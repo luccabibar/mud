@@ -2,3 +2,11 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+.avatar-home {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 125px !important; //any size
+  max-height: 125px !important; //any size
+  margin: auto;
+}
