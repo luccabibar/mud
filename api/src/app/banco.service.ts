@@ -23,9 +23,25 @@ export class BancoService {
  
   mostra(){
     let header = new HttpHeaders({'Content-type':'application/json'});
-    return this.http.post(this.API_URL + 'api.php', {headers: header}).toPromise();
+    return this.http.get(this.API_URL + 'api.php').toPromise();
   }
   
+  excluir(){
+    let header = new HttpHeaders({'Content-type':'application/json'});
+    return this.http.delete(this.API_URL + 'api.php', {headers: header}).toPromise();
+  }
+
+  atualizarAccount(nome: string, idade: number) {
+    var data = {
+      nome: nome,
+      idade: idade
+    };
+    
+    let header = new HttpHeaders({'Content-type':'application/json'});
+    return this.http.put(this.API_URL + 'insere.php', data, {headers: header}).toPromise();
+  }
 
   
 }
+  
+

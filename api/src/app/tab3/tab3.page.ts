@@ -20,7 +20,7 @@ export class Tab3Page {
   }
  
   openListUsers() {
-    this.navCtrl.navigateForward('UserListPage');
+    this.navCtrl.navigateForward('/user-list-page');
   }
 }
 
