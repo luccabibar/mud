@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>testarDB</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1 text-center>Exemplo de criação de conta</h1>
+ 
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>Nome</ion-label>
+      <ion-input id="1" type="text" name="nome" [(ngModel)]="model.nome"></ion-input>
+    </ion-item>
+ 
+    <ion-item>
+      <ion-label stacked>Idade</ion-label>
+      <ion-input id="2" type="number" name="idade" [(ngModel)]="model.idade"></ion-input>
+    </ion-item>
+  </ion-list>
+ 
+  <button ion-button block (click)="post()" color="primary">Criar conta</button>
+  <button ion-button block (click)="get()" color="primary">Mostrar</button>
+
+  <h1>Resposta do servidor</h1>
+
+  {{result}}
+</ion-content>
