@@ -26,6 +26,15 @@ const routes: Routes = [
         ] 
       },
       {
+        path: 'user-list-page',
+        children: [
+          {
+            path: '',
+            loadChildren: '../user-list-page/user-list-page.module#UserListPagePageModule'
+          }
+        ] 
+      },
+      {
         path: 'tab2',
         children: [
           {

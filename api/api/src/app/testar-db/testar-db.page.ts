@@ -16,9 +16,7 @@ export class TestarDBPage{
   post()
   {
     alert('post');
-    let valor = (<HTMLInputElement>document.getElementById("1")).value;
-    let valor2 = (<HTMLInputElement>document.getElementById("2")).value;
-    this.BancoService.createAccount(valor, parseInt(valor2,10) )
+    this.BancoService.createAccount('Testessss',57)
     .then((response)=>{
       this.result = response;
     }
@@ -28,7 +26,8 @@ export class TestarDBPage{
     });
   }
 
-  get(){
+  get()
+  {
     alert('get');
     this.BancoService.mostra()
     .then((response)=>{
@@ -38,6 +37,16 @@ export class TestarDBPage{
     .catch((response)=>{
       this.result = JSON.stringify(response);
     });
+  }
+
+  put()
+  {
+
+  }
+
+  delete()
+  {
+    
   }
 }
 
