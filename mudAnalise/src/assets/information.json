@@ -1,0 +1,65 @@
+{
+    "items": [
+        {
+            "name": "Specials",
+            "children": [
+                {
+                    "name" : "Special Academy Pizza",
+                    "information": "pastrami pork belly ball  tip lorem ipsum",
+                    "price" : "$25"
+                },
+                {
+                    "name" : "Pizza Ionic",
+                    "information": "margerita mamma mia aahasdadadad",
+                    "price" : "$45"
+                }
+            ]
+        },
+        {
+            "name": "Salada",
+            "children": [
+                {
+                    "name" : "Salada Cesar",
+                    "information": "loa dasda s a as a aadadsasdas sum",
+                    "price" : "$1"
+                },
+                {
+                    "name" : "Salada Francesa",
+                    "information": "bonjour e muito amor asdsdadsadsa",
+                    "price" : "$45"
+                }
+            ]
+        },
+        {
+            "name": "Massa",
+            "children": [
+                {
+                    "name" : "Spaghetto",
+                    "information": "pasta pasta pasta pasta pasta ",
+                    "price" : "$10"
+                },
+                {
+                    "name" : "Katso",
+                    "information": "asd ajs najn na ;njna dad",
+                    "price" : "$77"
+                }
+            ]
+        },
+        {
+            "name": "strogonoffff",
+            "children": [
+                {
+                    "name" : "strogonos",
+                    "information": "atenas mikonos adsa a da a a ",
+                    "price" : "$102"
+                },
+                {
+                    "name" : "mamamsmasd",
+                    "information": "asd ajs najn na ;njna dad",
+                    "price" : "$333"
+                }
+            ]
+        }
+        
+    ]
+}
