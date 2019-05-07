@@ -2,13 +2,26 @@
   <ion-toolbar color="escuro">
     <ion-title>Linha Do Tempo</ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/home">
-        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      <!--routerLink="/home"-->
+      <ion-button  (click)="automaticClose= !automaticClose">
+        <ion-icon slot="icon-only" name="close" *ngIf="automaticClose"></ion-icon>
+        <ion-icon slot="icon-only" name="resize" *ngIf="!automaticClose"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
- 
+<ion-content padding>
+  <ion-list *ngFor="let item of information; let i = index" class="accordion-list" lines="nome" detail="false" no-padding>
+    <ion-item tappable (click)="toggleSelection(i)" [ngClass]="{'section-active': item.open, 'section': !item.open}">
+      <ion-icon slot="start" name="arrow-forward" *ngIf="!item.open"></ion-icon>
+      <ion-icon slot="start" name="arrow-down" *ngIf="item.open"></ion-icon>
+      <ion-label>
+        {{item.name}}
+      </ion-label>
+    </ion-item> 
+    <div *ngIf="item.children && item.open">
+     PUTA
+    </div>
+  </ion-list>
 </ion-content>
