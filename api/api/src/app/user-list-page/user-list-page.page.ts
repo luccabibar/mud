@@ -12,7 +12,7 @@ export class UserListPagePage implements OnInit {
 
   get(){
     alert("Get");
-    this.BancoService.mostra()
+    this.BancoService.mostraUsuarios()
     .then((response)=>{
       this.result = JSON.stringify(response);
     }

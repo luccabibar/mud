@@ -5,24 +5,29 @@
 </ion-header>
 
 <ion-content>
-  <h1 text-center>Exemplo de criação de conta</h1>
- 
-  <ion-list>
-    <ion-item>
-      <ion-label stacked>Nome</ion-label>
-      <ion-input type="text" name="nome" [(ngModel)]="model.nome"></ion-input>
-    </ion-item>
- 
-    <ion-item>
-      <ion-label stacked>Idade</ion-label>
-      <ion-input type="number" name="idade" [(ngModel)]="model.idade"></ion-input>
-    </ion-item>
-  </ion-list>
- 
-  <button ion-button block (click)="post()" color="primary">Criar conta</button>
-  <button ion-button block (click)="get()" color="primary">Mostrar</button>
-
-  <h1>Resposta do servidor</h1>
-
-  {{result}}
+  <ion-item>
+    <ion-label>Nome</ion-label>
+    <ion-input type="text" placeholder="Nome"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Email</ion-label>
+    <ion-input type="text" placeholder="Email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Data de Nascimento</ion-label>
+    <ion-input type="date" placeholder="Data de nascimento"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>CPF</ion-label>
+    <ion-input type="text" placeholder="CPF"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Tell</ion-label>
+    <ion-input type="text" placeholder="Número de Celular"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Senha</ion-label>
+    <ion-input type="password" placeholder="Senha"></ion-input>
+    <ion-input type="password" placeholder="Repetir Senha"></ion-input>
+  </ion-item>
 </ion-content>

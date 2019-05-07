@@ -13,10 +13,12 @@ export class TestarDBPage{
   result : any;
   constructor(private BancoService: BancoService) {}
 
-  post()
+
+  inserirUsuario()
   {
-    alert('post');
-    this.BancoService.createAccount('Testessss',57)
+    let nome = (<HTMLInputElement>document.getElementById("1")).value;
+    let idade = (<HTMLInputElement>document.getElementById("2")).value;
+    this.BancoService.insertGenerico("INSERT INTO teste(nome,idade) VALUES('"+nome+"','"+idade+"');")
     .then((response)=>{
       this.result = response;
     }
@@ -26,27 +28,17 @@ export class TestarDBPage{
     });
   }
 
-  get()
+  mostrarUsuarios()
   {
-    alert('get');
-    this.BancoService.mostra()
+    alert("Get");
+    this.BancoService.mostraUsuarios()
     .then((response)=>{
       this.result = JSON.stringify(response);
     }
     )
     .catch((response)=>{
       this.result = JSON.stringify(response);
-    });
-  }
-
-  put()
-  {
-
-  }
-
-  delete()
-  {
-    
+    })
   }
 }
 
