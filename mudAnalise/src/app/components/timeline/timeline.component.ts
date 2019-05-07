@@ -1,4 +1,5 @@
-import { timeline } from 'console';
+// tinha um import { timeline } from 'console';
+
 import { Component, OnInit, Input } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
