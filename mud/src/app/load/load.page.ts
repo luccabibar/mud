@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoadPage implements OnInit {
 
-  constructor(private BancoService: BancoService) {
+  constructor() {
    }
 
   ngOnInit() {
