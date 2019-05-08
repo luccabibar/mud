@@ -4,6 +4,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
