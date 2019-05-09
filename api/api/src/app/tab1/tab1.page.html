@@ -1,23 +1,35 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab One
+      Dados Iniciais
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
+
+
+
 <ion-content>
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-        <div id="myDropdown" class="dropdown-content">
-          <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-          <a href="#about">About</a>
-          <a href="#base">Base</a>
-          <a href="#blog">Blog</a>
-          <a href="#contact">Contact</a>
-          <a href="#custom">Custom</a>
-          <a href="#support">Support</a>
-          <a href="#tools">Tools</a>
-        </div>
-      </div> 
+    
+    <p>Quando foi sua primeira crise?</p>
+    <ion-item>
+      <ion-label>Data</ion-label>
+      <ion-datetime display-format="DD.MM.YYYY"></ion-datetime>
+    </ion-item>
+    <br><br>
+    <p>Selecione Qual os sintomas que você geralmente apresenta durante a crise</p>
+    <ion-list>
+        <ion-item *ngFor="let entry of form"  style="font-size: 10px;" >
+          <ion-label>{{entry.val}}</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"  size="2px"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <br><br>
+      <p>Em que situações você teve essas sensações?</p>
+      <ion-item>
+        <ion-textarea rows="6" cols="20" placeholder="Fatores desencadeantes da crise" border-radius="2"></ion-textarea>
+      </ion-item>
+      
 </ion-content>
+
+

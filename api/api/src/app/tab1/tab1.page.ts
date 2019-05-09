@@ -9,5 +9,22 @@ import { ValueAccessor } from '@ionic/angular/dist/directives/control-value-acce
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-   
+
+  public form = [
+    { val: 'Dificuldade para Respirar', id: 0 },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+    { val: 'Sensações de Asfixia', isChecked: false },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+    { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false }
+  ];
+ 
 }
