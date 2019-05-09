@@ -4,14 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-import { BrMaskerModule } from 'br-mask';
 
-import { CadastroUserPage } from './cadastro-user.page';
+import { LoginPagePage } from './login-page.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: CadastroUserPage
+    component: LoginPagePage
   }
 ];
 
@@ -20,9 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    BrMaskerModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [CadastroUserPage]
+  declarations: [LoginPagePage]
 })
-export class CadastroUserPageModule {}
+export class LoginPagePageModule {}
