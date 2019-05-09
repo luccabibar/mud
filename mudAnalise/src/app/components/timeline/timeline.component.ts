@@ -1,5 +1,3 @@
-// tinha um import { timeline } from 'console';
-
 import { Component, OnInit, Input } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
@@ -10,15 +8,16 @@ import { ToastController } from '@ionic/angular';
 })
 export class TimelineComponent implements OnInit {
 
-  @Input('product') product: any;
+  @Input('timeline') timeline: any;
   constructor(private toastCtrl:ToastController ) { }
 
   ngOnInit() {}
 
-  async buyItem(relatorio){
+  async buyItem(timeline){
     let toast = await this.toastCtrl.create({
-      message: `Added to the cart : ${relatorio.name}`
+      message: 'Added to the cart: ${timeline.name}'
     })
     toast.present();
   }
 }
+ 
