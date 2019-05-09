@@ -10,7 +10,8 @@ import { TouchSequence } from 'selenium-webdriver';
 export class Tab2Page {
   information: any[];
 
-  automaticClose: any[];
+  automaticClose: false;
+
   constructor(private http: HttpClient){
     this.http.get('assets/information.json').subscribe(res => {
       this.information = res['items'];
@@ -24,8 +25,8 @@ export class Tab2Page {
 
     if(this.automaticClose && this.information[index].open ){
       this.information
-        .filter((item,itemIndex) => itemIndex != index)
-        .map(item => item.open = false);
+      .filter((item,itemIndex) => itemIndex != index)
+      .map(item => item.open = false);
     }
   }
 
