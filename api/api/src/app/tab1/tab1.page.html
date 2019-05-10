@@ -7,28 +7,43 @@
 </ion-header>
 
 <ion-content>
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-        <div id="myDropdown" class="dropdown-content">
-          <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-          <a href="#about">About</a>
-          <a href="#base">Base</a>
-          <a href="#blog">Blog</a>
-          <a href="#contact">Contact</a>
-          <a href="#custom">Custom</a>
-          <a href="#support">Support</a>
-          <a href="#tools">Tools</a>
-        </div>
-      </div> 
-      <ion-item padding horizontal>
-        <ion-label>Quando foi su primeira crise</ion-label>
-        <ion-input type:"text" placeholder="Primeira"></ion-input>
-      </ion-item>
-      <ion-label>Selecione os sintomas que você apresenta durante uma crise</ion-label>
-      <ion-list>
-        <ion-item *ngFor="let entry of form">
-          <ion-label>nome</ion-label>
-          <ion-checkbox ></ion-checkbox>
+    <div class="dropdown">    
+          <ion-item>
+            <ion-label>Selecione intolerância alimentar</ion-label>
+              <ion-select multiple="true" cancelText="Cancelar" okText="Selecionado">
+                <ion-select-option value="Lactose">Lactose</ion-select-option>
+                <ion-select-option value="Gluten">Gluten</ion-select-option>
+                <ion-select-option value="Frutose">Frutose</ion-select-option>
+                <ion-select-option value="Sacarose">Sacorose</ion-select-option>
+              </ion-select>
+          </ion-item>
+          <ion-item>
+              <ion-label>intolerância se faltar na lista:</ion-label>
+          </ion-item>
+          <ion-item>
+              <ion-input type="text" placeholder="Escreva aqui"></ion-input> 
+          </ion-item>
+    </div> 
+    <p>Quando foi sua primeira crise?</p>
+    <ion-item>
+      <ion-label>Data</ion-label>
+      <ion-datetime display-format="DD.MM.YYYY"></ion-datetime>
+    </ion-item>
+    <br><br>
+    <p>Selecione Qual os sintomas que você geralmente apresenta durante a crise</p>
+    <ion-list>
+        <ion-item *ngFor="let entry of form"  style="font-size: 10px;" >
+          <ion-label>{{entry.val}}</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"  size="2px"></ion-checkbox>
         </ion-item>
       </ion-list>
+      <br><br>
+      <p>Em que situações você teve essas sensações?</p>
+      <ion-item>
+        <ion-textarea rows="6" cols="20" placeholder="Fatores desencadeantes da crise" border-radius="2"></ion-textarea>
+      </ion-item>
+      
+
 </ion-content>
+
+

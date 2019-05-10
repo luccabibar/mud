@@ -9,13 +9,32 @@
 <ion-content>
     <ion-item padding-horizontal>
        <ion-label position="stacked">Nome</ion-label>
-       <ion-input></ion-input>
+       <ion-input placeholder="Informe seu nome"></ion-input>
     </ion-item>
     <ion-item padding-horizontal>
-        <ion-label position="stacked">Telefone</ion-label>
-        <ion-input></ion-input>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input type="Email" placeholder="Informe seu email"></ion-input>
      </ion-item>
      <ion-item padding-horizontal>
-        <io>
+
+        <ion-label position="stacked">Data de Nascimento</ion-label>
+        <ion-datetime display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
+      </ion-item>
+      <ion-item padding-horizontal>
+        <ion-label position="stacked">Celular</ion-label>
+        <ion-input id="celular" type="tel" placeholder="Informe seu celular"></ion-input>
      </ion-item>
+     <ion-item padding-horizontal>
+        <ion-label position="stacked">CPF</ion-label>
+        <ion-input type="number" name="cpf" placeholder="Informe seu CPF"></ion-input>
+     </ion-item>
+     <ion-item padding-horizontal>
+        <ion-label position="stacked">Senha</ion-label>
+        <ion-input type="password" placeholder="Escolha sua senha"></ion-input>
+     </ion-item>
+     <ion-item padding-horizontal>
+        <ion-label position="stacked">Senha*</ion-label>
+        <ion-input type="password" placeholder="Redigite sua senha"></ion-input>
+     </ion-item>
+     <ion-button padding-horizontal class="button" expand="block">Próximo</ion-button>
 </ion-content>
