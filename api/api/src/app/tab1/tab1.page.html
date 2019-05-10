@@ -6,11 +6,24 @@
   </ion-toolbar>
 </ion-header>
 
-
-
-
 <ion-content>
-    
+    <div class="dropdown">    
+          <ion-item>
+            <ion-label>Selecione intolerância alimentar</ion-label>
+              <ion-select multiple="true" cancelText="Cancelar" okText="Selecionado">
+                <ion-select-option value="Lactose">Lactose</ion-select-option>
+                <ion-select-option value="Gluten">Gluten</ion-select-option>
+                <ion-select-option value="Frutose">Frutose</ion-select-option>
+                <ion-select-option value="Sacarose">Sacorose</ion-select-option>
+              </ion-select>
+          </ion-item>
+          <ion-item>
+              <ion-label>intolerância se faltar na lista:</ion-label>
+          </ion-item>
+          <ion-item>
+              <ion-input type="text" placeholder="Escreva aqui"></ion-input> 
+          </ion-item>
+    </div> 
     <p>Quando foi sua primeira crise?</p>
     <ion-item>
       <ion-label>Data</ion-label>
@@ -30,6 +43,7 @@
         <ion-textarea rows="6" cols="20" placeholder="Fatores desencadeantes da crise" border-radius="2"></ion-textarea>
       </ion-item>
       
+
 </ion-content>
 
 

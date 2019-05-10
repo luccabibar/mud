@@ -30,7 +30,7 @@ export class Tab2Page {
     }
   }
 
-  toggleItem(index,childIndex){
+  toggleItem( index, childIndex){
     this.information[index].children[childIndex].open = !this.information[index].children[childIndex].open;
   }
 
