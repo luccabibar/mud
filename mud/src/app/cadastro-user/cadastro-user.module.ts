@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
-import { IonicModule } from '@ionic/angular';
 
 import { CadastroUserPage } from './cadastro-user.page';
 

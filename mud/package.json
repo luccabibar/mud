@@ -27,6 +27,7 @@
     "ajv": "^6.10.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
+    "rxjs-compat": "^6.5.1",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab One
+      Dados Iniciais
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -20,4 +20,15 @@
           <a href="#tools">Tools</a>
         </div>
       </div> 
+      <ion-item padding horizontal>
+        <ion-label>Quando foi su primeira crise</ion-label>
+        <ion-input type:"text" placeholder="Primeira"></ion-input>
+      </ion-item>
+      <ion-label>Selecione os sintomas que você apresenta durante uma crise</ion-label>
+      <ion-list>
+        <ion-item *ngFor="let entry of form">
+          <ion-label>nome</ion-label>
+          <ion-checkbox ></ion-checkbox>
+        </ion-item>
+      </ion-list>
 </ion-content>
