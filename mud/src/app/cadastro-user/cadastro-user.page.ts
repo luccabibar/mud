@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import $ from "jquery";
 
 @Component({
   selector: 'app-cadastro-user',
@@ -11,5 +12,11 @@ export class CadastroUserPage implements OnInit {
 
   ngOnInit() {
   }
-
+  
+  Mask()
+  {
+    $(document).ready(function(){
+      $('#telefone').mask('(00) 0000-0000#');
+    });
+  }
 }
