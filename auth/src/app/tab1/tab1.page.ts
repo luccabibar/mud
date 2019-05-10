@@ -13,24 +13,43 @@ export class Tab1Page {
 
   }
 
+  sleep(ms){
+    let start = Date.now();
+    let now = start;
+    while(now - start < ms){
+      now = Date.now();
+    }
+  }
+
   //ctrl+c ctrl+v
   scan(){
 
-    let rst = "";
-
+    let rst = "koe";
+    
     this.qr.prepare().then((status: QRScannerStatus) => {
       
-      // camera permission was granted
+      //permissao da camera
       if (status.authorized) {
-      
-        // start scanning
+        
+        //esconde view
+        let view = document.getElementsByTagName("ion-app")[0];
+    
+        //comeca scan
         let scanSub = this.qr.scan().subscribe((text: string) => {
-          rst = text;
-
-          this.qr.hide(); // hide camera preview
-          scanSub.unsubscribe(); // stop scanning
+          //leu algo
+          rst = text; 
+          
         });
+        this.qr.show();
+        view.style.display = "none";
 
+        this.qr.hide();
+        
+        view[0].style.display = "block";
+        this.sleep(7 * 1000);
+        
+        scanSub.unsubscribe();
+        
       } else if (status.denied) {
         rst = "vc negou a permissao koe vei"
 
@@ -41,7 +60,7 @@ export class Tab1Page {
     })
     .catch((e: any) => rst = "erro: " + e); 
 
-    document.getElementById("rst").innerHTML = rst;  
+    document.getElementById("rst").innerHTML = rst;      
 
   }
 
