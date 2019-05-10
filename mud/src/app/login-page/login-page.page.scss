@@ -1,23 +1,79 @@
 #logoLogin 
 {
-    width: 40%;
+    width: 35%;
     position: relative;
     margin: 0;
     position: absolute;
-    top: 25%;
+    top: 20%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%); 
+}
+
+#loginTitle
+{
+    width: 17%;
+    font-size: 110%;
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%); 
+}
+
+#itemEmail
+{
+    top: 45%;
+    width: 80%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%) 
 }
 
-#loginTitle
+#itemSenha
 {
-    width: 20%;
-    position: relative;
-    margin: 0;
-    position: absolute;
-    top: 35%;
+    top: 50%;
+    width: 80%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%) 
+}
+
+#esqSenha
+{
+    width: 40%;
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 70%;
+    left: 45%;
+    font-size: 90%;
+}
+
+#btnEntrar
+{
+    width: 50%;
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 83%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+#hrefCadast
+{
+    width: 85%;
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 93%;
+    font-size: 95%;
+    left: 50%;
+    margin-right: 50%;
+    //margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
