@@ -12,21 +12,28 @@ import { BoundDirectivePropertyAst } from '@angular/compiler';
 
 export class CadastroUserPage implements OnInit {
 
-  constructor(public navCtrl: NavController,private BD: BancoService) { }
-  /*public dadosUser: FormGroup = new FormGroup({
-    'nome' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
+  constructor(public navCtrl: NavController, private BD: BancoService) { }
+  public dadosUser:FormGroup = new FormGroup({
+    'nome' : new FormControl(null, [Validators.required, Validators.minLength(2)])/*,
     'email' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
     'datanasc' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
     'tel' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
     'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-    'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)])
+    'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)])*/
   })
-
-
-
   
-  
-  inserirUsuario()
+  public Validar(name:string)
+  {
+    if(name == 'nome')
+    {
+      if(this.dadosUser.controls.nome.valid)
+        document.getElementById('lbl_'+ name).style.color='#020B04';
+      else if(!this.dadosUser.controls.nome.valid)
+        document.getElementById('lbl_' + name).style.color='#f53d3d';
+    }
+  }
+
+  /*inserirUsuario()
   {
     let nome = (<HTMLInputElement>document.getElementById("0")).value;
     let email = (<HTMLInputElement>document.getElementById("1")).value;

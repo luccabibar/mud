@@ -7,11 +7,12 @@
 </ion-header>
 
 <ion-content>
-   <!--<form [formGroup]="dadosUser">-->
+   <form [formGroup]="dadosUser">
     <ion-item padding-horizontal>
-       <ion-label position="stacked">Nome</ion-label>
-       <ion-input name="nome" id="0" placeholder="Informe seu nome" ngModel required></ion-input>
+       <ion-label id="lbl_nome" position="stacked">Nome</ion-label>
+       <ion-input type="text" name="nome" id="0" formControlName="nome" (ionFocus)="Validar('nome')" (keyup)="Validar('nome')" placeholder="Informe seu nome"></ion-input>
     </ion-item>
+    <!--
     <ion-item padding-horizontal>
         <ion-label position="stacked">Email</ion-label>
         <ion-input name="email" id="1" type="Email" placeholder="Informe seu email" ngModel required></ion-input>
@@ -27,7 +28,7 @@
      </ion-item>
      <ion-item padding-horizontal>
         <ion-label position="stacked">CPF</ion-label>
-        <ion-input type="number" name="cpf" id="4" placeholder="Informe seu CPF" ngModel required></ion-input>
+        <ion-input type="number" size="11" name="cpf" id="4" placeholder="Informe seu CPF (apenas números)" ngModel required></ion-input>
      </ion-item>
      <ion-item padding-horizontal>
         <ion-label position="stacked">Senha</ion-label>
@@ -37,6 +38,7 @@
         <ion-label position="stacked">Senha*</ion-label>
         <ion-input name="confirmasenha" type="password" placeholder="Redigite sua senha" ngModel required></ion-input>
      </ion-item>
-     <ion-button padding-horizontal (click)="inserirUsuario()" type="submit" [disabled]="form.invalid" class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
-     <!--</form>-->
+     -->
+     <ion-button padding-horizontal class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
+     </form>
    </ion-content>
