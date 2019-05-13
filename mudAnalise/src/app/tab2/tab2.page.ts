@@ -8,6 +8,7 @@ import { TouchSequence } from 'selenium-webdriver';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+
   information: any[];
 
   automaticClose: false;
@@ -23,7 +24,8 @@ export class Tab2Page {
   toggleSection(index){
     this.information[index].open = !this.information[index].open;
 
-    if(this.automaticClose && this.information[index].open ){
+    // se tirar  o "!", deixa abrir varias consultas ao msm tempo 
+    if(!this.automaticClose && this.information[index].open ){
       this.information
       .filter((item,itemIndex) => itemIndex != index)
       .map(item => item.open = false);

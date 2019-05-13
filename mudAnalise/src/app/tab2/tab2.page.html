@@ -19,13 +19,13 @@
       <ion-icon slot="start" name="arrow-forward" *ngIf="!item.open"></ion-icon>
       <ion-icon slot="start" name="arrow-down" *ngIf="item.open"></ion-icon>
       <ion-label>
-        {{item.name}}
+        {{ item.name }}
       </ion-label>
     </ion-item>
 
     <div *ngIf="item.children && item.open">
 
-      <ion-list *ngFor="let child of item.children; let j = index;" lines="nome" class="child-list">
+      <ion-list *ngFor="let child of item.children; let j = index;" lines="none" class="child-list">
         <ion-item tappable (click)="toggleItem(i, j)" *ngIf="child.children" [ngClass]="{'child-active': child.open, 'child': !child.open}">
           <ion-icon slot="start" name="add" *ngIf="!child.open"></ion-icon>
           <ion-icon slot="start" name="close" *ngIf="child.open"></ion-icon>
@@ -35,9 +35,9 @@
         </ion-item>
 
         <app-timeline [timeline]="child " *ngIf="!child.children "></app-timeline>
-        
+
         <ion-list *ngIf="!child.children && child.open" class="timeline-list" lines="none">
-          <app-timeline [timeline]="timeline " *ngFor="let product of child.children"></app-timeline>
+          <app-timeline [timeline]="child " *ngFor="let product of child.children"></app-timeline>
         </ion-list>
       </ion-list>
     </div>

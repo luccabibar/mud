@@ -15,7 +15,7 @@ export class TimelineComponent implements OnInit {
 
   async buyItem(timeline){
     let toast = await this.toastCtrl.create({
-      message: 'Added to the cart: ${timeline.name}'
+      message: "Added to the cart: ${timeline.name}"
     })
     toast.present();
   }
