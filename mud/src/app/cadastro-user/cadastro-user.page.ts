@@ -1,7 +1,7 @@
 import { BancoService } from './../banco.service';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 
 @Component({
@@ -12,28 +12,31 @@ import { BoundDirectivePropertyAst } from '@angular/compiler';
 
 export class CadastroUserPage implements OnInit {
 
-  constructor(public navCtrl: NavController, private BD: BancoService) { }
+  constructor(public navCtrl: NavController, private BD: BancoService, public formBuilder: FormBuilder) { }
   public dadosUser:FormGroup = new FormGroup({
-    'nome' : new FormControl(null, [Validators.required, Validators.minLength(2)])/*,
-    'email' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
+    'nome' : new FormControl(null, [Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')]),
+    'email' : new FormControl(null, [Validators.required, Validators.email]),
     'datanasc' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
-    'tel' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-    'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-    'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)])*/
+    'celular' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')]),
+    'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')]),
+    'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
+    'confirmasenha' : new FormControl(null, [Validators.required, Validators.minLength(2)])
   })
+
   
-  public Validar(name:string)
+  
+ /* public Validar(name:string)
   {
     if(name == 'nome')
     {
       if(this.dadosUser.controls.nome.valid)
-        document.getElementById('lbl_'+ name).style.color='#020B04';
+        document.getElementById(name).style.color='#020B04';
       else if(!this.dadosUser.controls.nome.valid)
-        document.getElementById('lbl_' + name).style.color='#f53d3d';
+        document.getElementById(name).style.color='#f53d3d';
     }
   }
 
-  /*inserirUsuario()
+  inserirUsuario()
   {
     let nome = (<HTMLInputElement>document.getElementById("0")).value;
     let email = (<HTMLInputElement>document.getElementById("1")).value;
