@@ -1,0 +1,17 @@
+No cmd dentro da pasta onde está o projeto, criar o provider:
+
+cmd> ionic generate provider Banco
+
+
+A seguida copiar o conteudo de todos os arquivos relacionados ao provider da API:  Banco.service.ts
+
+Ir na pasta app.module.ts e adicionar:
+- Na parte dos import: IMPORT { HttpClientModule } from '@angular/common/http'
+- Na parte dos import do @NgModule: HttpClientModule (só acrescentar este import.
+
+PARA CONSEGUIR DAR COMANDOS DENTRO DO IONIC NA HORA DE TESTAR É PRECISO LIBERAR O CORS DO SEU NAVEGADOR. NO CASO DO FIREFOX BAIXAR A EXTENÇÃO ABAIXO E ATIVA-LA
+https://addons.mozilla.org/pt-BR/firefox/addon/cors-everywhere/
+
+
+Qualquer duvida contatar o vice-lider Giovanni Shibaki Camargo
+Obrigado
