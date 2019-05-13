@@ -1,1 +1,51 @@
+ion-content {
+    --background: var(ion-color-light);
+}
 
+.accordion-list {
+    margin-bottom: 4px;
+    --ion-item-background: #fff;
+
+    .section,
+    .section-active {
+        --min-height: 58px;
+    }
+}
+
+.section {
+    --ion-item-background: #fff;
+    --ion-item-color: #000;
+}
+
+.section-active {
+    --ion-item-background: #ffc400;
+    font-weight: 600;
+
+    ion-icon{
+        color: #fff;
+    }
+}
+
+.child-list{
+    padding: 0px;
+    margin: 0px;
+    .child, .child-active{
+        margin-bottom: 2px;
+    }
+}
+
+.child{
+    --ion-item-background: #e8e7e6;
+    --ion-item-color: #000;
+}
+
+.child-active{
+    --ion-item-background: #fad86b;
+    --ion-item-color: #fff;
+
+}
+
+.product-list {
+    padding: 0px;
+    margin: 0px;
+}
