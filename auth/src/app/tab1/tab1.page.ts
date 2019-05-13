@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
+import { viewAttached } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-tab1',
@@ -9,7 +10,11 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 })
 
 export class Tab1Page {
-  constructor(private qr: QRScanner) { 
+  
+  view = <HTMLElement>document.getElementsByTagName('ion-app')[0];
+
+  constructor(private qr: QRScanner) {
+    this.qr.prepare();
 
   }
 
@@ -21,48 +26,24 @@ export class Tab1Page {
     }
   }
 
-  //ctrl+c ctrl+v
   scan(){
+    let ret = "erro poar";
 
-    let rst = "koe";
+    //abre camera
+    let scanSub = this.qr.scan().subscribe(text => {
+      ret = text;
+    });
+    this.qr.show();
+    this.view.style.display = "none";
     
-    this.qr.prepare().then((status: QRScannerStatus) => {
-      
-      //permissao da camera
-      if (status.authorized) {
-        
-        //esconde view
-        let view = document.getElementsByTagName("ion-app")[0];
-    
-        //comeca scan
-        let scanSub = this.qr.scan().subscribe((text: string) => {
-          //leu algo
-          rst = text; 
-          
-        });
-        this.qr.show();
-        view.style.display = "none";
+    this.sleep(10 * 1000);
 
-        this.qr.hide();
-        
-        view[0].style.display = "block";
-        this.sleep(7 * 1000);
-        
-        scanSub.unsubscribe();
-        
-      } else if (status.denied) {
-        rst = "vc negou a permissao koe vei"
+    //esconde camera
+    this.qr.hide();
+    scanSub.unsubscribe();
+    this.view.style.display = 'block';
 
-      } else {
-        rst = "libera a permissao ae pow";
-
-      }
-    })
-    .catch((e: any) => rst = "erro: " + e); 
-
-    document.getElementById("rst").innerHTML = rst;      
-
+    document.getElementById("rst").innerHTML = ret;
   }
-
 
 }
