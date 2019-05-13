@@ -4,8 +4,7 @@
             "children": [
             {
                 "name": "Conserva",
-                "children": 
-                [
+                "children": [
                     {
                         "name": "Special Academy Pizza",
                         "information": "pastrami pork belly ball  tip lorem ipsum",
@@ -15,10 +14,17 @@
                         "name": "PIZA Academy Pizza",
                         "information": "pastrami pork belly ball  tip lorem ipsum",
                         "price": "$25"
+                    },
+                    {
+                        "name": "CAlabrisa",
+                        "information": "pastrami pork belly ball  tip lorem ipsum",
+                        "price": "$25"
                     }
+
                 ]
 
-            }]
+            }
+        ]
         },
         {
             "name": "Specials",
