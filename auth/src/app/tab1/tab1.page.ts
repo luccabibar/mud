@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ZBar, ZBarOptions } from '@ionic-native/zbar/ngx';
 
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 
@@ -9,60 +10,29 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 })
 
 export class Tab1Page {
-  constructor(private qr: QRScanner) { 
+  zbarOptions:any;
+  scannedResult:any;
 
-  }
+  constructor(
+    private zbar: ZBar
+  ) {
 
-  sleep(ms){
-    let start = Date.now();
-    let now = start;
-    while(now - start < ms){
-      now = Date.now();
+    this.zbarOptions = {
+      flash: 'off',
+      drawSight: false
     }
-  }
-
-  //ctrl+c ctrl+v
-  scan(){
-
-    let rst = "koe";
-    
-    this.qr.prepare().then((status: QRScannerStatus) => {
-      
-      //permissao da camera
-      if (status.authorized) {
-        
-        //esconde view
-        let view = document.getElementsByTagName("ion-app")[0];
-    
-        //comeca scan
-        let scanSub = this.qr.scan().subscribe((text: string) => {
-          //leu algo
-          rst = text; 
-          
-        });
-        this.qr.show();
-        view.style.display = "none";
-
-        this.qr.hide();
-        
-        view[0].style.display = "block";
-        this.sleep(7 * 1000);
-        
-        scanSub.unsubscribe();
-        
-      } else if (status.denied) {
-        rst = "vc negou a permissao koe vei"
-
-      } else {
-        rst = "libera a permissao ae pow";
-
-      }
-    })
-    .catch((e: any) => rst = "erro: " + e); 
-
-    document.getElementById("rst").innerHTML = rst;      
 
   }
 
-
+  scanCode(){
+    this.zbar.scan(this.zbarOptions)
+   .then(result => {
+      console.log(result); // Scanned code
+      this.scannedResult = result;
+   })
+   .catch(error => {
+      alert(error); // Error message
+   });
+  }
 }
+
