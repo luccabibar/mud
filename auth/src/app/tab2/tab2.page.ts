@@ -1,5 +1,7 @@
+import { BancoService } from './../banco.service';
 import { Component } from '@angular/core';
 import { ZBar, ZBarOptions } from '@ionic-native/zbar/ngx';
+import { BoundDirectivePropertyAst } from '@angular/compiler';
 
 @Component({
   selector: 'app-tab2',
@@ -11,7 +13,8 @@ export class Tab2Page {
   scannedResult:any;
  
   constructor(
-    private zbar: ZBar
+    private zbar: ZBar,
+    private BD: BancoService
   ) {
  
     this.zbarOptions = {
@@ -20,7 +23,12 @@ export class Tab2Page {
     }
  
   }
- 
+  valida(result : any)
+  {
+    let verifica = this.BD.updateGenerico("UPDATE sessao SET status = TRUE, cpf_cliente = " + "50952454858" + " WHERE hash = " + result).then((response)=>{
+      
+    })
+  }
   scanCode(){
     this.zbar.scan(this.zbarOptions)
    .then(result => {
