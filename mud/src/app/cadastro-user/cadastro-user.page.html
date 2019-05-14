@@ -7,37 +7,76 @@
 </ion-header>
 
 <ion-content>
-   <form [formGroup]="dadosUser">
-      
+         <p *ngIf="submitAttempt" style="color: #ea6153;">Please fill out all details accurately.</p>
+
+         <ion-list lines="none">
+
+   <form [formGroup]="slideOneForm">
+
     <ion-item padding-horizontal>
        <ion-label class="label" position="stacked">Nome</ion-label>
-       <ion-input type="text" name="nome" id="0" formControlName="nome" placeholder="Informe seu nome" ngModel required></ion-input>
+       <ion-input type="text" name="nome" id="0" formControlName="nome" [class.invalid]="!slideOneForm.controls.nome.valid && (slideOneForm.controls.nome.dirty || submitAttempt)" placeholder="Informe seu nome" ngModel required></ion-input>
     </ion-item>
+
+    <ion-item padding-horizontal *ngIf="!slideOneForm.controls.nome.valid  && (slideOneForm.controls.nome.dirty || submitAttempt)">
+         <p>Insira um nome válido.</p>
+     </ion-item>
+
     <ion-item padding-horizontal>
         <ion-label class="label" position="stacked">Email</ion-label>
-        <ion-input name="email" id="1" formControlName="email" type="Email" placeholder="Informe seu email" ngModel required></ion-input>
+        <ion-input name="email" id="1" formControlName="email" type="Email" [class.invalid]="!slideOneForm.controls.email.valid && (slideOneForm.controls.email.dirty || submitAttempt)" placeholder="Informe seu email" ngModel required></ion-input>
      </ion-item>
-     <ion-item padding-horizontal>
 
+     <ion-item padding-horizontal *ngIf="!slideOneForm.controls.email.valid  && (slideOneForm.controls.email.dirty || submitAttempt)">
+         <p>Insira um e-mail válido.</p>
+     </ion-item>
+
+     <ion-item padding-horizontal>
         <ion-label class="label" position="stacked">Data de Nascimento</ion-label>
-        <ion-datetime backdropDismiss name="datanasc" id="2" formControlName="datanasc" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" ngModel required></ion-datetime>
+        <ion-datetime backdropDismiss name="datanasc" id="2" formControlName="datanasc" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" [class.invalid]="!slideOneForm.controls.datanasc.valid && (slideOneForm.controls.datanasc.dirty || submitAttempt)" ngModel required></ion-datetime>
       </ion-item>
+
+      <ion-item padding-horizontal *ngIf="!slideOneForm.controls.datanasc.valid  && (slideOneForm.controls.datanasc.dirty || submitAttempt)">
+            <p>Insira sua data de nascimento.</p>
+        </ion-item>
+
       <ion-item padding-horizontal>
         <ion-label class="label" position="stacked">Celular</ion-label>
-        <ion-input name="celular" id="3" formControlName="celular" type="number" placeholder="Informe seu celular" ngModel required></ion-input>
+        <ion-input name="celular" maxlenght="11" id="3" formControlName="celular" type="tel" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt)" placeholder="Informe seu celular" ngModel required></ion-input>
      </ion-item>
+
+     <ion-item  padding-horizontal *ngIf="!slideOneForm.controls.celular.valid  && (slideOneForm.controls.celular.dirty || submitAttempt)">
+         <p>Insira apenas números.</p>
+     </ion-item>
+
      <ion-item padding-horizontal>
         <ion-label class="label" position="stacked">CPF</ion-label>
-        <ion-input type="number" size="11" formControlName="cpf" name="cpf" id="4" placeholder="Informe seu CPF (apenas números)" ngModel required></ion-input>
+        <ion-input type="number" size="11" formControlName="cpf" name="cpf" id="4" [class.invalid]="!slideOneForm.controls.cpf.valid && (slideOneForm.controls.cpf.dirty || submitAttempt)" placeholder="Informe seu CPF (apenas números)" ngModel required></ion-input>
      </ion-item>
+
+     <ion-item padding-horizontal *ngIf="!slideOneForm.controls.cpf.valid  && (slideOneForm.controls.cpf.dirty || submitAttempt)">
+         <p>CPF já cadastrado.</p>
+     </ion-item>
+
      <ion-item padding-horizontal>
         <ion-label class="label" position="stacked">Senha</ion-label>
-        <ion-input name="senha" type="password" id="5" formControlName="senha" placeholder="Escolha sua senha" ngModel required></ion-input>
+        <ion-input name="senha" type="password" id="5" formControlName="senha" [class.invalid]="!slideOneForm.controls.senha.valid && (slideOneForm.controls.senha.dirty || submitAttempt)" placeholder="Escolha sua senha" ngModel required></ion-input>
      </ion-item>
+
+     <ion-item padding-horizontal *ngIf="!slideOneForm.controls.senha.valid  && (slideOneForm.controls.senha.dirty || submitAttempt)">
+         <p>Insira uma senha.</p>
+     </ion-item>
+
      <ion-item padding-horizontal>
         <ion-label class="label" position="stacked">Senha*</ion-label>
-        <ion-input name="confirmasenha" type="password" formControlName="confirmasenha" placeholder="Redigite sua senha" ngModel required></ion-input>
+        <ion-input name="confirmasenha" type="password" formControlName="confirmasenha" [class.invalid]="!slideOneForm.controls.confirmasenha.valid && (slideOneForm.controls.confirmasenha.dirty || submitAttempt)" placeholder="Redigite sua senha" ngModel required></ion-input>
      </ion-item>
-     <ion-button padding-horizontal class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
+
+     <ion-item padding-horizontal *ngIf="!slideOneForm.controls.confirmasenha.valid  && (slideOneForm.controls.confirmasenha.dirty || submitAttempt)">
+         <p>Insira um e-mail válido.</p>
+     </ion-item>
+
+     <ion-button padding-horizontal click="save()" class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
      </form>
+   </ion-list>
    </ion-content>
