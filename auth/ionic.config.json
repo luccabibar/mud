@@ -1,5 +1,7 @@
 {
   "name": "auth",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
