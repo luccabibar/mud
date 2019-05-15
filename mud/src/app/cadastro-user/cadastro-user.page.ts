@@ -1,7 +1,7 @@
 import { CpfValidator } from '../validators/cpf';
 import { BancoService } from './../banco.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, IonSlides } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 
@@ -11,12 +11,12 @@ import { BoundDirectivePropertyAst } from '@angular/compiler';
   styleUrls: ['./cadastro-user.page.scss'],
 })
 
+
 export class CadastroUserPage implements OnInit {
 
-  @ViewChild('signupSlider') signupSlider;
-
-	/*public slideOneForm: FormGroup;*/
+  @ViewChild(IonSlides) IonSlides: IonSlides;
   
+	/*public slideOneForm: FormGroup;*/
   public submitAttempt: boolean = false;
 
   constructor(public navCtrl: NavController, private BD: BancoService, public formBuilder: FormBuilder) {
@@ -26,9 +26,9 @@ export class CadastroUserPage implements OnInit {
       cpf: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf])]
      });*/
 
-
+     
    }
-
+   
    
 
   
@@ -42,16 +42,24 @@ export class CadastroUserPage implements OnInit {
     'confirmasenha' : new FormControl(null, [Validators.required, Validators.minLength(2)])
   })
 
+    proxSlide()
+    {
+      this.IonSlides.lockSwipes(false);
+      this.IonSlides.slideNext();
+      this.IonSlides.lockSwipes(true);
+    }
 
     save(){
       this.submitAttempt = true;
 
       if(!this.slideOneForm.valid){
-          this.signupSlider.slideTo(0);
+          this.IonSlides.slideTo(0);
       } 
       else {
-          console.log("success!")
-          console.log(this.slideOneForm.value);
+          this.IonSlides.lockSwipes(false);
+          this.IonSlides.slideNext();
+          this.IonSlides.lockSwipes(true);
+          alert("Sucesso");
       }
     }
 
@@ -80,5 +88,24 @@ export class CadastroUserPage implements OnInit {
 
 }*/
 ngOnInit() {
+  this.IonSlides.lockSwipes(true);
 }
+
+public sintomas = [
+  { val: 'Dificuldade para Respirar', id: 0 },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Sensações de Asfixia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false }
+];
+
 }
