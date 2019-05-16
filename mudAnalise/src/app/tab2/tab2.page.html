@@ -2,11 +2,18 @@
   <ion-toolbar color="escuro">
     <ion-title>Linha Do Tempo</ion-title>
     <ion-buttons slot="end">
-      <!--routerLink="/home"-->
-      <ion-button (click)="automaticClose= !automaticClose">
+      <!--
+  
+       <ion-button (click)="automaticClose= !automaticClose;" >
         <ion-icon slot="icon-only" name="close" *ngIf="automaticClose"></ion-icon>
         <ion-icon slot="icon-only" name="resize" *ngIf="!automaticClose"></ion-icon>
       </ion-button>
+      
+      -->
+      <ion-button routerLink="/home">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -26,9 +33,10 @@
     <div *ngIf="item.children && item.open">
 
       <ion-list *ngFor="let child of item.children; let j = index;" lines="none" class="child-list">
-        <ion-item tappable (click)="toggleItem(i, j)" *ngIf="child.children" [ngClass]="{'child-active': child.open, 'child': !child.open}">
-          <ion-icon slot="start" name="add" *ngIf="!child.open"></ion-icon>
-          <ion-icon slot="start" name="close" *ngIf="child.open"></ion-icon>
+        <ion-item tappable (click)="toggleItem(i, j)" *ngIf="child.children"
+          [ngClass]="{'child-active': child.open, 'child': !child.open}">
+          <ion-icon slot="start" name="add" *ngIf="child.open"></ion-icon>
+          <ion-icon slot="start" name="close" *ngIf="!child.open"></ion-icon>
           <ion-label>
             {{child.name}}
           </ion-label>
