@@ -1,44 +1,157 @@
 <ion-header>
-  <ion-toolbar>
-      <ion-title>
-          Cadastro
-      </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Cadastro</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-   <form [formGroup]="dadosUser">
-    <ion-item padding-horizontal>
-       <ion-label id="lbl_nome" position="stacked">Nome</ion-label>
-       <ion-input type="text" name="nome" id="0" formControlName="nome" (ionFocus)="Validar('nome')" (keyup)="Validar('nome')" placeholder="Informe seu nome"></ion-input>
-    </ion-item>
-    <!--
-    <ion-item padding-horizontal>
-        <ion-label position="stacked">Email</ion-label>
-        <ion-input name="email" id="1" type="Email" placeholder="Informe seu email" ngModel required></ion-input>
-     </ion-item>
-     <ion-item padding-horizontal>
+    <ion-slides mode="ios" pager="ios" scrollbar="ios">
+        <ion-slide>
+                <p *ngIf="submitAttempt" style="color: #ea6153;">Please fill out all details accurately.</p>
 
-        <ion-label position="stacked">Data de Nascimento</ion-label>
-        <ion-datetime backdropDismiss name="datanasc" id="2" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" ngModel required></ion-datetime>
-      </ion-item>
-      <ion-item padding-horizontal>
-        <ion-label position="stacked">Celular</ion-label>
-        <ion-input name="celular" id="3" type="tel" placeholder="Informe seu celular" ngModel required></ion-input>
-     </ion-item>
-     <ion-item padding-horizontal>
-        <ion-label position="stacked">CPF</ion-label>
-        <ion-input type="number" size="11" name="cpf" id="4" placeholder="Informe seu CPF (apenas números)" ngModel required></ion-input>
-     </ion-item>
-     <ion-item padding-horizontal>
-        <ion-label position="stacked">Senha</ion-label>
-        <ion-input name="senha" type="password" id="5" placeholder="Escolha sua senha" ngModel required></ion-input>
-     </ion-item>
-     <ion-item padding-horizontal>
-        <ion-label position="stacked">Senha*</ion-label>
-        <ion-input name="confirmasenha" type="password" placeholder="Redigite sua senha" ngModel required></ion-input>
-     </ion-item>
-     -->
-     <ion-button padding-horizontal class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
-     </form>
-   </ion-content>
+                <ion-list lines="none">
+       
+          <form [formGroup]="slideOneForm">
+       
+           <ion-item padding-horizontal>
+              <ion-label class="label" position="stacked">Nome</ion-label>
+              <ion-input type="text" name="nome" id="0" formControlName="nome" [class.invalid]="!slideOneForm.controls.nome.valid && (slideOneForm.controls.nome.dirty || submitAttempt)" placeholder="Informe seu nome" ngModel required></ion-input>
+           </ion-item>
+       
+           <ion-item padding-horizontal *ngIf="!slideOneForm.controls.nome.valid  && (slideOneForm.controls.nome.dirty || submitAttempt)">
+                <p>Insira um nome válido.</p>
+            </ion-item>
+       
+           <ion-item padding-horizontal>
+               <ion-label class="label" position="stacked">Email</ion-label>
+               <ion-input name="email" id="1" formControlName="email" type="Email" [class.invalid]="!slideOneForm.controls.email.valid && (slideOneForm.controls.email.dirty || submitAttempt)" placeholder="Informe seu email" ngModel required></ion-input>
+            </ion-item>
+       
+            <ion-item padding-horizontal *ngIf="!slideOneForm.controls.email.valid  && (slideOneForm.controls.email.dirty || submitAttempt)">
+                <p>Insira um e-mail válido.</p>
+            </ion-item>
+       
+            <ion-item padding-horizontal>
+               <ion-label class="label" position="stacked">Data de Nascimento</ion-label>
+               <ion-datetime backdropDismiss name="datanasc" id="2" formControlName="datanasc" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" [class.invalid]="!slideOneForm.controls.datanasc.valid && (slideOneForm.controls.datanasc.dirty || submitAttempt)" ngModel required></ion-datetime>
+             </ion-item>
+       
+             <ion-item padding-horizontal *ngIf="!slideOneForm.controls.datanasc.valid  && (slideOneForm.controls.datanasc.dirty || submitAttempt)">
+                   <p>Insira sua data de nascimento.</p>
+               </ion-item>
+       
+             <ion-item padding-horizontal>
+               <ion-label class="label" position="stacked">Celular</ion-label>
+               <ion-input name="celular" maxlenght="11" id="3" formControlName="celular" type="tel" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt)" placeholder="Informe seu celular" ngModel required></ion-input>
+            </ion-item>
+       
+            <ion-item  padding-horizontal *ngIf="!slideOneForm.controls.celular.valid  && (slideOneForm.controls.celular.dirty || submitAttempt)">
+                <p>Insira apenas números.</p>
+            </ion-item>
+       
+            <ion-item padding-horizontal>
+               <ion-label class="label" position="stacked">CPF</ion-label>
+               <ion-input type="number" size="11" formControlName="cpf" name="cpf" id="4" [class.invalid]="!slideOneForm.controls.cpf.valid && (slideOneForm.controls.cpf.dirty || submitAttempt)" placeholder="Informe seu CPF (apenas números)" ngModel required></ion-input>
+            </ion-item>
+       
+            <ion-item padding-horizontal *ngIf="!slideOneForm.controls.cpf.valid  && (slideOneForm.controls.cpf.dirty || submitAttempt)">
+                <p>CPF já cadastrado.</p>
+            </ion-item>
+       
+            <ion-item padding-horizontal>
+               <ion-label class="label" position="stacked">Senha</ion-label>
+               <ion-input name="senha" type="password" id="5" formControlName="senha" [class.invalid]="!slideOneForm.controls.senha.valid && (slideOneForm.controls.senha.dirty || submitAttempt)" placeholder="Escolha sua senha" ngModel required></ion-input>
+            </ion-item>
+       
+            <ion-item padding-horizontal *ngIf="!slideOneForm.controls.senha.valid  && (slideOneForm.controls.senha.dirty || submitAttempt)">
+                <p>Insira uma senha.</p>
+            </ion-item>
+       
+            <ion-item padding-horizontal>
+               <ion-label class="label" position="stacked">Senha*</ion-label>
+               <ion-input name="confirmasenha" type="password" formControlName="confirmasenha" [class.invalid]="!slideOneForm.controls.confirmasenha.valid && (slideOneForm.controls.confirmasenha.dirty || submitAttempt)" placeholder="Redigite sua senha" ngModel required></ion-input>
+            </ion-item>
+       
+            <ion-item padding-horizontal *ngIf="!slideOneForm.controls.confirmasenha.valid  && (slideOneForm.controls.confirmasenha.dirty || submitAttempt)">
+                <p>Insira um e-mail válido.</p>
+            </ion-item>
+       
+            <ion-button padding-horizontal (click)="proxSlide()" class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
+            </form> <!--Depois tem que trocar o proxSlide deste botão para o save()-->
+          </ion-list>
+        </ion-slide>
+        <ion-slide>
+            <ion-list lines="none">
+       
+                <form [formGroup]="slideOneForm">
+                    <h1>Adicionar Contatos</h1>
+                    <h6 style="padding-top: -10%;">Para situação de emergência</h6>
+                    <hr style="width: 10px;">
+                    <h5>Contato 1:</h5>
+                    <ion-item padding-horizontal>
+                        <ion-label class="label" position="stacked">Nome</ion-label>
+                        <ion-input type="text" name="nome_contato1" id="0" formControlName="nome_contato1" placeholder="Informe o nome do 1 contato" ngModel required></ion-input>
+                    </ion-item>
+                    <ion-item padding-horizontal>
+                            <ion-label class="label" position="stacked">Número do Telefone</ion-label>
+                            <ion-input type="number" name="num_contato1" id="0" formControlName="num_contato1" placeholder="Informe seu nome" ngModel required></ion-input>
+                    </ion-item>
+                    <hr>
+                    <h5>Contato 2:</h5>
+                    <ion-item padding-horizontal>
+                        <ion-label class="label" position="stacked">Nome</ion-label>
+                        <ion-input type="text" name="nome_contato2" id="0" formControlName="nome_contato1" placeholder="Informe o nome do 1 contato" ngModel required></ion-input>
+                    </ion-item>
+                    <ion-item padding-horizontal>
+                        <ion-label class="label" position="stacked">Número do Telefone</ion-label>
+                        <ion-input type="number" name="num_contato2" id="0" formControlName="num_contato1" placeholder="Informe seu nome" ngModel required></ion-input>
+                    </ion-item>
+                        
+                    <ion-button padding-horizontal (click)="proxSlide()" class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
+                    
+                </form>
+            </ion-list>
+        </ion-slide>
+        <ion-slide>
+                <ion-list lines="none">
+       
+                        <form [formGroup]="slideTwoForm">
+                       
+                            <ion-item padding-horizontal>
+                            <ion-label>Selecione intolerância alimentar</ion-label>
+                            <ion-select multiple="true" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option value="Lactose">Lactose</ion-select-option>
+                                <ion-select-option value="Gluten">Gluten</ion-select-option>
+                                <ion-select-option value="Frutose">Frutose</ion-select-option>
+                                <ion-select-option value="Sacarose">Sacorose</ion-select-option>
+                            </ion-select>
+                            </ion-item>
+                     
+                     
+                         <ion-item padding-horizontal>
+                             <ion-label class="label" position="stacked">Data de quando ocorreu sua primeira crise:</ion-label>
+                             <ion-datetime display-format="DD.MM.YYYY" name="data_primeira_crise"></ion-datetime>
+                          </ion-item>
+                     
+                          <ion-item padding-horizontal>
+                                <ion-label class="label" position="stacked">Selecione quais os sintomas que você geralmente apresenta durante a crise</ion-label>
+                                <ion-list>
+                                    <ion-item *ngFor="let entry of sintomas"  style="font-size: 10px;" >
+                                        <ion-label>{{entry.val}}</ion-label>
+                                        <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"  size="2px"></ion-checkbox>
+                                    </ion-item>
+                                </ion-list>
+                            </ion-item>
+                     
+                     
+                           <ion-item padding-horizontal>
+                             <ion-label class="label" position="stacked">Em quais situações você teve essas sensações? (Descreva)</ion-label>
+                             <ion-textarea rows="6" cols="20" placeholder="Fatores desencadeantes da crise" border-radius="2"></ion-textarea>
+                          </ion-item>
+                     
+                          <ion-button padding-horizontal (click)="save()" class="button" fill="outline" color="verdemud4" expand="block">Finalizar Cadastro</ion-button>
+                          </form>
+                        </ion-list>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

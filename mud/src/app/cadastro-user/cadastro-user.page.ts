@@ -1,7 +1,8 @@
+import { CpfValidator } from '../validators/cpf';
 import { BancoService } from './../banco.service';
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NavController, IonSlides } from '@ionic/angular';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 
 @Component({
@@ -10,30 +11,71 @@ import { BoundDirectivePropertyAst } from '@angular/compiler';
   styleUrls: ['./cadastro-user.page.scss'],
 })
 
+
 export class CadastroUserPage implements OnInit {
 
-  constructor(public navCtrl: NavController, private BD: BancoService) { }
-  public dadosUser:FormGroup = new FormGroup({
-    'nome' : new FormControl(null, [Validators.required, Validators.minLength(2)])/*,
-    'email' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
-    'datanasc' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
-    'tel' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-    'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-    'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)])*/
-  })
+  @ViewChild(IonSlides) IonSlides: IonSlides;
   
-  public Validar(name:string)
+	/*public slideOneForm: FormGroup;*/
+  public submitAttempt: boolean = false;
+
+  constructor(public navCtrl: NavController, private BD: BancoService, public formBuilder: FormBuilder) {
+    /*this.slideOneForm = formBuilder.group({
+      nome: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      cpf: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf])]
+     });*/
+
+     
+   }
+   
+   
+
+  
+  public slideOneForm:FormGroup = new FormGroup({
+    'nome' : new FormControl(null, [Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')]),
+    'email' : new FormControl(null, [Validators.required, Validators.email]),
+    'datanasc' : new FormControl(null, [Validators.required]),
+    'celular' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')]),
+    'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')]),
+    'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
+    'confirmasenha' : new FormControl(null, [Validators.required, Validators.minLength(2)])
+  })
+
+    proxSlide()
+    {
+      this.IonSlides.lockSwipes(false);
+      this.IonSlides.slideNext();
+      this.IonSlides.lockSwipes(true);
+    }
+
+    save(){
+      this.submitAttempt = true;
+
+      if(!this.slideOneForm.valid){
+          this.IonSlides.slideTo(0);
+      } 
+      else {
+          this.IonSlides.lockSwipes(false);
+          this.IonSlides.slideNext();
+          this.IonSlides.lockSwipes(true);
+          alert("Sucesso");
+      }
+    }
+
+  
+ /* public Validar(name:string)
   {
     if(name == 'nome')
     {
       if(this.dadosUser.controls.nome.valid)
-        document.getElementById('lbl_'+ name).style.color='#020B04';
+        document.getElementById(name).style.color='#020B04';
       else if(!this.dadosUser.controls.nome.valid)
-        document.getElementById('lbl_' + name).style.color='#f53d3d';
+        document.getElementById(name).style.color='#f53d3d';
     }
   }
 
-  /*inserirUsuario()
+  inserirUsuario()
   {
     let nome = (<HTMLInputElement>document.getElementById("0")).value;
     let email = (<HTMLInputElement>document.getElementById("1")).value;
@@ -46,5 +88,24 @@ export class CadastroUserPage implements OnInit {
 
 }*/
 ngOnInit() {
+  this.IonSlides.lockSwipes(true);
 }
+
+public sintomas = [
+  { val: 'Dificuldade para Respirar', id: 0 },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Sensações de Asfixia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false }
+];
+
 }

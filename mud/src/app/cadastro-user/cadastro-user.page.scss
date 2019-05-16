@@ -1,4 +1,17 @@
 .button
 {
-    margin-top: 20px; 
+    margin-top: 30px; 
+}
+
+ion-label {
+    color:  #165044ff !important; 
+}
+
+p {
+    font-size: 0.8em;
+    color: #989aa2;
+}
+
+ion-slide >:first-child {
+    width: 100%;
 }
