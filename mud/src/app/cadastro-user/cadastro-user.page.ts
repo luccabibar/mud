@@ -37,7 +37,7 @@ export class CadastroUserPage implements OnInit {
     'email' : new FormControl(null, [Validators.required, Validators.email]),
     'datanasc' : new FormControl(null, [Validators.required]),
     'celular' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')]),
-    'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')]),
+    'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf]),
     'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
     'confirmasenha' : new FormControl(null, [Validators.required, Validators.minLength(2)])
   })
