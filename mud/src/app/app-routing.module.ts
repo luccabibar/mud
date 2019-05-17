@@ -7,8 +7,8 @@ const routes: Routes = [
   { path: 'tab2', loadChildren: './tab2/tab2.module#Tab2PageModule' },
   { path: 'tab3', loadChildren: './tab3/tab3.module#Tab3PageModule' },
   { path: 'load', loadChildren: './load/load.module#LoadPageModule' },
-  { path: '', loadChildren: './cadastro-user/cadastro-user.module#CadastroUserPageModule' },
-  { path: 'login', loadChildren: './login-page/login-page.module#LoginPagePageModule' }
+  { path: 'cadastro', loadChildren: './cadastro-user/cadastro-user.module#CadastroUserPageModule' },
+  { path: '', loadChildren: './login-page/login-page.module#LoginPagePageModule' }
   
 
 

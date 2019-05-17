@@ -34,7 +34,7 @@
 
 #itemSenha
 {
-    top: 50%;
+    top: 45%;
     width: 80%;
     left: 50%;
     margin-right: -50%;
@@ -44,36 +44,30 @@
 #esqSenha
 {
     width: 40%;
-    position: relative;
     margin: 0;
     position: absolute;
-    top: 70%;
-    left: 45%;
-    font-size: 90%;
+    top: 67%;
+    font-size: 70%;
+    left: 52%;
+    color: #2ca089ff;
 }
 
-#btnEntrar
+.btnEntrar
 {
-    width: 50%;
-    position: relative;
-    margin: 0;
+    width: 80%;
     position: absolute;
-    top: 83%;
+    top: 75%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%) 
 }
 
 #hrefCadast
 {
+    color:#2ca089ff;
     width: 85%;
-    position: relative;
     margin: 0;
     position: absolute;
-    top: 93%;
-    font-size: 95%;
-    left: 50%;
-    margin-right: 50%;
-    //margin-right: -50%;
-    transform: translate(-50%, -50%);
+    top: 95%;
+    font-size: 70%;
 }
