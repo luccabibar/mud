@@ -41,11 +41,11 @@
        
              <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Celular</ion-label>
-               <ion-input name="celular" maxlenght="11" id="3" formControlName="celular" type="tel" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt)" placeholder="Informe seu celular a partir do DDD." ngModel required></ion-input>
+               <ion-input name="celular" id="3" formControlName="celular" type="number" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt)" placeholder="Informe seu celular a partir do DDD." ngModel required></ion-input>
             </ion-item>
        
             <ion-item  padding-horizontal *ngIf="!slideOneForm.controls.celular.valid  && (slideOneForm.controls.celular.dirty || submitAttempt)">
-                <p>Insira apenas números.</p>
+                <p>Insira apenas os números.</p>
             </ion-item>
        
             <ion-item padding-horizontal>
