@@ -44,12 +44,10 @@
 #esqSenha
 {
     width: 40%;
-    position: relative;
     margin: 0;
     position: absolute;
     top: 70%;
-    left: 45%;
-    font-size: 90%;
+    font-size: 85%;
 }
 
 #btnEntrar
@@ -70,10 +68,9 @@
     position: relative;
     margin: 0;
     position: absolute;
-    top: 93%;
-    font-size: 95%;
+    top: 97%;
+    font-size: 12px;
     left: 50%;
     margin-right: 50%;
-    //margin-right: -50%;
     transform: translate(-50%, -50%);
 }
