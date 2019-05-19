@@ -2,23 +2,25 @@ import { FormControl } from '@angular/forms';
 
 export class CpfValidator {
     static checkCpf(control: FormControl): any {
+      
+      if(isNaN(control.value)){
+          return {
+              "nao e um numero": true
+          };
+      }
+      
+      if(control.value < 9999999999){
+          return {
+              "menor que um numero real": true
+          };
+      }
 
-        return new Promise(resolve => {
-    
-          //Fake a slow response from server
-    
-          setTimeout(() => {
-            if(control.value == 12345678910){
-    
-              resolve({
-                "cpf taken": true
-              });
-    
-            } else {
-              resolve(null);
-            }
-          }, 2000);
-    
-        });
+      if(control.value > 99999999999){
+          return {
+              "maior que um numero real": true
+          };
+      }
+
+      return null;
       }
 }

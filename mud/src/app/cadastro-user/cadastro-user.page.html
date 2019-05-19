@@ -7,11 +7,10 @@
 <ion-content>
     <ion-slides mode="ios" pager="ios" scrollbar="ios">
         <ion-slide>
-                <p *ngIf="submitAttempt" style="color: #ea6153;">Please fill out all details accurately.</p>
-
-                <ion-list lines="none">
-       
+        <ion-list lines="none">
           <form [formGroup]="slideOneForm">
+
+            <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, preencha todos os campos corretamente.</p>
        
            <ion-item padding-horizontal>
               <ion-label class="label" position="stacked">Nome</ion-label>
@@ -19,7 +18,7 @@
            </ion-item>
        
            <ion-item padding-horizontal *ngIf="!slideOneForm.controls.nome.valid  && (slideOneForm.controls.nome.dirty || submitAttempt)">
-                <p>Insira um nome válido.</p>
+                <p>Apenas letras são aceitas.</p>
             </ion-item>
        
            <ion-item padding-horizontal>
@@ -42,11 +41,11 @@
        
              <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Celular</ion-label>
-               <ion-input name="celular" maxlenght="11" id="3" formControlName="celular" type="tel" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt)" placeholder="Informe seu celular" ngModel required></ion-input>
+               <ion-input name="celular" id="3" formControlName="celular" type="number" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt)" placeholder="Informe seu celular a partir do DDD." ngModel required></ion-input>
             </ion-item>
        
             <ion-item  padding-horizontal *ngIf="!slideOneForm.controls.celular.valid  && (slideOneForm.controls.celular.dirty || submitAttempt)">
-                <p>Insira apenas números.</p>
+                <p>Insira apenas os números.</p>
             </ion-item>
        
             <ion-item padding-horizontal>
@@ -69,14 +68,14 @@
        
             <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Senha*</ion-label>
-               <ion-input name="confirmasenha" type="password" formControlName="confirmasenha" [class.invalid]="!slideOneForm.controls.confirmasenha.valid && (slideOneForm.controls.confirmasenha.dirty || submitAttempt)" placeholder="Redigite sua senha" ngModel required></ion-input>
+               <ion-input name="confirmasenha" id="confirmasenha" type="password" formControlName="confirmasenha" (keyup)="Validar('confirmasenha')" (ionChange)="Validar('confirmasenha')" (ionFocus)="Validar('confirmasenha')" [class.invalid]="!slideOneForm.controls.confirmasenha.valid && (slideOneForm.controls.confirmasenha.dirty || submitAttempt)" placeholder="Redigite sua senha" ngModel required></ion-input>
             </ion-item>
        
             <ion-item padding-horizontal *ngIf="!slideOneForm.controls.confirmasenha.valid  && (slideOneForm.controls.confirmasenha.dirty || submitAttempt)">
-                <p>Insira um e-mail válido.</p>
+                <p>As senhas não conferem.</p>
             </ion-item>
        
-            <ion-button padding-horizontal (click)="proxSlide()" class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
+            <ion-button padding-horizontal (click)="save()" class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
             </form> <!--Depois tem que trocar o proxSlide deste botão para o save()-->
           </ion-list>
         </ion-slide>

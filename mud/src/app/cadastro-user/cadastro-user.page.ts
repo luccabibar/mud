@@ -1,4 +1,6 @@
+import { ConfirmaSenha } from './../validators/senhas';
 import { CpfValidator } from '../validators/cpf';
+import { CelularValidator } from '../validators/celular';
 import { BancoService } from './../banco.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, IonSlides } from '@ionic/angular';
@@ -28,18 +30,15 @@ export class CadastroUserPage implements OnInit {
 
      
    }
-   
-   
-
   
   public slideOneForm:FormGroup = new FormGroup({
     'nome' : new FormControl(null, [Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')]),
     'email' : new FormControl(null, [Validators.required, Validators.email]),
     'datanasc' : new FormControl(null, [Validators.required]),
-    'celular' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')]),
-    'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')]),
+    'celular' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CelularValidator.checkCelular]),
+    'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf]),
     'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
-    'confirmasenha' : new FormControl(null, [Validators.required, Validators.minLength(2)])
+    'confirmasenha' : new FormControl(null, [Validators.required, Validators.minLength(2), ConfirmaSenha.checkSenha])
   })
 
     proxSlide()
@@ -63,15 +62,15 @@ export class CadastroUserPage implements OnInit {
       }
     }
 
-  
- /* public Validar(name:string)
+  /*
+ public Validar(name:string)
   {
-    if(name == 'nome')
+    if(name == 'confirmasenha')
     {
-      if(this.dadosUser.controls.nome.valid)
-        document.getElementById(name).style.color='#020B04';
-      else if(!this.dadosUser.controls.nome.valid)
-        document.getElementById(name).style.color='#f53d3d';
+      if(this.slideOneForm.controls.confirmasenha.value != this.slideOneForm.controls.senha.value)
+        document.getElementById(name).style.outlineColor='#020B04';
+      else if(!this.slideOneForm.controls.nome.valid)
+        document.getElementById(name).style.backgroundColor='#f53d3d';
     }
   }
 
@@ -90,6 +89,7 @@ export class CadastroUserPage implements OnInit {
 ngOnInit() {
   this.IonSlides.lockSwipes(true);
 }
+
 
 public sintomas = [
   { val: 'Dificuldade para Respirar', id: 0 },
