@@ -1,0 +1,39 @@
+{
+    "semanas": [{
+        "name": "29/05 - 03/06/2019",
+        "children": [
+            {
+                "name": "alimento",
+                "laticinios": 3,
+                "carboidratos": 7,
+                "verduras": 4,
+                "frutas": 0,
+                "hidratacao": 2
+            },
+            {
+                "name": "saude",
+                "": 3,
+                "carboidratos": 7,
+                "verduras": 4,
+                "frutas": 0,
+                "hidratacao": 2
+            },
+            {
+                "name": "sono",
+                "laticinios": 3,
+                "carboidratos": 7,
+                "verduras": 4,
+                "frutas": 0,
+                "hidratacao": 2
+            },
+            {
+                "name": "fisica",
+                "laticinios": 3,
+                "carboidratos": 7,
+                "verduras": 4,
+                "frutas": 0,
+                "hidratacao": 2
+            }
+        ]
+    }]
+}

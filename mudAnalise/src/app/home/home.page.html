@@ -22,17 +22,11 @@
   <ion-card>
     <ion-list>
       <ion-item-sliding>
-        <ion-item>
+        <ion-item tappable routerLink="/tabs">
           <ion-avatar slot="start">
             <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-373-456325.png">
           </ion-avatar>
           <ion-label>Paciente 1</ion-label>
-          <ion-buttons slot="end">
-            <ion-button routerLink="/tabs" side="end">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="eye"></ion-icon>
-            </ion-button>
-          </ion-buttons>
         </ion-item>
         <ion-item-options side="end">
           <ion-item-option color="danger" (click)="alertaDeletar()">
@@ -43,20 +37,12 @@
 
       <!--Paciente 2-->
       <ion-item-sliding>
-        <ion-item>
+        <ion-item tappable routerLink="/tabs">
           <ion-avatar slot="start">
             <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png">
           </ion-avatar>
           <ion-label>Paciente 1</ion-label>
-          <ion-buttons slot="end">
-            <ion-button routerLink="/tabs" side="end">
-              <ion-ripple-effect></ion-ripple-effect>
-
-              <ion-icon name="eye"></ion-icon>
-            </ion-button>
-          </ion-buttons>
         </ion-item>
-
         <ion-item-options side="end" (click)="alertaDeletar()">
           <ion-item-option color="danger">
             <ion-icon slot="icon-only" name="trash"></ion-icon>
@@ -66,18 +52,11 @@
 
       <!--Paciente 3-->
       <ion-item-sliding>
-
-        <ion-item>
+        <ion-item tappable routerLink="/tabs">
           <ion-avatar slot="start">
             <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png">
           </ion-avatar>
           <ion-label>Paciente 1</ion-label>
-          <ion-buttons slot="end">
-            <ion-button routerLink="/tabs" side="end">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="eye"></ion-icon>
-            </ion-button>
-          </ion-buttons>
         </ion-item>
         <ion-item-options side="end" (click)="alertaDeletar()">
           <ion-item-option color="danger">
@@ -86,6 +65,26 @@
         </ion-item-options>
       </ion-item-sliding>
 
+      <!-- ITEM COM BOTAO QUE REDIRECIONA PARA O HOME PSIC
+         <ion-item-sliding>
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png">
+          </ion-avatar>
+          <ion-label>Paciente 1</ion-label>
+          <ion-buttons slot="end">
+            <ion-button routerLink="/tabs" side="end">
+              <ion-icon name="eye"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>>
+        <ion-item-options side="end" (click)="alertaDeletar()">
+          <ion-item-option color="danger">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+      -->
     </ion-list>
   </ion-card>
 
