@@ -18,7 +18,8 @@ export class CadastroUserPage implements OnInit {
 
   @ViewChild(IonSlides) IonSlides: IonSlides;
   
-	public slideOneForm: FormGroup;
+  public slideOneForm: FormGroup;
+  public slideTwoForm: FormGroup;
   public submitAttempt: boolean = false;
 
   matchingPasswords(senhaKey: string, confirmasenhaKey: string) {
@@ -26,27 +27,33 @@ export class CadastroUserPage implements OnInit {
       let senha = group.controls[senhaKey];
       let confirmasenha= group.controls[confirmasenhaKey];
 
-      if (confirmasenha.value !== senha.value) {
+      if (confirmasenha.value != senha.value) {
         return {
           mismatchedPasswords: true
         };
       }
 
-
+      return null;
     }
   }
 
   constructor(public navCtrl: NavController, private BD: BancoService, public formBuilder: FormBuilder, private AlertController: AlertController) {
       this.slideOneForm = formBuilder.group({
-      nome: [null , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
+      nome: ['' , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       datanasc : ['', Validators.compose([Validators.required])],
       celular : ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CelularValidator.checkCelular])],
       cpf: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf])],
       senha: ['', Validators.required],
-      confirmasenha : ['', Validators.required, ConfirmaSenha.checkSenha]}, 
+      confirmasenha : ['', Validators.required]}, 
       {validator: this.matchingPasswords('senha', 'confirmasenha')}
       );
+      this.slideTwoForm = formBuilder.group({
+        nome_contato1: ['' , Validators.compose([Validators.required, Validators.pattern('[ A-Za-zÀ-ú ]*')])],
+        num_contato1: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CelularValidator.checkCelular])],
+        nome_contato2: ['' , Validators.compose([Validators.pattern('[ A-Za-zÀ-ú ]*')])],
+        num_contato2: ['', Validators.compose([Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')])]
+      });
    }
   
  /* public slideOneForm:FormGroup = new FormGroup({
@@ -68,16 +75,19 @@ export class CadastroUserPage implements OnInit {
     }
 
     save(){
-      this.submitAttempt = true;
 
-      if(!this.slideOneForm.valid){
+      if(this.slideOneForm.invalid){
           this.IonSlides.slideTo(0);
+          this.submitAttempt = true;
+      } 
+      if(this.slideTwoForm.invalid){
+        this.IonSlides.slideTo(0);
+        this.submitAttempt = true;
       } 
       else {
           this.IonSlides.lockSwipes(false);
           this.IonSlides.slideNext();
           this.IonSlides.lockSwipes(true);
-          alert("Sucesso");
       }
     }
 
