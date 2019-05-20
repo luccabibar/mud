@@ -18,28 +18,31 @@ export class CadastroUserPage implements OnInit {
 
   @ViewChild(IonSlides) IonSlides: IonSlides;
   
-	/*public slideOneForm: FormGroup;*/
+	public slideOneForm: FormGroup;
   public submitAttempt: boolean = false;
 
   constructor(public navCtrl: NavController, private BD: BancoService, public formBuilder: FormBuilder) {
-    /*this.slideOneForm = formBuilder.group({
-      nome: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
+    this.slideOneForm = formBuilder.group({
+      nome: ['', Validators.compose([Validators.required, Validators.pattern('[ A-Za-zÀ-ú ]*')])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      cpf: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf])]
-     });*/
+      datanasc : ['', Validators.compose([Validators.required])],
+      cpf: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf])],
+      senha: ['', Validators.required],
+      confirmasenha : ['', Validators.required, ConfirmaSenha.checkSenha]
+     });
 
      
    }
   
-  public slideOneForm:FormGroup = new FormGroup({
-    'nome' : new FormControl(null, [Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')]),
+ /* public slideOneForm:FormGroup = new FormGroup({
+    'nome' : new FormControl(null, [Validators.required, Validators.pattern('[ A-Za-zÀ-ú ]*')]),
     'email' : new FormControl(null, [Validators.required, Validators.email]),
     'datanasc' : new FormControl(null, [Validators.required]),
     'celular' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CelularValidator.checkCelular]),
     'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf]),
-    'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
-    'confirmasenha' : new FormControl(null, [Validators.required, Validators.minLength(2), ConfirmaSenha.checkSenha])
-  })
+    'senha' : new FormControl(null, [Validators.required]),
+    'confirmasenha' : new FormControl(null, [Validators.required, ConfirmaSenha.checkSenha])
+  })*/
 
     proxSlide()
     {
