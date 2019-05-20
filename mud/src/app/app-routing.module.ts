@@ -9,9 +9,6 @@ const routes: Routes = [
   { path: 'load', loadChildren: './load/load.module#LoadPageModule' },
   { path: 'cadastro', loadChildren: './cadastro-user/cadastro-user.module#CadastroUserPageModule' },
   { path: '', loadChildren: './login-page/login-page.module#LoginPagePageModule' }
-  
-
-
 ];
 
 

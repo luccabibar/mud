@@ -25,31 +25,52 @@ export class LoginPagePage {
   {
     let email = (<HTMLInputElement>document.getElementById("1")).value;
     let senha = (<HTMLInputElement>document.getElementById("2")).value;
-    this.BancoService.selectGenerico("SELECT * FROM usuario WHERE email='"+email+"' AND senha='"+senha+"';")
+    this.BancoService.selectGenerico("SELECT * FROM usuario WHERE email='"+email+"';")
     .then(async(response)=>{
-        const alert = await this.alertController.create({
+      if(response[0].senha == senha)
+      {
+          const alert = await this.alertController.create({
           header: 'Confirmação',
           subHeader: 'Sucesso!',
           message: JSON.stringify(response),
           buttons: ['OK']
         });
+
+        await alert.present();
+        this.nav.navigateForward('tab1');
+      } 
+
+      else if(response[0].senha != senha)
+      {
+
+          const alert = await this.alertController.create({
+          header: 'Confirmação',
+          subHeader: 'Sucesso!',
+          message: 'A senha está incorreta',
+          buttons: ['OK']
+        });
+
+        /*
+       document.getElementById('1').style.borderColor = 'success';
+        document.getElementById('2').style.borderColor = 'danger';
+        document.getElementById('2').focus();*/
         
         await alert.present();
       }
-    )
-    .catch(async(response)=>{
+})
+
+.catch(async(response)=>{
 
       const alert = await this.alertController.create({
         header: 'Confirmação',
         subHeader: 'Erro!',
-        message: JSON.stringify(response),
+        message: 'A conta não existe',
         buttons: ['OK']
       });
   
       await alert.present();
     })
   }
-
   direcCadast()
   {
       this.nav.navigateForward('cadastro');
