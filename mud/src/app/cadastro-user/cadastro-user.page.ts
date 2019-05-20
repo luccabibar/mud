@@ -18,28 +18,47 @@ export class CadastroUserPage implements OnInit {
 
   @ViewChild(IonSlides) IonSlides: IonSlides;
   
-	/*public slideOneForm: FormGroup;*/
+	public slideOneForm: FormGroup;
   public submitAttempt: boolean = false;
 
-  constructor(public navCtrl: NavController, private BD: BancoService, public formBuilder: FormBuilder, private AlertController: AlertController) {
-    /*this.slideOneForm = formBuilder.group({
-      nome: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      cpf: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf])]
-     });*/
+  matchingPasswords(senhaKey: string, confirmasenhaKey: string) {
+    return (group: FormGroup): {[key: string]: any} => {
+      let senha = group.controls[senhaKey];
+      let confirmasenha= group.controls[confirmasenhaKey];
 
-     
+      if (confirmasenha.value !== senha.value) {
+        return {
+          mismatchedPasswords: true
+        };
+      }
+
+
+    }
+  }
+
+  constructor(public navCtrl: NavController, private BD: BancoService, public formBuilder: FormBuilder, private AlertController: AlertController) {
+      this.slideOneForm = formBuilder.group({
+      nome: [null , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      datanasc : ['', Validators.compose([Validators.required])],
+      celular : ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CelularValidator.checkCelular])],
+      cpf: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf])],
+      senha: ['', Validators.required],
+      confirmasenha : ['', Validators.required, ConfirmaSenha.checkSenha]}, 
+      {validator: this.matchingPasswords('senha', 'confirmasenha')}
+      );
    }
   
-  public slideOneForm:FormGroup = new FormGroup({
+ /* public slideOneForm:FormGroup = new FormGroup({
     'nome' : new FormControl(null, [Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')]),
     'email' : new FormControl(null, [Validators.required, Validators.email]),
     'datanasc' : new FormControl(null, [Validators.required]),
     'celular' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CelularValidator.checkCelular]),
     'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf]),
     'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
-    'confirmasenha' : new FormControl(null, [Validators.required, Validators.minLength(2), ConfirmaSenha.checkSenha])
-  })
+    'confirmasenha' : new FormControl(null, [Validators.required, Validators.minLength(2), ConfirmaSenha.checkSenha])}, 
+    {validator: this.matchingPasswords('senha', 'confirmasenha')}
+  })*/
 
     proxSlide()
     {
