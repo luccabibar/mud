@@ -15,7 +15,7 @@
       <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-373-456325.png">
     </ion-avatar>
     <ion-card-header text-center>
-      <ion-button (click)=" callNow()">
+      <ion-button (click)=" callNow(1432274032)">
         <ion-icon slot="icon-only" name="call"></ion-icon>
       </ion-button>
       <ion-card-title>Joana Silva Francisca</ion-card-title>
@@ -27,19 +27,17 @@
     <ion-list-header>
       <ion-label>Recursos</ion-label>
     </ion-list-header>
-    <ion-item>
+    <ion-item tappable routerLink="/ficha-paciente">
         <ion-icon slot="start" color="big" name="clipboard"></ion-icon>
         <ion-label>Ficha de Paciente</ion-label>
     </ion-item>
-    <ion-item href="https://ionicframework.com/docs/">
+    <ion-item tappable routerLink="/grafico-semanal">
       <ion-icon slot="start" color="big" name="calendar"></ion-icon>
       <ion-label>Histórico de Relatório Semanal</ion-label>
     </ion-item>
-    <ion-item href="https://ionicframework.com/docs/building/scaffolding">
+    <ion-item tappable routerLink="/grafico-crise">
       <ion-icon slot="start" color="big" name="pulse"></ion-icon>
       <ion-label>Histórico de Relatório de Crise</ion-label>
     </ion-item>
-
-
   </ion-list>
 </ion-content>

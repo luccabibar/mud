@@ -10,7 +10,21 @@ import { HomePage } from './home.page';
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
+    component: HomePage,
+    children: [
+      {
+        path: 'opcoes-menu/ficha-paciente',
+        loadChildren: './opcoes-menu/ficha-paciente/ficha-paciente.module#FichaPacientePageModule'
+      },
+      {
+        path: 'opcoes-menu/grafico-crise',
+        loadChildren: './opcoes-menu/grafico-crise/grafico-crise.module#GraficoCrisePageModule'
+      },
+      {
+        path: 'opcoes-menu/grafico-semanal',
+        loadChildren: './opcoes-menu/grafico-semanal/grafico-semanal.module#GraficoSemanalPageModule'
+      }
+    ]
   }
 ];
 
