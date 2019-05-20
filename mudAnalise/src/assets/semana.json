@@ -11,7 +11,7 @@
                 "hidratacao": 2
             },
             {
-                "name": "saude",
+                "name": "social",
                 "": 3,
                 "carboidratos": 7,
                 "verduras": 4,
@@ -27,7 +27,7 @@
                 "hidratacao": 2
             },
             {
-                "name": "fisica",
+                "name": "atividade",
                 "laticinios": 3,
                 "carboidratos": 7,
                 "verduras": 4,
