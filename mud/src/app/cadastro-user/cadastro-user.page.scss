@@ -15,3 +15,8 @@ p {
 ion-slide >:first-child {
     width: 100%;
 }
+
+ion-slides {
+    --bullet-background: #989aa2;
+    --bullet-background-active: #165044ff; 
+}

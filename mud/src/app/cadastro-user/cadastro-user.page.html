@@ -5,12 +5,12 @@
 </ion-header>
 
 <ion-content>
-    <ion-slides mode="ios" pager="ios" scrollbar="ios">
+    <ion-slides pager>
         <ion-slide>
         <ion-list lines="none">
           <form [formGroup]="slideOneForm">
 
-            <ion-item padding-horizontal *ngIf="submitAttempt">
+            <ion-item padding-horizontal *ngIf="submitAttempt1">
             <p style="color: #f04141;">Por favor, preencha todos os campos corretamente.</p>
             </ion-item>
 
@@ -43,7 +43,7 @@
        
              <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Celular</ion-label>
-               <ion-input name="celular" id="3" formControlName="celular" type="number" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt)" placeholder="Informe seu celular a partir do DDD."></ion-input>
+               <ion-input name="celular" id="3" formControlName="celular" type="number" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt)" placeholder="Insira apenas os números (incluindo o DDD)."></ion-input>
             </ion-item>
        
             <ion-item  padding-horizontal *ngIf="!slideOneForm.controls.celular.valid  && (slideOneForm.controls.celular.dirty || submitAttempt)">
@@ -86,15 +86,10 @@
        
                 <form [formGroup]="slideTwoForm">
                     <h1>Adicionar Contatos</h1>
-                    <h6 style="padding-top: -10%;">Para situação de emergência</h6>
+                    <h6 style="padding-top: -10%;">Para situações de emergência</h6>
                     <hr style="width: 10px;">
 
-                    <ion-item padding-horizontal *ngIf="submitAttempt">
-                        <p style="color: #f04141;">Por favor, preencha todos os campos corretamente.</p>
-                        </ion-item>
-            
-
-                    <h5>Contato 1:</h5>
+                    <h5>Contato:</h5>
                     <ion-item padding-horizontal>
                         <ion-label class="label" position="stacked">Nome</ion-label>
                         <ion-input type="text" name="nome_contato1" id="6" formControlName="nome_contato1" [class.invalid]="!slideTwoForm.controls.nome_contato1.valid && (slideTwoForm.controls.nome_contato1.dirty || submitAttempt)" placeholder="Informe o nome de um contato"></ion-input>
@@ -104,8 +99,15 @@
                     </ion-item>
                     <ion-item padding-horizontal>
                             <ion-label class="label" position="stacked">Número do Telefone</ion-label>
-                            <ion-input type="number" name="num_contato1" id="7" formControlName="num_contato1" placeholder="Informe seu nome"></ion-input>
+                            <ion-input type="number" name="num_contato1" id="7" formControlName="num_contato1" [class.invalid]="!slideTwoForm.controls.num_contato1.valid && (slideTwoForm.controls.num_contato1.dirty || submitAttempt)" placeholder="Insira apenas os números (incluindo o DDD)"></ion-input>
                     </ion-item>
+                    <ion-item padding-horizontal *ngIf="!slideTwoForm.controls.num_contato1.valid  && (slideTwoForm.controls.num_contato1.dirty || submitAttempt)">
+                        <p>Insira um número válido (não esqueça o DDD).</p>
+                    </ion-item>
+                    <ion-item padding-horizontal *ngIf="submitAttempt2">
+                        <p style="color: #f04141;">Por favor, adicione um contato.</p>
+                    </ion-item>
+                    <div id="contato2" style="display: none;">
                     <hr>
                     <h5>Contato 2:</h5>
                     <ion-item padding-horizontal>
@@ -116,8 +118,16 @@
                         <ion-label class="label" position="stacked">Número do Telefone</ion-label>
                         <ion-input type="number" name="num_contato2" id="9" formControlName="num_contato2" placeholder="Informe seu nome"></ion-input>
                     </ion-item>
-                        
-                    <ion-button padding-horizontal (click)="save()" class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
+                    </div>
+                    <div id="fab">
+                    <ion-fab padding-horizontal horizontal="end">
+                    <ion-fab-button  size="small" (click)="addcontato()" color="verdemud4">
+                        <ion-icon name="add"></ion-icon>
+                    </ion-fab-button>
+                    </ion-fab>
+                    <hr><hr><hr><hr>
+                    </div>
+                    <ion-button padding-horizontal (click)="proxSlide()" class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
                     
                 </form>
             </ion-list>
