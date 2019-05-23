@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController} from '@ionic/angular';
 import { BancoService } from './../banco.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ViewChild } from '@angular/core';
+
 
 @Component({
   selector: 'app-login-page',
@@ -38,6 +40,7 @@ export class LoginPagePage {
 
         await alert.present();
         this.nav.navigateForward('tab1');
+        return;
       } 
 
       else if(response[0].senha != senha)
@@ -50,16 +53,11 @@ export class LoginPagePage {
           buttons: ['OK']
         });
 
-        /*
-       document.getElementById('1').style.borderColor = 'success';
-        document.getElementById('2').style.borderColor = 'danger';
-        document.getElementById('2').focus();*/
-        
         await alert.present();
       }
-})
+    })
 
-.catch(async(response)=>{
+    .catch(async(response)=>{
 
       const alert = await this.alertController.create({
         header: 'Confirmação',
@@ -71,6 +69,8 @@ export class LoginPagePage {
       await alert.present();
     })
   }
+
+
   direcCadast()
   {
       this.nav.navigateForward('cadastro');
