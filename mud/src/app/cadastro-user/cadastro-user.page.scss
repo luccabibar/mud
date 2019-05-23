@@ -7,6 +7,7 @@ ion-label {
     color:  #165044ff !important; 
 }
 
+
 p {
     font-size: 0.8em;
     color: #989aa2;
@@ -14,4 +15,9 @@ p {
 
 ion-slide >:first-child {
     width: 100%;
+}
+
+ion-slides {
+    --bullet-background: #989aa2;
+    --bullet-background-active: #165044ff; 
 }

@@ -1,4 +1,4 @@
-import { ConfirmaSenha } from './../validators/senhas';
+
 import { CpfValidator } from '../validators/cpf';
 import { CelularValidator } from '../validators/celular';
 import { BancoService } from './../banco.service';
@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, IonSlides, AlertController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
+import { getElementDepthCount } from '@angular/core/src/render3/state';
 
 @Component({
   selector: 'app-cadastro-user',
@@ -20,7 +21,8 @@ export class CadastroUserPage implements OnInit {
   
   public slideOneForm: FormGroup;
   public slideTwoForm: FormGroup;
-  public submitAttempt: boolean = false;
+  public submitAttempt1: boolean = false;
+  public submitAttempt2: boolean = false;
 
   matchingPasswords(senhaKey: string, confirmasenhaKey: string) {
     return (group: FormGroup): {[key: string]: any} => {
@@ -74,15 +76,21 @@ export class CadastroUserPage implements OnInit {
       this.IonSlides.lockSwipes(true);
     }
 
+    addcontato()
+    {
+      document.getElementById("contato2").style.display='unset';
+      document.getElementById("fab").style.display='none';
+    }
+
     save(){
 
       if(this.slideOneForm.invalid){
           this.IonSlides.slideTo(0);
-          this.submitAttempt = true;
+          this.submitAttempt1 = true;
       } 
       if(this.slideTwoForm.invalid){
         this.IonSlides.slideTo(0);
-        this.submitAttempt = true;
+        this.submitAttempt2 = true;
       } 
       else {
           this.IonSlides.lockSwipes(false);
@@ -163,17 +171,16 @@ public sintomas = [
   { val: 'Dificuldade para Respirar', id: 0 },
   { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
   { val: 'Sensações de Asfixia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false }
+  { val: 'Sudorese', isChecked: false },
+  { val: 'Tremores/abalos', isChecked: false },
+  { val: 'Naúsea/indisposição abdominal', isChecked: false },
+  { val: 'Dor/desconforto torácido', isChecked: false },
+  { val: 'Ondas de calor/frio', isChecked: false },
+  { val: 'Anestesia/formigamento', isChecked: false },
+  { val: 'Sensações de irrealidade', isChecked: false },
+  { val: 'Instabilidade/tontura/desmaio', isChecked: false },
+  { val: 'Medo de morrer', isChecked: false },
+  { val: 'Medo de perder o controle/enlouquecer', isChecked: false }
 ];
 
 }

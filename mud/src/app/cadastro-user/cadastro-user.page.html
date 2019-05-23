@@ -5,12 +5,12 @@
 </ion-header>
 
 <ion-content>
-    <ion-slides mode="ios" pager="ios" scrollbar="ios">
+    <ion-slides pager>
         <ion-slide>
         <ion-list lines="none">
           <form [formGroup]="slideOneForm">
 
-            <ion-item padding-horizontal *ngIf="submitAttempt">
+            <ion-item padding-horizontal *ngIf="submitAttempt1">
             <p style="color: #f04141;">Por favor, preencha todos os campos corretamente.</p>
             </ion-item>
 
@@ -43,7 +43,7 @@
        
              <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Celular</ion-label>
-               <ion-input name="celular" id="3" formControlName="celular" type="number" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt)" placeholder="Informe seu celular a partir do DDD."></ion-input>
+               <ion-input name="celular" id="3" formControlName="celular" type="number" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt)" placeholder="Insira apenas os números (incluindo o DDD)."></ion-input>
             </ion-item>
        
             <ion-item  padding-horizontal *ngIf="!slideOneForm.controls.celular.valid  && (slideOneForm.controls.celular.dirty || submitAttempt)">
@@ -86,15 +86,10 @@
        
                 <form [formGroup]="slideTwoForm">
                     <h1>Adicionar Contatos</h1>
-                    <h6 style="padding-top: -10%;">Para situação de emergência</h6>
+                    <h6 style="padding-top: -10%;">Para situações de emergência</h6>
                     <hr style="width: 10px;">
 
-                    <ion-item padding-horizontal *ngIf="submitAttempt">
-                        <p style="color: #f04141;">Por favor, preencha todos os campos corretamente.</p>
-                        </ion-item>
-            
-
-                    <h5>Contato 1:</h5>
+                    <h5>Contato:</h5>
                     <ion-item padding-horizontal>
                         <ion-label class="label" position="stacked">Nome</ion-label>
                         <ion-input type="text" name="nome_contato1" id="6" formControlName="nome_contato1" [class.invalid]="!slideTwoForm.controls.nome_contato1.valid && (slideTwoForm.controls.nome_contato1.dirty || submitAttempt)" placeholder="Informe o nome de um contato"></ion-input>
@@ -104,8 +99,15 @@
                     </ion-item>
                     <ion-item padding-horizontal>
                             <ion-label class="label" position="stacked">Número do Telefone</ion-label>
-                            <ion-input type="number" name="num_contato1" id="7" formControlName="num_contato1" placeholder="Informe seu nome"></ion-input>
+                            <ion-input type="number" name="num_contato1" id="7" formControlName="num_contato1" [class.invalid]="!slideTwoForm.controls.num_contato1.valid && (slideTwoForm.controls.num_contato1.dirty || submitAttempt)" placeholder="Insira apenas os números (incluindo o DDD)"></ion-input>
                     </ion-item>
+                    <ion-item padding-horizontal *ngIf="!slideTwoForm.controls.num_contato1.valid  && (slideTwoForm.controls.num_contato1.dirty || submitAttempt)">
+                        <p>Insira um número válido (não esqueça o DDD).</p>
+                    </ion-item>
+                    <ion-item padding-horizontal *ngIf="submitAttempt2">
+                        <p style="color: #f04141;">Por favor, adicione um contato.</p>
+                    </ion-item>
+                    <div id="contato2" style="display: none;">
                     <hr>
                     <h5>Contato 2:</h5>
                     <ion-item padding-horizontal>
@@ -116,8 +118,16 @@
                         <ion-label class="label" position="stacked">Número do Telefone</ion-label>
                         <ion-input type="number" name="num_contato2" id="9" formControlName="num_contato2" placeholder="Informe seu nome"></ion-input>
                     </ion-item>
-                        
-                    <ion-button padding-horizontal (click)="save()" class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
+                    </div>
+                    <div id="fab">
+                    <ion-fab padding-horizontal horizontal="end">
+                    <ion-fab-button  size="small" (click)="addcontato()" color="verdemud4">
+                        <ion-icon name="add"></ion-icon>
+                    </ion-fab-button>
+                    </ion-fab>
+                    <hr><hr><hr><hr>
+                    </div>
+                    <ion-button padding-horizontal (click)="proxSlide()" class="button" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
                     
                 </form>
             </ion-list>
@@ -128,7 +138,7 @@
                         <form [formGroup]="slideThreeForm">
                        
                             <ion-item padding-horizontal>
-                            <ion-label>Selecione intolerância alimentar</ion-label>
+                            <ion-label position="stacked" text-wrap>Selecione intolerância alimentar</ion-label>
                             <ion-select multiple="true" cancelText="Cancelar" okText="Selecionado">
                                 <ion-select-option value="Lactose">Lactose</ion-select-option>
                                 <ion-select-option value="Gluten">Gluten</ion-select-option>
@@ -139,23 +149,41 @@
                      
                      
                          <ion-item padding-horizontal>
-                             <ion-label class="label" position="stacked">Data de quando ocorreu sua primeira crise:</ion-label>
+                             <ion-label class="label" position="stacked" text-wrap>Data de quando ocorreu sua primeira crise:</ion-label>
                              <ion-datetime display-format="DD.MM.YYYY" name="data_primeira_crise"></ion-datetime>
                           </ion-item>
-                     
+                          
+                          <!--<ion-item padding-horizontal>
+                            <ion-label class="label" position="stacked" text-wrap>Selecione os sintomas que você geralmente apresenta durante a crise:</ion-label>
+                            <ion-select multiple="true" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option value="1">Dificuldade para respirar</ion-select-option>
+                                <ion-select-option value="2">Ritmo cardíaco acelerado/Taquicardia</ion-select-option>
+                                <ion-select-option value="3">Sensações de asfixia</ion-select-option>
+                                <ion-select-option value="4">Sudorese</ion-select-option>
+                                <ion-select-option value="5">Tremores/abalos</ion-select-option>
+                                <ion-select-option value="6">Naúsea/indisposição abdominal</ion-select-option>
+                                <ion-select-option value="7">Dor/desconforto torácido</ion-select-option>
+                                <ion-select-option value="8">Ondas de calor/frio</ion-select-option>
+                                <ion-select-option value="9">Anestesia/formigamento</ion-select-option>
+                                <ion-select-option value="10">Sensações de irrealidade</ion-select-option>
+                                <ion-select-option value="11">Instabilidade/tontura/desmaio</ion-select-option>
+                                <ion-select-option value="12">Medo de morrer</ion-select-option>
+                                <ion-select-option value="13">Medo de perder o controle/enlouquecer</ion-select-option>
+                            </ion-select>
+                            </ion-item>-->
                           <ion-item padding-horizontal>
-                                <ion-label class="label" position="stacked">Selecione quais os sintomas que você geralmente apresenta durante a crise</ion-label>
+                                <ion-label text-wrap class="label" position="stacked">Selecione quais os sintomas que você geralmente apresenta durante a crise</ion-label>
+                                <hr>
                                 <ion-list>
                                     <ion-item *ngFor="let entry of sintomas"  style="font-size: 10px;" >
                                         <ion-label>{{entry.val}}</ion-label>
-                                        <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"  size="2px"></ion-checkbox>
+                                        <ion-checkbox slot="start"  size="2px" [(ngModel)]="entry.isChecked"></ion-checkbox>
                                     </ion-item>
                                 </ion-list>
                             </ion-item>
-                     
-                     
+
                            <ion-item padding-horizontal>
-                             <ion-label class="label" position="stacked">Em quais situações você teve essas sensações? (Descreva)</ion-label>
+                             <ion-label class="label" position="stacked" text-wrap>Em quais situações você teve essas sensações? (Descreva)</ion-label>
                              <ion-textarea rows="6" cols="20" placeholder="Fatores desencadeantes da crise" border-radius="2"></ion-textarea>
                           </ion-item>
                      
