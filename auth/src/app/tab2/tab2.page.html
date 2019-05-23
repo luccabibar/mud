@@ -1,12 +1,23 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two
+      Tab Two 
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <ion-button (click)="scanCode()">Scan Code</ion-button>
-    <p>{{scannedResult}}</p>
+    <p></p>
+  <!--<ion-button (click)="onClick()">
+    Click me
+  </ion-button>-->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>RESULTADOS</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{scannedResult}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import QRious from "qrious"
+import QRious from "qrious";
 
 @Component({
   selector: 'app-tab3',
