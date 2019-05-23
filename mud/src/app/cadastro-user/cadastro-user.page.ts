@@ -171,17 +171,16 @@ public sintomas = [
   { val: 'Dificuldade para Respirar', id: 0 },
   { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
   { val: 'Sensações de Asfixia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false }
+  { val: 'Sudorese', isChecked: false },
+  { val: 'Tremores/abalos', isChecked: false },
+  { val: 'Naúsea/indisposição abdominal', isChecked: false },
+  { val: 'Dor/desconforto torácido', isChecked: false },
+  { val: 'Ondas de calor/frio', isChecked: false },
+  { val: 'Anestesia/formigamento', isChecked: false },
+  { val: 'Sensações de irrealidade', isChecked: false },
+  { val: 'Instabilidade/tontura/desmaio', isChecked: false },
+  { val: 'Medo de morrer', isChecked: false },
+  { val: 'Medo de perder o controle/enlouquecer', isChecked: false }
 ];
 
 }

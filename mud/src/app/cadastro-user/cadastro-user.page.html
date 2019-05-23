@@ -138,7 +138,7 @@
                         <form [formGroup]="slideThreeForm">
                        
                             <ion-item padding-horizontal>
-                            <ion-label>Selecione intolerância alimentar</ion-label>
+                            <ion-label position="stacked" text-wrap>Selecione intolerância alimentar</ion-label>
                             <ion-select multiple="true" cancelText="Cancelar" okText="Selecionado">
                                 <ion-select-option value="Lactose">Lactose</ion-select-option>
                                 <ion-select-option value="Gluten">Gluten</ion-select-option>
@@ -149,23 +149,41 @@
                      
                      
                          <ion-item padding-horizontal>
-                             <ion-label class="label" position="stacked">Data de quando ocorreu sua primeira crise:</ion-label>
+                             <ion-label class="label" position="stacked" text-wrap>Data de quando ocorreu sua primeira crise:</ion-label>
                              <ion-datetime display-format="DD.MM.YYYY" name="data_primeira_crise"></ion-datetime>
                           </ion-item>
-                     
+                          
+                          <!--<ion-item padding-horizontal>
+                            <ion-label class="label" position="stacked" text-wrap>Selecione os sintomas que você geralmente apresenta durante a crise:</ion-label>
+                            <ion-select multiple="true" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option value="1">Dificuldade para respirar</ion-select-option>
+                                <ion-select-option value="2">Ritmo cardíaco acelerado/Taquicardia</ion-select-option>
+                                <ion-select-option value="3">Sensações de asfixia</ion-select-option>
+                                <ion-select-option value="4">Sudorese</ion-select-option>
+                                <ion-select-option value="5">Tremores/abalos</ion-select-option>
+                                <ion-select-option value="6">Naúsea/indisposição abdominal</ion-select-option>
+                                <ion-select-option value="7">Dor/desconforto torácido</ion-select-option>
+                                <ion-select-option value="8">Ondas de calor/frio</ion-select-option>
+                                <ion-select-option value="9">Anestesia/formigamento</ion-select-option>
+                                <ion-select-option value="10">Sensações de irrealidade</ion-select-option>
+                                <ion-select-option value="11">Instabilidade/tontura/desmaio</ion-select-option>
+                                <ion-select-option value="12">Medo de morrer</ion-select-option>
+                                <ion-select-option value="13">Medo de perder o controle/enlouquecer</ion-select-option>
+                            </ion-select>
+                            </ion-item>-->
                           <ion-item padding-horizontal>
-                                <ion-label class="label" position="stacked">Selecione quais os sintomas que você geralmente apresenta durante a crise</ion-label>
+                                <ion-label text-wrap class="label" position="stacked">Selecione quais os sintomas que você geralmente apresenta durante a crise</ion-label>
+                                <hr>
                                 <ion-list>
                                     <ion-item *ngFor="let entry of sintomas"  style="font-size: 10px;" >
                                         <ion-label>{{entry.val}}</ion-label>
-                                        <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"  size="2px"></ion-checkbox>
+                                        <ion-checkbox slot="start"  size="2px" [(ngModel)]="entry.isChecked"></ion-checkbox>
                                     </ion-item>
                                 </ion-list>
                             </ion-item>
-                     
-                     
+
                            <ion-item padding-horizontal>
-                             <ion-label class="label" position="stacked">Em quais situações você teve essas sensações? (Descreva)</ion-label>
+                             <ion-label class="label" position="stacked" text-wrap>Em quais situações você teve essas sensações? (Descreva)</ion-label>
                              <ion-textarea rows="6" cols="20" placeholder="Fatores desencadeantes da crise" border-radius="2"></ion-textarea>
                           </ion-item>
                      
