@@ -14,7 +14,7 @@ export class Tab1Page {
   apei(){
     var result = [];
     this.db.selectGenerico("select * from usuario;").then((response) => {
-      for (let i = 0; i != response.length; i++) {
+      for (let i = 0; i != (<Array<Object>>response).length; i++) {
         result[i] = response[i];
         
       }
