@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController} from '@ionic/angular';
+import { Component, OnInit, Renderer, ViewChild, Input} from '@angular/core';
+import { NavController, AlertController, IonInput} from '@ionic/angular';
 import { BancoService } from './../banco.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ViewChild } from '@angular/core';
-
 
 @Component({
   selector: 'app-login-page',
@@ -12,7 +10,7 @@ import { ViewChild } from '@angular/core';
 })
 export class LoginPagePage {
 
-
+  @ViewChild('deus')  ino: IonInput;
   public submitAttempt: boolean = false;
 
   constructor(private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController) { }
@@ -22,7 +20,6 @@ export class LoginPagePage {
     'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)])
   })
 
-  
   login()
   {
     let email = (<HTMLInputElement>document.getElementById("1")).value;
@@ -52,8 +49,12 @@ export class LoginPagePage {
           message: 'A senha está incorreta',
           buttons: ['OK']
         });
-
         await alert.present();
+
+        
+        setTimeout(() => {
+          this.ino.setFocus();
+        }, 400);
       }
     })
 
@@ -69,7 +70,6 @@ export class LoginPagePage {
       await alert.present();
     })
   }
-
 
   direcCadast()
   {

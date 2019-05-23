@@ -1,5 +1,5 @@
-import { NavController } from '@ionic/angular';
-import { Component } from '@angular/core';
+import { NavController, IonInput } from '@ionic/angular';
+import { Component, ViewChild, Input} from '@angular/core';
 
 @Component({
   selector: 'app-tab1',
@@ -8,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
   constructor(){}
+
+  @ViewChild('deus')  ino: IonInput;
+
+  aa()
+  {
+    setTimeout(() => {
+      this.ino.setFocus();
+  }, 400);
+  }
 }
