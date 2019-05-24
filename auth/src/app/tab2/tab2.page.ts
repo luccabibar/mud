@@ -1,6 +1,7 @@
 import { BancoService } from './../banco.service';
 import { Component } from '@angular/core';
 import { ZBar, ZBarOptions } from '@ionic-native/zbar/ngx';
+import { AlertController } from '@ionic/angular';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 
 @Component({
@@ -11,10 +12,11 @@ import { BoundDirectivePropertyAst } from '@angular/compiler';
 export class Tab2Page {
   zbarOptions:any;
   scannedResult:any;
- 
+  resposta : any;
   constructor(
     private zbar: ZBar,
-    private BD: BancoService
+    private BD: BancoService,
+    public alertController: AlertController
   ) {
  
     this.zbarOptions = {
@@ -23,17 +25,38 @@ export class Tab2Page {
     }
  
   }
+  onClick()
+  {
+    this.valida("POWER")
+  }
+  async alert(mensagem : string) {
+      const alert = await this.alertController.create({
+      header: 'Aviso',
+      subHeader: 'Confirmação da conexão',
+      message: mensagem,
+      buttons: ['OK']
+    });
+    await alert.present();  
+  }
   valida(result : any)
   {
-    let verifica = this.BD.updateGenerico("UPDATE sessao SET status = TRUE, cpf_cliente = " + "50952454858" + " WHERE hash = " + result).then((response)=>{
-      
-    })
+    this.BD.selectGenerico("UPDATE sessao SET status = true WHERE hash = '" + result + "'; SELECT status FROM sessao WHERE hash = '" + result + "';").then((response)=>{
+      this.resposta = response[0].status;
+    }).catch((response)=>{
+      this.resposta = JSON.stringify(response);
+    });
+    if(this.resposta == 't')
+      this.alert("Conexão estabelecida. Agora, o especialista está habilitado para acompanhar as estatísticas geradas através dos questionários. Não se esqueça que a qualquer momento você pode excluir essa conexão e consequentemente os seus dados voltarão a serem restritos");
+    else
+      this.alert("blá : " + this.resposta);
   }
+  
   scanCode(){
     this.zbar.scan(this.zbarOptions)
    .then(result => {
       console.log(result); // Scanned code
       this.scannedResult = result;
+      this.valida(result);
    })
    .catch(error => {
       alert(error); // Error message

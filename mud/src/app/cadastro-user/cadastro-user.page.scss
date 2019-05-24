@@ -1,7 +1,3 @@
-.button
-{
-    margin-top: 30px; 
-}
 
 ion-label {
     color:  #165044ff !important; 
@@ -12,6 +8,24 @@ p {
     color: #989aa2;
 }
 
-ion-slide >:first-child {
+
+ion-slide >:first-child{
     width: 100%;
+    height: inherit;
+}
+
+#slide1
+{
+    height: inherit !important;
+}
+
+#slide3
+{
+    height:fit-content !important;
+}
+
+ion-slides {
+    --bullet-background: #989aa2;
+    --bullet-background-active: #165044ff; 
+    height: 100%;
 }

@@ -1,6 +1,6 @@
 <ion-content>
   <ion-img id="logoLogin" src="../../assets/logomud.png"></ion-img>
-  <h2 id="loginTitle"> Login </h2>
+  <h2 id="loginTitle"> Login </h2><br><br><br>
 
 <!--ITEM EMAIL-->
 <br><br><br><br><br><br><br><br><br><br><br>
@@ -9,7 +9,7 @@
 
 <ion-item padding-horizontal>
   <ion-label position="stacked"> E-mail </ion-label>
-  <ion-input id="1" size="11" placeholder="Insira seu email" name="email"  formControlName="email" type="Email" required> </ion-input>
+  <ion-input #mail id="1"  [(ngModel)]="emai" size="11" placeholder="Insira seu email" name="email"  formControlName="email" type="Email" required> </ion-input>
 </ion-item>  
 
 
@@ -18,10 +18,8 @@
 
 <ion-item padding-horizontal>
   <ion-label position="stacked"> Senha </ion-label>
-  <ion-input id="2" size="11" placeholder="Insira sua senha" name="senha" type="password" formControlName="senha" required> </ion-input>
+  <ion-input #enha id="2" [(ngModel)]="senh" size="11" placeholder="Insira sua senha" name="senha" type="password" formControlName="senha" required > </ion-input>
 </ion-item>
-
-
 
 
 
@@ -32,6 +30,6 @@
 <ion-button padding-horizontal class="btnEntrar" fill="outline" color="verdemud4" expand="block" (click)="login()">Entrar</ion-button>
 </form>
 
-<a routerLink="cadastro" id="hrefCadast" (click)="direcCadast()" padding-horizontal>Não possui uma conta? <b> Cadastre-se</b></a>
+<a routerLink="cadastro" id="hrefCadast" (click)="direcCadast()" padding-horizontal >Não possui uma conta? <b> Cadastre-se</b></a>
 
 </ion-content>

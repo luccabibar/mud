@@ -1,4 +1,4 @@
-import { ConfirmaSenha } from './../validators/senhas';
+
 import { CpfValidator } from '../validators/cpf';
 import { CelularValidator } from '../validators/celular';
 import { BancoService } from './../banco.service';
@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, IonSlides, AlertController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
+import { getElementDepthCount } from '@angular/core/src/render3/state';
 
 @Component({
   selector: 'app-cadastro-user',
@@ -18,35 +19,43 @@ export class CadastroUserPage implements OnInit {
 
   @ViewChild(IonSlides) IonSlides: IonSlides;
   
-	public slideOneForm: FormGroup;
-  public submitAttempt: boolean = false;
+  public slideOneForm: FormGroup;
+  public slideTwoForm: FormGroup;
+  public submitAttempt1: boolean = false;
+  public submitAttempt2: boolean = false;
 
   matchingPasswords(senhaKey: string, confirmasenhaKey: string) {
     return (group: FormGroup): {[key: string]: any} => {
       let senha = group.controls[senhaKey];
       let confirmasenha= group.controls[confirmasenhaKey];
 
-      if (confirmasenha.value !== senha.value) {
+      if (confirmasenha.value != senha.value) {
         return {
           mismatchedPasswords: true
         };
       }
 
-
+      return null;
     }
   }
 
   constructor(public navCtrl: NavController, private BD: BancoService, public formBuilder: FormBuilder, private AlertController: AlertController) {
       this.slideOneForm = formBuilder.group({
-      nome: [null , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
+      nome: ['' , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       datanasc : ['', Validators.compose([Validators.required])],
       celular : ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CelularValidator.checkCelular])],
       cpf: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf])],
       senha: ['', Validators.required],
-      confirmasenha : ['', Validators.required, ConfirmaSenha.checkSenha]}, 
+      confirmasenha : ['', Validators.required]}, 
       {validator: this.matchingPasswords('senha', 'confirmasenha')}
       );
+      this.slideTwoForm = formBuilder.group({
+        nome_contato1: ['' , Validators.compose([Validators.required, Validators.pattern('[ A-Za-zÀ-ú ]*')])],
+        num_contato1: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CelularValidator.checkCelular])],
+        nome_contato2: ['' , Validators.compose([Validators.pattern('[ A-Za-zÀ-ú ]*')])],
+        num_contato2: ['', Validators.compose([Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')])]
+      });
    }
   
  /* public slideOneForm:FormGroup = new FormGroup({
@@ -67,17 +76,34 @@ export class CadastroUserPage implements OnInit {
       this.IonSlides.lockSwipes(true);
     }
 
-    save(){
-      this.submitAttempt = true;
+    addcontato()
+    {
+      document.getElementById("contato2").style.display='unset';
+      document.getElementById("fab").style.display='none';
+    }
 
-      if(!this.slideOneForm.valid){
+    save(){
+
+      if(this.slideOneForm.invalid){
           this.IonSlides.slideTo(0);
+          this.submitAttempt1 = true;
+      }
+      if(this.slideTwoForm.invalid){
+        this.IonSlides.slideTo(0);
+        this.submitAttempt2 = true;
       } 
+      if(this.slideTwoForm.valid)
+      {
+        this.IonSlides.lockSwipes(false);
+        this.IonSlides.slideNext();
+        this.IonSlides.lockSwipes(true);
+        document.getElementById("butFinal").style.display='unset';
+        document.getElementById("butProx").style.display='none';
+      }
       else {
           this.IonSlides.lockSwipes(false);
           this.IonSlides.slideNext();
           this.IonSlides.lockSwipes(true);
-          alert("Sucesso");
       }
     }
 
@@ -95,7 +121,19 @@ export class CadastroUserPage implements OnInit {
       let cont2_nome = (<HTMLInputElement>document.getElementById("8")).value;
       let cont3_nome = (<HTMLInputElement>document.getElementById("9")).value;
 
-      this.BD.insertGenerico("INSERT INTO usuario(nome,email,data_nasc,cpf,celular,senha,data_primeira_crise,sintoma,situacoes_sintoma) VALUES('"+nome+"','"+email+"','"+dt_nasc+"','"+cpf+"','"+celular+"','','','','','');")
+     /* this.BD.insertGenerico("INSERT INTO usuario(nome,email,data_nasc,cpf,celular,senha,data_primeira_crise,sintoma,situacoes_sintoma) VALUES('"+nome+"','"+email+"','"+dt_nasc+"','"+cpf+"','"+celular+"','','','','','');")
+    .then(async(response)=>{
+        const alert = await this.AlertController.create({
+          header: 'Confirmação',
+          subHeader: 'Sucesso!',
+          message: JSON.stringify(response),
+          buttons: ['OK']
+        });
+        
+        await alert.present();
+      }
+    )*/
+    this.BD.cadUsu1(nome,cpf,email,"2010-02-02",celular,senha)
     .then(async(response)=>{
         const alert = await this.AlertController.create({
           header: 'Confirmação',
@@ -153,17 +191,16 @@ public sintomas = [
   { val: 'Dificuldade para Respirar', id: 0 },
   { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
   { val: 'Sensações de Asfixia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false }
+  { val: 'Sudorese', isChecked: false },
+  { val: 'Tremores/abalos', isChecked: false },
+  { val: 'Naúsea/indisposição abdominal', isChecked: false },
+  { val: 'Dor/desconforto torácido', isChecked: false },
+  { val: 'Ondas de calor/frio', isChecked: false },
+  { val: 'Anestesia/formigamento', isChecked: false },
+  { val: 'Sensações de irrealidade', isChecked: false },
+  { val: 'Instabilidade/tontura/desmaio', isChecked: false },
+  { val: 'Medo de morrer', isChecked: false },
+  { val: 'Medo de perder o controle/enlouquecer', isChecked: false }
 ];
 
 }

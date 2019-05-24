@@ -21,6 +21,13 @@ export class CelularValidator {
             };
         }
 
+        if(control.value == null)
+        {
+            return {
+                "sei la": false
+            };
+        }
+
         return null;
     }
 }
