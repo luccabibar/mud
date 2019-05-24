@@ -11,16 +11,12 @@ import { stringify } from '@angular/core/src/util';
 })
 export class Tab3Page {
 
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   constructor(private db: BancoService){
 
-  }
-  
-  sleep(ms){
-    let start = Date.now();
-    let now = Date.now();
-    while(now - start < ms){
-      now = Date.now()
-    }
   }
 
   /**
@@ -45,32 +41,30 @@ export class Tab3Page {
    * gera codigo qr com base num id e num hash 
    * e joga ele num elemento da pagina
    * 
-   * @param id id do usuario 
-   * @param hash hash gerado aleatoriamente
+   * @param hash hash gerado aleatoriamente com id do user
    */
-  geraQr(id, hash){
-    let text = id + "-" + hash;
+  geraQr(hash){
     let target = document.getElementById('qr-img');
     
     //gera codigo e joga ele num elem
     let qr = new QRious({
       element: target,
-      value: text
+      value: hash
     });
     
   }
   
-  iniciaSessao(){
-    let id = 1;
-    let hash = this.gerarhash(20);
-
-    //gera qr
-    this.geraQr(id, hash);
-
-    //cria a session no banco
+  /**
+   * gera um objeto sessao no banco de acordo com os dados
+   * que ja foram gerados
+   * 
+   * @param id id do usuario 
+   * @param hash hash gerado aleatoriamente com o id do user
+   */
+  geraSessao(id, hash){
     let sql = "INSERT INTO public.sessao VALUES (" + 
                 "default, " +
-                "'" + id + "-" + hash + "', " +
+                "'" + hash + "', " +
                 id + ", " +
                 "NULL, " +
                 "TRUE, " +
@@ -78,19 +72,61 @@ export class Tab3Page {
                 "NULL, " +
                 "NULL " +
               ");";
+
     this.db.insertGenerico(sql).then((response) => {
-      console.log(response);
+      //console.log(response);
 
     }).catch((ex) => {
-      console.log(ex);
+      //console.log(ex);
 
     });
+  }
 
-    /*this.sleep(1 * 1000)    
-    this.db.selectGenerico("SELECT * FROM public.sessao WHERE hash=" + id + "-" + hash).then((response) => {
+  /**
+   * procura por uma sessao pra ver se ela existe.
+   * retorna true caso exista, caso contrario, false
+   * 
+   * @param hash hash gerado aleatoriamente com id do user
+   * @returns existencia da sessao
+   */
+  checkSessao(hash){
+    let sql = "SELECT profissional_id FROM sessao WHERE hash='" + hash + "';";
+    console.log(sql);
+    this.db.selectGenerico(sql).then(response => {
       console.log(response);
+      
+    }).catch(ex => {
+      console.log(ex);
+      
+    });
+    return true;
+  }
+  
+  /**
+   * inicia o processo de sessao, criando um hash pra id da sessao,
+   * cira um qrcode com ela e cria um objeto sessao no banco,
+   * depois espera por confirmacao que a sessao comecou
+   */
+  async iniciaSessao(){
+    let id = 1;
+    let hash = id + "-" + this.gerarhash(20);
+    
+    //gera qr
+    this.geraQr(hash);
+    
+    //cria a session no banco
+    this.geraSessao(id, hash); 
+    
+    //espera por confirmacao
+    let conf = false;
+    let time = 2
+    do{
+      //espera um teco e dps procura pela sessao ate achar
+      await this.sleep(time * 1000);
+      conf = this.checkSessao(hash);
 
-    });*/  
+      time = 1;
 
+    }while(!conf);
   }
 }
