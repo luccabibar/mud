@@ -92,6 +92,14 @@ export class CadastroUserPage implements OnInit {
         this.IonSlides.slideTo(0);
         this.submitAttempt2 = true;
       } 
+      if(this.slideTwoForm.valid)
+      {
+        this.IonSlides.lockSwipes(false);
+        this.IonSlides.slideNext();
+        this.IonSlides.lockSwipes(true);
+        document.getElementById("butFinal").style.display='unset';
+        document.getElementById("butProx").style.display='none';
+      }
       else {
           this.IonSlides.lockSwipes(false);
           this.IonSlides.slideNext();
@@ -113,7 +121,19 @@ export class CadastroUserPage implements OnInit {
       let cont2_nome = (<HTMLInputElement>document.getElementById("8")).value;
       let cont3_nome = (<HTMLInputElement>document.getElementById("9")).value;
 
-      this.BD.insertGenerico("INSERT INTO usuario(nome,email,data_nasc,cpf,celular,senha,data_primeira_crise,sintoma,situacoes_sintoma) VALUES('"+nome+"','"+email+"','"+dt_nasc+"','"+cpf+"','"+celular+"','','','','','');")
+     /* this.BD.insertGenerico("INSERT INTO usuario(nome,email,data_nasc,cpf,celular,senha,data_primeira_crise,sintoma,situacoes_sintoma) VALUES('"+nome+"','"+email+"','"+dt_nasc+"','"+cpf+"','"+celular+"','','','','','');")
+    .then(async(response)=>{
+        const alert = await this.AlertController.create({
+          header: 'Confirmação',
+          subHeader: 'Sucesso!',
+          message: JSON.stringify(response),
+          buttons: ['OK']
+        });
+        
+        await alert.present();
+      }
+    )*/
+    this.BD.cadUsu1(nome,cpf,email,"2010-02-02",celular,senha)
     .then(async(response)=>{
         const alert = await this.AlertController.create({
           header: 'Confirmação',
