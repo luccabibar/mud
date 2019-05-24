@@ -87,7 +87,7 @@ export class CadastroUserPage implements OnInit {
       if(this.slideOneForm.invalid){
           this.IonSlides.slideTo(0);
           this.submitAttempt1 = true;
-      } 
+      }
       if(this.slideTwoForm.invalid){
         this.IonSlides.slideTo(0);
         this.submitAttempt2 = true;
