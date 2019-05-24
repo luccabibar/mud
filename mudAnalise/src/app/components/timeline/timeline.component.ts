@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { ModalPage } from '../modal/modal.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-timeline',
@@ -9,7 +11,7 @@ import { ToastController } from '@ionic/angular';
 export class TimelineComponent implements OnInit {
 
   @Input('timeline') timeline: any;
-  constructor(private toastCtrl:ToastController ) { }
+  constructor(private toastCtrl:ToastController, public modalController: ModalController ) { }
 
   ngOnInit() {}
 
@@ -19,5 +21,19 @@ export class TimelineComponent implements OnInit {
     })
     toast.present();
   }
+  
+  async detalhesSemana() {
+    const modal = await this.modalController.create({
+      component: ModalPage,
+      componentProps: { value: 123 }
+    });
+    return await modal.present();
+  }
+
+  
+
+
+  
+
 }
  

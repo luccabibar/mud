@@ -10,8 +10,15 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class LoginPagePage {
 
-  @ViewChild('deus')  ino: IonInput;
+
+  @ViewChild('enha')  ino: IonInput;
+  @ViewChild('mail')  onu: IonInput;
+  senh: string;
+  emai: string;
+
   public submitAttempt: boolean = false;
+
+ 
 
   constructor(private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController) { }
 
@@ -19,6 +26,25 @@ export class LoginPagePage {
     'email' : new FormControl(null, [Validators.required, Validators.email]),
     'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)])
   })
+
+  foca(oque: string)
+  {
+    if(oque == "senha")
+    {
+      this.senh = "";
+      setTimeout(() => {
+      this.ino.setFocus();
+      }, 400);
+    }
+    else
+    {
+      this.emai = "";
+      this.senh = "";
+      setTimeout(() => {
+      this.onu.setFocus();
+      }, 400);
+    }
+  }
 
   login()
   {
@@ -36,7 +62,7 @@ export class LoginPagePage {
         });
 
         await alert.present();
-        this.nav.navigateForward('tab1');
+        this.nav.navigateForward('tabs');
         return;
       } 
 
@@ -47,14 +73,14 @@ export class LoginPagePage {
           header: 'Confirmação',
           subHeader: 'Sucesso!',
           message: 'A senha está incorreta',
-          buttons: ['OK']
+          buttons:[
+            {
+              text: 'OK',
+              handler: () => { this.foca("senha") }
+            }
+          ],
         });
         await alert.present();
-
-        
-        setTimeout(() => {
-          this.ino.setFocus();
-        }, 400);
       }
     })
 
@@ -64,10 +90,16 @@ export class LoginPagePage {
         header: 'Confirmação',
         subHeader: 'Erro!',
         message: 'A conta não existe',
-        buttons: ['OK']
+        buttons:  [
+          {
+            text: 'OK',
+            handler: () => { this.foca("email") }
+          }
+        ],
       });
   
       await alert.present();
+      
     })
   }
 

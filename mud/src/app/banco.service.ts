@@ -19,6 +19,20 @@ export class BancoService {
     return this.http.post(this.API_URL + 'insertGenerico', data, {headers: header}).toPromise();
   }
 
+  cadUsu1(nome: string, cpf: string, email: string, data_nasc: string, celular: string, senha: string)
+  {
+    var data = {
+      nome: nome,
+      cpf: cpf,
+      email: email,
+      data_nasc: data_nasc,
+      celular: celular,
+      senha: senha,
+    };
+
+    let header = new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL + 'cadUsu1', data, {headers: header}).toPromise();
+  } 
   selectGenerico(sql: string)
   {
     var data = {
