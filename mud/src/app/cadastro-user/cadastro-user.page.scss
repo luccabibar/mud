@@ -11,12 +11,17 @@ p {
 
 ion-slide >:first-child{
     width: 100%;
-    height: 100%;
+    height: inherit;
 }
 
-ion-slide >:visited {
-    width: 100%;
-    height: 100%;
+#slide1
+{
+    height: inherit !important;
+}
+
+#slide3
+{
+    height:fit-content !important;
 }
 
 ion-slides {
