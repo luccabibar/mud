@@ -21,6 +21,7 @@ export class CadastroUserPage implements OnInit {
   
   public slideOneForm: FormGroup;
   public slideTwoForm: FormGroup;
+  public slideThreeoForm: FormGroup;
   public submitAttempt1: boolean = false;
   public submitAttempt2: boolean = false;
 

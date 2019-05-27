@@ -9,23 +9,15 @@ p {
 }
 
 
-ion-slide >:first-child{
-    width: 100%;
-    height: inherit;
-}
+//ion-slide >:first-child{
+//    width: 100%;
+//}
 
-#slide1
-{
-    height: inherit !important;
-}
-
-#slide3
-{
-    height:fit-content !important;
-}
 
 ion-slides {
     --bullet-background: #989aa2;
     --bullet-background-active: #165044ff; 
     height: 100%;
+    width: 100%;
 }
+
