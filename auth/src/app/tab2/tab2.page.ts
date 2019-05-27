@@ -40,7 +40,8 @@ export class Tab2Page {
   }
   valida(result : any)
   {
-    this.BD.selectGenerico("UPDATE sessao SET status = true WHERE hash = '" + result + "'; SELECT status FROM sessao WHERE hash = '" + result + "';").then((response)=>{
+    //TODO: mudar esse '2' pro id do usuario mesmo pliz
+    this.BD.selectGenerico("UPDATE sessao SET status = true, profissional_id = 2 WHERE hash = '" + result + "'; SELECT status FROM sessao WHERE hash = '" + result + "';").then((response)=>{
       this.resposta = response[0].status;
     }).catch((response)=>{
       this.resposta = JSON.stringify(response);
