@@ -67,7 +67,7 @@ export class Tab3Page {
                 "'" + hash + "', " +
                 "NULL, " +
                 id + ", " +
-                "TRUE, " +
+                "0, " +
                 "NOW(), " +
                 "NULL, " +
                 "NULL " +
