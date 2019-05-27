@@ -4,9 +4,9 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
     <ion-slides pager>
-        <ion-slide id="slide1">
+        <ion-slide>
+        <ion-content>
         <ion-list lines="none">
           <form [formGroup]="slideOneForm">
 
@@ -78,8 +78,10 @@
             </ion-item>
             </form> <!--Depois tem que trocar o proxSlide deste botão para o save()-->
           </ion-list>
+        </ion-content>
         </ion-slide>
         <ion-slide>
+            <ion-content>
             <ion-list lines="none">
                 <form [formGroup]="slideTwoForm">
                     <h1>Adicionar Contatos</h1>
@@ -126,10 +128,11 @@
                     </div>     
                 </form>
             </ion-list>
+            </ion-content>
         </ion-slide>
-        <ion-slide id="slide3">
+        <ion-slide>
+                <ion-content>
                 <ion-list lines="none">
-       
                         <form [formGroup]="slideThreeForm">
                        
                             <ion-item padding-horizontal>
@@ -152,12 +155,12 @@
                                 <ion-label text-wrap class="label" position="stacked">Selecione quais os sintomas que você geralmente apresenta durante a crise</ion-label>
                                 <hr>
                             </ion-item>
-                                <ion-list>
-                                    <ion-item *ngFor="let entry of sintomas" style="font-size: 12px;" padding-horizontal>
-                                        <ion-label style="color: #222428 !important;" text-wrap>{{entry.val}}</ion-label>
-                                        <ion-checkbox color="verdemud4" slot="start"  size="2px" [(ngModel)]="entry.isChecked"></ion-checkbox>
-                                    </ion-item>
-                                </ion-list>
+                            <ion-list>
+                                <ion-item *ngFor="let entry of sintomas" style="font-size: 12px;" padding-horizontal>
+                                      <ion-label style="color: #222428 !important;" text-wrap>{{entry.val}}</ion-label>
+                                    <ion-checkbox color="verdemud4" slot="start"  size="2px" [(ngModel)]="entry.isChecked"></ion-checkbox>
+                                </ion-item>
+                            </ion-list>
 
                            <ion-item padding-horizontal>
                              <ion-label class="label" position="stacked" text-wrap>Em quais situações você teve essas sensações? (Descreva)</ion-label>
@@ -165,9 +168,9 @@
                           </ion-item>
                           </form>
                         </ion-list>
+                </ion-content>
         </ion-slide>
     </ion-slides>
-</ion-content>
 
 <ion-footer>
     <div id="butProx">
