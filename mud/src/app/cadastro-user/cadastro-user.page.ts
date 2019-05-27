@@ -4,7 +4,7 @@ import { CelularValidator } from '../validators/celular';
 import { BancoService } from './../banco.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, IonSlides, AlertController } from '@ionic/angular';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { getElementDepthCount } from '@angular/core/src/render3/state';
 
@@ -21,9 +21,11 @@ export class CadastroUserPage implements OnInit {
   
   public slideOneForm: FormGroup;
   public slideTwoForm: FormGroup;
-  public slideThreeoForm: FormGroup;
+  public slideThreeForm: FormGroup;
   public submitAttempt1: boolean = false;
   public submitAttempt2: boolean = false;
+  public submitAttempt3: boolean = false;
+  public conta = 0;
 
   matchingPasswords(senhaKey: string, confirmasenhaKey: string) {
     return (group: FormGroup): {[key: string]: any} => {
@@ -57,7 +59,24 @@ export class CadastroUserPage implements OnInit {
         nome_contato2: ['' , Validators.compose([Validators.pattern('[ A-Za-zÀ-ú ]*')])],
         num_contato2: ['', Validators.compose([Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')])]
       });
+      this.slideThreeForm = formBuilder.group({
+        data_primeira_crise : ['', Validators.compose([Validators.required])],
+        cbox : [false, CadastroUserPage.mustBeTruthy]
+      });
    }
+  
+
+
+   onSubmit() {
+  }
+
+  static mustBeTruthy(c: AbstractControl): { [key: string]: boolean } {
+    let rv: { [key: string]: boolean } = {};
+    if (!c.value) {
+      rv['notChecked'] = true;
+    }
+    return rv;
+  }
   
  /* public slideOneForm:FormGroup = new FormGroup({
     'nome' : new FormControl(null, [Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')]),
@@ -83,16 +102,35 @@ export class CadastroUserPage implements OnInit {
       document.getElementById("fab").style.display='none';
     }
 
+    addsitu1()
+    {
+      this.conta++;
+      if(this.conta == 1)
+      {
+      document.getElementById("situacao2").style.display='unset';
+      }
+      if(this.conta == 2)
+      {
+      document.getElementById("situacao3").style.display='unset';
+      }
+      if(this.conta == 3)
+      {
+      document.getElementById("situacao4").style.display='unset';
+      document.getElementById("fab2").style.display='none';
+      }
+
+    }
+
     save(){
 
-      if(this.slideOneForm.invalid){
+      /*if(this.slideOneForm.invalid){
           this.IonSlides.slideTo(0);
           this.submitAttempt1 = true;
       }
       if(this.slideTwoForm.invalid){
         this.IonSlides.slideTo(0);
         this.submitAttempt2 = true;
-      } 
+      }*/ 
       if(this.slideTwoForm.valid)
       {
         this.IonSlides.lockSwipes(false);
@@ -101,6 +139,10 @@ export class CadastroUserPage implements OnInit {
         document.getElementById("butFinal").style.display='unset';
         document.getElementById("butProx").style.display='none';
       }
+      /*if(this.slideThreeForm.invalid){
+        this.IonSlides.slideTo(0);
+        this.submitAttempt3 = true;
+      } */
       else {
           this.IonSlides.lockSwipes(false);
           this.IonSlides.slideNext();

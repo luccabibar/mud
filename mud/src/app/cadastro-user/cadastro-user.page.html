@@ -101,7 +101,7 @@
                             <ion-input type="number" name="num_contato1" id="7" formControlName="num_contato1" [class.invalid]="!slideTwoForm.controls.num_contato1.valid && (slideTwoForm.controls.num_contato1.dirty || submitAttempt)" placeholder="Insira apenas os números (incluindo o DDD)"></ion-input>
                     </ion-item>
                     <ion-item padding-horizontal *ngIf="!slideTwoForm.controls.num_contato1.valid  && (slideTwoForm.controls.num_contato1.dirty || submitAttempt2)">
-                        <p>Insira um número válido (não esqueça o DDD).</p>
+                        <p>Insira um número válido.</p>
                     </ion-item>
                     <ion-item padding-horizontal *ngIf="submitAttempt2">
                         <p style="color: #f04141;">Por favor, adicione um contato.</p>
@@ -148,7 +148,7 @@
                      
                          <ion-item padding-horizontal>
                              <ion-label class="label" position="stacked" text-wrap>Quando ocorreu a primeira crise?</ion-label>
-                             <ion-datetime backdropDismiss display-format="D MMM, YYYY" name="data_primeira_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
+                             <ion-datetime backdropDismiss display-format="D MMM, YYYY" name="data_primeira_crise" formControlName="data_primeira_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
                           </ion-item>
 
                           <ion-item padding-horizontal>
@@ -158,14 +158,43 @@
                             <ion-list>
                                 <ion-item *ngFor="let entry of sintomas" style="font-size: 12px;" padding-horizontal>
                                       <ion-label style="color: #222428 !important;" text-wrap>{{entry.val}}</ion-label>
-                                    <ion-checkbox color="verdemud4" slot="start"  size="2px" [(ngModel)]="entry.isChecked"></ion-checkbox>
+                                    <ion-checkbox formControlName="cbox" color="verdemud4" slot="start"  size="2px" [(ngModel)]="entry.isChecked"></ion-checkbox>
                                 </ion-item>
                             </ion-list>
 
-                           <ion-item padding-horizontal>
-                             <ion-label class="label" position="stacked" text-wrap>Em quais situações você teve essas sensações? (Descreva)</ion-label>
-                             <ion-textarea rows="6" cols="20" placeholder="Fatores desencadeantes da crise" border-radius="2"></ion-textarea>
+                            <ion-item padding-horizontal *ngIf="!slideThreeForm.controls.cbox.valid  && (slideThreeForm.controls.cbox.dirty || submitAttempt3)">
+                                <p>Insira um número válido.</p>
+                            </ion-item>
+                            
+                            <ion-item padding-horizontal>
+                             <ion-label class="label" position="stacked" text-wrap>Quais as principais situações que desencadeiam as crises?</ion-label>
+                             <hr>
+                             <ion-input type="text" name="situ1" id="situ1" placeholder="Situação 1"></ion-input>
                           </ion-item>
+                            <div id="situacao2" style="display: none;">
+                                <ion-item padding-horizontal>
+                                <ion-input type="text" name="situ2" id="situ2" placeholder="Situação 2"></ion-input>
+                                </ion-item>
+                            </div>
+                            <div id="situacao3" style="display: none;">
+                                <ion-item padding-horizontal>
+                                <ion-input type="text" name="situ3" id="situ3" placeholder="Situação 3"></ion-input>
+                                </ion-item>
+                            </div>
+                            <div id="situacao4" style="display: none;">
+                                <ion-item padding-horizontal>
+                                <ion-input type="text" name="situ4" id="situ4" placeholder="Situação 4"></ion-input>
+                                </ion-item>
+                            </div>
+                            <div id="fab2">
+                            <ion-fab padding-horizontal horizontal="end">
+                            <ion-fab-button  size="small" (click)="addsitu1()" color="verdemud4">
+                                <ion-icon name="add"></ion-icon>
+                            </ion-fab-button>
+                            </ion-fab>
+                            <hr><hr><hr>
+                            </div>
+                            <hr><hr><hr><hr>
                           </form>
                         </ion-list>
                 </ion-content>
@@ -174,9 +203,9 @@
 
 <ion-footer>
     <div id="butProx">
-        <ion-button padding-horizontal (click)="proxSlide()" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
+        <ion-button padding-horizontal (click)="save()" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
     </div>
     <div id="butFinal" style="display: none;">
-        <ion-button padding-horizontal (click)="proxSlide()" fill="outline" color="verdemud4" expand="block">Finalizar Cadastro</ion-button>
+        <ion-button padding-horizontal (click)="save()" fill="outline" color="verdemud4" expand="block">Finalizar Cadastro</ion-button>
     </div>
 </ion-footer>
