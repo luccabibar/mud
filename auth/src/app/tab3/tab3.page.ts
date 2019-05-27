@@ -91,20 +91,29 @@ export class Tab3Page {
    */
   checkSessao(hash){
     let sql = "SELECT usuario_id FROM sessao WHERE hash='" + hash + "';";
+    console.log("ANUS DE CAVALO");
+    
     this.db.selectGenerico(sql).then(response => {
-      console.log("response: ", response);
-      if(response[0].usuario_id != null){
-        return true;
-
+      if(response[0].usuario_id !== null){
+        return new Promise((resolve) => {
+          resolve(true);
+        
+        });
+        
       }
       
     }).catch(ex => {
-      console.log("exception: ", ex);
+      return new Promise((resolve) => {
+        resolve(false);
+      
+      });
       
     });
-    console.log("deu nao");
     
-    return false;
+    return new Promise((resolve) => {
+      resolve(false);
+    
+    });
   }
   
   /**
@@ -121,14 +130,19 @@ export class Tab3Page {
     
     //cria a session no banco
     this.geraSessao(id, hash); 
-    
     //espera por confirmacao
     let conf = false;
     do{
       //espera um teco e dps procura pela sessao ate achar
       await this.sleep(2 * 1000);
-      conf = this.checkSessao(hash);
-
+      //eu ODEIO isso. do fundo do meu coracao
+      this.checkSessao(hash).then(response => {
+        console.log(response);
+        conf = response;
+      });
+      //(╯°□°）╯︵ ┻━┻
+      
     }while(!conf);
+    
   }
 }
