@@ -65,8 +65,8 @@ export class Tab3Page {
     let sql = "INSERT INTO public.sessao VALUES (" + 
                 "default, " +
                 "'" + hash + "', " +
-                id + ", " +
                 "NULL, " +
+                id + ", " +
                 "TRUE, " +
                 "NOW(), " +
                 "NULL, " +
@@ -90,16 +90,21 @@ export class Tab3Page {
    * @returns existencia da sessao
    */
   checkSessao(hash){
-    let sql = "SELECT profissional_id FROM sessao WHERE hash='" + hash + "';";
-    console.log(sql);
+    let sql = "SELECT usuario_id FROM sessao WHERE hash='" + hash + "';";
     this.db.selectGenerico(sql).then(response => {
-      console.log(response);
+      console.log("response: ", response);
+      if(response[0].usuario_id != null){
+        return true;
+
+      }
       
     }).catch(ex => {
-      console.log(ex);
+      console.log("exception: ", ex);
       
     });
-    return true;
+    console.log("deu nao");
+    
+    return false;
   }
   
   /**
@@ -119,13 +124,10 @@ export class Tab3Page {
     
     //espera por confirmacao
     let conf = false;
-    let time = 2
     do{
       //espera um teco e dps procura pela sessao ate achar
-      await this.sleep(time * 1000);
+      await this.sleep(2 * 1000);
       conf = this.checkSessao(hash);
-
-      time = 1;
 
     }while(!conf);
   }
