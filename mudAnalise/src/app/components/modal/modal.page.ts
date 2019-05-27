@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { 
+    
+  }
+
 
   ngOnInit() {
   }
+
+  async voltaTimeline() {
+    this.router.navigateByUrl('/home');
+
+     
+  }
+
 
 }
