@@ -1,3 +1,4 @@
+import { Router, RouterModule } from '@angular/router';
 import { Component, OnInit, Renderer, ViewChild, Input} from '@angular/core';
 import { NavController, AlertController, IonInput} from '@ionic/angular';
 import { BancoService } from './../banco.service';
@@ -20,7 +21,7 @@ export class LoginPagePage {
 
  
 
-  constructor(private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController) { }
+  constructor(private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router) { }
 
   public loginForm:FormGroup = new FormGroup({
     'email' : new FormControl(null, [Validators.required, Validators.email]),
@@ -62,7 +63,7 @@ export class LoginPagePage {
         });
 
         await alert.present();
-        this.nav.navigateForward('tabs');
+        this.nav.navigateForward('/tabs');
         return;
       } 
 
