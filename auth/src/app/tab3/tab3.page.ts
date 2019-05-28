@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { BancoService } from "../banco.service"
 
 import QRious from "qrious"
-import { stringify } from '@angular/core/src/util';
+
+import { SingletonService } from '../singleton.service'
 
 @Component({
   selector: 'app-tab3',
@@ -15,7 +16,7 @@ export class Tab3Page {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  constructor(private db: BancoService){
+  constructor(private db:BancoService, private sgt:SingletonService){
 
   }
 
@@ -97,10 +98,18 @@ export class Tab3Page {
                 ");";
 
       this.db.insertGenerico(sql).then((response) => {
+        console.log(response);
+        
         resolve(true);
 
       }).catch((ex) => {
-        resolve(false);
+        if(ex.error.text == "sucesso"){
+          resolve(true);
+        
+        }else{
+          resolve(false);
+
+        }
 
       });
       
@@ -109,7 +118,7 @@ export class Tab3Page {
 
   /**
    * procura por uma sessao pra ver se ela existe.
-   * retorna true caso exista, caso contrario, false
+   * retorna o id do user caso exista, caso contrario, 0
    * a funcao nao consegue retornar simplesmente true ou false
    * ela PRECISA retornar uma promessa. typescript why
    * 
@@ -123,15 +132,15 @@ export class Tab3Page {
 
       this.db.selectGenerico(sql).then(response => {
         if(response[0].usuario_id !== null) {
-          resolve(true);
+          resolve(response[0].usuario_id);
        
         } else {
-          resolve(false);
+          resolve(0);
        
         }
 
       }).catch(ex => {
-        resolve(false);
+        resolve(0); 
       
       });
     
@@ -145,7 +154,7 @@ export class Tab3Page {
    * depois espera por confirmacao que a sessao comecou,
    * pra entao buscar os dados da sessao do usuario
    */
-  async iniciaSessao(){
+  async iniciaSessao(single){
     let id = 1;
     let hash = id + "-" + this.gerarhash(20);
     
@@ -163,18 +172,22 @@ export class Tab3Page {
     }
 
     //espera por confirmacao
-    let conf:any = false;
+    let userId:any = 0;
     do{
       //espera um teco e dps procura pela sessao ate achar
       await this.sleep(2 * 1000);
-      conf = await this.checkSessao(hash);
+      userId = await this.checkSessao(hash);
       
-    }while(!conf);
+    }while(!userId);
     
-    
+    //ativa permissao, e o timer
+    this.sgt.session = {
+      status : 1,
+      hash : hash,
+      idUser : userId
+    };
+    //TODO: impelentar timer
+
   }
   
-  //ativa permissao, e o timer
-
-  //TODO: impelentar timer
 }
