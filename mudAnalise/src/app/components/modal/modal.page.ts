@@ -17,7 +17,6 @@ export class ModalPage implements OnInit {
   }
 
   async voltaTimeline() {
-    this.router.navigateByUrl('/home');
 
      
   }
