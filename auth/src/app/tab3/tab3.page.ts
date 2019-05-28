@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { BancoService } from "../banco.service"
 
 import QRious from "qrious"
-import { stringify } from '@angular/core/src/util';
+
+import { SingletonService } from '../singleton.service'
 
 @Component({
   selector: 'app-tab3',
@@ -15,7 +16,7 @@ export class Tab3Page {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  constructor(private db: BancoService){
+  constructor(private db:BancoService, private sgt:SingletonService){
 
   }
 
@@ -53,75 +54,107 @@ export class Tab3Page {
     });
     
   }
+
+  /**
+   * substitui o elemento do qr code por um limpo novo
+   */
+  limpaQr() {
+    //joga fora o elem
+    let target = document.getElementById('qr-img');
+    let parent = target.parentElement;
+    parent.removeChild(target);
+
+    //cria o elem novo
+    let clear = document.createElement('canvas');
+    clear.id = 'qr-img';
+
+    //bota ele no view
+    parent.appendChild(clear);
+    
+  }
   
   /**
    * gera um objeto sessao no banco de acordo com os dados
    * que ja foram gerados
+   * a funcao nao consegue retornar simplesmente true ou false
+   * ela PRECISA retornar uma promessa. typescript why
    * 
    * @param id id do usuario 
    * @param hash hash gerado aleatoriamente com o id do user
+   * @returns a promisse com o sucesso da sessao
    */
   geraSessao(id, hash){
-    let sql = "INSERT INTO public.sessao VALUES (" + 
-                "default, " +
-                "'" + hash + "', " +
-                "NULL, " +
-                id + ", " +
-                "0, " +
-                "NOW(), " +
-                "NULL, " +
-                "NULL " +
-              ");";
 
-    this.db.insertGenerico(sql).then((response) => {
-      //console.log(response);
+    return new Promise((resolve, reject) => {
+      let sql = "INSERT INTO public.sessao VALUES (" + 
+                  "default, " +
+                  "'" + hash + "', " +
+                  "NULL, " +
+                  id + ", " +
+                  "0, " +
+                  "NOW(), " +
+                  "NULL, " +
+                  "NULL " +
+                ");";
 
-    }).catch((ex) => {
-      //console.log(ex);
+      this.db.insertGenerico(sql).then((response) => {
+        console.log(response);
+        
+        resolve(true);
 
-    });
-  }
+      }).catch((ex) => {
+        if(ex.error.text == "sucesso"){
+          resolve(true);
+        
+        }else{
+          resolve(false);
+
+        }
+
+      });
+      
+  });
+}
 
   /**
    * procura por uma sessao pra ver se ela existe.
-   * retorna true caso exista, caso contrario, false
+   * retorna o id do user caso exista, caso contrario, 0
+   * a funcao nao consegue retornar simplesmente true ou false
+   * ela PRECISA retornar uma promessa. typescript why
    * 
    * @param hash hash gerado aleatoriamente com id do user
-   * @returns existencia da sessao
+   * @returns promisse com existencia da sessao
    */
-  checkSessao(hash){
-    let sql = "SELECT usuario_id FROM sessao WHERE hash='" + hash + "';";
-    console.log("ANUS DE CAVALO");
-    
-    this.db.selectGenerico(sql).then(response => {
-      if(response[0].usuario_id !== null){
-        return new Promise((resolve) => {
-          resolve(true);
-        
-        });
-        
-      }
-      
-    }).catch(ex => {
-      return new Promise((resolve) => {
-        resolve(false);
+  checkSessao(hash) {
+    //(╯°□°）╯︵ ┻━┻
+    return new Promise((resolve, reject) => {
+      let sql = "SELECT usuario_id FROM sessao WHERE hash='" + hash + "';";  
+
+      this.db.selectGenerico(sql).then(response => {
+        if(response[0].usuario_id !== null) {
+          resolve(response[0].usuario_id);
+       
+        } else {
+          resolve(0);
+       
+        }
+
+      }).catch(ex => {
+        resolve(0); 
       
       });
-      
-    });
-    
-    return new Promise((resolve) => {
-      resolve(false);
     
     });
+  
   }
   
   /**
    * inicia o processo de sessao, criando um hash pra id da sessao,
    * cira um qrcode com ela e cria um objeto sessao no banco,
-   * depois espera por confirmacao que a sessao comecou
+   * depois espera por confirmacao que a sessao comecou,
+   * pra entao buscar os dados da sessao do usuario
    */
-  async iniciaSessao(){
+  async iniciaSessao(single){
     let id = 1;
     let hash = id + "-" + this.gerarhash(20);
     
@@ -129,20 +162,32 @@ export class Tab3Page {
     this.geraQr(hash);
     
     //cria a session no banco
-    this.geraSessao(id, hash); 
+    let success = await this.geraSessao(id, hash);
+    //if deu errado, limpa tudo e prepara pra nova sessao
+    if(!success){
+      this.limpaQr();
+      alert("houve um erro inesperado. tente novamente");
+      return;
+
+    }
+
     //espera por confirmacao
-    let conf = false;
+    let userId:any = 0;
     do{
       //espera um teco e dps procura pela sessao ate achar
       await this.sleep(2 * 1000);
-      //eu ODEIO isso. do fundo do meu coracao
-      this.checkSessao(hash).then(response => {
-        console.log(response);
-        conf = response;
-      });
-      //(╯°□°）╯︵ ┻━┻
+      userId = await this.checkSessao(hash);
       
-    }while(!conf);
+    }while(!userId);
     
+    //ativa permissao, e o timer
+    this.sgt.session = {
+      status : 1,
+      hash : hash,
+      idUser : userId
+    };
+    //TODO: impelentar timer
+
   }
+  
 }
