@@ -26,6 +26,7 @@ export class CadastroUserPage implements OnInit {
   public submitAttempt2: boolean = false;
   public submitAttempt3: boolean = false;
   public conta = 0;
+  public cont = 0;
 
   matchingPasswords(senhaKey: string, confirmasenhaKey: string) {
     return (group: FormGroup): {[key: string]: any} => {
@@ -61,6 +62,7 @@ export class CadastroUserPage implements OnInit {
       });
       this.slideThreeForm = formBuilder.group({
         data_primeira_crise : ['', Validators.compose([Validators.required])],
+        situ1: ['' ,  Validators.compose([Validators.required, Validators.minLength(1)])],
         cbox : [false, CadastroUserPage.mustBeTruthy]
       });
    }
@@ -121,17 +123,40 @@ export class CadastroUserPage implements OnInit {
 
     }
 
-    save(){
+    async save(){
 
-      /*if(this.slideOneForm.invalid){
+      if(this.slideOneForm.invalid){
           this.IonSlides.slideTo(0);
           this.submitAttempt1 = true;
+          const alert = await this.AlertController.create({
+            header: 'Erro',
+            message: 'Por favor, preencha os campos corretamente.',
+            buttons: ['OK']
+          });
+          
+          await alert.present();
       }
+      else if(this.slideOneForm.valid && this.cont == 0 )
+      {
+            this.IonSlides.lockSwipes(false);
+            this.IonSlides.slideNext();
+            this.IonSlides.lockSwipes(true);
+            this.cont++;
+    }
+    else
+    {
       if(this.slideTwoForm.invalid){
         this.IonSlides.slideTo(0);
         this.submitAttempt2 = true;
-      }*/ 
-      if(this.slideTwoForm.valid)
+        const alert = await this.AlertController.create({
+          header: 'Erro',
+          message: 'Por favor, preencha os campos corretamente.',
+          buttons: ['OK']
+        });
+        
+        await alert.present();
+       }
+      else
       {
         this.IonSlides.lockSwipes(false);
         this.IonSlides.slideNext();
@@ -139,19 +164,17 @@ export class CadastroUserPage implements OnInit {
         document.getElementById("butFinal").style.display='unset';
         document.getElementById("butProx").style.display='none';
       }
-      /*if(this.slideThreeForm.invalid){
-        this.IonSlides.slideTo(0);
-        this.submitAttempt3 = true;
-      } */
-      else {
-          this.IonSlides.lockSwipes(false);
-          this.IonSlides.slideNext();
-          this.IonSlides.lockSwipes(true);
-      }
+    }
+    
     }
 
     cadastra()
     {
+      if(this.slideThreeForm.invalid){
+        this.IonSlides.slideTo(0);
+        this.submitAttempt3 = true;
+      } 
+      
       let nome = (<HTMLInputElement>document.getElementById("0")).value;
       let email = (<HTMLInputElement>document.getElementById("1")).value;
       let dt_nasc = (<HTMLInputElement>document.getElementById("2")).value;
