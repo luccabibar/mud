@@ -41,12 +41,12 @@ export class Tab2Page {
   valida(result : any)
   {
     //TODO: mudar esse '2' pro id do usuario mesmo pliz
-    this.BD.selectGenerico("UPDATE sessao SET status = 1, profissional_id = 2 WHERE hash = '" + result + "'; SELECT status FROM sessao WHERE hash = '" + result + "';").then((response)=>{
+    this.BD.selectGenerico("UPDATE sessao SET status = 1, usuario_id = 2 WHERE hash = '" + result + "'; SELECT status FROM sessao WHERE hash = '" + result + "';").then((response)=>{
       this.resposta = response[0].status;
     }).catch((response)=>{
       this.resposta = JSON.stringify(response);
     });
-    if(this.resposta == 't')
+    if(this.resposta == 1)
       this.alert("Conexão estabelecida. Agora, o especialista está habilitado para acompanhar as estatísticas geradas através dos questionários. Não se esqueça que a qualquer momento você pode excluir essa conexão e consequentemente os seus dados voltarão a serem restritos");
     else
       this.alert("blá : " + this.resposta);
