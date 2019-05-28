@@ -1,5 +1,8 @@
 <ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
         <ion-title>Cadastro</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -10,25 +13,21 @@
         <ion-list lines="none">
           <form [formGroup]="slideOneForm">
 
-            <ion-item padding-horizontal *ngIf="submitAttempt1">
-            <p style="color: #f04141;">Por favor, preencha todos os campos corretamente.</p>
-            </ion-item>
-
            <ion-item padding-horizontal>
               <ion-label class="label" position="stacked">Nome</ion-label>
-              <ion-input type="text" name="nome" id="0" formControlName="nome" [class.invalid]="!slideOneForm.controls.nome.valid && (slideOneForm.controls.nome.dirty || submitAttempt)" placeholder="Informe seu nome"></ion-input>
+              <ion-input type="text" name="nome" id="0" formControlName="nome" [class.invalid]="!slideOneForm.controls.nome.valid && (slideOneForm.controls.nome.dirty || submitAttempt1)" placeholder="Informe seu nome"></ion-input>
            </ion-item>
        
-           <ion-item padding-horizontal *ngIf="!slideOneForm.controls.nome.valid  && (slideOneForm.controls.nome.dirty || submitAttempt)">
+           <ion-item padding-horizontal *ngIf="!slideOneForm.controls.nome.valid  && (slideOneForm.controls.nome.dirty || submitAttempt1)">
                 <p>Insira um nome válido.</p>
             </ion-item>
        
            <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Email</ion-label>
-               <ion-input name="email" id="1" formControlName="email" type="Email" [class.invalid]="!slideOneForm.controls.email.valid && (slideOneForm.controls.email.dirty || submitAttempt)" placeholder="Informe seu email"></ion-input>
+               <ion-input name="email" id="1" formControlName="email" type="Email" [class.invalid]="!slideOneForm.controls.email.valid && (slideOneForm.controls.email.dirty || submitAttempt1)" placeholder="Informe seu email"></ion-input>
             </ion-item>
        
-            <ion-item padding-horizontal *ngIf="!slideOneForm.controls.email.valid  && (slideOneForm.controls.email.dirty || submitAttempt)">
+            <ion-item padding-horizontal *ngIf="!slideOneForm.controls.email.valid  && (slideOneForm.controls.email.dirty || submitAttempt1)">
                 <p>Insira um e-mail válido.</p>
             </ion-item>
        
@@ -37,46 +36,46 @@
                <ion-datetime backdropDismiss name="datanasc" id="2" formControlName="datanasc" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" [class.invalid]="!slideOneForm.controls.datanasc.valid && (slideOneForm.controls.datanasc.dirty || submitAttempt)"></ion-datetime>
              </ion-item>
        
-             <ion-item padding-horizontal *ngIf="!slideOneForm.controls.datanasc.valid  && (slideOneForm.controls.datanasc.dirty || submitAttempt)">
+             <ion-item padding-horizontal *ngIf="!slideOneForm.controls.datanasc.valid  && (slideOneForm.controls.datanasc.dirty || submitAttempt1)">
                    <p>Insira sua data de nascimento.</p>
                </ion-item>
        
              <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Celular</ion-label>
-               <ion-input name="celular" id="3" formControlName="celular" type="number" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt)" placeholder="Insira apenas os números (incluindo o DDD)."></ion-input>
+               <ion-input name="celular" id="3" formControlName="celular" type="number" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt1)" placeholder="Insira apenas os números (incluindo o DDD)."></ion-input>
             </ion-item>
        
-            <ion-item  padding-horizontal *ngIf="!slideOneForm.controls.celular.valid  && (slideOneForm.controls.celular.dirty || submitAttempt)">
+            <ion-item  padding-horizontal *ngIf="!slideOneForm.controls.celular.valid  && (slideOneForm.controls.celular.dirty || submitAttempt1)">
                 <p>Insira um número válido (não esqueça o DDD).</p>
             </ion-item>
        
             <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">CPF</ion-label>
-               <ion-input type="number" size="11" formControlName="cpf" name="cpf" id="4" [class.invalid]="!slideOneForm.controls.cpf.valid && (slideOneForm.controls.cpf.dirty || submitAttempt)" placeholder="Informe seu CPF (apenas números)"></ion-input>
+               <ion-input type="number" size="11" formControlName="cpf" name="cpf" id="4" [class.invalid]="!slideOneForm.controls.cpf.valid && (slideOneForm.controls.cpf.dirty || submitAttempt1)" placeholder="Informe seu CPF (apenas números)"></ion-input>
             </ion-item>
        
-            <ion-item padding-horizontal *ngIf="!slideOneForm.controls.cpf.valid  && (slideOneForm.controls.cpf.dirty || submitAttempt)">
+            <ion-item padding-horizontal *ngIf="!slideOneForm.controls.cpf.valid  && (slideOneForm.controls.cpf.dirty || submitAttempt1)">
                 <p>Insira um CPF válido.</p>
             </ion-item>
        
             <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Senha</ion-label>
-               <ion-input name="senha" type="password" id="5" formControlName="senha" [class.invalid]="!slideOneForm.controls.senha.valid && (slideOneForm.controls.senha.dirty || submitAttempt)" placeholder="Escolha sua senha"></ion-input>
+               <ion-input name="senha" type="password" id="5" formControlName="senha" [class.invalid]="!slideOneForm.controls.senha.valid && (slideOneForm.controls.senha.dirty || submitAttempt1)" placeholder="Escolha sua senha"></ion-input>
             </ion-item>
        
-            <ion-item padding-horizontal *ngIf="!slideOneForm.controls.senha.valid  && (slideOneForm.controls.senha.dirty || submitAttempt)">
+            <ion-item padding-horizontal *ngIf="!slideOneForm.controls.senha.valid  && (slideOneForm.controls.senha.dirty || submitAttempt1)">
                 <p>Insira uma senha.</p>
             </ion-item>
        
             <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Senha*</ion-label>
-               <ion-input name="confirmasenha" id="confirmasenha" type="password" formControlName="confirmasenha"  [class.invalid]="!slideOneForm.controls.confirmasenha.valid  && (slideOneForm.controls.confirmasenha.dirty || submitAttempt) || slideOneForm.hasError('mismatchedPasswords')" placeholder="Redigite sua senha"></ion-input>
+               <ion-input name="confirmasenha" id="confirmasenha" type="password" formControlName="confirmasenha"  [class.invalid]="!slideOneForm.controls.confirmasenha.valid  && (slideOneForm.controls.confirmasenha.dirty || submitAttempt1) || slideOneForm.hasError('mismatchedPasswords')" placeholder="Redigite sua senha"></ion-input>
             </ion-item>
        
             <ion-item padding-horizontal *ngIf="!slideOneForm.controls.confirmasenha.valid  && (slideOneForm.controls.confirmasenha.dirty || submitAttempt) || slideOneForm.hasError('mismatchedPasswords')">
                 <p style="color:#f04141;">As senhas não conferem.</p>
             </ion-item>
-            </form> <!--Depois tem que trocar o proxSlide deste botão para o save()-->
+            </form>
           </ion-list>
         </ion-content>
         </ion-slide>
@@ -91,21 +90,19 @@
                     <h5>Contato:</h5>
                     <ion-item padding-horizontal>
                         <ion-label class="label" position="stacked">Nome</ion-label>
-                        <ion-input type="text" name="nome_contato1" id="6" formControlName="nome_contato1" [class.invalid]="!slideTwoForm.controls.nome_contato1.valid && (slideTwoForm.controls.nome_contato1.dirty || submitAttempt)" placeholder="Informe o nome de um contato"></ion-input>
+                        <ion-input type="text" name="nome_contato1" id="6" formControlName="nome_contato1" [class.invalid]="!slideTwoForm.controls.nome_contato1.valid && (slideTwoForm.controls.nome_contato1.dirty || submitAttempt2)" placeholder="Informe o nome de um contato"></ion-input>
                     </ion-item>
                     <ion-item padding-horizontal *ngIf="!slideTwoForm.controls.nome_contato1.valid  && (slideTwoForm.controls.nome_contato1.dirty || submitAttempt2)">
                         <p>Insira um nome válido.</p>
                     </ion-item>
                     <ion-item padding-horizontal>
                             <ion-label class="label" position="stacked">Número do Telefone</ion-label>
-                            <ion-input type="number" name="num_contato1" id="7" formControlName="num_contato1" [class.invalid]="!slideTwoForm.controls.num_contato1.valid && (slideTwoForm.controls.num_contato1.dirty || submitAttempt)" placeholder="Insira apenas os números (incluindo o DDD)"></ion-input>
+                            <ion-input type="number" name="num_contato1" id="7" formControlName="num_contato1" [class.invalid]="!slideTwoForm.controls.num_contato1.valid && (slideTwoForm.controls.num_contato1.dirty || submitAttempt2)" placeholder="Insira apenas os números (incluindo o DDD)"></ion-input>
                     </ion-item>
                     <ion-item padding-horizontal *ngIf="!slideTwoForm.controls.num_contato1.valid  && (slideTwoForm.controls.num_contato1.dirty || submitAttempt2)">
                         <p>Insira um número válido.</p>
                     </ion-item>
-                    <ion-item padding-horizontal *ngIf="submitAttempt2">
-                        <p style="color: #f04141;">Por favor, adicione um contato.</p>
-                    </ion-item>
+                    
                     <div id="contato2" style="display: none;">
                     <hr>
                     <h5>Contato 2:</h5>
@@ -148,17 +145,24 @@
                      
                          <ion-item padding-horizontal>
                              <ion-label class="label" position="stacked" text-wrap>Quando ocorreu a primeira crise?</ion-label>
-                             <ion-datetime backdropDismiss display-format="D MMM, YYYY" name="data_primeira_crise" formControlName="data_primeira_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
+                             <ion-datetime backdropDismiss display-format="D MMM, YYYY" name="data_primeira_crise" formControlName="data_primeira_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" [class.invalid]="!slideThreeForm.controls.data_primeira_crise.valid && (slideThreeForm.controls.data_primeira_crise.dirty || submitAttempt3)"></ion-datetime>
                           </ion-item>
+
+                          <ion-item padding-horizontal *ngIf="!slideThreeForm.controls.data_primeira_crise.valid  && (slideThreeForm.controls.data_primeira_crise.dirty || submitAttempt3)">
+                            <p>Insira a data da primeira crise.</p>
+                            </ion-item>
 
                           <ion-item padding-horizontal>
                                 <ion-label text-wrap class="label" position="stacked">Selecione quais os sintomas que você geralmente apresenta durante a crise</ion-label>
                                 <hr>
                             </ion-item>
+                            <ion-item padding-horizontal *ngIf="rv">
+                                <p style="color: #f04141;">Por favor, adicione um contato.</p>
+                            </ion-item>
                             <ion-list>
                                 <ion-item *ngFor="let entry of sintomas" style="font-size: 12px;" padding-horizontal>
                                       <ion-label style="color: #222428 !important;" text-wrap>{{entry.val}}</ion-label>
-                                    <ion-checkbox formControlName="cbox" color="verdemud4" slot="start"  size="2px" [(ngModel)]="entry.isChecked"></ion-checkbox>
+                                    <ion-checkbox [class.invalid]="!slideThreeForm.controls.cbox.valid && (slideThreeForm.controls.cbox.dirty || submitAttempt3)" formControlName="cbox" color="verdemud4" slot="start"  size="2px" [(ngModel)]="entry.isChecked"></ion-checkbox>
                                 </ion-item>
                             </ion-list>
 
@@ -169,21 +173,26 @@
                             <ion-item padding-horizontal>
                              <ion-label class="label" position="stacked" text-wrap>Quais as principais situações que desencadeiam as crises?</ion-label>
                              <hr>
-                             <ion-input type="text" name="situ1" id="situ1" placeholder="Situação 1"></ion-input>
-                          </ion-item>
+                             <ion-input type="text" formControlname="situ1" name="situ1" id="situ1" placeholder="Situação 1" [class.invalid]="!slideThreeForm.controls.situ1.valid && (slideThreeForm.controls.situ1.dirty || submitAttempt3)"></ion-input>
+                            </ion-item>
+
+                            <ion-item padding-horizontal *ngIf="!slideThreeForm.controls.situ1.valid  && (slideThreeForm.controls.situ1.dirty || submitAttempt3)">
+                                <p>Insira no mínimo uma situação.</p>
+                            </ion-item>
+
                             <div id="situacao2" style="display: none;">
                                 <ion-item padding-horizontal>
-                                <ion-input type="text" name="situ2" id="situ2" placeholder="Situação 2"></ion-input>
+                                <ion-input type="text" formControlname="situ2" name="situ2" id="situ2" placeholder="Situação 2"></ion-input>
                                 </ion-item>
                             </div>
                             <div id="situacao3" style="display: none;">
                                 <ion-item padding-horizontal>
-                                <ion-input type="text" name="situ3" id="situ3" placeholder="Situação 3"></ion-input>
+                                <ion-input type="text" formControlname="situ3" name="situ3" id="situ3" placeholder="Situação 3"></ion-input>
                                 </ion-item>
                             </div>
                             <div id="situacao4" style="display: none;">
                                 <ion-item padding-horizontal>
-                                <ion-input type="text" name="situ4" id="situ4" placeholder="Situação 4"></ion-input>
+                                <ion-input type="text" formControlname="situ4" name="situ4" id="situ4" placeholder="Situação 4"></ion-input>
                                 </ion-item>
                             </div>
                             <div id="fab2">
@@ -206,6 +215,6 @@
         <ion-button padding-horizontal (click)="save()" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
     </div>
     <div id="butFinal" style="display: none;">
-        <ion-button padding-horizontal (click)="save()" fill="outline" color="verdemud4" expand="block">Finalizar Cadastro</ion-button>
+        <ion-button padding-horizontal (click)="cadastra()" fill="outline" color="verdemud4" expand="block">Finalizar Cadastro</ion-button>
     </div>
 </ion-footer>
