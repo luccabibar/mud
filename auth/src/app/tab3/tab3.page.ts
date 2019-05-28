@@ -53,73 +53,97 @@ export class Tab3Page {
     });
     
   }
+
+  /**
+   * substitui o elemento do qr code por um limpo novo
+   */
+  limpaQr() {
+    //joga fora o elem
+    let target = document.getElementById('qr-img');
+    let parent = target.parentElement;
+    parent.removeChild(target);
+
+    //cria o elem novo
+    let clear = document.createElement('canvas');
+    clear.id = 'qr-img';
+
+    //bota ele no view
+    parent.appendChild(clear);
+    
+  }
   
   /**
    * gera um objeto sessao no banco de acordo com os dados
    * que ja foram gerados
+   * a funcao nao consegue retornar simplesmente true ou false
+   * ela PRECISA retornar uma promessa. typescript why
    * 
    * @param id id do usuario 
    * @param hash hash gerado aleatoriamente com o id do user
+   * @returns a promisse com o sucesso da sessao
    */
   geraSessao(id, hash){
-    let sql = "INSERT INTO public.sessao VALUES (" + 
-                "default, " +
-                "'" + hash + "', " +
-                "NULL, " +
-                id + ", " +
-                "0, " +
-                "NOW(), " +
-                "NULL, " +
-                "NULL " +
-              ");";
 
-    this.db.insertGenerico(sql).then((response) => {
-      //console.log(response);
+    return new Promise((resolve, reject) => {
+      let sql = "INSERT INTO public.sessao VALUES (" + 
+                  "default, " +
+                  "'" + hash + "', " +
+                  "NULL, " +
+                  id + ", " +
+                  "0, " +
+                  "NOW(), " +
+                  "NULL, " +
+                  "NULL " +
+                ");";
 
-    }).catch((ex) => {
-      //console.log(ex);
+      this.db.insertGenerico(sql).then((response) => {
+        resolve(true);
 
-    });
-  }
+      }).catch((ex) => {
+        resolve(false);
+
+      });
+      
+  });
+}
 
   /**
    * procura por uma sessao pra ver se ela existe.
    * retorna true caso exista, caso contrario, false
+   * a funcao nao consegue retornar simplesmente true ou false
+   * ela PRECISA retornar uma promessa. typescript why
    * 
    * @param hash hash gerado aleatoriamente com id do user
-   * @returns existencia da sessao
+   * @returns promisse com existencia da sessao
    */
-  checkSessao(hash){
-    let sql = "SELECT usuario_id FROM sessao WHERE hash='" + hash + "';";
-    console.log("ANUS DE CAVALO");
-    
-    this.db.selectGenerico(sql).then(response => {
-      if(response[0].usuario_id !== null){
-        return new Promise((resolve) => {
+  checkSessao(hash) {
+    //(╯°□°）╯︵ ┻━┻
+    return new Promise((resolve, reject) => {
+      let sql = "SELECT usuario_id FROM sessao WHERE hash='" + hash + "';";  
+
+      this.db.selectGenerico(sql).then(response => {
+        if(response[0].usuario_id !== null) {
           resolve(true);
-        
-        });
-        
-      }
-      
-    }).catch(ex => {
-      return new Promise((resolve) => {
+       
+        } else {
+          resolve(false);
+       
+        }
+
+      }).catch(ex => {
         resolve(false);
       
       });
-      
-    });
-    
-    return new Promise((resolve) => {
-      resolve(false);
     
     });
+  
   }
   
   /**
    * inicia o processo de sessao, criando um hash pra id da sessao,
    * cira um qrcode com ela e cria um objeto sessao no banco,
-   * depois espera por confirmacao que a sessao comecou
+   * depois espera por confirmacao que a sessao comecou,
+   * pra entao buscar os dados da sessao do usuario
    */
   async iniciaSessao(){
     let id = 1;
@@ -129,20 +153,28 @@ export class Tab3Page {
     this.geraQr(hash);
     
     //cria a session no banco
-    this.geraSessao(id, hash); 
+    let success = await this.geraSessao(id, hash);
+    //if deu errado, limpa tudo e prepara pra nova sessao
+    if(!success){
+      this.limpaQr();
+      alert("houve um erro inesperado. tente novamente");
+      return;
+
+    }
+
     //espera por confirmacao
-    let conf = false;
+    let conf:any = false;
     do{
       //espera um teco e dps procura pela sessao ate achar
       await this.sleep(2 * 1000);
-      //eu ODEIO isso. do fundo do meu coracao
-      this.checkSessao(hash).then(response => {
-        console.log(response);
-        conf = response;
-      });
-      //(╯°□°）╯︵ ┻━┻
+      conf = await this.checkSessao(hash);
       
     }while(!conf);
     
+    
   }
+  
+  //ativa permissao, e o timer
+
+  //TODO: impelentar timer
 }
