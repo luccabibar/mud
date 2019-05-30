@@ -42,7 +42,7 @@
        
              <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Celular</ion-label>
-               <ion-input name="celular" id="3" formControlName="celular" type="number" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt1)" placeholder="Insira apenas os números (incluindo o DDD)."></ion-input>
+               <ion-input #celulari [(ngModel)]="celulare" name="celular" id="3" formControlName="celular" type="number" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt1)" placeholder="Insira apenas os números (incluindo o DDD)."></ion-input>
             </ion-item>
        
             <ion-item  padding-horizontal *ngIf="!slideOneForm.controls.celular.valid  && (slideOneForm.controls.celular.dirty || submitAttempt1)">
@@ -51,7 +51,7 @@
        
             <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">CPF</ion-label>
-               <ion-input type="number" size="11" formControlName="cpf" name="cpf" id="4" [class.invalid]="!slideOneForm.controls.cpf.valid && (slideOneForm.controls.cpf.dirty || submitAttempt1)" placeholder="Informe seu CPF (apenas números)"></ion-input>
+               <ion-input #cpfi [(ngModel)]="cpfe" type="number" size="11" formControlName="cpf" name="cpf" id="4" [class.invalid]="!slideOneForm.controls.cpf.valid && (slideOneForm.controls.cpf.dirty || submitAttempt1)" placeholder="Informe seu CPF (apenas números)"></ion-input>
             </ion-item>
        
             <ion-item padding-horizontal *ngIf="!slideOneForm.controls.cpf.valid  && (slideOneForm.controls.cpf.dirty || submitAttempt1)">

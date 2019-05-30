@@ -23,3 +23,18 @@
     top: 5%;
 }
 
+#iconAviso,#iconPasta
+{
+    width: 50%;
+    margin-top: 50px;
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+#rs, #rc
+{
+    position: absolute;
+    top: 80%;
+}
