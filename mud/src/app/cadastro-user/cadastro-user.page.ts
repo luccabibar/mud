@@ -3,10 +3,11 @@ import { CpfValidator } from '../validators/cpf';
 import { CelularValidator } from '../validators/celular';
 import { BancoService } from './../banco.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, IonSlides, AlertController } from '@ionic/angular';
+import { NavController, IonSlides, AlertController, IonInput } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { getElementDepthCount } from '@angular/core/src/render3/state';
+import { async } from 'q';
 
 @Component({
   selector: 'app-cadastro-user',
@@ -18,6 +19,10 @@ import { getElementDepthCount } from '@angular/core/src/render3/state';
 export class CadastroUserPage implements OnInit {
 
   @ViewChild(IonSlides) IonSlides: IonSlides;
+  @ViewChild('celulari')  celulari: IonInput;
+  @ViewChild('cpfi')  cpfi: IonInput;
+  celulare: string;
+  cpfe: string;
   
   public slideOneForm: FormGroup;
   public slideTwoForm: FormGroup;
@@ -123,8 +128,34 @@ export class CadastroUserPage implements OnInit {
 
     }
 
-    async save(){
+    foca(oque: string)
+    {
+      if(oque == "cpf")
+      {
+        this.cpfe = "";
+        setTimeout(() => {
+        this.cpfi.setFocus();
+        }, 400);
+      }
+      if(oque == "cpfcel")
+      {
+        this.celulare = "";
+        this.cpfe = "";
+        setTimeout(() => {
+        this.celulari.setFocus();
+        }, 400);
+      }
+      if(oque == "celular")
+      {
+        this.celulare = "";
+        setTimeout(() => {
+        this.celulari.setFocus();
+        }, 400);
+      }
+    }
 
+    async save(){
+      
       if(this.slideOneForm.invalid){
           this.IonSlides.slideTo(0);
           this.submitAttempt1 = true;
@@ -138,10 +169,84 @@ export class CadastroUserPage implements OnInit {
       }
       else if(this.slideOneForm.valid && this.cont == 0 )
       {
+        let celular = (<HTMLInputElement>document.getElementById("3")).value;
+        let cpf = (<HTMLInputElement>document.getElementById("4")).value;
+        this.BD.selectGenerico("SELECT * FROM usuario WHERE cpf='"+cpf+"';")
+        .then(async(response)=>{
+          if(response[0].celular == celular){
+            const alert = await this.AlertController.create({
+              header: 'Erro',
+              message: 'CPF e celular já cadastrados anteriormente.',
+              buttons: [
+                {
+                  text: 'OK',
+                  handler: () => { this.foca("cpfcel") }
+                }
+              ],
+            });
+            
+            await alert.present();
+          }
+
+          else if(response[0].celular != celular)
+          {
+
+              const alert = await this.AlertController.create({
+              header: 'Erro',
+              message: 'CPF já cadastrado anteriormente.',
+              buttons:[
+                {
+                  text: 'OK',
+                  handler: () => { this.foca("cpf") }
+                }
+              ],
+            });
+            await alert.present();
+          }
+          
+        })
+
+        .catch(async(response)=>{
+          this.BD.selectGenerico("SELECT * FROM usuario WHERE celular='"+celular+"';")
+          .then(async(resposta)=>{
+            if(resposta[0].cpf == cpf){
+              const alert = await this.AlertController.create({
+                header: 'Erro',
+                message: 'CPF e celular já cadastrados anteriormente.',
+                buttons: [
+                  {
+                    text: 'OK',
+                    handler: () => { this.foca("cpfcel") }
+                  }
+                ],
+              });
+              
+              await alert.present();
+            }
+            else if(resposta[0].cpf != cpf)
+            {
+
+                const alert = await this.AlertController.create({
+                header: 'Erro',
+                message: 'Celular já cadastrado anteriormente.',
+                buttons:[
+                  {
+                    text: 'OK',
+                    handler: () => { this.foca("celular") }
+                  }
+                ],
+              });
+              await alert.present();
+            }
+          })
+          .catch(async(resposta)=>{
             this.IonSlides.lockSwipes(false);
             this.IonSlides.slideNext();
             this.IonSlides.lockSwipes(true);
             this.cont++;
+           })
+          
+        })
     }
     else
     {
