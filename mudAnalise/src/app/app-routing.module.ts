@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'grafico-semanal', loadChildren: './opcoes-menu/grafico-semanal/grafico-semanal.module#GraficoSemanalPageModule' },
   { path: 'grafico-crise', loadChildren: './opcoes-menu/grafico-crise/grafico-crise.module#GraficoCrisePageModule' },
   { path: 'ficha-paciente', loadChildren: './opcoes-menu/ficha-paciente/ficha-paciente.module#FichaPacientePageModule' },
-  { path: 'second/:myId', loadChildren: './components/second/second.module#SecondPageModule' },
+  { path: 'detalhes-semanal/:myId', loadChildren: './components/detalhes-semanal/detalhes-semanal.module#DetalhesSemanalPageModule' }
 
 ];
 @NgModule({

@@ -1,4 +1,3 @@
-import { ModalPageModule } from './components/modal/modal.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -18,7 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-  HttpClientModule,ModalPageModule],
+  HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,
