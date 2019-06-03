@@ -7,3 +7,11 @@
 {
   border: 1px solid rgba(0,0,0,0);
 }
+
+ion-label {
+  color:  #000000 !important; 
+}
+
+ion-item {
+  --highlight-color-focused: #a2a4ab;
+}
