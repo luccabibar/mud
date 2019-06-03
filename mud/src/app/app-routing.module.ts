@@ -8,9 +8,8 @@ const routes: Routes = [
   { path: 'tab3', loadChildren: './tab3/tab3.module#Tab3PageModule' },
   { path: 'load', loadChildren: './load/load.module#LoadPageModule' },
   { path: 'cadastro', loadChildren: './cadastro-user/cadastro-user.module#CadastroUserPageModule' },
-  { path: 'login', loadChildren: './login-page/login-page.module#LoginPagePageModule' },
   { path: 'relatorio-semanal', loadChildren: './relatorio-semanal/relatorio-semanal.module#RelatorioSemanalPageModule' }
-
+  { path: '', loadChildren: './relatorio-crise/relatorio-crise.module#RelatorioCrisePageModule' }
   
 ];
 
