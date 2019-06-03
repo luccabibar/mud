@@ -12,6 +12,6 @@ export class DetalhesSemanalPage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) { }
 
  ngOnInit() {
-   this.myId = this.activatedRoute.snapshot.paramMap.get('myid');
+   this.myId = this.activatedRoute.snapshot.paramMap.get('myId');
  }
 }

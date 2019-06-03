@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DetalhesSemanalPage } from './detalhes-semanal.page';
-
+ 
 const routes: Routes = [
   {
     path: '',

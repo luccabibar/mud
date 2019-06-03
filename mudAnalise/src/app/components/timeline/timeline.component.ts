@@ -21,6 +21,9 @@ export class TimelineComponent implements OnInit {
     toast.present();
   }
   
+  async onClick(){
+    alert("o asadda");
+  }
   /*
   async detalhesSemana() {
     const modal = await this.modalController.create({
