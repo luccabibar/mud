@@ -1,12 +1,22 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="escuro">
+      <ion-title>Detalhes</ion-title>
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/dashboard"></ion-back-button>
+        <ion-button routerLink="/tabs/tab2">
+          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
       </ion-buttons>
-      <ion-title>Details</ion-title>
     </ion-toolbar>
-   </ion-header>
+  </ion-header>
    
    <ion-content padding>
-    My ID is: {{ myId }}
+     <ion-card>
+        <ion-item>
+          <ion-icon name="pizza" slot="start"></ion-icon>
+          <ion-label><strong>{{ myId }}</strong></ion-label>
+        </ion-item>
+        <ion-card-content>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit soluta esse facilis officia, expedita culpa atque quidem, sapiente perferendis quas fugit? Dignissimos, at odit sequi ut explicabo culpa autem ab!
+        </ion-card-content>
+      </ion-card>
    </ion-content>

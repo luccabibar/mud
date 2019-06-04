@@ -304,7 +304,7 @@ export class CadastroUserPage implements OnInit {
         await alert.present();
       }
     )*/
-    this.BD.cadUsu1(nome,cpf,email,"2010-02-02",celular,senha)
+    this.BD.cadUsu1(nome,cpf,email,celular,senha,dt_nasc)
     .then(async(response)=>{
         const alert = await this.AlertController.create({
           header: 'Confirmação',

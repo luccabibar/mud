@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* === header === */
+
+.header {
+    height: 100px;
+    box-shadow: 0 0.5px 10px #333;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 35px; 
+}
+
+/* === main === */
+
+.main {
+    background-color: #f9f9f9; 
+}
+
+/* main => banner */
+
+.banner {
+    width: 100%;
+    background: url("images/banner-ph.jpg");
+    padding: 30vh    90px;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    padding: 40%, 40px;
+}
+
+.banner-text-cont {
+    display: flex;
+    width: 500px;
+    align-content: flex-end;
+    flex-direction: column;
+}
+
+.banner-title {
+    text-align: right;
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+.banner-text {
+    text-align: right;
+    font-size: 24px;
+}
+
+/* === footer === */
+
+.footer {
+    background-color: #333;
+    color: white;
+}
