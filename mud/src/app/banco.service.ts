@@ -19,15 +19,16 @@ export class BancoService {
     return this.http.post(this.API_URL + 'insertGenerico', data, {headers: header}).toPromise();
   }
 
-  cadUsu1(nome: string, cpf: string, email: string, data_nasc: string, celular: string, senha: string)
+  cadUsu1(nome: string, cpf: string, email: string, celular: string, senha: string, data_nasc: string)
   {
+    var date=new Date(data_nasc).toDateString();
     var data = {
       nome: nome,
       cpf: cpf,
       email: email,
-      data_nasc: data_nasc,
       celular: celular,
       senha: senha,
+      data_nasc: date,
     };
 
     let header = new HttpHeaders({'Content-type':'application/json'});
