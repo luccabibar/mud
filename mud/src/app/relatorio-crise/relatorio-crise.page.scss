@@ -3,8 +3,28 @@
     position: relative;
     margin: 0;
     position: absolute;
-    top: 20%;
+    top: 12%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%); 
+}
+
+.label {
+    color:  #165044ff !important; 
+}
+
+ion-item-group {
+    //font-size: 16px !important;
+    flex-basis: auto !important;
+    text-align: start;
+    padding-left: 10%;
+}
+
+
+ion-slides {
+    --bullet-background: #989aa2;
+    --bullet-background-active: #165044ff; 
+    height: relative;
+    width: relative;
+    top: 17%;
 }
