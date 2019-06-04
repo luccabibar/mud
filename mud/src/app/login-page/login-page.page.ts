@@ -63,7 +63,8 @@ export class LoginPagePage {
         });
 
         await alert.present();
-        this.nav.navigateForward('/tabs');
+        alert("aasaa");
+        this.router.navigateByUrl('/tabs/tab2');
         return;
       } 
 
@@ -72,7 +73,7 @@ export class LoginPagePage {
 
           const alert = await this.alertController.create({
           header: 'Confirmação',
-          subHeader: 'Sucesso!',
+          subHeader: 'Erro!',
           message: 'A senha está incorreta',
           buttons:[
             {
@@ -100,9 +101,8 @@ export class LoginPagePage {
       });
   
       await alert.present();
-      
-    })
-  }
+       })
+}
 
   direcCadast()
   {

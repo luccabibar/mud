@@ -7,7 +7,7 @@ import { Component, ViewChild, Input} from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  constructor(){}
+  constructor(public nav : NavController){}
 
   @ViewChild('deus')  ino: IonInput;
 
@@ -16,5 +16,10 @@ export class Tab1Page {
     setTimeout(() => {
       this.ino.setFocus();
   }, 400);
+  }
+
+  relatsem()
+  {
+      this.nav.navigateForward('relatorio-semanal');
   }
 }

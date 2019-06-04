@@ -12,17 +12,13 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class Tab2Page {
   
   
-  constructor(private nav: NavController) {}
+  constructor(private nav: NavController, public alertController: AlertController) {}
 
 
 
-  iniciaRelat()
+  relatsem()
   {
     this.nav.navigateForward('relatorio-semanal');
   }
-
-
-
-
 }
 
