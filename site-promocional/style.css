@@ -9,7 +9,7 @@
 
 .header {
     height: 100px;
-    box-shadow: 0 0.5px 10px #333;
+    box-shadow: 0 0.5px 10px #999;
     background-color: #f9f9f9;
     display: flex;
     justify-content: space-between;
@@ -29,7 +29,7 @@
     width: 100%;
     background: url("images/banner-ph.jpg");
     padding: 30vh    90px;
-    color: white;
+    color: #fff;
     display: flex;
     justify-content: flex-end;
     padding: 40%, 40px;
@@ -46,6 +46,7 @@
     text-align: right;
     font-size: 34px;
     margin-bottom: 20px;
+    font-family: Monaco, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .banner-text {
@@ -53,9 +54,64 @@
     font-size: 24px;
 }
 
+/* main => combo image-text  */
+
+.combo-image-text {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 20vw;
+}
+
+.cb-it-revert {
+    flex-direction: row-reverse;
+    background-color: #fff;
+}
+
+.cb-it-img, .cb-it-text {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.cb-it-img {
+    max-width: 25vw;
+}
+
+.cb-it-text {
+    width: 25vw;
+    text-align: center;
+    font-size: 28px;
+    font-weight: lighter;
+}
+
 /* === footer === */
 
 .footer {
     background-color: #333;
-    color: white;
+    color: #fff;
+    display: flex;
+    padding: 55px 15vw 130px 15vw;
+    justify-content: space-around;
+}
+
+.ft-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.ft-row-title {
+    font-size: 24px;
+    font-family: Monaco, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 25px;
+}
+
+.ft-row-text {
+    margin-bottom: 15px;
+}
+
+a.ft-row-text:link, 
+a.ft-row-text:active, 
+a.ft-row-text:visited {
+    color: #0ea7ae;
+    text-decoration: none;
 }
