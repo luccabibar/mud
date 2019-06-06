@@ -14,12 +14,14 @@
 }
 
 ion-item-group {
-    //font-size: 16px !important;
+    font-size: 16px !important;
     flex-basis: auto !important;
     text-align: start;
-    padding-left: 10%;
 }
 
+.ion-padding-horizontal {
+    padding: 0 16px !important;
+}
 
 ion-slides {
     --bullet-background: #989aa2;
@@ -27,4 +29,20 @@ ion-slides {
     height: relative;
     width: relative;
     top: 17%;
+}
+
+ion-footer {
+    text-align: center
+}
+
+#btnVoltar {
+    width: 48%;
+    padding-right: 1%;
+    padding-left: 1%;
+}
+
+#btnProx {
+    width: 48%;
+    padding-right: 1%;
+    padding-left: 1%;
 }

@@ -63,7 +63,7 @@ export class LoginPagePage {
         });
 
         await alert.present();
-        alert("aasaa");
+        //alert("aasaa");
         this.router.navigateByUrl('/tabs/tab2');
         return;
       } 

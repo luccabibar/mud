@@ -11,9 +11,18 @@ export class RelatorioCrisePage implements OnInit {
 
   @ViewChild(IonSlides) IonSlides: IonSlides;
 
+  public conta = 0;
+
   constructor(public navCtrl: NavController) { }
 
   ngOnInit() {
+    this.IonSlides.lockSwipes(true);
+  }
+
+  antSlide()
+  {
+    this.IonSlides.lockSwipes(false);
+    this.IonSlides.slidePrev();
     this.IonSlides.lockSwipes(true);
   }
 
@@ -53,4 +62,48 @@ export class RelatorioCrisePage implements OnInit {
     }
   }
 
+  mudaLabel2()
+  {
+    let grau = (<HTMLInputElement>document.getElementById("preocupa")).value;
+    if(grau == "0")
+    {
+      document.getElementById("lblGrau").innerHTML = 'Nenhuma';
+    }
+    else if(grau == "2")
+    {
+      document.getElementById("lblGrau").innerHTML = 'Leve';
+    }
+    else if(grau == "4")
+    {
+      document.getElementById("lblGrau").innerHTML = 'Moderada';
+    }
+    else if(grau == "6")
+    {
+      document.getElementById("lblGrau").innerHTML = 'Forte';
+    }
+    else if(grau == "8")
+    {
+      document.getElementById("lblGrau").innerHTML = 'Extrema';
+    }
+  }
+
+  addsitu()
+  {
+    this.conta++;
+    if(this.conta == 1)
+    {
+    document.getElementById("addsitu").style.display='unset';
+    }
+    if(this.conta == 2)
+    {
+    document.getElementById("escolhersitu").style.display='unset';
+    }
+
+  }
+
 }
+
+
+
+
+
