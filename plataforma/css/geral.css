@@ -1,0 +1,11 @@
+@import url("reset.css");@import url("variables.css");.cabecalho {box-sizing: border-box ;display: flex;flex-direction: row;justify-content: space-between;background-color: var(--background-default);padding: var(--padding-default);padding-top: 0.5em;padding-bottom: 0.5em;position: fixed;width: 100%;border-bottom: var(--border-all);z-index: 5000;}.logo {width: 2em; height:100%;}.corrige{opacity: 0;}.main{width:100%;}.flex_row{flex-direction: row;}.flex_column{flex-direction: column;}.btn-nav-show {background-color: var(--background-transparent);}.btn-nav-show > * {font-size: var(--samll-elements);color: var(--color-default-clear);}.lista-cabecalho {height: 100vh;position: absolute;top: 0;right: -100%;background-color: var(--background-default);box-shadow: var(--box-shadow-default);border-left: var(--border-all);}.menu_ul_top {width: 100%; border-bottom: var(--border-all);}.menu_ul_top li{height: 100%;display: flex;align-items: center;justify-content: flex-end;}.menu_ul_bottom{height: 100%;background-color: rgb(250, 250, 250);display: flex;}.menu_ul_bottom > li {width: 100%;padding: var(--padding-default);}.menu_ul_bottom > li > * {width: 100%;color: var(--color-default-clear);font-size: 1.2em;font-weight: 300;}.menu_ul_bottom > li:nth-child(odd) {background-color: var(--background-child);}.btn-basic {background-color: white;margin-right: 5%;}.btn-basic > * {font-size: var(--samll-elements);color: var(--color-default-clear);}
+.footer{width: 100%;display: flex;flex-direction: column;}
+.footer-top{display: grid;grid-template-columns: repeat(3,1fr);grid-column-gap:2em;background-color: var(--color-specific-black);}
+.footer-bottom{background-color: var(--color-default-clear);}
+.footer-top,.footer-bottom{padding-left: var(--padding-default-page);padding-right: var(--padding-default-page);padding-top: var(--padding-default);padding-bottom: var(--padding-default);}
+.footer-top-list > li {padding: 0.15em;}
+.footer-top-list > li:nth-child(1) {margin-bottom: var(--padding-default);margin-top: var(--padding-default);}
+.footer-top-list *,.footer-bottom {color:white;font-weight: 300;}
+.footer-top-list > *:nth-child(1) {font-weight: 900; font-size: 1.2em; color:var(--color-default-clear);}
+.footer-top-list a{display:flex;width: 100%;font-size: 0.91em;}
+.footer-top-list a > i{margin-left: 10px;color:var(--color-specific-black);width:30%;}
