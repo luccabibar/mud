@@ -15,3 +15,18 @@ ion-label {
 ion-item {
   --highlight-color-focused: #a2a4ab;
 }
+
+#title1
+{
+  margin: 0;
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%); 
+    font-size: 150%;
+}
+
+#item1
+{
+  height: 100px;
+}
