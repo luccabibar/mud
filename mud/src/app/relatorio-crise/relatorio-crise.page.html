@@ -7,7 +7,7 @@
             <ion-card-content>
                 <ion-item padding-horizontal>
                     <ion-label class="label" position="stacked" text-wrap>Onde ocorreu a crise?</ion-label>
-                    <ion-input type="text" name="situ1" id="situ1" placeholder="Situação 1"></ion-input>
+                    <ion-input type="text" name="situ1" id="situ1" placeholder="Local"></ion-input>
                 </ion-item>
                 <ion-item padding-horizontal>
                     <ion-label class="label" position="stacked" text-wrap>Quando ocorreu a crise?</ion-label>
@@ -26,10 +26,20 @@
       <ion-list>
         <ion-card>          
             <ion-card-content>
-                <ion-item padding-horizontal>
-                    <ion-label class="label" position="stacked" text-wrap>Qual situação acarretou a crise?</ion-label>
-                    <ion-input type="text" name="situ1" id="situ1" placeholder="Situação 1"></ion-input>
-                </ion-item>
+                    <ion-item lines="none" padding-horizontal>  
+                        <ion-label class="label" position="stacked" text-wrap>Você estava acompanhado?</ion-label>
+                    </ion-item>
+                    <ion-radio-group>
+                        <ion-item lines="none" padding-horizontal>
+                          <ion-label>Sim</ion-label>
+                          <ion-radio slot="start" value="biff"></ion-radio>
+                        </ion-item>
+                        <ion-item lines="none" padding-horizontal>
+                          <ion-label>Não</ion-label>
+                          <ion-radio slot="start" value="griff" checked></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                
                 <ion-item padding-horizontal>
                     <ion-label class="label" position="stacked" text-wrap>Quais sintomas foram predominantes na crise?</ion-label>
                     <ion-datetime backdropDismiss display-format="D MMM, YYYY" name="data_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
@@ -55,9 +65,8 @@
                 <div id="addsitu" style="display: none;">
                     <ion-item padding-horizontal>
                         <ion-label class="label" position="stacked" text-wrap>Adicionar nova situação?</ion-label>
-                        <hr>
                         <ion-input type="text" name="situ" id="situ" placeholder="Situação 1"></ion-input>
-                       </ion-item>
+                    </ion-item>
                 </div>
                 <div id="fab">
                     <ion-fab padding-horizontal horizontal="end">

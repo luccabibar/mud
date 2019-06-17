@@ -93,10 +93,13 @@ export class RelatorioCrisePage implements OnInit {
     if(this.conta == 1)
     {
     document.getElementById("addsitu").style.display='unset';
+    document.getElementById("escolhersitu").style.display='none';
     }
     if(this.conta == 2)
     {
     document.getElementById("escolhersitu").style.display='unset';
+    document.getElementById("addsitu").style.display='none';
+    this.conta = 0;
     }
 
   }
