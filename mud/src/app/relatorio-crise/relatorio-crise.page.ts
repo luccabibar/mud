@@ -12,6 +12,7 @@ export class RelatorioCrisePage implements OnInit {
   @ViewChild(IonSlides) IonSlides: IonSlides;
 
   public conta = 0;
+  public contar = 0;
 
   constructor(public navCtrl: NavController) { }
 
@@ -102,6 +103,20 @@ export class RelatorioCrisePage implements OnInit {
     this.conta = 0;
     }
 
+  }
+
+  porquem()
+  {
+    this.contar++;
+    if(this.contar==1)
+    {
+      document.getElementById("acomp").style.display='unset';
+    }
+    if(this.contar==2)
+    {
+      document.getElementById("acomp").style.display='none';
+      this.contar = 0;
+    }
   }
 
 }
