@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Binding</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Variáveis</h3>
+  <strong>{{</strong> variavel <strong>}}</strong> - Exibe o que está dentro da variavel em tempo real. Isso se chama
+  Interpolação.
+  <table border="1" style="border-collapse: collapse; width: 100%">
+    <tr>
+      <th>Variável</th>
+      <th>Tipo</th>
+      <th>Valor</th>
+    </tr>
+    <tr>
+      <td>variavel</td>
+      <td></td>
+      <td>{{variavel}}</td>
+    </tr>
+    <tr>
+      <td>qualquerCoisa </td>
+      <td>any</td>
+      <td>{{qualquerCoisa}}</td>
+    </tr>
+    <tr>
+      <td>valor</td>
+      <td>number</td>
+      <td>{{valor}}</td>
+    </tr>
+    <tr>
+      <td>valorDeclarado</td>
+      <td>number</td>
+      <td>{{valorDeclarado}}</td>
+    </tr>
+
+    <tr>
+      <td>texto</td>
+      <td>string</td>
+      <td>{{texto}}</td>
+    </tr>
+
+    <tr>
+      <td>textoDeclarado</td>
+      <td>string</td>
+      <td>{{textoDeclarado}}</td>
+    </tr>
+    <tr>
+      <td>booleana</td>
+      <td>boolean</td>
+      <td>{{booleana}}</td>
+    </tr>
+  </table>
+
+  <h3>Objetos</h3>
+  Para utilizar objetos devemos utilizar: <strong>varivel.propriedade</strong>
+  <table border="1" style="border-collapse: collapse; width: 100%">
+    <tr>
+      <th>Variável</th>
+      <th>Propriedade</th>
+      <th>Valor</th>
+    </tr>
+    <tr>
+      <td>pokemon</td>
+      <td>nome</td>
+      <td>{{pokemon.nome}}</td>
+    </tr>
+    <tr>
+      <td>pokemon</td>
+      <td>numero</td>
+      <td>{{pokemon.numero}}</td>
+    </tr>
+    <tr>
+      <td>pokemon</td>
+      <td>img</td>
+      <td>{{pokemon.img}}</td>
+    </tr>
+  </table>
+
+  <h3>Modificando Variáveis em tempo Real (Binding)</h3>
+  Para modificar o conteudo de uma varivel em tempo real, precisamos de um <strong>input</strong> e nele conter:
+  <strong>[(ngModel)]="nomeDaVar"</strong>
+  <ion-item>
+    <ion-label>Digite algo:</ion-label>
+    <ion-input [(ngModel)]="variavel"></ion-input>
+  </ion-item>
+  Conteudo da Variável: <strong>{{variavel}}</strong>
+
+  <h3>Imagens</h3>
+  As imagens podem ser retiradas direto da internet ou colocadas na pasta <strong>src/assets</strong> ficando assim
+  disponiveis offline
+  <ion-item>
+    <ion-thumbnail slot="start">
+      <img src="assets/bulbasaur.png" alt="texto caso a imagem não seja encontrada!">
+    </ion-thumbnail>
+    <ion-label>Imagem na Pasta Assets</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-thumbnail slot="start">
+      <img [src]="pokemon.img" alt="texto caso a imagem não seja encontrada!">
+    </ion-thumbnail>
+    <ion-label>Imagem vindo como variavel, <br />utiliza <strong>[ ]</strong> no src</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-thumbnail slot="start">
+      <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/004.png"
+        alt="texto caso a imagem não seja encontrada!">
+    </ion-thumbnail>
+    <ion-label>Imagem da Internet, coloca-se o link dela.</ion-label>
+  </ion-item>
+
+
+
+
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>NgSwitch</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <p>Quando temos muitas opções de, devemos utilizar o <strong>Switch</strong></p>
+  <ion-button (click)="tipoUsuario = 'usuario'" size="small">Usuário</ion-button>
+  <ion-button (click)="tipoUsuario = 'admin'" size="small">Admin</ion-button>
+  <ion-button (click)="tipoUsuario = 'visitante'" size="small">Visitante</ion-button>
+  <ion-button (click)="tipoUsuario = ''" size="small">Defaut</ion-button>
+  <p>Usuário Atual: <strong>{{tipoUsuario}}</strong></p>
+
+  <!-- Criamos uma div para separar o conteudo que pertence ao switch-->
+  <div [ngSwitch]="tipoUsuario">
+
+    <ion-list *ngSwitchCase="'usuario'">
+      <!-- Exibe somente se a variavel tenha o valor = usuario -->
+      <ion-list-header color="warning">Menu do Usuário</ion-list-header>
+      <ion-item>Meu Perfil</ion-item>
+      <ion-item>Meus Arquivos</ion-item>
+      <ion-item>Sair</ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'admin'">
+      <!-- Exibe somente se a variavel tenha o valor = admin -->
+      <ion-list-header color="danger">Menu do Administrador</ion-list-header>
+      <ion-item>Lista de Usuários</ion-item>
+      <ion-item>Lista de Arquivos</ion-item>
+      <ion-item>Sair</ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'visitante'">
+      <!-- Exibe somente se a variavel tenha o valor = visitante -->
+      <ion-list-header color="secondary">Menu do Visitante</ion-list-header>
+      <ion-item>Arquivos Disponiveis</ion-item>
+      <ion-item>Sair</ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchDefault>
+      <!-- Exibe somente se a variavel tenha um valor inválido ou vazio -->
+      <ion-list-header color="success">Menu do Defaut</ion-list-header>
+      <ion-item>Solicitar Cadastro</ion-item>
+      <ion-item>Recuperar Senha</ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

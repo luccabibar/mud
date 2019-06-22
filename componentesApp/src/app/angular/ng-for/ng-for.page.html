@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>NgFor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <h3>Listas / Arrays</h3>
+  <p>Para utilizar arrays, devemos utilizar o laço de repetiçao <strong>for</strong></p>
+  <p>No arquivo <strong>.ts</strong> fica: <strong>for(let item of array)</strong> <br />
+    No arquivo <strong>.html</strong> fica: <strong>*ngFor(let item of array)</strong></p>
+
+  <p>Para pegar a posição dentro do array de cada item, colocamos <strong>; let i = index</strong> que usaremos para
+    remover o item da lista.</p>
+
+  <table border="1" style="border-collapse: collapse; width: 100%">
+    <tr>
+      <th>Posição</th>
+      <th>Fruta</th>
+      <th>Ação</th>
+    </tr>
+    <tr *ngFor="let fruta of listaDeFrutas; let posicao = index" style="text-align: center">
+      <td>{{posicao}}</td>
+      <td>{{fruta}}</td>
+      <!--Pega a posição do item e envia para o método de exclusão. -->
+      <td (click)="excluirPeloIndex(posicao)"><strong style="color: #ff0000">Remover</strong></td>
+    </tr>
+  </table>
+
+  <h3>Listas (Arrays) de Objetos</h3>
+  <p>Aqui utilizamos o conceito de <strong>obejto.propriedade</strong> para exibir os itens da lista com objetos.</p>
+  <table border="1" style="border-collapse: collapse; width: 100%">
+    <tr>
+      <th>Nome</th>
+      <th>Numero</th>
+      <th>Ação</th>
+    </tr>
+    <tr *ngFor="let itemDaLista of listaPokemons" style="text-align: center">
+      <td>{{itemDaLista.nome}}</td>
+      <td>{{itemDaLista.numero}}</td>
+      <!--Pega o item inteiro e envia para o método de exclusão. -->
+      <td (click)="excluirBuscandoPosicao(itemDaLista)"><strong style="color: #ff0000">Remover</strong></td>
+    </tr>
+  </table>
+
+  <h3>Listas com Soma</h3>
+  <table border="1" style="border-collapse: collapse; width: 100%">
+    <tr>
+      <th>Produto</th>
+      <th>Valor Formatado</th>
+    </tr>
+    <tr *ngFor="let item of listaProdutos">
+      <td>{{item.nome}}</td>
+      <!-- Formata o numero, colocando R$ antes -->
+      <td style="text-align: right">{{ item.valor | currency:'R$ ' }}</td>
+    </tr>
+    <tr>
+      <th style="text-align: center">TOTAL</th>
+      <!-- Formata o numero, colocando R$ antes e utiliza a virgula para decimal -->
+      <th style="text-align: right">{{ retornaTotal().toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
+      </th>
+    </tr>
+  </table>
+
+  <h3>Adicionar elementos ao Array.</h3>
+  <p>Tamanho do Array: <strong>{{listaArray.length}}</strong></p>
+
+  <p *ngFor="let item of listaArray; let i = index">
+    Adicionou: <strong>{{ item }}</strong>, Posição: <strong>{{ i }}</strong>
+  </p>
+
+  <ion-item>
+    <ion-label position="stacked">Digite algo: </ion-label>
+    <ion-input [(ngModel)]="valor" placeholder="Digite Aqui."></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="adicionarNoArray()">Adicionar</ion-button>
+
+</ion-content>

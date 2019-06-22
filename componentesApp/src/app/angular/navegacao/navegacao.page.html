@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Navegação</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Navegação simples</h3>
+  Para navegar entre paginas de forma simples, basta adicionar a propriedade <strong>routerLink="/rota"</strong> em
+  qualquer elemento da pagina.
+  <ion-button fill="outline" expand="block" routerLink="/recebendo-parametros">Navegar</ion-button>
+
+  <h3>Enviando dados simples</h3>
+  Para enviar dados de uma pagina para outra, enviando dados básicos, como um ID ou uma palavra, devemos fazer por
+  programação, conforme os seguintes passos:
+  <ul>
+    <li>Criar uma pagina de destino: <strong>ionic generate page nomeDaPagina</strong></li>
+    <li>Modificar ou criar uma nova rota no arquivo: <strong>app-routing.module.ts</strong></li>
+    <li>No final do path colocamos o nome do parametro: <strong>nome-da-pagina:parametro</strong></li>
+    <li>Criar o método responsavel por chamar a nova pagina, enviando o parametro.</li>
+  </ul>
+
+  <ion-item>
+    <ion-label position="stacked">Digite um número:</ion-label>
+    <ion-input type="number" [(ngModel)]="numero"></ion-input>
+  </ion-item>
+  <ion-button fill="outline" expand="block" (click)="navegacaoSimples()">Enviar dados simples</ion-button>
+
+  <h3>Enviando dados complexos</h3>
+  Para enviar dados <strong>complexos ou muitos dados</strong> de uma pagina para outra, devemos fazer por programação, conforme os seguintes passos:
+  <ul>
+    <li>Criar uma pagina de destino: <strong>ionic generate page nomeDaPagina</strong></li>
+    <li>Criar um serviço: <strong>ionic generate service servicos/nomeDoServico</strong></li>
+    <li>Importar o serviço no arquivo: <strong>app.module.ts</strong></li>
+    <li>Importar o serviço nas paginas.</li>
+  </ul>
+  <ion-button fill="outline" expand="block" (click)="navegacaoComMuitosDados()">Enviar muitos dados</ion-button>
+
+
+</ion-content>

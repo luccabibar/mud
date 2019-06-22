@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>NgClass</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  O <strong>ngClass</strong> permite a utilização dinâmica de classes css na sua pagina, podendo realizar mudanças em
+  tempo real e tambem criar condições para utilização das classes. <br />
+
+  <ion-button size="small" (click)="css = 'bold'">.bold</ion-button>
+  <ion-button size="small" (click)="css = 'font-red'">.font-red</ion-button>
+  <ion-button size="small" (click)="css = 'italic'">.italic</ion-button>
+  <ion-button size="small" (click)="limpaEstilos()">Limpar Estilos</ion-button>
+
+  <p [ngClass]="css">Neste texto será aplicado apenas 1 css por vez.</p>
+
+  <h3>Aplicando vários estilos</h3>
+  Para aplicar vários estilos, devemos utilizar um array com todos os estilos que queremos aplicar.
+  <p [ngClass]="['bold', 'font-red']"> Estou com o estilo bold e font-red</p>
+
+  <h3>Utilizando métodos para adicionar estilos</h3>
+  <ion-button size="small" (click)="addEstilo('bold')">.bold</ion-button>
+  <ion-button size="small" (click)="addEstilo('font-red')">.font-red</ion-button>
+  <ion-button size="small" (click)="addEstilo('italic')">.italic</ion-button>
+  <ion-button size="small" (click)="limpaEstilos()">Limpar Estilos</ion-button>
+  <p [ngClass]="listaEstilos"> Clique nos botões para adicionar os estilos.</p>
+
+  <h3>Utilizando condições</h3>
+  Podemos fazer um teste para saber quais estilos aplicar a um ou mais elementos. <br />
+  <ion-item>
+    <ion-label>Idade:</ion-label>
+    <ion-input [(ngModel)]="idade" type="number"></ion-input>
+  </ion-item>
+
+  <!-- condição ? estilos se verdadeiro : estilos se falso -->
+  <p [ngClass]="idade < 18 ? 'bold font-red' : 'font-green italic'"> Apenas uma condição</p>
+
+  <!-- estilos de maior que 18, estilos se menor que 18 -->
+  <p [ngClass]="{'bold font-green': idade >= 18, 'font-red italic': idade < 18}"> Várias condições </p>
+
+</ion-content>

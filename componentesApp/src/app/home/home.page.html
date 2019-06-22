@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Ajuda Ionic
+    </ion-title>
+  </ion-toolbar>
+  <!-- TOOLBAR CONTENTO O CONTROLADOR O MENU DE SEGUMENTAÇÃO -->
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="segmento" color="dark" scrollable>
+      <ion-segment-button value="angular">
+        <ion-label>Angular</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="componentes">
+        <ion-label>Componentes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="api">
+        <ion-label>API</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="plugins">
+        <ion-label>Plugins</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- SWITCH DO ANGULAR PARA TROCAR QUAL CONTEUDO DA SEGMENTAÇÃO MOSTRAR NA TELA -->
+  <div [ngSwitch]="segmento">
+    <ion-list *ngSwitchCase="'angular'">
+      <ion-item *ngFor="let ang of angular" (click)="irParaPagina(ang.pagina)">
+        {{ ang.titulo }}
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'componentes'">
+      <ion-item *ngFor="let componente of componentes" (click)="irParaPagina(componente.pagina)">
+        {{ componente.titulo }}
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'api'">
+      <ion-item *ngFor="let api of apis" (click)="irParaPagina(api.pagina)">
+        {{ api.titulo }}
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'plugins'">
+      <ion-item *ngFor="let plugin of plugins" (click)="irParaPagina(plugin.pagina)">
+        {{ plugin.titulo }}
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

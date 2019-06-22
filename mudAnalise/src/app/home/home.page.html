@@ -13,7 +13,8 @@
   <ion-card color="claro">
     <ion-item color="claro">
       <ion-label color="branco"><strong>Nova Sessão / Pareamento</strong> </ion-label>
-      <ion-button fill="outline" slot="end" shape="round" color="branco" routerLink="/auth">
+     <!-- <ion-button fill="outline" slot="end" shape="round" color="branco" (click)="addSessao()"> -->
+        <ion-button fill="outline" slot="end" shape="round" color="branco" (click)="addSessao()" routerLink="/auth"> 
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </ion-item>
@@ -21,12 +22,12 @@
   </ion-card>
   <ion-card>
     <ion-list>
-      <ion-item-sliding>
+      <ion-item-sliding *ngFor="let sessao of sessoes">
         <ion-item tappable routerLink="/tabs">
           <ion-avatar slot="start">
-            <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-373-456325.png">
+            <img [src]="sessao.img">
           </ion-avatar>
-          <ion-label>Paciente 1</ion-label>
+          <ion-label>{{sessao.nome}}</ion-label>
         </ion-item>
         <ion-item-options side="end">
           <ion-item-option color="danger" (click)="alertaDeletar()">
@@ -34,57 +35,6 @@
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
-
-      <!--Paciente 2-->
-      <ion-item-sliding>
-        <ion-item tappable routerLink="/tabs">
-          <ion-avatar slot="start">
-            <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png">
-          </ion-avatar>
-          <ion-label>Paciente 1</ion-label>
-        </ion-item>
-        <ion-item-options side="end" (click)="alertaDeletar()">
-          <ion-item-option color="danger">
-            <ion-icon slot="icon-only" name="trash"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
-      <!--Paciente 3-->
-      <ion-item-sliding>
-        <ion-item tappable routerLink="/tabs">
-          <ion-avatar slot="start">
-            <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png">
-          </ion-avatar>
-          <ion-label>Paciente 1</ion-label>
-        </ion-item>
-        <ion-item-options side="end" (click)="alertaDeletar()">
-          <ion-item-option color="danger">
-            <ion-icon slot="icon-only" name="trash"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
-      <!-- ITEM COM BOTAO QUE REDIRECIONA PARA O HOME PSIC
-         <ion-item-sliding>
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png">
-          </ion-avatar>
-          <ion-label>Paciente 1</ion-label>
-          <ion-buttons slot="end">
-            <ion-button routerLink="/tabs" side="end">
-              <ion-icon name="eye"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-item>>
-        <ion-item-options side="end" (click)="alertaDeletar()">
-          <ion-item-option color="danger">
-            <ion-icon slot="icon-only" name="trash"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-      -->
     </ion-list>
   </ion-card>
 

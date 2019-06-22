@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Metodos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Com o uso de colchetes [ ] qualquer propriedade da página, fica observando a variavel em tempo real -->
+<!-- Ou seja, mudou a variavel no código, ela muda aqui tambem. -->
+<ion-content [color]="color" padding>
+
+  <h3>Métodos Simples, sem Retorno</h3>
+  Esses métodos geralmente são chamados para exibir dados ou alterar a estrutura do programa.<br />
+  <ion-button (click)="metodo()">Diga Oi.</ion-button>
+
+  <h3>Método que altera variavel e estrutura</h3>
+  Apesar de geralmente serem chamados em botões, podem, ser chamados em qualquer parte do código.
+  <p (click)="metodoAlteraVariaveis()">eu sou um <strong>texto clicavel</strong>, todos os elementos da pagina podem se
+    tornar clicaveis. <strong> AQUI quantas vezes quiser.</strong> Cor: <strong>{{color}}</strong></p>
+  <br />
+
+  <h3>Método com Retorno</h3>
+  Este método, retorna uma varivel para o código, no arquivo .ts, irá verificar que ele somou 88 + 2 e trouxe o
+  resultado: <strong>{{metodoComRetorno()}}</strong>
+
+  <h3>Método que recebe valor</h3>
+  Este método, recebe um valor qualquer, podendo ser texto, numero, booleano, objeto, que pode ser utilizado somente
+  dentro do método:<br />
+  <strong (click)="metodoQueRecebeValor('IONIC')">Clique Aqui e veja que passamos o nome: IONIC</strong>
+
+  <h3>Método que recebe 2 valores e interage com variaveis locais</h3>
+  Este método, recebe obrigatóriamente uma <strong>string</strong> e um <strong>number</strong>.<br />
+  Alem de utilizar o declarador <strong>let</strong> para criar duas variaveis locais, que só podem ser utilizadas
+  dentro do método.<br />
+  <strong (click)="metodoQueRecebeValores('IONIC', 2012)">Clique Aqui, passamos o nome: IONIC, e o ano de sua fundação:
+    2012</strong><br />
+  <p>Resultado: <strong>{{texto}}</strong></p>
+
+</ion-content>

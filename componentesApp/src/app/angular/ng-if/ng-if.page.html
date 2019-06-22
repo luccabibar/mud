@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>NgIf</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Condições</h3>
+  <p>É utilizado sempre que você precisar alterar pedaços da pagina, conforme uma condição.</p>
+  <p>As condições só podem conter resultados/repostas <strong>true</strong> ou <strong>false</strong>.</p>
+  Cada vez que clicar no botão ele inverte o valor da variavel <strong>administrador</strong>, que é booleana.
+  <!-- O simbolo de ! retorna o valor contrário de um booleano -->
+  <ion-button (click)="administrador = !administrador">Mudar true/false</ion-button> <br />
+
+  Só aparece quando verdadeiro: <strong *ngIf="administrador">Você é um Administrador</strong>
+
+  <h3>IF com ELSE</h3>
+  <p>Para o ELSE é necessário criar um bloco html com a tag <strong>ng-template</strong> com o nome do bloco do ELSE.
+  </p>
+  Este código, irá receber uma idada no input e atualizará a varivel idade, exibindo se o usuário é maior ou menor de
+  idade.
+
+  <ion-item>
+    <ion-label>Idade:</ion-label>
+    <ion-input [(ngModel)]="idade" type="number"></ion-input>
+  </ion-item>
+
+  <!-- Esta parte do código aparece, caso a condição seja TRUE -->
+  <p *ngIf="idade >= 18; else blocoElse"><strong style="color:#00ff00">Você é maior de Idade!</strong></p>
+
+  <!-- Esta parte do código só aparece, caso a condição seja FALSE -->
+  <ng-template #blocoElse>
+    <p><strong style="color:#ff0000">Você é menor de idade!</strong></p>
+  </ng-template>
+
+
+</ion-content>

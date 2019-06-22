@@ -1,8 +1,7 @@
 <ion-header>
-<<<<<<< HEAD
   <ion-toolbar color="escuro">
     <ion-title>Cadastro</ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-button routerLink="/login">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
@@ -10,109 +9,104 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-slides pager>
-  <ion-slide>
-    <ion-content>
-      <ion-list lines="none">
-        <form [formGroup]="slideOneForm">
-
-          <ion-item padding-horizontal>
-            <ion-label class="label" position="stacked">Nome</ion-label>
-            <ion-input type="text" name="nome" id="0" formControlName="nome"
-              [class.invalid]="!slideOneForm.controls.nome.valid && (slideOneForm.controls.nome.dirty || submitAttempt1)"
-              placeholder="Informe seu nome"></ion-input>
-          </ion-item>
-
-          <ion-item padding-horizontal
-            *ngIf="!slideOneForm.controls.nome.valid  && (slideOneForm.controls.nome.dirty || submitAttempt1)">
-            <p>Insira um nome válido.</p>
-          </ion-item>
-
-          <ion-item padding-horizontal>
-            <ion-label class="label" position="stacked">Email</ion-label>
-            <ion-input name="email" id="1" formControlName="email" type="Email"
-              [class.invalid]="!slideOneForm.controls.email.valid && (slideOneForm.controls.email.dirty || submitAttempt1)"
-              placeholder="Informe seu email"></ion-input>
-          </ion-item>
-
-          <ion-item padding-horizontal
-            *ngIf="!slideOneForm.controls.email.valid  && (slideOneForm.controls.email.dirty || submitAttempt1)">
-            <p>Insira um e-mail válido.</p>
-          </ion-item>
-
-          <ion-item padding-horizontal>
-            <ion-label class="label" position="stacked">Data de Nascimento</ion-label>
-            <ion-datetime backdropDismiss name="datanasc" id="2" formControlName="datanasc" display-format="D MMM, YYYY"
-              month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
-              month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"
-              [class.invalid]="!slideOneForm.controls.datanasc.valid && (slideOneForm.controls.datanasc.dirty || submitAttempt)">
-            </ion-datetime>
-          </ion-item>
-
-          <ion-item padding-horizontal
-            *ngIf="!slideOneForm.controls.datanasc.valid  && (slideOneForm.controls.datanasc.dirty || submitAttempt1)">
-            <p>Insira sua data de nascimento.</p>
-          </ion-item>
-
-          <ion-item padding-horizontal>
-            <ion-label class="label" position="stacked">Celular</ion-label>
-            <ion-input #celulari [(ngModel)]="celulare" name="celular" id="3" formControlName="celular" type="number"
-              [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt1)"
-              placeholder="Insira apenas os números (incluindo o DDD)."></ion-input>
-          </ion-item>
-
-          <ion-item padding-horizontal
-            *ngIf="!slideOneForm.controls.celular.valid  && (slideOneForm.controls.celular.dirty || submitAttempt1)">
-            <p>Insira um número válido (não esqueça o DDD).</p>
-          </ion-item>
-
-          <ion-item padding-horizontal>
-            <ion-label class="label" position="stacked">CPF</ion-label>
-            <ion-input #cpfi [(ngModel)]="cpfe" type="number" size="11" formControlName="cpf" name="cpf" id="4"
-              [class.invalid]="!slideOneForm.controls.cpf.valid && (slideOneForm.controls.cpf.dirty || submitAttempt1)"
-              placeholder="Informe seu CPF (apenas números)"></ion-input>
-          </ion-item>
-
-          <ion-item padding-horizontal
-            *ngIf="!slideOneForm.controls.cpf.valid  && (slideOneForm.controls.cpf.dirty || submitAttempt1)">
-            <p>Insira um CPF válido.</p>
-          </ion-item>
-
-          <ion-item padding-horizontal>
-            <ion-label class="label" position="stacked">Senha</ion-label>
-            <ion-input name="senha" type="password" id="5" formControlName="senha"
-              [class.invalid]="!slideOneForm.controls.senha.valid && (slideOneForm.controls.senha.dirty || submitAttempt1)"
-              placeholder="Escolha sua senha"></ion-input>
-          </ion-item>
-
-          <ion-item padding-horizontal
-            *ngIf="!slideOneForm.controls.senha.valid  && (slideOneForm.controls.senha.dirty || submitAttempt1)">
-            <p>Insira uma senha.</p>
-          </ion-item>
-
-          <ion-item padding-horizontal>
-            <ion-label class="label" position="stacked">Senha*</ion-label>
-            <ion-input name="confirmasenha" id="confirmasenha" type="password" formControlName="confirmasenha"
-              [class.invalid]="!slideOneForm.controls.confirmasenha.valid  && (slideOneForm.controls.confirmasenha.dirty || submitAttempt1) || slideOneForm.hasError('mismatchedPasswords')"
-              placeholder="Redigite sua senha"></ion-input>
-          </ion-item>
-
-          <ion-item padding-horizontal
-            *ngIf="!slideOneForm.controls.confirmasenha.valid  && (slideOneForm.controls.confirmasenha.dirty || submitAttempt) || slideOneForm.hasError('mismatchedPasswords')">
-            <p style="color:#f04141;">As senhas não conferem.</p>
-          </ion-item>
-        </form>
-      </ion-list>
-    </ion-content>
-  </ion-slide>
-</ion-slides>
-=======
-  <ion-toolbar>
-    <ion-title>cadastro</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <form [formGroup]="formCadastro">
+    <ion-item>
+      <ion-label position="stacked">Nome completo</ion-label>
+      <ion-input formControlName="nome" type="text"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.nome">
+        <span
+          *ngIf="formCadastro.get('nome').hasError(erro.tipo) && (formCadastro.get('nome').dirty || formCadastro.get('nome').touched)"
+          class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
 
+    <ion-item>
+      <ion-label position="stacked">CPF</ion-label>
+      <ion-input (ionBlur)="validaCPF($event)" formControlName="cpf" type="number" max="11" placeholder="somente numeros"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.cpf">
+        <span
+          *ngIf="formCadastro.get('cpf').hasError(erro.tipo) && (formCadastro.get('cpf').dirty || formCadastro.get('cpf').touched)"
+          class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">E-mail</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.email">
+        <span
+          *ngIf="formCadastro.get('email').hasError(erro.tipo) && (formCadastro.get('email').dirty || formCadastro.get('email').touched)"
+          class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Celular</ion-label>
+      <ion-input formControlName="celular" type="number"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.celular">
+        <span
+          *ngIf="formCadastro.get('celular').hasError(erro.tipo) && (formCadastro.get('celular').dirty || formCadastro.get('celular').touched)"
+          class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Data de Nascimento:</ion-label>
+      <ion-input formControlName="dt_nasc" placeholder="dd/mm/yyyy"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.dt_nasc">
+        <span
+          *ngIf="formCadastro.get('dt_nasc').hasError(erro.tipo) && (formCadastro.get('dt_nasc').dirty || formCadastro.get('dt_nasc').touched)"
+          class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">CRP</ion-label>
+      <ion-input formControlName="crp" type="text"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.crp">
+        <span
+          *ngIf="formCadastro.get('crp').hasError(erro.tipo) && (formCadastro.get('crp').dirty || formCadastro.get('crp').touched)"
+          class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Senha</ion-label>
+      <ion-input formControlName="senha" type="password"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.senha">
+        <span
+          *ngIf="formCadastro.get('senha').hasError(erro.tipo) && (formCadastro.get('senha').dirty || formCadastro.get('senha').touched)"
+          class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Confirmar Senha</ion-label>
+      <ion-input formControlName="confirmaSenha" type="password"></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.confirmaSenha">
+        <span
+          *ngIf="formCadastro.get('confirmaSenha').hasError(erro.tipo) && (formCadastro.get('confirmaSenha').dirty || formCadastro.get('confirmaSenha').touched)"
+          class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+    <br>
+    <ion-button expand="full" (click)="salvar()" >Salvar</ion-button>
+  </form>
 </ion-content>
->>>>>>> master

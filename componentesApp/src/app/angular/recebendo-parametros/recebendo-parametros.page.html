@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Recebendo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h1>Seja bem vindo</h1>
+
+  <h3 *ngIf="dadoSimples">Veio o valor: {{dadoSimples}}</h3>
+
+  <div *ngIf="objeto1">
+    <h3>Muitos Dados</h3>
+    <p>Objeto1: {{objeto1.nome + " - " + objeto1.idade}}</p>
+    <p>Objeto2: {{objeto2.nome + " - " + objeto2.altura}}</p>
+    <p>ObjetoVazio: {{objetoVazio}}</p>
+    <p>Numero Servico: {{numeroServico}}</p>
+  </div>
+</ion-content>

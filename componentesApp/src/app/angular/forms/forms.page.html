@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Formulários</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="formLogin" (ngSubmit)="login()">
+    <ion-item>
+      <ion-label position="stacked">E-mail</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Senha</ion-label>
+      <ion-input formControlName="senha" type="password"
+        [ngClass]="{'invalido': (!formLogin.get('senha').valid && formLogin.get('senha').dirty), 'valido': (formLogin.get('senha').valid && formLogin.get('senha').dirty)}">
+      </ion-input>
+    </ion-item>
+    <ion-button expand="full" color="primary" type="submit">LOGIN!</ion-button>
+  </form>
+
+
+  <ion-card *ngIf="email && email != ''">
+    <ion-card-header color="success">
+      <strong>Usuário logado: </strong>{{email}}
+    </ion-card-header>
+  </ion-card>
+
+  <ion-button fill="clear" expand="block" color="primary" routerLink="/registro-form">CRIAR CONTA!</ion-button>
+</ion-content>

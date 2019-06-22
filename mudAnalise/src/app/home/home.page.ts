@@ -7,6 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  public sessoes = [
+    {nome:"paciente1",img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"},
+    {nome:"paciente2",img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"},
+    {nome:"paciente3",img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"},
+    
+  ];
+  public addSessao(){
+    let sessao = {nome:"paciente4", img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"};
+    this.sessoes.push(sessao);
+    
+
+  }
 
   constructor(private AlertController: AlertController) {
 
