@@ -1,6 +1,6 @@
 No cmd dentro da pasta onde está o projeto, criar o provider:
 
-cmd> ionic generate provider Banco
+cmd> ionic generate service Banco
 
 
 A seguida copiar o conteudo de todos os arquivos relacionados ao provider da API:  Banco.service.ts

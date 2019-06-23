@@ -6,6 +6,7 @@ import { IUsuario } from '../interfaces/IUsuario';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ComparaValidator } from './../validators/compara-validator';
 import { async } from '@angular/core/testing';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -51,17 +52,19 @@ export class CadastroPage implements OnInit {
     ],
     crp: [
       { tipo: 'required', mensagem: 'É obrigatório inserir o CRP' },
+      { tipo: 'minlength', mensagem: 'O CRP deve ter 9 caracteres.' },
+      { tipo: 'maxlength', mensagem: 'O CRP deve ter 9 caracteres.' },
 
     ]
   };
 
-  constructor(public formBuilder: FormBuilder, private alertController: AlertController, private bd: BancoService) {
+  constructor(public formBuilder: FormBuilder, private alertController: AlertController, private bd: BancoService, private router: Router) {
     this.formCadastro = formBuilder.group({
       nome: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       cpf: ['', Validators.compose([Validators.required, CpfValidator.cpfValido])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       celular: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11)])],
-      crp: ['', Validators.compose([Validators.required])],
+      crp: ['', Validators.compose([Validators.required,Validators.minLength(9), Validators.maxLength(9)])],
       senha: ['', Validators.compose([Validators.required])],
       confirmaSenha: ['', Validators.compose([Validators.required])],
       dt_nasc: ['', Validators.compose([Validators.required])],
@@ -97,15 +100,23 @@ export class CadastroPage implements OnInit {
               '${this.user.dt_nasc}',
               'true',
                '2019-06-22',
-               '1');`;
+               '3');`;
       this.bd.insertGenerico(sql).then(async resposta => {
         console.log(resposta);
       }).catch(async resposta => {
         console.log("Erro: ", resposta)
       });
+      const alert = await this.alertController.create({
+        message: 'Cadastro Efetuado com sucesso!',
+        buttons: ['OK']
+      });
+      await alert.present();
+      this.router.navigateByUrl('/login');
+      this.formCadastro.reset()
     }
 
   }
+  // validação no bd de campos unicos para cada usuario
 
   public async validaCPF(evento) {
     let cpf = evento.target.value
@@ -117,7 +128,7 @@ export class CadastroPage implements OnInit {
         if (resposta[0].cpf == cpf) {
           const alert = await this.alertController.create({
             header: 'ERRO!!',
-            subHeader: 'Cadastro existente!',
+            subHeader: 'CPF existente!',
             message: 'Você ja possui cadastro em nosso sistema.',
             buttons: ['OK']
           });
@@ -133,7 +144,92 @@ export class CadastroPage implements OnInit {
     }
 
   }
+
+  public async validaEmail(evento) {
+    let email = evento.target.value
+
+    if (this.formCadastro.get('email').valid) {
+
+      this.bd.selectGenerico("SELECT * FROM usuario WHERE email='" + email + "';").then(async (resposta) => {
+        console.log(resposta)
+        if (resposta[0].email == email) {
+          const alert = await this.alertController.create({
+            header: 'ERRO!!',
+            subHeader: 'EMAIL ja cadastrado!',
+            message: 'Você ja possui cadastro em nosso sistema.',
+            buttons: ['OK']
+          });
+          this.existente = true;
+          await alert.present();
+
+        } else {
+          this.existente = false
+        }
+      }).catch(async (resposta) => {
+        this.existente = false;
+      })
+    }
+
+  }
+
+  public async validaCelular(evento) {
+    let celular = evento.target.value
+
+    if (this.formCadastro.get('celular').valid) {
+
+      this.bd.selectGenerico("SELECT * FROM usuario WHERE celular='" + celular + "';").then(async (resposta) => {
+        console.log(resposta)
+        if (resposta[0].celular == celular) {
+          const alert = await this.alertController.create({
+            header: 'ERRO!!',
+            subHeader: 'CELULAR ja cadastrado!',
+            message: 'Você ja possui cadastro em nosso sistema.',
+            buttons: ['OK']
+          });
+          this.existente = true;
+          await alert.present();
+
+        } else {
+          this.existente = false
+        }
+      }).catch(async (resposta) => {
+        this.existente = false;
+      })
+    }
+
+  }
+
+  public async validaCRP(evento) {
+    let crp = evento.target.value
+
+    if (this.formCadastro.get('crp').valid) {
+
+      this.bd.selectGenerico("SELECT * FROM usuario WHERE crp='" + crp + "';").then(async (resposta) => {
+        console.log(resposta)
+        if (resposta[0].crp == crp) {
+          const alert = await this.alertController.create({
+            header: 'ERRO!!',
+            subHeader: 'CRP ja cadastrado!',
+            message: 'Falsificação do CRP pode acarretar em processos judiciais, conforme o artigo 299 do Código Penal! ',
+            buttons: ['OK']
+          });
+          this.existente = true;
+          await alert.present();
+            
+
+        } else {
+          this.existente = false
+        }
+      }).catch(async (resposta) => {
+        this.existente = false;
+      })
+    }
+
+  }
+
+  // metodos auxiliares 
   async presentAlert() {
+
     const alert = await this.alertController.create({
       header: 'ERRO!!',
       subHeader: 'Erro ao salvar',
@@ -141,6 +237,31 @@ export class CadastroPage implements OnInit {
       buttons: ['OK']
     });
 
+    await alert.present();
+  }
+
+  async sairCad() {
+    const alert = await this.alertController.create({
+      header: 'Apagar Resgistro',
+      message: 'Deseja sair do cadastro?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Sim',
+          handler: () => {
+            this.router.navigateByUrl('/login');
+            this.formCadastro.reset()
+          }
+        }
+      ]
+
+    });
     await alert.present();
   }
 
