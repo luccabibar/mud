@@ -1,37 +1,52 @@
-<ion-content   color="branco">
+<ion-content color="branco">
   <ion-card color="branco">
     <ion-card-content>
       <img src="assets/logoMudAnalise.png" alt="">
     </ion-card-content>
   </ion-card>
 
-  <ion-card color="branco"> 
+  <ion-card color="branco">
     <ion-card-content>
-      
-      <p><strong>Insira seus dados para entrar:</strong></p>
-      <ion-item>
-        <ion-label position="floating">E-mail</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Senha</ion-label>
-        <ion-input type="password"></ion-input>
-      </ion-item>
+      <form [formGroup]="formLogin">
+        <ion-item>
+          <ion-label position="stacked">E-mail</ion-label>
+          <ion-input formControlName="email" type="email" placeholder="..."></ion-input>
+          <ng-container *ngFor="let erro of mensagens_validacao.email">
+            <span
+              *ngIf="formLogin.get('email').hasError(erro.tipo) && (formLogin.get('email').dirty || formLogin.get('email').touched)"
+              class="msg-erro">
+              {{erro.mensagem}}
+            </span>
+          </ng-container>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Senha</ion-label>
+          <ion-input formControlName="senha" type="password" placeholder="..."></ion-input>
+          <ng-container *ngFor="let erro of mensagens_validacao.senha">
+            <span
+              *ngIf="formLogin.get('senha').hasError(erro.tipo) && (formLogin.get('senha').dirty || formLogin.get('senha').touched)"
+              class="msg-erro">
+              {{erro.mensagem}}
+            </span>
+          </ng-container>
+        </ion-item>
+      </form>
       <br>
-      <ion-button expand="block" color="escuro" routerLink="/home">Entrar</ion-button>
+      <ion-button expand="block" color="escuro" (click)="login()">Entrar</ion-button>
       <ion-button expand="block" color="medio" fill="outline" routerLink="/cadastro">Registrar</ion-button>
       <!-- <ion-button expand="block" fill="clear">Esqueci a senha</ion-button> -->
 
     </ion-card-content>
   </ion-card>
-  
+
   <ion-card color="branco">
     <ion-card-content>
       <ion-item>
         <ion-thumbnail slot="start">
           <img src="assets/logocti.png">
         </ion-thumbnail>
-        <ion-label>Mud 73B 2019</ion-label> 
+        <ion-label>Mud 73B 2019</ion-label>
       </ion-item>
     </ion-card-content>
   </ion-card>

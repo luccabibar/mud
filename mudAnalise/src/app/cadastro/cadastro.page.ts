@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
 import { IUsuario } from '../interfaces/IUsuario';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ComparaValidator } from './../validators/compara-validator';
-import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 
 @Component({
@@ -47,8 +46,8 @@ export class CadastroPage implements OnInit {
     ],
     celular: [
       { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
-      { tipo: 'minlength', mensagem: 'O celular deve ter pelo menos 11 caracteres.' },
-      { tipo: 'maxlength', mensagem: 'O celular deve ter no máximo 11 caractéres.' },
+      { tipo: 'minlength', mensagem: 'O celular deve ter pelo menos 15 caracteres.' },
+      { tipo: 'maxlength', mensagem: 'O celular deve ter no máximo 15 caractéres.' },
     ],
     crp: [
       { tipo: 'required', mensagem: 'É obrigatório inserir o CRP' },
@@ -63,10 +62,10 @@ export class CadastroPage implements OnInit {
       nome: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       cpf: ['', Validators.compose([Validators.required, CpfValidator.cpfValido])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      celular: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11)])],
-      crp: ['', Validators.compose([Validators.required,Validators.minLength(9), Validators.maxLength(9)])],
-      senha: ['', Validators.compose([Validators.required])],
-      confirmaSenha: ['', Validators.compose([Validators.required])],
+      celular: ['', Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])],
+      crp: ['', Validators.compose([Validators.required, Validators.minLength(9), Validators.maxLength(9)])],
+      senha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      confirmaSenha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       dt_nasc: ['', Validators.compose([Validators.required])],
       sexo: ['']
     }, {
@@ -83,36 +82,35 @@ export class CadastroPage implements OnInit {
       this.presentAlert();
     } else if (this.formCadastro.valid && !this.existente) {
       this.user = this.formCadastro.value;
-      /*this.user.nome = this.formCadastro.value.nome;
-      this.user.cpf = this.formCadastro.get('cpf').value;
-      this.user.email = this.formCadastro.get('email').value;
-      this.user.celular = this.formCadastro.get('celular').value;
-      this.user.crp = this.formCadastro.get('crp').value;
-      this.user.senha = this.formCadastro.get('senha').value;
-      this.user.dt_nasc = this.formCadastro.get('dt_nasc').value;*/
-      let sql = `INSERT INTO usuario(nome,cpf,email,celular,crp,senha,dt_nasc,profissional,created_at,key) 
-      VALUES('${this.user.nome}',
-              '${this.user.cpf}',
-              '${this.user.email}',
-              '${this.user.celular}',
-              '${this.user.crp}',
-              '${this.user.senha}',
-              '${this.user.dt_nasc}',
-              'true',
-               '2019-06-22',
-               '3');`;
-      this.bd.insertGenerico(sql).then(async resposta => {
+
+      // let sql = `INSERT INTO usuario(nome,cpf,email,celular,crp,senha,dt_nasc,profissional,created_at,key) 
+      // VALUES('${this.user.nome}',
+      //         '${this.user.cpf}',
+      //         '${this.user.email}',
+      //         '${this.user.celular}',
+      //         '${this.user.crp}',
+      //         '${this.user.senha}',
+      //         '${this.user.dt_nassc}',
+      //         'true',
+      //          '2019-06-22',
+      //          '3');`;
+      this.bd.cadProf(this.user).then(async resposta => {
         console.log(resposta);
+        const alert = await this.alertController.create({
+          message: 'Cadastro Efetuado com sucesso!',
+          buttons: ['OK']
+        });
+        await alert.present();
+        this.router.navigateByUrl('/login');
+        this.formCadastro.reset()
       }).catch(async resposta => {
+        const alert = await this.alertController.create({
+          message: 'ERRO NO CADASTROOOOO!',
+          buttons: ['OK']
+        });
         console.log("Erro: ", resposta)
+        await alert.present();
       });
-      const alert = await this.alertController.create({
-        message: 'Cadastro Efetuado com sucesso!',
-        buttons: ['OK']
-      });
-      await alert.present();
-      this.router.navigateByUrl('/login');
-      this.formCadastro.reset()
     }
 
   }
@@ -215,7 +213,7 @@ export class CadastroPage implements OnInit {
           });
           this.existente = true;
           await alert.present();
-            
+
 
         } else {
           this.existente = false

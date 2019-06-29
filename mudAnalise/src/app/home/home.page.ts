@@ -1,5 +1,6 @@
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { DadosService } from '../servicos/dados.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  public user;
   public sessoes = [
     {nome:"paciente1",img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"},
     {nome:"paciente2",img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"},
@@ -20,8 +22,8 @@ export class HomePage implements OnInit {
 
   }
 
-  constructor(private AlertController: AlertController) {
-
+  constructor(private AlertController: AlertController, private dados: DadosService) {
+    this.user= this.dados.getDados("user");
   }
 
   ngOnInit() {

@@ -10,6 +10,9 @@
 </ion-header>
 
 <ion-content>
+  <h1 *ngIf="user">
+   Bem-vindo:  {{user.nome}}
+  </h1>
   <ion-card color="claro">
     <ion-item color="claro">
       <ion-label color="branco"><strong>Nova Sessão / Pareamento</strong> </ion-label>

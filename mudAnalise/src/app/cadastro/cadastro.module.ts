@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { CadastroPage } from './cadastro.page';
 
+// Importação para utilização de mascaras no formulário
+import { BrMaskerModule } from 'br-mask';
+
 const routes: Routes = [
   {
     path: '',
@@ -19,7 +22,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,ReactiveFormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    BrMaskerModule
   ],
   declarations: [CadastroPage]
 })

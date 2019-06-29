@@ -50,7 +50,8 @@
 
     <ion-item>
       <ion-label position="stacked">Celular</ion-label>
-      <ion-input (ionBlur)="validaCelular($event)" formControlName="celular" type="number" placeholder="..."></ion-input>
+      <ion-input (ionBlur)="validaCelular($event)" formControlName="celular" type="tel" placeholder="..."
+      [brmasker]="{form: formCadastro.get('celular'), phone: true}" max="15"></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.celular">
         <span
           *ngIf="formCadastro.get('celular').hasError(erro.tipo) && (formCadastro.get('celular').dirty || formCadastro.get('celular').touched)"
@@ -63,7 +64,7 @@
     <ion-item>
       <ion-label position="stacked">Data de Nascimento:</ion-label>
       <!-- <ion-input formControlName="dt_nasc" placeholder="dd/mm/yyyy"></ion-input> -->
-      <ion-datetime formControlName="dt_nasc" display-format="YYYY-MM-DD"></ion-datetime>
+      <ion-datetime formControlName="dt_nasc" display-format="DD/MM/YYYY"></ion-datetime>
 
       <ng-container *ngFor="let erro of mensagens_validacao.dt_nasc">
         <span

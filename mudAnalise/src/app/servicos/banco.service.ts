@@ -55,18 +55,20 @@ export class BancoService {
     return this.http.post(this.API_URL + 'mostraUsuarios', {headers: header}).toPromise();
   }
   
-  cadProf(nome: string, cpf: string, email: string, data_nasc: string, celular: string,profissional: string,crp: string,senha: string)
+  cadProf(obj)
   {
     var data = {
-      nome: nome,
-      cpf: cpf,
-      email: email,
-      data_nasc: data_nasc,
-      celular: celular,
-      profissional: profissional,
-      crp:crp,
-      senha: senha,
+      nome: obj.nome,
+      cpf: obj.cpf,
+      email: obj.email,
+      data_nasc: obj.dt_nasc,
+      celular: obj.celular,
+      profissional: obj.profissional,
+      crp: obj.crp,
+      senha: obj.senha,
     };
+
+    console.log(obj.dt_nasc)
     
     let header = new HttpHeaders({'Content-type':'application/json'});
     return this.http.post(this.API_URL + 'cadProf', data, {headers: header}).toPromise();

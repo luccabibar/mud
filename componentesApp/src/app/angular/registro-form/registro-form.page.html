@@ -36,10 +36,25 @@
 
     <ion-item>
       <ion-label position="stacked">Data de Nascimento:</ion-label>
-      <ion-input formControlName="dataNascimento" placeholder="dd/mm/yyyy"></ion-input>
+      <!-- Utilizando mascara para o campo -->
+      <ion-input formControlName="dataNascimento" placeholder="dd/mm/yyyy"
+        [brmasker]="{form: formCadastro.get('dataNascimento'), mask: '99/99/9999', type:'num'}"></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.dataNascimento">
         <span
           *ngIf="formCadastro.get('dataNascimento').hasError(erro.tipo) && (formCadastro.get('dataNascimento').dirty || formCadastro.get('dataNascimento').touched)"
+          class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Data de Cadastro:</ion-label>
+      <ion-datetime formControlName="dataCadastro" display-format="DD/MM/YYYY" placeholder="Selecione a Data">
+      </ion-datetime>
+      <ng-container *ngFor="let erro of mensagens_validacao.dataCadastro">
+        <span
+          *ngIf="formCadastro.get('dataCadastro').hasError(erro.tipo) && (formCadastro.get('dataCadastro').dirty || formCadastro.get('dataCadastro').touched)"
           class="msg-erro">
           {{erro.mensagem}}
         </span>

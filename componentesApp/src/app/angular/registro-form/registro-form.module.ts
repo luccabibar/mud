@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { RegistroFormPage } from './registro-form.page';
 
+// Importação para utilização de mascaras no formulário
+import { BrMaskerModule } from 'br-mask';
+
 const routes: Routes = [
   {
     path: '',
@@ -19,7 +22,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule, ReactiveFormsModule, // Adicionado o módulo ReactiveFormsModule
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    BrMaskerModule
   ],
   declarations: [RegistroFormPage]
 })

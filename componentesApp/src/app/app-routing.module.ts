@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'forms', loadChildren: './angular/forms/forms.module#FormsPageModule' },
   { path: 'registro-form', loadChildren: './angular/registro-form/registro-form.module#RegistroFormPageModule' },
   { path: 'navegacao', loadChildren: './angular/navegacao/navegacao.module#NavegacaoPageModule' },
+  { path: 'recebendo-parametros', loadChildren: './angular/recebendo-parametros/recebendo-parametros.module#RecebendoParametrosPageModule' },
   { path: 'recebendo-parametros/:numero', loadChildren: './angular/recebendo-parametros/recebendo-parametros.module#RecebendoParametrosPageModule' },
   { path: 'recebendo-dados', loadChildren: './angular/recebendo-parametros/recebendo-parametros.module#RecebendoParametrosPageModule' }
 ];

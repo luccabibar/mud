@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import {HttpClientModule} from '@angular/common/http';
+import { DadosService } from './servicos/dados.service';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {HttpClientModule} from '@angular/common/http';
     StatusBar,
     SplashScreen,
     CallNumber,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    DadosService
   ],
   bootstrap: [AppComponent]
 })
