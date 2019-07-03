@@ -2,20 +2,54 @@
 
   <ion-content>
     <ion-img id="logoLogin" src="../../assets/logomud.png"></ion-img>
+    
+
 
     <ion-slides>
-      <ion-slide id="slide1">
-        <ion-card padding-horizontal id="card1">
-          <ion-item> 
-            <ion-label> Alimentação </ion-label>
-            
-          </ion-item>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-          <ion-card>
-            bbbbbbbbbbbb
-          </ion-card>
+        <ion-slide id="slide1">
+            <ion-list lines="none">
+              <ion-item padding-horizontal>
+                  <ion-button (click)="alimentacao()">
+                      <ion-icon slot="start" name="add"></ion-icon>
+                      Alimentação
+                    </ion-button>
+              </ion-item>
+              <ion-item padding-horizontal>
+                  <ion-button (click)="onClick()">
+                      <ion-icon slot="start" name="add"></ion-icon>
+                      Atividade Física
+                    </ion-button>
+              </ion-item>
+              <ion-item padding-horizontal>
+                  <ion-button (click)="onClick()">
+                      <ion-icon slot="start" name="add"></ion-icon>
+                      Bem Estar
+                    </ion-button>
+              </ion-item>
+              <ion-item padding-horizontal>
+                  <ion-button (click)="onClick()">
+                      <ion-icon slot="start" name="add"></ion-icon>
+                      Sono
+                    </ion-button>
+              </ion-item>
+            </ion-list>
         </ion-slide>
+
+        <ion-slide id="slide2">
+          Aqui é o de alimetacao ta
+        </ion-slide>
+
+        <ion-slide id="slide3">
+          
+        </ion-slide>
+         
+        <ion-slide id="slide4">
+          
+        </ion-slide>
+            
+        <ion-slide id="slide5">
+          
+        </ion-slide>
+
     </ion-slides>
   </ion-content>
