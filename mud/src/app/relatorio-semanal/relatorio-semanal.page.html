@@ -9,25 +9,25 @@
         <ion-slide id="slide1">
             <ion-list lines="none">
               <ion-item padding-horizontal>
-                  <ion-button (click)="alimentacao()">
+                  <ion-button (click)="alimentacao()" padding-horizontal fill="outline" color="verdemud4" expand="block">
                       <ion-icon slot="start" name="add"></ion-icon>
                       Alimentação
                     </ion-button>
               </ion-item>
               <ion-item padding-horizontal>
-                  <ion-button (click)="onClick()">
+                  <ion-button (click)="onClick()" padding-horizontal fill="outline" color="verdemud4" expand="block">
                       <ion-icon slot="start" name="add"></ion-icon>
                       Atividade Física
                     </ion-button>
               </ion-item>
               <ion-item padding-horizontal>
-                  <ion-button (click)="onClick()">
+                  <ion-button (click)="onClick()" padding-horizontal fill="outline" color="verdemud4" expand="block">
                       <ion-icon slot="start" name="add"></ion-icon>
                       Bem Estar
                     </ion-button>
               </ion-item>
               <ion-item padding-horizontal>
-                  <ion-button (click)="onClick()">
+                  <ion-button (click)="onClick()" padding-horizontal fill="outline" color="verdemud4" expand="block">
                       <ion-icon slot="start" name="add"></ion-icon>
                       Sono
                     </ion-button>
@@ -36,19 +36,67 @@
         </ion-slide>
 
         <ion-slide id="slide2">
-          Aqui é o de alimetacao ta
+            <form [formGroup]="slide2form" (ngSubmit)="onSubmit()">
+              <ion-item padding-horizontal>
+                <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="email" type="text"></ion-input>
+              </ion-item>
+              <ion-item padding-horizontal>
+                <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="password" type="text"></ion-input>
+              </ion-item>
+              <ion-button padding-horizontal type="submit" fill="outline" color="verdemud4" expand="block">
+                Login
+              </ion-button>
+            </form>
         </ion-slide>
 
         <ion-slide id="slide3">
-          
+          <form [formGroup]="slide3form" (ngSubmit)="onSubmit()">
+            <ion-item>
+              <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+              <ion-input required formControlName="email" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+              <ion-input required formControlName="password" type="text"></ion-input>
+            </ion-item>
+            <ion-button block color="primary" type="submit">
+              Login
+            </ion-button>
+          </form>
         </ion-slide>
          
         <ion-slide id="slide4">
-          
+          <form [formGroup]="slide4form" (ngSubmit)="onSubmit()">
+            <ion-item>
+              <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+              <ion-input required formControlName="email" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+              <ion-input required formControlName="password" type="text"></ion-input>
+            </ion-item>
+            <ion-button block color="primary" type="submit">
+              Login
+            </ion-button>
+          </form>
         </ion-slide>
             
         <ion-slide id="slide5">
-          
+          <form [formGroup]="slide5form" (ngSubmit)="onSubmit()">
+            <ion-item>
+              <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+              <ion-input required formControlName="email" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+              <ion-input required formControlName="password" type="text"></ion-input>
+            </ion-item>
+            <ion-button block color="primary" type="submit">
+              Login
+            </ion-button>
+          </form>
         </ion-slide>
 
     </ion-slides>

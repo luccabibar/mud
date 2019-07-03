@@ -9,8 +9,18 @@
     transform: translate(-50%, -50%); 
 }
 
-ion-slides{
-    width: relative;
-    height: relative;
-    top: 17%;
+ion-label {
+    color:  #165044ff !important; 
+}
+
+p {
+    font-size: 0.8em;
+    color: #989aa2;
+}
+
+ion-slides {
+    --bullet-background: #989aa2;
+    --bullet-background-active: #165044ff; 
+    height: 100%;
+    width: 100%;
 }

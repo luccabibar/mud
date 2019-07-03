@@ -1,5 +1,6 @@
 import { NavController, IonInput } from '@ionic/angular';
 import { Component, ViewChild, Input} from '@angular/core';
+import { DadosService } from '../dados.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,10 +8,15 @@ import { Component, ViewChild, Input} from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  constructor(public nav : NavController){}
+  constructor(public nav : NavController,public dadosService: DadosService){}
 
   @ViewChild('deus')  ino: IonInput;
 
+  nome = this.dadosService.getNome();
+  email = this.dadosService.getEmail();
+  cpf = this.dadosService.getCpf();
+  celular = this.dadosService.getCelular();
+  dtnasc = this.dadosService.getDataNasc();
   aa()
   {
     setTimeout(() => {
