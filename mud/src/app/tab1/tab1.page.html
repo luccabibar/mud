@@ -1,51 +1,47 @@
 <ion-header>
   <ion-toolbar color="verdemud3">
     <ion-title id="title1">
-    Perfil
+      Perfil
     </ion-title>
+    <ion-button (click)="sair()" fill="solid" slot="end" style="font-size: 0.8rem; width: 4.5rem; height: 1.8rem;">Logoff</ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <!----<ion-fab-button> <ion-icon icon="add"> </ion-icon> </ion-fab-button>
-    <ion-label> Iniciar sessão </ion-label> <br>
-    <ion-fab-button> <ion-icon icon="checkmark"> </ion-icon> </ion-fab-button>
-    <ion-label> Sessão </ion-label> <br>--->
-  <ion-item id="item1" lines="none" padding-horizontal text-wrap>
-    <ion-label position="stacked"> Nome </ion-label>
-    <ion-label id="nome" > {{nome}} </ion-label> 
-  </ion-item><br>
-  <ion-item id="item2" lines="none" padding-horizontal>
-    <ion-label position="stacked"> E-mail </ion-label> <br>
-    <ion-label id="email"> {{email}} </ion-label> 
-  </ion-item><br>
-  <ion-item id="item3" lines="none" padding-horizontal >
-    <ion-label position="stacked"> Data de nascimento </ion-label> <br>
-    <ion-label id="nasc"> {{dtnasc}} </ion-label> 
-  </ion-item><br>
-  <ion-item id="item4" lines="none" padding-horizontal >
-    <ion-label position="stacked"> Celular </ion-label> <br>
-    <ion-label id="cel"> {{celular}} </ion-label> 
-  </ion-item><br>
-  <ion-item id="item5"  padding-horizontal >
-    <ion-label position="stacked"> CPF </ion-label> <br>
-    <ion-label id="cpf"> {{cpf}} </ion-label> 
-  </ion-item><br>
+<ion-content fullscreen>
+  <ion-card>
+    <img src="https://www.w3schools.com/howto/img_avatar2.png" style="width: 10rem; height: 10rem; margin-left: 3.5rem;"/>
+    <ion-card-header>
+      <ion-card-title> {{nome}} </ion-card-title>
+      <ion-card-subtitle> {{email}} </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Data da Nascimento</ion-label>
+          <ion-input value="{{dtnasc}}" type="text" name="nome" id="0" placeholder="Informe seu nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Celular</ion-label>
+          <ion-input value="{{celular}}" type="text" name="nome" id="0" placeholder="Informe seu nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> CPF</ion-label>
+          <ion-input value="{{cpf}}" type="text" name="nome" id="0" placeholder="Informe seu nome"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Nome</ion-label>
+          <ion-input value="{{nome}}" type="text" name="nome" id="0" placeholder="Informe seu nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Nome</ion-label>
+          <ion-input value="{{nome}}" type="text" name="nome" id="0" placeholder="Informe seu nome"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-  
-  <br><br><br>
-     <ion-label padding-horizontal> Contatos </ion-label>
-    <ion-card >
-      <ion-label> Nome </ion-label> <br>
-      <ion-label id="nomecont">  </ion-label> <br>
-      <ion-label> Celular </ion-label> <br>
-      <ion-label id="celcont">  </ion-label> <br>
-    </ion-card>
+    <ion-button (click)="salvarPerfil()" expand="block" style="margin-bottom: 4rem;">Salvar Perfil</ion-button>
 
 </ion-content>
 
-<ion-footer> 
-  <ion-button>
-    Editar Perfil
-  </ion-button>
-</ion-footer>

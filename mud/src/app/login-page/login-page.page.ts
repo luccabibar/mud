@@ -22,7 +22,9 @@ export class LoginPagePage {
 
  
 
-  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router) { }
+  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router) { 
+    
+  }
 
   public loginForm:FormGroup = new FormGroup({
     'email' : new FormControl(null, [Validators.required, Validators.email]),
@@ -60,7 +62,13 @@ export class LoginPagePage {
           header: 'Confirmação',
           subHeader: 'Sucesso!',
           message: JSON.stringify(response),
-          buttons: ['OK']
+          buttons: [{
+            text: 'OK',
+          handler: () => { 
+            this.emai = "";
+            this.senh = "";
+            this.router.navigateByUrl('/tabs/tab2'); }
+          }]
         });
 
         await alert.present();
@@ -75,7 +83,7 @@ export class LoginPagePage {
         this.dadosService.setCrp(String(response[0].crp));
         this.dadosService.setDataNasc(String(response[0].dt_nasc));
 
-        this.router.navigateByUrl('/tabs/tab2');
+        
         return;
       } 
 

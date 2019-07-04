@@ -31,13 +31,14 @@ export class Tab2Page {
     message: "A data do último relatório enviado foi de:<br><br><b>"+this.dataInicio+"</b><br><br>até:<br><br><b>"+this.dataFinal+"</b><br>",
     inputs: [
       {
-        name: 'username',
-        placeholder: 'Username'
+        name: 'dataInicio',
+        placeholder: 'Data de Inicio',
+        type: 'date'
       },
       {
-        name: 'password',
-        placeholder: 'Password',
-        type: 'password'
+        name: 'dataFim',
+        placeholder: 'Data de Término',
+        type: 'date'
       }
     ],
     buttons: [

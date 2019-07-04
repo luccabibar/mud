@@ -88,4 +88,15 @@ export class DadosService {
     this.Id = x;
   }
 
+  limpaDados()
+  {
+    this.setId(0);
+    this.setNome("");
+    this.setEmail("");
+    this.setCpf("");
+    this.setCrp("");
+    this.setProfissional(null);
+    this.setDataNasc("");
+    this.setCelular("");
+  }
 }
