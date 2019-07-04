@@ -28,7 +28,7 @@ export class Tab2Page {
     const alert = await this.alertController.create({
     header: "Relatório Semanal",
     subHeader: "Confirmar Data",
-    message: "A data do último relatório enviado foi de:<br><b>"+this.dataInicio+"</b><br>até:<br><b>"+this.dataFinal+"</b><br>",
+    message: "A data do último relatório enviado foi de:<br><br><b>"+this.dataInicio+"</b><br><br>até:<br><br><b>"+this.dataFinal+"</b><br>",
     inputs: [
       {
         name: 'username',
