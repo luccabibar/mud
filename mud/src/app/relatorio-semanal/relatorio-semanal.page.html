@@ -1,14 +1,160 @@
 
 
+  
+  
   <ion-content>
+    <ion-img id="logoLogin" src="../../assets/logomud.png"></ion-img>
+    <ion-slides>
+      <ion-slide id="slide1">
+        <ion-list>
+            <ion-card>          
+                <ion-card-content>
+                    <ion-item padding-horizontal lines="none">
+                      <ion-label class="label" position="stacked" text-wrap>O quanto você ingeriu de cada tipo de alimento? <br> <p>(Quantidade de dias na semana) </p></ion-label>
+                    </ion-item>
+                    <ion-item padding-horizontal lines="none">
+                        <ion-label class="label" position="stacked" text-wrap>Carboidratos</ion-label>
+                        <!--- fazer setinha com exemplos de carboidratos-->
+                          <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option class="option" value="pouco">Pouco (1 a 2 dias)</ion-select-option>
+                                <ion-select-option class="option" value="medio">Médio (3 a 5 dias)</ion-select-option>
+                                <ion-select-option class="option" value="muito">Muito (6 a 7 dias)</ion-select-option>
+                          </ion-select>
+                    </ion-item>
+                    
+                    <ion-item padding-horizontal lines="none">
+                        <ion-label class="label" position="stacked" text-wrap>Proteínas</ion-label>
+                        <!--- fazer setinha com exemplos de carboidratos-->
+                          <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option class="option" value="pouco">Pouco (1 a 2 dias)</ion-select-option>
+                                <ion-select-option class="option" value="medio">Médio (3 a 5 dias)</ion-select-option>
+                                <ion-select-option class="option" value="muito">Muito (6 a 7 dias)</ion-select-option>
+                          </ion-select>
+                    </ion-item>
+
+                    <ion-item padding-horizontal lines="none">
+                        <ion-label class="label" position="stacked" text-wrap>Laticínios</ion-label>
+                        <!--- fazer setinha com exemplos de carboidratos-->
+                          <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option class="option" value="pouco">Pouco (1 a 2 dias)</ion-select-option>
+                                <ion-select-option class="option" value="medio">Médio (3 a 5 dias)</ion-select-option>
+                                <ion-select-option class="option" value="muito">Muito (6 a 7 dias)</ion-select-option>
+                          </ion-select>
+                    </ion-item>
+
+                    <ion-item padding-horizontal lines="none">
+                        <ion-label class="label" position="stacked" text-wrap>Verduras e frutas</ion-label>
+                        <!--- fazer setinha com exemplos de carboidratos-->
+                          <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option class="option" value="pouco">Pouco (1 a 2 dias)</ion-select-option>
+                                <ion-select-option class="option" value="medio">Médio (3 a 5 dias)</ion-select-option>
+                                <ion-select-option class="option" value="muito">Muito (6 a 7 dias)</ion-select-option>
+                          </ion-select>
+                    </ion-item>
+
+                    <br>
+                    <ion-item padding-horizontal lines="none">
+                        <ion-label class="label" position="stacked" text-wrap>Qual a média de copos de água tomados? <br> <p>(Quantidade diária) </p></ion-label>
+                          <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option class="option" value="pouco">menos de 5 copos </ion-select-option>
+                                <ion-select-option class="option" value="medio">6 a 11 copos</ion-select-option>
+                                <ion-select-option class="option" value="muito"> mais de 11 copos</ion-select-option>
+                          </ion-select>
+                    </ion-item>
+
+                </ion-card-content>
+              </ion-card>
+            </ion-list>
+        </ion-slide>
+
+        <ion-slide id="slide2">
+            <ion-list>
+                <ion-card>          
+                    <ion-card-content>
+                        <ion-item padding-horizontal lines="none">
+                          <ion-label class="label" position="stacked" text-wrap>Fez atividade física durante a semana?</ion-label>
+                        </ion-item>
+                        <ion-radio-group>
+                          <ion-item lines="none" padding-horizontal>
+                            <ion-label>Sim</ion-label>
+                            <ion-radio slot="start" value="sim"  (ionSelect)="fezAtvd()"></ion-radio>
+                          </ion-item>
+                          <ion-item lines="none" padding-horizontal>
+                            <ion-label>Não</ion-label>
+                            <ion-radio slot="start" value="nao" (ionSelect)="fezAtvd()" checked></ion-radio>
+                          </ion-item>
+                        </ion-radio-group>
+                            
+                      <div id="fezatv" style="display: none;">
+                        <ion-list>
+                          <ion-item padding-horizontal lines="none">
+                            <ion-label class="label" position="stacked" text-wrap> Qual a duração média da(s) atividade(s)?</ion-label>
+                          </ion-item>
+                          <ion-item lines="none">
+                            <ion-range (ionFocus)="duracAtv()" (keyup)="duracAtv()" (ionChange)="duracAtv()" id="temp" min="0" max="800" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
+                          </ion-item>
+                            <ion-label class="label" id="lblTemp" position="fixed"></ion-label>
+                        </ion-list>
+                        <ion-list>
+                          <ion-item lines="none">
+                            <ion-label positions="stacked" text-wrap> Qual a intensidade da(s) atividade(s)? </ion-label>
+                          </ion-item>
+                          <ion-radio-group>
+                            <ion-item lines="none" padding-horizontal>
+                              <ion-label>Leve</ion-label>
+                              <ion-radio slot="start"></ion-radio>
+                            </ion-item>
+                            <ion-item lines="none" padding-horizontal>
+                              <ion-label>Moderado</ion-label>
+                              <ion-radio slot="start"></ion-radio>
+                            </ion-item>
+                            <ion-item lines="none" padding-horizontal>
+                              <ion-label>Alto</ion-label>
+                              <ion-radio slot="start"></ion-radio>
+                            </ion-item>
+                          </ion-radio-group>
+                        </ion-list>
+                      </div>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-list>
+            </ion-slide>
+            
+      <ion-slide id="slide3"> 
+        <form [formGroup]="slide2form" (ngSubmit)="onSubmit()">
+          <ion-item padding-horizontal>
+                <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="email" type="text"></ion-input>
+          </ion-item>
+          <ion-item padding-horizontal>
+                <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input required formControlName="password" type="text"></ion-input>
+          </ion-item>
+          <ion-button padding-horizontal type="submit" fill="outline" color="verdemud4" expand="block"> Login </ion-button>
+        </form>
+      </ion-slide>
+    </ion-slides>
+  </ion-content>
+  
+  <ion-footer>
+      <div id="butProx">
+          <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
+          <ion-button id="btnProx" (click)="proxSlide()" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
+      </div>
+  </ion-footer>
+      
+  
+
+
+  
+  <!----<ion-content>
     <ion-img id="logoLogin" src="../../assets/logomud.png"></ion-img>
     
 
 
     <ion-slides>
         <ion-slide id="slide1">
-            <ion-item lines="none" id="listoptions">
-            <ion-list lines="none">
+            <ion-list lines="none" id="listoptions2">
               <ion-item padding-horizontal>
                   <ion-button (click)="alimentacao()" padding-horizontal fill="outline" color="verdemud4" expand="block">
                       <ion-icon slot="start" name="add"></ion-icon>
@@ -32,10 +178,12 @@
                       <ion-icon slot="start" name="add"></ion-icon>
                       Sono
                     </ion-button>
-              </ion-item>
-           
-            </ion-list> 
-          </ion-item>
+                  </ion-item>
+            </ion-list>
+            <ion-item id="ph" padding-horizontal>
+              <ion-button id="registrar"> Registrar </ion-button>
+              <ion-button id="limpar"> Novo </ion-button>
+            </ion-item>
         </ion-slide>
 
         <ion-slide id="slide2">
@@ -127,7 +275,7 @@
               Login
             </ion-button>
           </form>
---->
+
         </ion-slide>
          
         <ion-slide id="slide4">
@@ -164,3 +312,4 @@
 
     </ion-slides>
   </ion-content>
+-->
