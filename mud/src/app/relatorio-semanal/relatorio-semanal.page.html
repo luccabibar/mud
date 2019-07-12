@@ -7,6 +7,9 @@
     <ion-slides>
       <ion-slide id="slide1">
         <ion-list>
+            <ion-item padding-horizontal lines="none">
+                <ion-label class="label" text-wrap> Alimentação </ion-label>
+            </ion-item>
             <ion-card>          
                 <ion-card-content>
                     <ion-item padding-horizontal lines="none">
@@ -69,6 +72,9 @@
 
         <ion-slide id="slide2">
             <ion-list>
+                <ion-item padding-horizontal lines="none">
+                    <ion-label class="label" text-wrap> Atividade física </ion-label>
+                </ion-item>
                 <ion-card>          
                     <ion-card-content>
                         <ion-item padding-horizontal lines="none">
@@ -116,24 +122,134 @@
                         </ion-list>
                       </div>
                     </ion-card-content>
-                  </ion-card>
-                </ion-list>
-            </ion-slide>
+                </ion-card>
+              </ion-list>
+        </ion-slide>
+
+
             
       <ion-slide id="slide3"> 
-        <form [formGroup]="slide2form" (ngSubmit)="onSubmit()">
-          <ion-item padding-horizontal>
-                <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required formControlName="email" type="text"></ion-input>
+        <ion-list>
+          <ion-item padding-horizontal lines="none">
+              <ion-label class="label" text-wrap> Lazer </ion-label>
           </ion-item>
-          <ion-item padding-horizontal>
-                <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required formControlName="password" type="text"></ion-input>
-          </ion-item>
-          <ion-button padding-horizontal type="submit" fill="outline" color="verdemud4" expand="block"> Login </ion-button>
-        </form>
+          <ion-card>
+            <ion-card-content>
+                <ion-item padding-horizontal lines="none">
+                    <ion-label class="label" position="stacked" text-wrap>Você dedicou algum tempo para atividades de lazer?</ion-label>
+                  </ion-item>
+                  <ion-radio-group>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label>Sim</ion-label>
+                      <ion-radio slot="start" value="sim2"  (ionSelect)="dedicou()"></ion-radio>
+                    </ion-item>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label>Não</ion-label>
+                      <ion-radio slot="start" value="nao2" (ionSelect)="ndedicou()" checked></ion-radio>
+                    </ion-item>
+                  </ion-radio-group>
+                      
+                <br>
+
+                <div id="dedico" style="display: none;">
+                  <ion-list>
+                      <ion-item padding-horizontal lines="none">
+                          <ion-label class="label" position="stacked" text-wrap>Quantas vezes? <br> <p> (Quantidade de dias na semana) </p></ion-label>
+                          <!--- fazer setinha com exemplos de carboidratos-->
+                            <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                                  <ion-select-option class="option" value="pouco">1 a 2 dias</ion-select-option>
+                                  <ion-select-option class="option" value="medio">3 a 5 dias</ion-select-option>
+                                  <ion-select-option class="option" value="muito">6 a 7 dias</ion-select-option>
+                            </ion-select>
+                      </ion-item>
+
+                      <br>
+
+                      <ion-item padding-horizontal lines="none">
+                          <ion-label class="label" position="stacked" text-wrap>Você geralmente estava acompanhado na realização das atividades?</ion-label>
+                        </ion-item>
+                        <ion-radio-group>
+                          <ion-item lines="none" padding-horizontal>
+                            <ion-label>Sim</ion-label>
+                            <ion-radio slot="start" value="sim3"  (ionSelect)="acomp()"></ion-radio>
+                          </ion-item>
+                          <ion-item lines="none" padding-horizontal>
+                            <ion-label>Não</ion-label>
+                            <ion-radio slot="start" value="nao3" (ionSelect)="nacomp()" checked></ion-radio>
+                          </ion-item>
+                        </ion-radio-group>
+                  </ion-list>
+                </div>
+
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
       </ion-slide>
-    </ion-slides>
+
+      <ion-slide id="slide4">
+        <ion-list>
+          <ion-item padding-horizontal lines="none">
+              <ion-label class="label" text-wrap> Sono </ion-label>
+          </ion-item>
+          <ion-card>
+            <ion-card-content>
+             <ion-item padding-horizontal>
+                <ion-label class="label" position="stacked" text-wrap>Que horário você geralmente foi dormir?</ion-label>
+                <ion-datetime displayFormat="HH:mm a" placeholder="Selecione um horário"></ion-datetime>
+             </ion-item>
+
+             <br>
+             <ion-item padding-horizontal lines="none">
+                <ion-label class="label" position="stacked" text-wrap>Você despertou durante o sono?</ion-label>
+             </ion-item>
+             <ion-radio-group>
+                <ion-item lines="none" padding-horizontal>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="sim4"  (ionSelect)="despertou()"></ion-radio>
+                </ion-item>
+                <ion-item lines="none" padding-horizontal>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="nao4" (ionSelect)="ndespertou()" checked></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+
+              <br>
+
+              <div id="desperto" style="display: none;">
+                  <ion-list>
+                      <ion-item padding-horizontal lines="none">
+                          <ion-label class="label" position="stacked" text-wrap>Quantas vezes? <br> <p> (Quantidade de dias na semana) </p></ion-label>
+                      </ion-item>
+                      <ion-item>    
+                          <ion-label class="label" placeholder="1"> </ion-label>
+                          <ion-icon icon="add"></ion-icon>
+                      </ion-item>
+
+                      <br>
+
+                      <ion-item padding-horizontal lines="none">
+                          <ion-label class="label" position="stacked" text-wrap>Acordou precocemente? <p> Sentiu fadiga</p></ion-label>
+                        </ion-item>
+                        <ion-radio-group>
+                          <ion-item lines="none" padding-horizontal>
+                            <ion-label>Sim</ion-label>
+                            <ion-radio slot="start" value="sim5"  (ionSelect)="fadiga()"></ion-radio>
+                          </ion-item>
+                          <ion-item lines="none" padding-horizontal>
+                            <ion-label>Não</ion-label>
+                            <ion-radio slot="start" value="nao5" (ionSelect)="nfadiga()" checked></ion-radio>
+                          </ion-item>
+                        </ion-radio-group>
+                  </ion-list>
+                </div>
+
+
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </ion-slide >
+        
+      </ion-slides>
   </ion-content>
   
   <ion-footer>

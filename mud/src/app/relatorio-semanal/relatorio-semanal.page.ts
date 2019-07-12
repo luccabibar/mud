@@ -16,6 +16,8 @@ export class RelatorioSemanalPage implements OnInit {
   public slide4form: FormGroup;
   public slide5form: FormGroup;
   public cont = 0;
+  public cont2 = 0;
+  public cont3 = 0;
 
   constructor(public navCtrl: NavController, private BD: BancoService,public formBuilder: FormBuilder,private AlertController: AlertController) { 
     this.slide2form = formBuilder.group({
@@ -69,6 +71,34 @@ export class RelatorioSemanalPage implements OnInit {
     {
       document.getElementById("fezatv").style.display='none';
       this.cont = 0;
+    }
+  }
+
+  dedicou()
+  {
+    this.cont2++;
+    if(this.cont2==1)
+    {
+      document.getElementById("dedico").style.display='unset';
+    }
+    if(this.cont2==2)
+    {
+      document.getElementById("dedico").style.display='none';
+      this.cont2 = 0;
+    }
+  }
+
+  despertou()
+  {
+    this.cont3++;
+    if(this.cont3==1)
+    {
+      document.getElementById("desperto").style.display='unset';
+    }
+    if(this.cont3==2)
+    {
+      document.getElementById("desperto").style.display='none';
+      this.cont3 = 0;
     }
   }
 
