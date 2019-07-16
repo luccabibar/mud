@@ -5,22 +5,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPage } from './login.page';
+import { EsqueciPage } from './esqueci.page';
 
 const routes: Routes = [
   {
-    path: '', 
-    component: LoginPage
+    path: '',
+    component: EsqueciPage
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule,ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LoginPage]
+  declarations: [EsqueciPage]
 })
-export class LoginPageModule {}
+export class EsqueciPageModule {}

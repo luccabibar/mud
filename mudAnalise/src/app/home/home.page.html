@@ -10,14 +10,23 @@
 </ion-header>
 
 <ion-content>
-  <h1 *ngIf="user">
-   Bem-vindo:  {{user.nome}}
-  </h1>
+  <ion-item color="">
+    <ion-avatar slot="start">
+      <img src="assets/logoMudAnalise.png">
+    </ion-avatar>
+    <ion-label >
+      <h2 *ngIf="user">
+       Dr {{user.nome}}
+      </h2>
+      <p *ngIf="user">{{user.email}}</p>
+    </ion-label>
+  </ion-item>
+
   <ion-card color="claro">
     <ion-item color="claro">
       <ion-label color="branco"><strong>Nova Sessão / Pareamento</strong> </ion-label>
-     <!-- <ion-button fill="outline" slot="end" shape="round" color="branco" (click)="addSessao()"> -->
-        <ion-button fill="outline" slot="end" shape="round" color="branco" (click)="addSessao()" routerLink="/auth"> 
+      <!-- <ion-button fill="outline" slot="end" shape="round" color="branco" (click)="addSessao()"> -->
+      <ion-button fill="outline" slot="end" shape="round" color="branco" (click)="addSessao()" routerLink="/auth">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </ion-item>

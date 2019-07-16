@@ -25,7 +25,6 @@ export class LoginPage implements OnInit {
     ],
     senha: [
       { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
-      { tipo: 'minlength', mensagem: 'A senha deve ter pelo menos 6 caracteres.' },
     ],
   };
 

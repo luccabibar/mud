@@ -30,6 +30,7 @@
     "br-mask": "0.0.7",
     "call-number": "1.0.1",
     "cordova-android": "8.0.0",
+    "cordova-browser": "6.0.0",
     "cordova-plugin-qrscanner": "3.0.1",
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
@@ -83,7 +84,8 @@
       "cordova-plugin-qrscanner": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }
