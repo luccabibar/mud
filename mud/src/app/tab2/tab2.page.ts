@@ -14,11 +14,51 @@ export class Tab2Page {
   
   constructor(private nav: NavController, public alertController: AlertController) {}
 
+  dataInicio = "TesteInicio";
+  dataFinal = "TestFinal";
 
-
-  relatsem()
+  pegarUltimoRelatorio()
   {
-    this.nav.navigateForward('relatorio-semanal');
+    
+  }
+
+  async relatsem()
+  {
+    this.pegarUltimoRelatorio();
+    const alert = await this.alertController.create({
+    header: "Relatório Semanal",
+    subHeader: "Confirmar Data",
+    message: "A data do último relatório enviado foi de:<br><br><b>"+this.dataInicio+"</b><br><br>até:<br><br><b>"+this.dataFinal+"</b><br>",
+    inputs: [
+      {
+        name: 'dataInicio',
+        placeholder: 'Data de Inicio',
+        type: 'date'
+      },
+      {
+        name: 'dataFim',
+        placeholder: 'Data de Término',
+        type: 'date'
+      }
+    ],
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancelar',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Confirmar',
+        handler: data => {
+          this.nav.navigateForward('relatorio-semanal');
+        }
+      }
+    ]
+  });
+    
+    await alert.present();
   }
 }
 

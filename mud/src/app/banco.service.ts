@@ -28,12 +28,37 @@ export class BancoService {
       email: email,
       celular: celular,
       senha: senha,
-      data_nasc: date,
+      data_nasc: date
     };
 
     let header = new HttpHeaders({'Content-type':'application/json'});
     return this.http.post(this.API_URL + 'cadUsu1', data, {headers: header}).toPromise();
   } 
+
+  cadUsu2(id_usu: string, cont1_nome: string, cont1_tell: string, cont2_nome: string, cont2_tell: string)
+  {
+    var data = {
+      id_usu: id_usu,
+      cont1_nome: cont1_nome,
+      cont1_tell: cont1_tell,
+      cont2_nome: cont2_nome,
+      cont2_tell: cont2_tell
+    };
+
+    let header = new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL + 'cadUsu2', data, {headers: header}).toPromise();
+  }
+
+  cadUsu3()
+  {
+    var data = {
+      
+    };
+
+    let header = new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL + 'cadUsu3', data, {headers: header}).toPromise();
+  } 
+
   selectGenerico(sql: string)
   {
     var data = {

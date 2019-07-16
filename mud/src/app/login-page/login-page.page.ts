@@ -3,6 +3,7 @@ import { Component, OnInit, Renderer, ViewChild, Input} from '@angular/core';
 import { NavController, AlertController, IonInput} from '@ionic/angular';
 import { BancoService } from './../banco.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { DadosService } from '../dados.service';
 
 @Component({
   selector: 'app-login-page',
@@ -21,7 +22,9 @@ export class LoginPagePage {
 
  
 
-  constructor(private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router) { }
+  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router) { 
+    
+  }
 
   public loginForm:FormGroup = new FormGroup({
     'email' : new FormControl(null, [Validators.required, Validators.email]),
@@ -59,11 +62,28 @@ export class LoginPagePage {
           header: 'Confirmação',
           subHeader: 'Sucesso!',
           message: JSON.stringify(response),
-          buttons: ['OK']
+          buttons: [{
+            text: 'OK',
+          handler: () => { 
+            this.emai = "";
+            this.senh = "";
+            this.router.navigateByUrl('/tabs/tab2'); }
+          }]
         });
 
         await alert.present();
-        this.router.navigateByUrl('/tabs/tab2');
+
+        // Deu certo, então salva os dados do Usuário Logado dentro do DadosService
+        this.dadosService.setId(Number(response[0].id_usuario));
+        this.dadosService.setNome(String(response[0].nome));
+        this.dadosService.setCpf(String(response[0].cpf));
+        this.dadosService.setEmail(String(response[0].email));
+        this.dadosService.setCelular(String(response[0].celular));
+        this.dadosService.setProfissional(Boolean(response[0].profissional));
+        this.dadosService.setCrp(String(response[0].crp));
+        this.dadosService.setDataNasc(String(response[0].dt_nasc));
+
+        
         return;
       } 
 

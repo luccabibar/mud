@@ -1,0 +1,62 @@
+<ion-header>
+    
+  <ion-toolbar color="verdemud3">
+    <ion-title id="title1">
+      Perfil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <ion-fab horizontal="start" vertical="top" slot="fixed" edge>
+        <ion-fab-button>
+          <ion-icon name="arrow-dropdown"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list>
+          <ion-fab-button color="light">
+              <ion-icon name="cog"></ion-icon>
+          </ion-fab-button>Sessões
+          <ion-fab-button color="light" (click)="sair()">
+              <ion-icon name="exit"></ion-icon>
+          </ion-fab-button>Logoff
+        </ion-fab-list>
+      </ion-fab>
+  <ion-card>
+    <img src="https://www.w3schools.com/howto/img_avatar2.png" style="width: 10rem; height: 10rem; margin-left: 3rem; margin-top: 1rem;"/>
+    <ion-card-header>
+      <ion-card-title> {{nome}} </ion-card-title>
+      <ion-card-subtitle> {{email}} </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Data da Nascimento </ion-label>
+          <ion-input value="{{dtnasc}}" type="text" name="nome" id="0" placeholder="Informe seu nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Celular</ion-label>
+          <ion-input value="{{celular}}" type="text" name="nome" id="0" placeholder="Informe seu nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> CPF</ion-label>
+          <ion-input value="{{cpf}}" type="text" name="nome" id="0" placeholder="Informe seu nome"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Nome</ion-label>
+          <ion-input value="{{nome}}" type="text" name="nome" id="0" placeholder="Informe seu nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Nome</ion-label>
+          <ion-input value="{{nome}}" type="text" name="nome" id="0" placeholder="Informe seu nome"></ion-input>
+        </ion-item>
+
+        <ion-button (click)="editarSintomas()" expand="block" style="margin-top: 1rem;" color="secondary">Editar Sintomas</ion-button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+    <ion-button (click)="salvarPerfil()" expand="block" style="margin-bottom: 4rem;">Salvar Perfil</ion-button>
+
+</ion-content>
+

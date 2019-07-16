@@ -9,8 +9,45 @@
     transform: translate(-50%, -50%); 
 }
 
-ion-slides{
-    width: relative;
+ion-label {
+    color:  #165044ff !important; 
+}
+
+p {
+    font-size: 0.8 em;
+    color: #989aa2;
+}
+
+ion-item-group {
+    font-size: 16px !important;
+    flex-basis: auto !important;
+    text-align: start;
+}
+
+.ion-padding-horizontal {
+    padding: 0 16px !important;
+}
+
+ion-slides {
+    --bullet-background: #989aa2;
+    --bullet-background-active: #165044ff; 
     height: relative;
+    width: relative;
     top: 17%;
+}
+
+#slide1
+{
+    background-color: aqua;
+}
+
+#lbl1
+{
+    width: 50%;
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
