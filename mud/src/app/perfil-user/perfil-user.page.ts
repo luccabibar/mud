@@ -3,11 +3,11 @@ import { Component, ViewChild, Input} from '@angular/core';
 import { DadosService } from '../dados.service';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-perfil-user',
+  templateUrl: 'perfil-user.html',
+  styleUrls: ['perfil-user.page.scss']
 })
-export class Tab1Page {
+export class PerfilUserPage {
   constructor(public nav : NavController,public dadosService: DadosService,public alertController: AlertController){}
 
   @ViewChild('deus')  ino: IonInput;
@@ -27,6 +27,11 @@ export class Tab1Page {
   relatsem()
   {
       this.nav.navigateForward('relatorio-semanal');
+  }
+
+  async editarSintomas()
+  {
+    
   }
 
   async salvarPerfil()

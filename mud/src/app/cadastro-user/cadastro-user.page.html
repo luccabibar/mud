@@ -112,7 +112,7 @@
                     </ion-item>
                     <ion-item padding-horizontal>
                         <ion-label class="label" position="stacked">Número do Telefone</ion-label>
-                        <ion-input type="number" name="num_contato2" id="9" formControlName="num_contato2" placeholder="Informe seu nome"></ion-input>
+                        <ion-input type="number" name="num_contato2" id="9" formControlName="num_contato2" placeholder="Insira apenas os números (incluindo o DDD)"></ion-input>
                     </ion-item>
                     </div>
                     <div id="fab">
@@ -153,11 +153,11 @@
                             </ion-item>
 
                           <ion-item padding-horizontal>
-                                <ion-label text-wrap class="label" position="stacked">Selecione quais os sintomas que você geralmente apresenta durante a crise</ion-label>
+                                <ion-label text-wrap class="label" position="stacked">Selecione quais os sintomas que você geralmente apresenta durante a crise: </ion-label>
                                 <hr>
                             </ion-item>
                             <ion-item padding-horizontal *ngIf="rv">
-                                <p style="color: #f04141;">Por favor, adicione um contato.</p>
+                                <p style="color: #f04141;">Por favor, adicione no mínimo um sintoma.</p>
                             </ion-item>
                             <ion-list>
                                 <ion-item *ngFor="let entry of sintomas" style="font-size: 12px;" padding-horizontal>

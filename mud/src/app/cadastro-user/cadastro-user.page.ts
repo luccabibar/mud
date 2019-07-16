@@ -7,7 +7,8 @@ import { NavController, IonSlides, AlertController, IonInput } from '@ionic/angu
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { getElementDepthCount } from '@angular/core/src/render3/state';
-import { async } from 'q';
+import { async, delay } from 'q';
+import { DadosService } from '../dados.service';
 
 @Component({
   selector: 'app-cadastro-user',
@@ -48,7 +49,7 @@ export class CadastroUserPage implements OnInit {
     }
   }
 
-  constructor(public navCtrl: NavController, private BD: BancoService, public formBuilder: FormBuilder, private AlertController: AlertController) {
+  constructor(public dadosService: DadosService,public navCtrl: NavController, private BD: BancoService, public formBuilder: FormBuilder, private AlertController: AlertController) {
       this.slideOneForm = formBuilder.group({
       nome: ['' , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -275,36 +276,73 @@ export class CadastroUserPage implements OnInit {
 
     cadastra()
     {
-      if(this.slideThreeForm.invalid){
-        this.IonSlides.slideTo(0);
-        this.submitAttempt3 = true;
-      } 
-      
-      let nome = (<HTMLInputElement>document.getElementById("0")).value;
-      let email = (<HTMLInputElement>document.getElementById("1")).value;
-      let dt_nasc = (<HTMLInputElement>document.getElementById("2")).value;
-      let celular = (<HTMLInputElement>document.getElementById("3")).value;
-      let cpf = (<HTMLInputElement>document.getElementById("4")).value;
-      let senha = (<HTMLInputElement>document.getElementById("5")).value;
+          if(this.slideThreeForm.invalid){
+            this.IonSlides.slideTo(0);
+            this.submitAttempt3 = true;
+          } 
+          
+          this.cadUsu1();
+          this.delay(3000).then(any=>{
+            this.cadUsu2();
+          });
+          this.delay(6000).then(any=>{
+            this.cadUsu3();
+          });
 
-      let cont1_nome = (<HTMLInputElement>document.getElementById("6")).value;
-      let cont1_tell = (<HTMLInputElement>document.getElementById("7")).value;
-      let cont2_nome = (<HTMLInputElement>document.getElementById("8")).value;
-      let cont3_nome = (<HTMLInputElement>document.getElementById("9")).value;
+  }
 
-     /* this.BD.insertGenerico("INSERT INTO usuario(nome,email,data_nasc,cpf,celular,senha,data_primeira_crise,sintoma,situacoes_sintoma) VALUES('"+nome+"','"+email+"','"+dt_nasc+"','"+cpf+"','"+celular+"','','','','','');")
+
+  async delay(ms: number) {
+    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+  }
+
+
+  cadUsu1()
+  {
+    let nome = (<HTMLInputElement>document.getElementById("0")).value;
+    let email = (<HTMLInputElement>document.getElementById("1")).value;
+    let dt_nasc = (<HTMLInputElement>document.getElementById("2")).value;
+    let celular = (<HTMLInputElement>document.getElementById("3")).value;
+    let cpf = (<HTMLInputElement>document.getElementById("4")).value;
+    let senha = (<HTMLInputElement>document.getElementById("5")).value;
+
+    this.BD.cadUsu1(nome,cpf,email,celular,senha,dt_nasc)
     .then(async(response)=>{
         const alert = await this.AlertController.create({
           header: 'Confirmação',
           subHeader: 'Sucesso!',
-          message: JSON.stringify(response),
+          message: JSON.stringify(response[0].id_usuario),
           buttons: ['OK']
         });
         
+        this.dadosService.setId(Number(response[0].id_usuario));
+
         await alert.present();
       }
-    )*/
-    this.BD.cadUsu1(nome,cpf,email,celular,senha,dt_nasc)
+    )
+    .catch(async(response)=>{
+
+      const alert = await this.AlertController.create({
+        header: 'Confirmação',
+        subHeader: 'Erro!',
+        message: JSON.stringify(response),
+        buttons: ['OK']
+      });
+  
+      await alert.present()
+    })
+
+
+  }
+  
+  cadUsu2()
+  {
+    let cont1_nome = (<HTMLInputElement>document.getElementById("6")).value;
+    let cont1_tell = (<HTMLInputElement>document.getElementById("7")).value;
+    let cont2_nome = (<HTMLInputElement>document.getElementById("8")).value;
+    let cont2_tell = (<HTMLInputElement>document.getElementById("9")).value;
+
+    this.BD.cadUsu2(this.dadosService.getId().toString(),cont1_nome,cont1_tell,cont2_nome,cont2_tell)
     .then(async(response)=>{
         const alert = await this.AlertController.create({
           header: 'Confirmação',
@@ -327,8 +365,38 @@ export class CadastroUserPage implements OnInit {
   
       await alert.present();
     })
+  }
 
-    }
+
+  cadUsu3()
+  {
+    this.BD.cadUsu3()
+    .then(async(response)=>{
+        const alert = await this.AlertController.create({
+          header: 'Confirmação',
+          subHeader: 'Sucesso!',
+          message: JSON.stringify(response),
+          buttons: ['OK']
+        });
+        
+        await alert.present();
+      }
+    )
+    .catch(async(response)=>{
+
+      const alert = await this.AlertController.create({
+        header: 'Confirmação',
+        subHeader: 'Erro!',
+        message: JSON.stringify(response),
+        buttons: ['OK']
+      });
+  
+      await alert.present();
+    })
+  }
+
+
+    
   /*
  public Validar(name:string)
   {
