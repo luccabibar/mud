@@ -2,7 +2,7 @@
   <ion-toolbar color="escuro">
     <ion-title>Parear...</ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/home">
+      <ion-button (click)="back()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -23,7 +23,7 @@
   </ion-card>
   <ion-card>
       <ion-card-content>
-        <img src="assets/frame.png" alt="">
+        <canvas id="qr-img"></canvas>
       </ion-card-content>
     </ion-card>
     

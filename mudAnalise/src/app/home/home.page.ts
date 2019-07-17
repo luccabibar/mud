@@ -2,6 +2,8 @@ import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { DadosService } from '../servicos/dados.service';
 
+import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -15,15 +17,28 @@ export class HomePage implements OnInit {
     {nome:"paciente3",img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"},
     
   ];
+  
   public addSessao(){
-    let sessao = {nome:"paciente4", img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"};
-    this.sessoes.push(sessao);
+
+    this.router.navigate(["/auth"]);
     
+    // let sessao = {nome:"paciente4", img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"};
+    // this.sessoes.push(sessao);
 
   }
 
-  constructor(private AlertController: AlertController, private dados: DadosService) {
+  constructor(private AlertController: AlertController, private dados: DadosService, private router: Router, private route: ActivatedRoute) {
     this.user= this.dados.getDados("user");
+
+    //check para adicionar sessao
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        let sessionDados = this.router.getCurrentNavigation().extras.state;
+        console.log(sessionDados);
+
+      }
+
+    });
   }
 
   ngOnInit() {
