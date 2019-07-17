@@ -1,13 +1,26 @@
 <ion-header>
+    
   <ion-toolbar color="verdemud3">
     <ion-title id="title1">
       Perfil
     </ion-title>
-    <ion-button (click)="sair()" fill="solid" slot="end" style="font-size: 0.8rem; width: 4.5rem; height: 1.8rem;">Logoff</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
+    <ion-fab horizontal="start" vertical="top" slot="fixed" edge>
+        <ion-fab-button>
+          <ion-icon name="arrow-dropdown"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list>
+          <ion-fab-button color="light">
+              <ion-icon name="cog"></ion-icon>
+          </ion-fab-button>Sessões
+          <ion-fab-button color="light" (click)="sair()">
+              <ion-icon name="exit"></ion-icon>
+          </ion-fab-button>Logoff
+        </ion-fab-list>
+      </ion-fab>
   <ion-card>
     <img src="https://www.w3schools.com/howto/img_avatar2.png" style="width: 10rem; height: 10rem; margin-left: 3rem; margin-top: 1rem;"/>
     <ion-card-header>

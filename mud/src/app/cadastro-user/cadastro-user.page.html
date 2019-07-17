@@ -134,7 +134,7 @@
                        
                             <ion-item padding-horizontal>
                             <ion-label position="stacked" text-wrap>Selecione intolerância alimentar</ion-label>
-                            <ion-select multiple="true" cancelText="Cancelar" okText="Selecionado">
+                            <ion-select multiple="true" cancelText="Cancelar" okText="Selecionado" id="10">
                                 <ion-select-option value="Lactose">Lactose</ion-select-option>
                                 <ion-select-option value="Gluten">Gluten</ion-select-option>
                                 <ion-select-option value="Frutose">Frutose</ion-select-option>
@@ -145,7 +145,7 @@
                      
                          <ion-item padding-horizontal>
                              <ion-label class="label" position="stacked" text-wrap>Quando ocorreu a primeira crise?</ion-label>
-                             <ion-datetime backdropDismiss display-format="D MMM, YYYY" name="data_primeira_crise" formControlName="data_primeira_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" [class.invalid]="!slideThreeForm.controls.data_primeira_crise.valid && (slideThreeForm.controls.data_primeira_crise.dirty || submitAttempt3)"></ion-datetime>
+                             <ion-datetime backdropDismiss display-format="D MMM, YYYY" id="11" name="data_primeira_crise" formControlName="data_primeira_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" [class.invalid]="!slideThreeForm.controls.data_primeira_crise.valid && (slideThreeForm.controls.data_primeira_crise.dirty || submitAttempt3)"></ion-datetime>
                           </ion-item>
 
                           <ion-item padding-horizontal *ngIf="!slideThreeForm.controls.data_primeira_crise.valid  && (slideThreeForm.controls.data_primeira_crise.dirty || submitAttempt3)">
@@ -162,7 +162,7 @@
                             <ion-list>
                                 <ion-item *ngFor="let entry of sintomas" style="font-size: 12px;" padding-horizontal>
                                       <ion-label style="color: #222428 !important;" text-wrap>{{entry.val}}</ion-label>
-                                    <ion-checkbox [class.invalid]="!slideThreeForm.controls.cbox.valid && (slideThreeForm.controls.cbox.dirty || submitAttempt3)" formControlName="cbox" color="verdemud4" slot="start"  size="2px" [(ngModel)]="entry.isChecked"></ion-checkbox>
+                                    <ion-checkbox [class.invalid]="!slideThreeForm.controls.cbox.valid && (slideThreeForm.controls.cbox.dirty || submitAttempt3)" id="12" formControlName="cbox" color="verdemud4" slot="start"  size="2px" [(ngModel)]="entry.isChecked"></ion-checkbox>
                                 </ion-item>
                             </ion-list>
 

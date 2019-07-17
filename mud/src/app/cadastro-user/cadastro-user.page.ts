@@ -427,19 +427,19 @@ ngOnInit() {
 
 
 public sintomas = [
-  { val: 'Dificuldade para Respirar', id: 0 },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false },
-  { val: 'Sensações de Asfixia', isChecked: false },
-  { val: 'Sudorese', isChecked: false },
-  { val: 'Tremores/abalos', isChecked: false },
-  { val: 'Naúsea/indisposição abdominal', isChecked: false },
-  { val: 'Dor/desconforto torácido', isChecked: false },
-  { val: 'Ondas de calor/frio', isChecked: false },
-  { val: 'Anestesia/formigamento', isChecked: false },
-  { val: 'Sensações de irrealidade', isChecked: false },
-  { val: 'Instabilidade/tontura/desmaio', isChecked: false },
-  { val: 'Medo de morrer', isChecked: false },
-  { val: 'Medo de perder o controle/enlouquecer', isChecked: false }
+  { val: 'Dificuldade para Respirar', id: 1 },
+  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false, id: 2 },
+  { val: 'Sensações de Asfixia', isChecked: false, id: 3 },
+  { val: 'Sudorese', isChecked: false, id: 4 },
+  { val: 'Tremores/abalos', isChecked: false, id: 5 },
+  { val: 'Naúsea/indisposição abdominal', isChecked: false, id: 6 },
+  { val: 'Dor/desconforto torácido', isChecked: false, id: 7 },
+  { val: 'Ondas de calor/frio', isChecked: false, id: 8 },
+  { val: 'Anestesia/formigamento', isChecked: false, id: 9 },
+  { val: 'Sensações de irrealidade', isChecked: false, id: 10 },
+  { val: 'Instabilidade/tontura/desmaio', isChecked: false, id: 11 },
+  { val: 'Medo de morrer', isChecked: false, id: 12 },
+  { val: 'Medo de perder o controle/enlouquecer', isChecked: false, id: 13 }
 ];
 
 }
