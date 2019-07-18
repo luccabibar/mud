@@ -128,4 +128,9 @@ export class LoginPagePage {
       this.nav.navigateForward('cadastro');
   }
 
+  
+  ngOnInit() {
+    this.dadosService.limpaDados();
+  }
 }
+

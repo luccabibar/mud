@@ -130,6 +130,10 @@
         <ion-slide>
                 <ion-content>
                 <ion-list lines="none">
+
+
+
+
                         <form [formGroup]="slideThreeForm">
                        
                             <ion-item padding-horizontal>
@@ -144,33 +148,42 @@
                      
                      
                          <ion-item padding-horizontal>
-                             <ion-label class="label" position="stacked" text-wrap>Quando ocorreu a primeira crise?</ion-label>
-                             <ion-datetime backdropDismiss display-format="D MMM, YYYY" id="11" name="data_primeira_crise" formControlName="data_primeira_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" [class.invalid]="!slideThreeForm.controls.data_primeira_crise.valid && (slideThreeForm.controls.data_primeira_crise.dirty || submitAttempt3)"></ion-datetime>
+                            <ion-label class="label" position="stacked" text-wrap>Quando ocorreu a primeira crise?</ion-label>
+                            <ion-datetime backdropDismiss display-format="D MMM, YYYY" id="11" name="data_primeira_crise" formControlName="data_primeira_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" [class.invalid]="!slideThreeForm.controls.data_primeira_crise.valid && (slideThreeForm.controls.data_primeira_crise.dirty || submitAttempt3)"></ion-datetime>
                           </ion-item>
 
                           <ion-item padding-horizontal *ngIf="!slideThreeForm.controls.data_primeira_crise.valid  && (slideThreeForm.controls.data_primeira_crise.dirty || submitAttempt3)">
                             <p>Insira a data da primeira crise.</p>
                             </ion-item>
 
-                          <ion-item padding-horizontal>
-                                <ion-label text-wrap class="label" position="stacked">Selecione quais os sintomas que você geralmente apresenta durante a crise: </ion-label>
-                                <hr>
+                            <ion-item padding-horizontal>
+                                    <ion-label position="stacked" text-wrap>Selecione quais sintomas você geralmente apresenta durante uma crise</ion-label>
+                                    <ion-select ok-text="Selecionar" cancel-text="Cancelar" multiple="true" id="12" text-wrap>
+                                        <ion-select-option text-wrap value="1">Dificuldade para Respirar</ion-select-option>
+                                        <ion-select-option value="2">Ritmo Cardíacao Acelerado / Taquicardia</ion-select-option>
+                                        <ion-select-option value="3">Sensações de Asfixia</ion-select-option>
+                                        <ion-select-option value="4">Sudorese</ion-select-option>
+                                        <ion-select-option value="5">Tremores/abalos</ion-select-option>
+                                        <ion-select-option value="6">Naúsea/indisposição abdominal</ion-select-option>
+                                        <ion-select-option value="7">Dor/desconforto toráxico</ion-select-option>
+                                        <ion-select-option value="8">Ondas de calor/frio</ion-select-option>
+                                        <ion-select-option value="9">Anestesia/formigamento</ion-select-option>
+                                        <ion-select-option value="10">Sensações de irrealidade</ion-select-option>
+                                        <ion-select-option value="11">Instabilidade/tontura/desmaio</ion-select-option>
+                                        <ion-select-option value="12">Medo de morrer</ion-select-option>
+                                        <ion-select-option value="13">Medo de perder o controle/enlouquecer</ion-select-option>
+                                    </ion-select>
                             </ion-item>
-                            <ion-item padding-horizontal *ngIf="rv">
-                                <p style="color: #f04141;">Por favor, adicione no mínimo um sintoma.</p>
-                            </ion-item>
-                            <ion-list>
-                                <ion-item *ngFor="let entry of sintomas" style="font-size: 12px;" padding-horizontal>
-                                      <ion-label style="color: #222428 !important;" text-wrap>{{entry.val}}</ion-label>
-                                    <ion-checkbox [class.invalid]="!slideThreeForm.controls.cbox.valid && (slideThreeForm.controls.cbox.dirty || submitAttempt3)" id="12" formControlName="cbox" color="verdemud4" slot="start"  size="2px" [(ngModel)]="entry.isChecked"></ion-checkbox>
-                                </ion-item>
-                            </ion-list>
 
                             <ion-item padding-horizontal *ngIf="!slideThreeForm.controls.cbox.valid  && (slideThreeForm.controls.cbox.dirty || submitAttempt3)">
                                 <p>Insira um número válido.</p>
                             </ion-item>
                             
-                            <ion-item padding-horizontal>
+                            <ion-item style="height: 12rem;">
+                                <ion-label position="stacked" text-wrap>Descreva quais são as principais situações que desencadeiam as crises (Isso pode ser alterado depois)</ion-label>
+                                <ion-textarea rows="5" autoGrow="true" maxlength="500" placeholder="Simples descrição sobre as situações que desencadeiam as crises" id="13"></ion-textarea>
+                            </ion-item>
+                            <!--<ion-item padding-horizontal>
                              <ion-label class="label" position="stacked" text-wrap>Quais as principais situações que desencadeiam as crises?</ion-label>
                              <hr>
                              <ion-input type="text" formControlname="situ1" name="situ1" id="situ1" placeholder="Situação 1" [class.invalid]="!slideThreeForm.controls.situ1.valid && (slideThreeForm.controls.situ1.dirty || submitAttempt3)"></ion-input>
@@ -182,7 +195,7 @@
 
                             <div id="situacao2" style="display: none;">
                                 <ion-item padding-horizontal>
-                                <ion-input type="text" formControlname="situ2" name="situ2" id="situ2" placeholder="Situação 2"></ion-input>
+                                <ion-input type="text" formControlname="situ2" name="situ2" id="situ2" placeholder="Situação 2" id="13"></ion-input>
                                 </ion-item>
                             </div>
                             <div id="situacao3" style="display: none;">
@@ -194,7 +207,7 @@
                                 <ion-item padding-horizontal>
                                 <ion-input type="text" formControlname="situ4" name="situ4" id="situ4" placeholder="Situação 4"></ion-input>
                                 </ion-item>
-                            </div>
+                            </div>-->
                             <div id="fab2">
                             <ion-fab padding-horizontal horizontal="end">
                             <ion-fab-button  size="small" (click)="addsitu1()" color="verdemud4">
