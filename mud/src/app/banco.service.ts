@@ -49,7 +49,7 @@ export class BancoService {
     return this.http.post(this.API_URL + 'cadUsu2', data, {headers: header}).toPromise();
   }
 
-  
+
   cadUsu3(usuario_id: string, sintoma_id: string, primeira_crise: string, situacao_sintoma: string, intolerancia: string)
   {
     var date=new Date(primeira_crise).toDateString();
@@ -101,5 +101,9 @@ export class BancoService {
     return this.http.post(this.API_URL + 'mostraUsuarios', {headers: header}).toPromise();
   }
 
-  
+  verificaSenha()
+  {
+    let header = new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL + 'verificarSenha', {headers: header}).toPromise();
+  }
 }
