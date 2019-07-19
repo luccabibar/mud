@@ -13,6 +13,7 @@ import QRious from "qrious"
 export class AuthPage implements OnInit {
 
   private sessionDados: Object;
+  private cancel: boolean;
 
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -177,9 +178,9 @@ export class AuthPage implements OnInit {
       //espera um teco e dps procura pela sessao ate achar
       await this.sleep(2 * 1000);
       userId = await this.checkSessao(hash);
-      console.log("tick");
+      console.log(this.cancel);
       
-    }while(!userId);
+    }while(!userId && !this.cancel);
     
     //ativa permissao, e o timer
     this.sessionDados = {
@@ -197,6 +198,7 @@ export class AuthPage implements OnInit {
 
   ngOnInit() {
     this.iniciaSessao();
+    this.cancel = false;
 
   }
 
@@ -207,6 +209,9 @@ export class AuthPage implements OnInit {
       }
     };
 
+    this.cancel = true;
+    console.log(this.cancel);
+    
     this.router.navigate(["/home"], navDados);
 
   }

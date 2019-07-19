@@ -63,6 +63,20 @@ export class PerfilUserPage {
       {
         text: 'Alterar',
         handler: data => {
+          if(data.senha == data.senha2)
+          {
+              // senhas batem, então conferir no banco de dados se o usuário digitou a senha certa.
+          }
+          else
+          {
+            this.alertController.create({
+              header: 'Erro',
+              message: 'As senhas não batem. Tente novamente.',
+              buttons: ['Ok']
+            }).then(alert => {
+              alert.present();
+            });
+          }
           //se clicar em alterar tem que dar o loading com sucesso ou falha na alteração
         }
       }

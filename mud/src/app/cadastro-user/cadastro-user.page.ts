@@ -2,7 +2,7 @@
 import { CpfValidator } from '../validators/cpf';
 import { CelularValidator } from '../validators/celular';
 import { BancoService } from './../banco.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, SystemJsNgModuleLoader } from '@angular/core';
 import { NavController, IonSlides, AlertController, IonInput } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
@@ -285,7 +285,7 @@ export class CadastroUserPage implements OnInit {
           this.delay(3000).then(any=>{
             this.cadUsu2();
           });
-          this.delay(6000).then(any=>{
+          this.delay(3000).then(any=>{
             this.cadUsu3();
           });
 
@@ -367,10 +367,15 @@ export class CadastroUserPage implements OnInit {
     })
   }
 
-
   cadUsu3()
   {
-    this.BD.cadUsu3()
+    let intolerancia = (<HTMLInputElement>document.getElementById("10")).value;
+    let data_primeira_crise = (<HTMLInputElement>document.getElementById("11")).value;
+    let sintomas_crise = (<HTMLInputElement>document.getElementById("12")).value;
+    let situacoes_crise = (<HTMLInputElement>document.getElementById("13")).value;
+
+
+    this.BD.cadUsu3(this.dadosService.getId().toString(),sintomas_crise,data_primeira_crise,situacoes_crise,intolerancia)
     .then(async(response)=>{
         const alert = await this.AlertController.create({
           header: 'Confirmação',
@@ -394,52 +399,8 @@ export class CadastroUserPage implements OnInit {
       await alert.present();
     })
   }
-
-
     
-  /*
- public Validar(name:string)
-  {
-    if(name == 'confirmasenha')
-    {
-      if(this.slideOneForm.controls.confirmasenha.value != this.slideOneForm.controls.senha.value)
-        document.getElementById(name).style.outlineColor='#020B04';
-      else if(!this.slideOneForm.controls.nome.valid)
-        document.getElementById(name).style.backgroundColor='#f53d3d';
-    }
-  }
-
-  inserirUsuario()
-  {
-    let nome = (<HTMLInputElement>document.getElementById("0")).value;
-    let email = (<HTMLInputElement>document.getElementById("1")).value;
-    let datanasc = (<HTMLIonDatetimeElement>document.getElementById("2")).value;
-    let celular = (<HTMLInputElement>document.getElementById("3")).value;
-    let cpf = (<HTMLInputElement>document.getElementById("4")).value;
-    let senha = (<HTMLInputElement>document.getElementById("5")).value;
-    let sql = "INSERT INTO usuario (id_usuario, nome)"
-    this.BD.selectGenerico(sql);
-
-}*/
 ngOnInit() {
   this.IonSlides.lockSwipes(true);
 }
-
-
-public sintomas = [
-  { val: 'Dificuldade para Respirar', id: 1 },
-  { val: 'Ritmo Cardíacao Acelerado / Taquicardia', isChecked: false, id: 2 },
-  { val: 'Sensações de Asfixia', isChecked: false, id: 3 },
-  { val: 'Sudorese', isChecked: false, id: 4 },
-  { val: 'Tremores/abalos', isChecked: false, id: 5 },
-  { val: 'Naúsea/indisposição abdominal', isChecked: false, id: 6 },
-  { val: 'Dor/desconforto torácido', isChecked: false, id: 7 },
-  { val: 'Ondas de calor/frio', isChecked: false, id: 8 },
-  { val: 'Anestesia/formigamento', isChecked: false, id: 9 },
-  { val: 'Sensações de irrealidade', isChecked: false, id: 10 },
-  { val: 'Instabilidade/tontura/desmaio', isChecked: false, id: 11 },
-  { val: 'Medo de morrer', isChecked: false, id: 12 },
-  { val: 'Medo de perder o controle/enlouquecer', isChecked: false, id: 13 }
-];
-
 }
