@@ -17,8 +17,8 @@
     <form [formGroup]="formEsqueci">
       <ion-item>
         <ion-label position="stacked">E-mail</ion-label>
-        <ion-input (ionBlur)="validaEmail($event)" formControlName="email" type="email" placeholder="..."></ion-input>
-        <ng-container *ngFor="let erro of mensagens_validacao.email">
+        <ion-input formControlName="email" type="email" placeholder="..."></ion-input>
+          <ng-container *ngFor="let erro of mensagens_validacao.email">  
           <span
             *ngIf="formEsqueci.get('email').hasError(erro.tipo) && (formEsqueci.get('email').dirty || formEsqueci.get('email').touched)"
             class="msg-erro">
@@ -27,8 +27,8 @@
         </ng-container>
       </ion-item>
     </form>
-    <ion-button expand="block" color="escuro" (click)="sendEmail()">
-      <ion-icon name="send"></ion-icon>
+    <ion-button expand="block" color="escuro" (click)="sendEmail()" [disabled]="disableButton">
+        <ion-icon name="send"></ion-icon>
       <ion-label>Enviar E-mail</ion-label>
     </ion-button>
   </ion-card>

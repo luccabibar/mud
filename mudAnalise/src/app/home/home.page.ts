@@ -1,6 +1,7 @@
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { DadosService } from '../servicos/dados.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,25 +11,42 @@ import { DadosService } from '../servicos/dados.service';
 export class HomePage implements OnInit {
   public user;
   public sessoes = [
-    {nome:"paciente1",img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"},
-    {nome:"paciente2",img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"},
-    {nome:"paciente3",img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"},
-    
+    { nome: "paciente1", img: "https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png" },
+    { nome: "paciente2", img: "https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png" },
+    { nome: "paciente3", img: "https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png" },
+
   ];
-  public addSessao(){
-    let sessao = {nome:"paciente4", img:"https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png"};
+  public addSessao() {
+    let sessao = { nome: "paciente4", img: "https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png" };
     this.sessoes.push(sessao);
-    
+
 
   }
 
-  constructor(private AlertController: AlertController, private dados: DadosService) {
-    this.user= this.dados.getDados("user");
+  constructor(
+    private AlertController: AlertController,
+    private ds: DadosService,
+    private router: Router
+  ) {
+    this.user = this.ds.getDados("user");
   }
 
   ngOnInit() {
   }
-  async deletadoSucesso(){
+
+  ionViewDidEnter() {
+    this.user = this.ds.getDados("user");
+    if (!this.user) {
+      this.logout();
+    }
+  }
+
+  public logout() {
+    this.ds.removeDados(true, '');
+    this.router.navigateByUrl("/login");
+  }
+
+  async deletadoSucesso() {
     const alert = await this.AlertController.create({
       header: '',
       subHeader: '',
@@ -39,7 +57,7 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  
+
 
   async alertaDeletar() {
     const alert = await this.AlertController.create({

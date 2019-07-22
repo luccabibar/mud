@@ -16,7 +16,7 @@ import { DadosService } from '../servicos/dados.service';
 export class EsqueciPage implements OnInit {
   public user: IUsuario;
   public formEsqueci: FormGroup;
-  public existente = false;
+  public disableButton = false;
 
 
   mensagens_validacao = {
@@ -41,25 +41,52 @@ export class EsqueciPage implements OnInit {
   ngOnInit() {
   }
 
-  public async validaEmail(evento) {
-    let email = evento.target.value
+  // public async validaEmail(evento) {
+  //   let email = evento.target.value
+
+  //   if (this.formEsqueci.get('email').valid) {
+  //     this.bd.selectGenerico("SELECT * FROM usuario WHERE email='" + email + "';").then(async (resposta) => {
+  //     }).catch(async (resposta) => {
+  //       this.existente = true;
+  //       const alert = await this.alertController.create({
+  //         header: 'Erro ao recuperar senha',
+  //         subHeader: 'E-mail inválido',
+  //         message: 'Certifique se o e-mail preenchido corresponde a uma conta do MudProfissional',
+  //         buttons: ['OK']
+  //       });
+  //       await alert.present();
+  //     })
+  //   }
+  // }
+
+  public async sendEmail() {
+
+    let email = this.formEsqueci.value.email;
+    console.log(email);
 
     if (this.formEsqueci.get('email').valid) {
-      this.bd.selectGenerico("SELECT * FROM usuario WHERE email='" + email + "';").then(async (resposta) => {
-      }).catch(async (resposta) => {
-        this.existente = true;
+      this.disableButton = true;
+      this.bd.esqueciSenha("SELECT * FROM usuario WHERE email='" + email + "';").then(async (resposta) => {
         const alert = await this.alertController.create({
-          header: 'Erro ao recuperar senha',
-          subHeader: 'E-mail inválido',
-          message: 'Certifique se o e-mail preenchido corresponde a uma conta do MudProfissional',
+          header: 'E-mail enviado com sucesso',
+          message: 'Verifique seu e-mail para recuperar sua senha',
           buttons: ['OK']
         });
         await alert.present();
+        this.router.navigateByUrl("/login");
+
+      }).catch(async (resposta) => {
+        console.log("erro: ", resposta);
+
+        const alert = await this.alertController.create({
+          header: 'Erro no envio de e-mail',
+          message: "Verifique o e-mail informado.",
+          buttons: ['OK']
+        });
+        await alert.present();
+        this.disableButton = false;
       })
     }
-  }
 
-  public async sendEmail(){
-    console.log("it works fine...");
   }
 }
