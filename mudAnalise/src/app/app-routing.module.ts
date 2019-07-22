@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'grafico-crise', loadChildren: './opcoes-menu/grafico-crise/grafico-crise.module#GraficoCrisePageModule' },
   { path: 'ficha-paciente', loadChildren: './opcoes-menu/ficha-paciente/ficha-paciente.module#FichaPacientePageModule' },
   { path: 'detalhes-semanal/:myId', loadChildren: './components/detalhes-semanal/detalhes-semanal.module#DetalhesSemanalPageModule' },  { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule' },
-  { path: 'esqueci', loadChildren: './esqueci/esqueci.module#EsqueciPageModule' }
+  { path: 'esqueci', loadChildren: './esqueci/esqueci.module#EsqueciPageModule' },
+  { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule' }
 
 
 ];

@@ -6,57 +6,61 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class BancoService {
   private API_URL = 'http://200.145.153.172/mud/API/index.php/'
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
 
   }
-  insertGenerico(sql: string)
-  {
+  insertGenerico(sql: string) {
     var data = {
       sql: sql,
     };
 
-    let header = new HttpHeaders({'Content-type':'application/json'});
-    return this.http.post(this.API_URL + 'insertGenerico', data, {headers: header}).toPromise();
+    let header = new HttpHeaders({ 'Content-type': 'application/json' });
+    return this.http.post(this.API_URL + 'insertGenerico', data, { headers: header }).toPromise();
   }
 
-  selectGenerico(sql: string)
-  {
+  selectGenerico(sql: string) {
     var data = {
       sql: sql,
     };
 
-    let header = new HttpHeaders({'Content-type':'application/json'});
-    return this.http.post(this.API_URL + 'selectGenerico', data, {headers: header}).toPromise();
+    let header = new HttpHeaders({ 'Content-type': 'application/json' });
+    return this.http.post(this.API_URL + 'selectGenerico', data, { headers: header }).toPromise();
   }
 
-  deleteGenerico(sql: string)
-  {
+  esqueciSenha(sql: string) {
     var data = {
       sql: sql,
     };
 
-    let header = new HttpHeaders({'Content-type':'application/json'});
-    return this.http.post(this.API_URL + 'deleteGenerico', data, {headers: header}).toPromise();
+    let header = new HttpHeaders({ 'Content-type': 'application/json' });
+    return this.http.post(this.API_URL + 'recuperarSenha', data, { headers: header }).toPromise();
   }
 
-  updateGenerico(sql: string)
-  {
+
+  deleteGenerico(sql: string) {
     var data = {
       sql: sql,
     };
-    
-    let header = new HttpHeaders({'Content-type':'application/json'});
-    return this.http.post(this.API_URL + 'updateGenerico', data, {headers: header}).toPromise();
+
+    let header = new HttpHeaders({ 'Content-type': 'application/json' });
+    return this.http.post(this.API_URL + 'deleteGenerico', data, { headers: header }).toPromise();
   }
-  
-  mostraUsuarios()
-  {
-    let header = new HttpHeaders({'Content-type':'application/json'});
-    return this.http.post(this.API_URL + 'mostraUsuarios', {headers: header}).toPromise();
+
+  updateGenerico(sql: string) {
+    var data = {
+      sql: sql,
+    };
+
+    let header = new HttpHeaders({ 'Content-type': 'application/json' });
+    return this.http.post(this.API_URL + 'updateGenerico', data, { headers: header }).toPromise();
   }
-  
-  cadProf(obj)
-  {
+
+  mostraUsuarios() {
+    let header = new HttpHeaders({ 'Content-type': 'application/json' });
+    return this.http.post(this.API_URL + 'mostraUsuarios', { headers: header }).toPromise();
+  }
+
+  cadProf(obj) {
     var data = {
       nome: obj.nome,
       cpf: obj.cpf,
@@ -69,9 +73,9 @@ export class BancoService {
     };
 
     console.log(obj.dt_nasc)
-    
-    let header = new HttpHeaders({'Content-type':'application/json'});
-    return this.http.post(this.API_URL + 'cadProf', data, {headers: header}).toPromise();
+
+    let header = new HttpHeaders({ 'Content-type': 'application/json' });
+    return this.http.post(this.API_URL + 'cadProf', data, { headers: header }).toPromise();
   }
 
 }
