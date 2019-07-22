@@ -1,6 +1,7 @@
 import { NavController, IonInput, AlertController } from '@ionic/angular';
 import { Component, ViewChild, Input} from '@angular/core';
 import { DadosService } from '../dados.service';
+import { BancoService } from '../banco.service';
 
 @Component({
   selector: 'app-perfil-user',
@@ -8,7 +9,7 @@ import { DadosService } from '../dados.service';
   styleUrls: ['perfil-user.page.scss']
 })
 export class PerfilUserPage {
-  constructor(public nav : NavController,public dadosService: DadosService,public alertController: AlertController){}
+  constructor(public bancoService: BancoService, public nav : NavController,public dadosService: DadosService,public alertController: AlertController){}
 
   @ViewChild('deus')  ino: IonInput;
 
@@ -65,6 +66,40 @@ export class PerfilUserPage {
         handler: data => {
           if(data.senha == data.senha2)
           {
+            this.bancoService.verificaSenha(this.dadosService.getId(),data.senha)
+            .then(async(response)=>{
+              if(response[0].senha == data.senha)
+              {
+                  const alert = await this.alertController.create({
+                  header: 'Confirmação',
+                  subHeader: 'Sucesso!',
+                  message: 'Alteração Realizada com sucesso!',
+                  buttons:  [
+                    {
+                      text: 'OK',
+                    }
+                  ],
+                  });
+        
+                await alert.present();
+                return;
+              }
+              else
+              {
+                const alert = await this.alertController.create({
+                  header: 'Erro',
+                  message: 'As senhas não batem. Tente novamente.',
+                  buttons:  [
+                    {
+                      text: 'OK',
+                    }
+                  ],
+                  });
+              }
+            })
+        
+            .catch(async(response)=>{
+               })
               // senhas batem, então conferir no banco de dados se o usuário digitou a senha certa.
           }
           else
