@@ -30,7 +30,7 @@ export class DadosService {
   }
 
   // Método para limpar os dados guardados
-  public removeDados(todos: boolean, nome: string) {
+  public removeDados(todos: boolean = false, nome: string) {
     // Caso deseje apagar todos os dados armazenados.
     if (todos) {
       this.dados = null;

@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
     private alertController: AlertController,
     private bd: BancoService,
     private router: Router,
-    private dados: DadosService
+    private ds: DadosService
   ) {
     this.formLogin = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
         console.log(resposta)
         if (resposta[0].senha == this.formLogin.value.senha) {
           if (resposta[0].profissional == 't') {
-            this.dados.setDados("user", resposta[0]);
+            this.ds.setDados("user", resposta[0]);
             this.router.navigate(["/home"]);
           } else {
             const alert = await this.alertController.create({
@@ -76,7 +76,7 @@ export class LoginPage implements OnInit {
         const alert = await this.alertController.create({
           header: 'ERRO!!',
           subHeader: 'Dados inválidos!',
-          message: 'Verifique se usuário/senha estão corretos',
+          message: 'Verifique se usuário/senha estão corretos ou se há conexão com wi-fi',
           buttons: ['OK']
         });
         await alert.present();
