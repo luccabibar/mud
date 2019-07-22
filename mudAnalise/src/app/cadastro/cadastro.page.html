@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar color="escuro">
-    <ion-title>Cadastro</ion-title>
+    <ion-title *ngIf="this.user.nome">Alteração </ion-title>
+    <ion-title *ngIf="!this.user.nome">Cadastro </ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="sairCad()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
@@ -51,7 +52,7 @@
     <ion-item>
       <ion-label position="stacked">Celular</ion-label>
       <ion-input (ionBlur)="validaCelular($event)" formControlName="celular" type="tel" placeholder="..."
-      [brmasker]="{form: formCadastro.get('celular'), phone: true}" max="15"></ion-input>
+        [brmasker]="{form: formCadastro.get('celular'), phone: true}" max="15"></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.celular">
         <span
           *ngIf="formCadastro.get('celular').hasError(erro.tipo) && (formCadastro.get('celular').dirty || formCadastro.get('celular').touched)"
@@ -77,7 +78,7 @@
 
     <ion-item>
       <ion-label position="stacked">CRP</ion-label>
-      <ion-input (ionBlur)="validaCRP($event)" formControlName="crp" type="number" placeholder="..." ></ion-input>
+      <ion-input (ionBlur)="validaCRP($event)" formControlName="crp" type="number" placeholder="..."></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.crp">
         <span
           *ngIf="formCadastro.get('crp').hasError(erro.tipo) && (formCadastro.get('crp').dirty || formCadastro.get('crp').touched)"
