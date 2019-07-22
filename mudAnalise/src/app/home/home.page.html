@@ -16,13 +16,12 @@
     </ion-avatar>
     <ion-label>
       <h2 *ngIf="user">
-        Psi {{user.nome}}
+        Psicólogo {{user.nome}}
       </h2>
       <p *ngIf="user">CRP:{{user.crp}}</p>
     </ion-label>
     <ion-buttons slot="end">
       <ion-button routerLink="/cadastro">
-        perfil
         <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>

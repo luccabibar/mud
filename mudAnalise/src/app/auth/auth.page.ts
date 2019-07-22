@@ -51,7 +51,9 @@ export class AuthPage implements OnInit {
     let qr = new QRious({
       element: target,
       foreground: 'blue',
-      value: hash
+      size:250,
+      value: hash,
+      
     });
     
   }
