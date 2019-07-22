@@ -1,9 +1,9 @@
 #circulo {
     border-radius: 100%;
     overflow: hidden;
-    height: 100px;
-    width: 100px;
-    background: #165044ff;
+    height: 124px;
+    width: 124px;
+    background-color: rgba(44, 160, 137, 1);
     position: relative;
     margin: 0;
     position: absolute;
@@ -11,4 +11,26 @@
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
+}
+
+#circulofora {
+    border-radius: 100%;
+    overflow: hidden;
+    height: 290px;
+    width: 290px;
+    background-color: rgba(22, 80, 68, 1);
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+#inspire
+{
+    font-size: 13px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    opacity: 100%;
 }
