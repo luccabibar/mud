@@ -105,6 +105,12 @@ export class RelatorioCrisePage implements OnInit {
 
   }
 
+  addoutras()
+  {
+    document.getElementById("outras").style.display='unset';
+    document.getElementById("mostram").style.display='none';
+  }
+
   porquem()
   {
     this.contar++;
