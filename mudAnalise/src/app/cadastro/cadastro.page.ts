@@ -6,6 +6,7 @@ import { IUsuario } from '../interfaces/IUsuario';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ComparaValidator } from './../validators/compara-validator';
 import { Router } from '@angular/router';
+import { DadosService } from './../servicos/dados.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -57,24 +58,64 @@ export class CadastroPage implements OnInit {
     ]
   };
 
-  constructor(public formBuilder: FormBuilder, private alertController: AlertController, private bd: BancoService, private router: Router) {
+  constructor(
+    public formBuilder: FormBuilder,
+    private alertController: AlertController,
+    private bd: BancoService,
+    private router: Router,
+    private ds: DadosService
+  ) {
+
+    this.user = this.ds.getDados("user");
+
+    if (!this.user) {
+      this.user = {
+        id_usuario: 0,
+        nome: '',
+        cpf: '',
+        email: '',
+        celular: '',
+        profissional: true,
+        crp: '',
+        senha: '',
+        key: '',
+        dt_nasc: '',
+        sexo: '',
+        created_at: '',
+        updated_at: '',
+        deleted_at: '',
+      }
+    }
+
+
     this.formCadastro = formBuilder.group({
-      nome: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      cpf: ['', Validators.compose([Validators.required, CpfValidator.cpfValido])],
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      celular: ['', Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])],
-      crp: ['', Validators.compose([Validators.required, Validators.minLength(9), Validators.maxLength(9)])],
+      nome: [this.user.nome, Validators.compose([Validators.required, Validators.minLength(3)])],
+      cpf: [this.user.cpf, Validators.compose([Validators.required, CpfValidator.cpfValido])],
+      email: [this.user.email, Validators.compose([Validators.required, Validators.email])],
+      celular: [this.user.celular, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])],
+      crp: [this.user.crp, Validators.compose([Validators.required, Validators.minLength(9), Validators.maxLength(9)])],
       senha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       confirmaSenha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      dt_nasc: ['', Validators.compose([Validators.required])],
-      sexo: ['']
+      dt_nasc: [this.user.dt_nasc, Validators.compose([Validators.required])],
+      sexo: [this.user.sexo]
     }, {
         validator: ComparaValidator('senha', 'confirmaSenha')
-      })
+      });
+
+    this.controleSenha();
+  }
+  ngOnInit() {
+    this.controleSenha();
+
   }
 
-  ngOnInit() {
-
+  private controleSenha() {
+    if (this.user.nome) {
+      this.formCadastro.controls.senha.setValidators(null);
+      this.formCadastro.controls.senha.updateValueAndValidity();
+      this.formCadastro.controls.confirmaSenha.setValidators(null);
+      this.formCadastro.controls.confirmaSenha.updateValueAndValidity();
+    }
   }
 
   public async salvar() {
@@ -119,7 +160,7 @@ export class CadastroPage implements OnInit {
   public async validaCPF(evento) {
     let cpf = evento.target.value
 
-    if (this.formCadastro.get('cpf').valid) {
+    if (this.formCadastro.get('cpf').valid  && !this.user.nome) {
 
       this.bd.selectGenerico("SELECT * FROM usuario WHERE cpf='" + cpf + "';").then(async (resposta) => {
         console.log(resposta)
@@ -146,7 +187,7 @@ export class CadastroPage implements OnInit {
   public async validaEmail(evento) {
     let email = evento.target.value
 
-    if (this.formCadastro.get('email').valid) {
+    if (this.formCadastro.get('email').valid && !this.user.nome) {
 
       this.bd.selectGenerico("SELECT * FROM usuario WHERE email='" + email + "';").then(async (resposta) => {
         console.log(resposta)
@@ -173,7 +214,7 @@ export class CadastroPage implements OnInit {
   public async validaCelular(evento) {
     let celular = evento.target.value
 
-    if (this.formCadastro.get('celular').valid) {
+    if (this.formCadastro.get('celular').valid && !this.user.nome) {
 
       this.bd.selectGenerico("SELECT * FROM usuario WHERE celular='" + celular + "';").then(async (resposta) => {
         console.log(resposta)
@@ -200,7 +241,7 @@ export class CadastroPage implements OnInit {
   public async validaCRP(evento) {
     let crp = evento.target.value
 
-    if (this.formCadastro.get('crp').valid) {
+    if (this.formCadastro.get('crp').valid && !this.user.nome) {
 
       this.bd.selectGenerico("SELECT * FROM usuario WHERE crp='" + crp + "';").then(async (resposta) => {
         console.log(resposta)
@@ -240,8 +281,8 @@ export class CadastroPage implements OnInit {
 
   async sairCad() {
     const alert = await this.alertController.create({
-      header: 'Apagar Resgistro',
-      message: 'Deseja sair do cadastro?',
+      header: 'Registro',
+      message: 'Deseja sair?',
       buttons: [
         {
           text: 'Não',
@@ -253,7 +294,11 @@ export class CadastroPage implements OnInit {
         }, {
           text: 'Sim',
           handler: () => {
-            this.router.navigateByUrl('/login');
+            if (!this.user.nome) {
+              this.router.navigateByUrl('/login');
+            } else {
+              this.router.navigateByUrl('/home');
+            }
             this.formCadastro.reset()
           }
         }
@@ -262,5 +307,6 @@ export class CadastroPage implements OnInit {
     });
     await alert.present();
   }
+
 
 }

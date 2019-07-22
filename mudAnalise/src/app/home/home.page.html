@@ -2,7 +2,7 @@
   <ion-toolbar color="escuro">
     <ion-title>Sessões Ativas</ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/login">
+      <ion-button (click)="logout()">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -14,12 +14,18 @@
     <ion-avatar slot="start">
       <img src="assets/logoMudAnalise.png">
     </ion-avatar>
-    <ion-label >
+    <ion-label>
       <h2 *ngIf="user">
-       Dr {{user.nome}}
+        Psi {{user.nome}}
       </h2>
-      <p *ngIf="user">{{user.email}}</p>
+      <p *ngIf="user">CRP:{{user.crp}}</p>
     </ion-label>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/cadastro">
+        perfil
+        <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-item>
 
   <ion-card color="claro">
