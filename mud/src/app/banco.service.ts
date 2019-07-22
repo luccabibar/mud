@@ -101,9 +101,23 @@ export class BancoService {
     return this.http.post(this.API_URL + 'mostraUsuarios', {headers: header}).toPromise();
   }
 
-  verificaSenha()
+  verificaSenha(id_usuario: string,senha: string)
   {
+    var data = {
+      id_usuario: id_usuario,
+      senha: senha
+    };
     let header = new HttpHeaders({'Content-type':'application/json'});
-    return this.http.post(this.API_URL + 'verificarSenha', {headers: header}).toPromise();
+    return this.http.post(this.API_URL + 'verificarSenha',data, {headers: header}).toPromise();
+  }
+
+  selecionarMural(id_usuario: string)
+  {
+    var data = {
+      id_usuario: id_usuario
+    };
+    let header=new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL+'pegarMural', data,{headers: header}).toPromise();
+
   }
 }

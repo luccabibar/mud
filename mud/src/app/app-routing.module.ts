@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'load', loadChildren: './load/load.module#LoadPageModule' },
   { path: 'cadastro', loadChildren: './cadastro-user/cadastro-user.module#CadastroUserPageModule' },
   { path: 'relatorio-semanal', loadChildren: './relatorio-semanal/relatorio-semanal.module#RelatorioSemanalPageModule' },
-  { path: 'relatorio-crise', loadChildren: './relatorio-crise/relatorio-crise.module#RelatorioCrisePageModule' },
+  { path: 'relatorio-crise', loadChildren: './relatorio-crise/relatorio-crise.module#RelatorioCrisePageModule' },  { path: 'mural', loadChildren: './mural/mural.module#MuralPageModule' },
+
   
 ];
 
