@@ -18,6 +18,7 @@
       <ion-item>
         <ion-label position="stacked">E-mail</ion-label>
         <ion-input formControlName="email" type="email" placeholder="..."></ion-input>
+          <ng-container *ngFor="let erro of mensagens_validacao.email">  
           <span
             *ngIf="formEsqueci.get('email').hasError(erro.tipo) && (formEsqueci.get('email').dirty || formEsqueci.get('email').touched)"
             class="msg-erro">
