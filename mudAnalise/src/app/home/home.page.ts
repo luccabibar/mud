@@ -19,8 +19,6 @@ export class HomePage implements OnInit {
   public addSessao() {
     let sessao = { nome: "paciente4", img: "https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png" };
     this.sessoes.push(sessao);
-
-
   }
 
   constructor(
@@ -37,13 +35,36 @@ export class HomePage implements OnInit {
   ionViewDidEnter() {
     this.user = this.ds.getDados("user");
     if (!this.user) {
-      this.logout();
+      this.logout(0);
     }
   }
 
-  public logout() {
-    this.ds.removeDados(true, '');
-    this.router.navigateByUrl("/login");
+  public async logout(trava) {
+    if(trava==0){
+      this.ds.removeDados(true, '');
+      this.router.navigateByUrl("/login");
+    }
+    const alert = await this.AlertController.create({
+      header: 'Sair',
+      message: 'Deseja realmente sair?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('nem saiu');
+          }
+        }, {
+          text: 'Sim',
+          handler: () => {
+            this.ds.removeDados(true, '');
+            this.router.navigateByUrl("/login");
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   async deletadoSucesso() {
