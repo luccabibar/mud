@@ -1,9 +1,9 @@
 #circulo {
     border-radius: 100%;
     overflow: hidden;
-    height: 100px;
-    width: 100px;
-    background: #165044ff;
+    height: 124px;
+    width: 124px;
+    background-color: rgba(44, 160, 137, 1);
     position: relative;
     margin: 0;
     position: absolute;
@@ -11,4 +11,54 @@
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
+}
+
+#circulofora {
+    border-radius: 100%;
+    overflow: hidden;
+    height: 290px;
+    width: 290px;
+    background-color: rgba(22, 80, 68, 1);
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+#inspire
+{
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:rgba(255, 255, 255, 1);
+}
+
+#expire
+{
+    font-size: 62px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:rgba(255, 255, 255, 1);
+}
+
+.text
+{
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+#btnParar
+{
+    width: 50%;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translateX(-50%) 
 }
