@@ -30,7 +30,35 @@
 
 #inspire
 {
-    font-size: 13px;
+    font-size: 14px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    opacity: 100%;
+    color:rgba(255, 255, 255, 1);
+}
+
+#expire
+{
+    font-size: 62px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:rgba(255, 255, 255, 1);
+}
+
+.text
+{
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+#btnParar
+{
+    width: 50%;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translateX(-50%) 
 }

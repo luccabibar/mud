@@ -1,13 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>animacao</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <div id="circulofora">
   <div id="circulo" >
-    <p id="inspire">Inspire</p>
+    <div class="text">
+        <p id="inspire">Inspire</p>
+        <p id="expire" style="display: none;">Expire</p>
+    </div>
   </div>
   </div>
+
+  <ion-button id="btnParar" (click)="vaiRelatCrise()" fill="outline" color="verdemud4">Parar</ion-button>
 </ion-content>
+
+
+
