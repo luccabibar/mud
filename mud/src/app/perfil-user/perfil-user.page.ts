@@ -1,7 +1,13 @@
 import { NavController, IonInput, AlertController } from '@ionic/angular';
 import { Component, ViewChild, Input} from '@angular/core';
+
 import { DadosService } from '../dados.service';
+<<<<<<< HEAD
+import { Router, NavigationExtras } from '@angular/router';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
+=======
 import { BancoService } from '../banco.service';
+>>>>>>> 677ed11aa12e013dc825281cb6cbb1a783374ef1
 
 @Component({
   selector: 'app-perfil-user',
@@ -9,7 +15,13 @@ import { BancoService } from '../banco.service';
   styleUrls: ['perfil-user.page.scss']
 })
 export class PerfilUserPage {
+<<<<<<< HEAD
+  constructor(public nav : NavController,public dadosService: DadosService,public alertController: AlertController, public router: Router){
+
+  }
+=======
   constructor(public bancoService: BancoService, public nav : NavController,public dadosService: DadosService,public alertController: AlertController){}
+>>>>>>> 677ed11aa12e013dc825281cb6cbb1a783374ef1
 
   @ViewChild('deus')  ino: IonInput;
 
@@ -28,6 +40,10 @@ export class PerfilUserPage {
   relatsem()
   {
       this.nav.navigateForward('relatorio-semanal');
+  }
+
+  pagsessao(){
+    this.router.navigate(['auth']);
   }
 
   async editarSintomas()

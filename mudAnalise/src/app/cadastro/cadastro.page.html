@@ -37,7 +37,7 @@
       </ng-container>
     </ion-item>
 
-    <ion-item>
+    <ion-item *ngIf="!this.user.nome">
       <ion-label position="stacked">E-mail</ion-label>
       <ion-input (ionBlur)="validaEmail($event)" formControlName="email" type="email" placeholder="..."></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.email">

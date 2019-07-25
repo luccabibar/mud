@@ -1,5 +1,7 @@
 {
   "name": "mud",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
