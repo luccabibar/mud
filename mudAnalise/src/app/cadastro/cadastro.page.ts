@@ -118,49 +118,300 @@ export class CadastroPage implements OnInit {
     }
   }
 
+
+
+
   public async salvar() {
-    if (!this.formCadastro.valid) {
+
+    if (this.formCadastro.valid) {
+      if (!this.existente && this.user.id_usuario == 0) {
+        this.user = this.formCadastro.value;
+
+        this.bd.cadProf(this.user).then(async resposta => {
+          console.log(resposta);
+          const alert = await this.alertController.create({
+            message: 'Cadastro Efetuado com sucesso!',
+            buttons: ['OK']
+          });
+          await alert.present();
+          this.router.navigateByUrl('/login');
+          this.formCadastro.reset()
+        }).catch(async resposta => {
+          const alert = await this.alertController.create({
+            message: 'ERRO NO CADASTROOOOO!',
+            buttons: ['OK']
+          });
+          console.log("Erro: ", resposta)
+          await alert.present();
+        });
+      } else if (this.user.id_usuario != 0) {
+
+        if (this.desejaAlterar()) {
+
+          this.user = this.formCadastro.value;
+          let sql = `UPDATE usuario 
+        SET  nome=   '${this.user.nome}',
+             cpf=    '${this.user.cpf}',
+             celular='${this.user.celular}',
+             crp=    '${this.user.crp}',
+             senha=  '${this.user.senha}',
+             dt_nasc='${this.user.dt_nasc}',
+             updated_at= CURRENT_DATE
+        WHERE email ='${this.user.email}'
+          ;`;
+
+          this.bd.updateGenerico(sql).then(async resposta => {
+            console.log(resposta);
+            const alert = await this.alertController.create({
+              message: 'Alteração Efetuada com sucesso!',
+              buttons: ['OK']
+            });
+            await alert.present();
+            // aqui deve atualizar os dados do registro quando ele voltar pro menu
+            // this.user = this.ds.getDados("user");
+            this.router.navigateByUrl('/home');
+          }).catch(async resposta => {
+            const alert = await this.alertController.create({
+              message: 'ERRO NA ALTERAÇÃO',
+              buttons: ['OK']
+            });
+            console.log("Erro: ", resposta)
+            await alert.present();
+          });
+        }
+
+      }
+    } else if (!this.formCadastro.valid) {
       this.presentAlert();
-    } else if (this.formCadastro.valid && !this.existente) {
-      this.user = this.formCadastro.value;
-
-      // let sql = `INSERT INTO usuario(nome,cpf,email,celular,crp,senha,dt_nasc,profissional,created_at,key) 
-      // VALUES('${this.user.nome}',
-      //         '${this.user.cpf}',
-      //         '${this.user.email}',
-      //         '${this.user.celular}',
-      //         '${this.user.crp}',
-      //         '${this.user.senha}',
-      //         '${this.user.dt_nassc}',
-      //         'true',
-      //          '2019-06-22',
-      //          '3');`;
-      this.bd.cadProf(this.user).then(async resposta => {
-        console.log(resposta);
-        const alert = await this.alertController.create({
-          message: 'Cadastro Efetuado com sucesso!',
-          buttons: ['OK']
-        });
-        await alert.present();
-        this.router.navigateByUrl('/login');
-        this.formCadastro.reset()
-      }).catch(async resposta => {
-        const alert = await this.alertController.create({
-          message: 'ERRO NO CADASTROOOOO!',
-          buttons: ['OK']
-        });
-        console.log("Erro: ", resposta)
-        await alert.present();
-      });
     }
-
   }
+
+  public async desejaAlterar() {
+    const alert = await this.alertController.create({
+      header: 'Registro',
+      message: 'Deseja Salvar as alterações do perfil?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: não deseja salvar as alterações');
+            return false;
+          }
+        }, {
+          text: 'Sim',
+          handler: () => {
+            
+          }
+        }
+      ]
+
+    });
+    await alert.present();
+    return true;
+  }
+
+  
+  //#region Shibaki
+  // async salvarPerfil()
+  // {
+  //   const alert = await this.alertController.create({
+  //   header: "Confirmação",
+  //   subHeader: "Confirmar alteração",
+  //   message: "Deseja mesmo alterar seu perfil com as informações preenchidas?",
+  //   inputs: [
+  //     {
+  //       name: 'senha',
+  //       placeholder: 'Senha',
+  //       type: 'password'
+  //     },
+  //     {
+  //       name: 'senha2',
+  //       placeholder: 'Redigite',
+  //       type: 'password'
+  //     }
+  //   ],
+  //   buttons: [
+  //     {
+  //       text: 'Cancelar',
+  //       role: 'cancelar',
+  //       handler: data => {
+  //         console.log('Cancel clicked');
+  //       }
+  //     },
+  //     {
+  //       text: 'Alterar',
+  //       handler: data => {
+  //         if(data.senha == data.senha2)
+  //         {
+  //           // senhas batem, então conferir no banco de dados se o usuário digitou a senha certa.
+  //           this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senha)
+  //           .then(async(response)=>{
+  //             if(response[0].senha == data.senha)
+  //             {
+  //               //passou pela verificação de senha, agora será feita a auteração em si
+  //                 let nome = (<HTMLInputElement>document.getElementById("0")).value;
+  //                 let email = (<HTMLInputElement>document.getElementById("1")).value;
+  //                 let data_nasc = (<HTMLInputElement>document.getElementById("2")).value;
+  //                 let celular = (<HTMLInputElement>document.getElementById("3")).value;
+  //                 let cpf = (<HTMLInputElement>document.getElementById("4")).value;
+
+  //                 /*this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senhaA)
+  //                 .then(async(response)=>{
+
+  //                 })
+  //                 .catch(async(response)=>{
+  //                 })*/
+  //               }
+  //               else
+  //               {
+  //                 const alert = await this.alertController.create({
+  //                 header: 'Erro',
+  //                       message: 'As senhas não batem. Tente novamente.',
+  //                       buttons:  [
+  //                         {
+  //                           text: 'OK',
+  //                         }
+  //                       ],
+  //                       });
+
+  //                       await alert.present();
+  //                   }
+  //           })
+  //             .catch(async(response)=>{
+  //               const alert = await this.alertController.create({
+  //                 header: 'Erro',
+  //                 message: 'Senha incorreta! Tente novamente!.',
+  //                 buttons:  [
+  //                   {
+  //                     text: 'OK',
+  //                   }       ],
+  //                });
+  //               await alert.present();
+  //              })
+  //         }
+  //         else
+  //         {
+  //           this.alertController.create({
+  //             header: 'Erro',
+  //             message: 'As senhas não batem. Tente novamente.',
+  //             buttons: ['Ok']
+  //           }).then(alert => {
+  //             alert.present();
+  //           });
+  //         }
+  //         //se clicar em alterar tem que dar o loading com sucesso ou falha na alteração
+  //       }
+  //     }
+  //   ]
+  // });
+
+  //   await alert.present();
+  // }
+
+  // async alterarSenha()
+  // {
+  //   const alert = await this.alertController.create({
+  //     header: "Alterar Senha",
+  //     subHeader: "Confirmar alteração",
+  //     message: "Deseja mesmo alterar sua senha?",
+  //     inputs: [
+  //       {
+  //         name: 'senhaA',
+  //         placeholder: 'Senha Antiga',
+  //         type: 'password'
+  //       },
+  //       {
+  //         name: 'senhaN',
+  //         placeholder: 'Nova Senha',
+  //         type: 'password'
+  //       },
+  //       {
+  //         name: 'senhaN2',
+  //         placeholder: 'Redigite a nova senha',
+  //         type: 'password'
+  //       }
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancelar',
+  //         role: 'cancelar',
+  //         handler: data => {
+  //           console.log('Cancel clicked');
+  //         }
+  //       },
+  //       {
+  //         text: 'Alterar',
+  //         handler: data => {
+  //           this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senhaA)
+  //           .then(async(response)=>{
+  //             if(response[0].senha == data.senha)
+  //             {
+  //               if(data.senhaN == data.senhaN2)
+  //               {
+
+  //                 const alert = await this.alertController.create({
+  //                   header: 'Confirmação',
+  //                   subHeader: 'Sucesso!',
+  //                   message: 'Alteração Realizada com sucesso!',
+  //                   buttons:  [
+  //                     {
+  //                       text: 'OK',
+  //                     }
+  //                   ],
+  //                   });
+  //                   alert.present();
+  //               }
+  //               else
+  //               {
+  //                 const alert = await this.alertController.create({
+  //                   header: 'Erro',
+  //                   message: 'As senhas novas não batem. Tente novamente.',
+  //                   buttons:  [
+  //                     {
+  //                       text: 'OK',
+  //                     }
+  //                   ],
+  //                   });
+
+  //                   await alert.present();
+  //               }
+  //               //passou pela verificação de senha, agora será feita a auteração em si
+  //             }
+  //             else
+  //             {
+  //               const alert = await this.alertController.create({
+  //                 header: 'Erro',
+  //                 message: 'As senhas não batem. Tente novamente.',
+  //                 buttons:  [
+  //                   {
+  //                     text: 'OK',
+  //                   }
+  //                 ],
+  //                 });
+
+  //                 await alert.present();
+  //             }
+  //           })
+  //             .catch(async(response)=>{
+  //              })
+  //         }
+  //       }
+  //     ]
+  //   });
+
+  //   await alert.present();
+  // }
+  //#endregion
+
+
   // validação no bd de campos unicos para cada usuario
 
   public async validaCPF(evento) {
     let cpf = evento.target.value
 
-    if (this.formCadastro.get('cpf').valid  && !this.user.nome) {
+    if (this.formCadastro.get('cpf').valid && !this.user.nome) {
 
       this.bd.selectGenerico("SELECT * FROM usuario WHERE cpf='" + cpf + "';").then(async (resposta) => {
         console.log(resposta)

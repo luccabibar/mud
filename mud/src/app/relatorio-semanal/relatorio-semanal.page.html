@@ -11,24 +11,26 @@
                 <ion-label class="label" text-wrap> Alimentação </ion-label>
             </ion-item>
             <ion-card>          
-                <ion-card-content>
+                <ion-card-content> 
+                 <form [formGroup]="slide1form">
+
                     <ion-item padding-horizontal lines="none">
-                      <ion-label class="label" position="stacked" text-wrap>O quanto você ingeriu de cada tipo de alimento? <br> <p>(Quantidade de dias na semana) </p></ion-label>
+                      <ion-label class="label" position="stacked" text-wrap>1. O quanto você ingeriu de cada tipo de alimento? <br> <p>(Quantidade de dias na semana) </p></ion-label>
                     </ion-item>
                     <ion-item padding-horizontal lines="none">
                         <ion-label class="label" position="stacked" text-wrap>Carboidratos</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
-                          <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
-                                <ion-select-option class="option" value="pouco">Pouco (1 a 2 dias)</ion-select-option>
-                                <ion-select-option class="option" value="medio">Médio (3 a 5 dias)</ion-select-option>
-                                <ion-select-option class="option" value="muito">Muito (6 a 7 dias)</ion-select-option>
+                          <ion-select formControlName="qtdCarboidratos" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option class="option" value="pouco" >Pouco (1 a 2 dias)</ion-select-option>
+                                <ion-select-option class="option" value="medio" >Médio (3 a 5 dias)</ion-select-option>
+                                <ion-select-option class="option" value="muito" >Muito (6 a 7 dias)</ion-select-option>
                           </ion-select>
                     </ion-item>
-                    
+
                     <ion-item padding-horizontal lines="none">
                         <ion-label class="label" position="stacked" text-wrap>Proteínas</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
-                          <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                          <ion-select formControlName="qtdProteinas" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado" >
                                 <ion-select-option class="option" value="pouco">Pouco (1 a 2 dias)</ion-select-option>
                                 <ion-select-option class="option" value="medio">Médio (3 a 5 dias)</ion-select-option>
                                 <ion-select-option class="option" value="muito">Muito (6 a 7 dias)</ion-select-option>
@@ -38,7 +40,7 @@
                     <ion-item padding-horizontal lines="none">
                         <ion-label class="label" position="stacked" text-wrap>Laticínios</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
-                          <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                          <ion-select formControlName="qtdLaticinios" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado" >
                                 <ion-select-option class="option" value="pouco">Pouco (1 a 2 dias)</ion-select-option>
                                 <ion-select-option class="option" value="medio">Médio (3 a 5 dias)</ion-select-option>
                                 <ion-select-option class="option" value="muito">Muito (6 a 7 dias)</ion-select-option>
@@ -48,23 +50,29 @@
                     <ion-item padding-horizontal lines="none">
                         <ion-label class="label" position="stacked" text-wrap>Verduras e frutas</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
-                          <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                          <ion-select formControlName="qtdVerdFrut" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
                                 <ion-select-option class="option" value="pouco">Pouco (1 a 2 dias)</ion-select-option>
                                 <ion-select-option class="option" value="medio">Médio (3 a 5 dias)</ion-select-option>
                                 <ion-select-option class="option" value="muito">Muito (6 a 7 dias)</ion-select-option>
                           </ion-select>
                     </ion-item>
-
+                  
                     <br>
                     <ion-item padding-horizontal lines="none">
-                        <ion-label class="label" position="stacked" text-wrap>Qual a média de copos de água tomados? <br> <p>(Quantidade diária) </p></ion-label>
-                          <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                        <ion-label class="label" position="stacked" text-wrap>2. Qual a média de copos de água tomados? <br> <p>(Quantidade diária) </p></ion-label>
+                          <ion-select formControlName="qtdAgua" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
                                 <ion-select-option class="option" value="pouco">menos de 5 copos </ion-select-option>
                                 <ion-select-option class="option" value="medio">6 a 11 copos</ion-select-option>
                                 <ion-select-option class="option" value="muito"> mais de 11 copos</ion-select-option>
                           </ion-select>
                     </ion-item>
-
+                  
+                    <br>
+                    <ion-item lines="none">
+                      <ion-button id="btnVoltar" disabled="true" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
+                      <ion-button id="btnProx" (click)="proxSlide1()" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
+                    </ion-item>
+                  </form>
                 </ion-card-content>
               </ion-card>
             </ion-list>
@@ -78,7 +86,7 @@
                 <ion-card>          
                     <ion-card-content>
                         <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap>Fez atividade física durante a semana?</ion-label>
+                          <ion-label class="label" position="stacked" text-wrap>1. Fez atividade física durante a semana?</ion-label>
                         </ion-item>
                         <ion-radio-group>
                           <ion-item lines="none" padding-horizontal>
@@ -94,7 +102,7 @@
                       <div id="fezatv" style="display: none;">
                         <ion-list>
                           <ion-item padding-horizontal lines="none">
-                            <ion-label class="label" position="stacked" text-wrap> Qual a duração média da(s) atividade(s)?</ion-label>
+                            <ion-label class="label" position="stacked" text-wrap>2. Qual a duração média da(s) atividade(s)?</ion-label>
                           </ion-item>
                           <ion-item lines="none">
                             <ion-range (ionFocus)="duracAtv()" (keyup)="duracAtv()" (ionChange)="duracAtv()" id="temp" min="0" max="800" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
@@ -103,12 +111,12 @@
                         </ion-list>
                         <ion-list>
                           <ion-item lines="none">
-                            <ion-label positions="stacked" text-wrap> Qual a intensidade da(s) atividade(s)? </ion-label>
+                            <ion-label positions="stacked" text-wrap>3. Qual a intensidade da(s) atividade(s)? </ion-label>
                           </ion-item>
                           <ion-radio-group>
                             <ion-item lines="none" padding-horizontal>
                               <ion-label>Leve</ion-label>
-                              <ion-radio slot="start"></ion-radio>
+                              <ion-radio slot="start" checked></ion-radio>
                             </ion-item>
                             <ion-item lines="none" padding-horizontal>
                               <ion-label>Moderado</ion-label>
@@ -121,6 +129,13 @@
                           </ion-radio-group>
                         </ion-list>
                       </div>
+
+                      <br>
+                      <ion-item lines="none">
+                        <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
+                        <ion-button id="btnProx" (click)="proxSlide2()" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
+                      </ion-item>
+
                     </ion-card-content>
                 </ion-card>
               </ion-list>
@@ -135,17 +150,18 @@
           </ion-item>
           <ion-card>
             <ion-card-content>
+              <form [formGroup]="slide3form">
                 <ion-item padding-horizontal lines="none">
-                    <ion-label class="label" position="stacked" text-wrap>Você dedicou algum tempo para atividades de lazer?</ion-label>
+                    <ion-label class="label" position="stacked" text-wrap>1. Você dedicou algum tempo para atividades de lazer?</ion-label>
                   </ion-item>
                   <ion-radio-group>
                     <ion-item lines="none" padding-horizontal>
                       <ion-label>Sim</ion-label>
-                      <ion-radio slot="start" value="sim2"  (ionSelect)="dedicou()"></ion-radio>
+                      <ion-radio slot="start" value="sim2" id="dedicous" (ionSelect)="dedicou()"></ion-radio>
                     </ion-item>
                     <ion-item lines="none" padding-horizontal>
                       <ion-label>Não</ion-label>
-                      <ion-radio slot="start" value="nao2" (ionSelect)="ndedicou()" checked></ion-radio>
+                      <ion-radio slot="start" value="nao2" id="dedicoun" (ionSelect)="dedicou()" checked></ion-radio>
                     </ion-item>
                   </ion-radio-group>
                       
@@ -154,9 +170,8 @@
                 <div id="dedico" style="display: none;">
                   <ion-list>
                       <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap>Quantas vezes? <br> <p> (Quantidade de dias na semana) </p></ion-label>
-                          <!--- fazer setinha com exemplos de carboidratos-->
-                            <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                          <ion-label class="label" position="stacked" text-wrap>2. Quantas vezes? <br> <p> (Quantidade de dias na semana) </p></ion-label>
+                            <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado" formControlName="qtdLazer">
                                   <ion-select-option class="option" value="pouco">1 a 2 dias</ion-select-option>
                                   <ion-select-option class="option" value="medio">3 a 5 dias</ion-select-option>
                                   <ion-select-option class="option" value="muito">6 a 7 dias</ion-select-option>
@@ -166,7 +181,7 @@
                       <br>
 
                       <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap>Você geralmente estava acompanhado na realização das atividades?</ion-label>
+                          <ion-label class="label" position="stacked" text-wrap>3. Você geralmente estava acompanhado na realização das atividades?</ion-label>
                         </ion-item>
                         <ion-radio-group>
                           <ion-item lines="none" padding-horizontal>
@@ -181,6 +196,11 @@
                   </ion-list>
                 </div>
 
+                <ion-item lines="none">
+                  <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
+                  <ion-button id="btnProx" (click)="proxSlide3()" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
+                </ion-item>
+              </form>
             </ion-card-content>
           </ion-card>
         </ion-list>
@@ -193,14 +213,15 @@
           </ion-item>
           <ion-card>
             <ion-card-content>
+            <form [formGroup]="slide4form">
              <ion-item padding-horizontal>
-                <ion-label class="label" position="stacked" text-wrap>Que horário você geralmente foi dormir?</ion-label>
-                <ion-datetime displayFormat="HH:mm a" placeholder="Selecione um horário"></ion-datetime>
+                <ion-label class="label" position="stacked" text-wrap>1. Que horário você geralmente foi dormir?</ion-label>
+                <ion-datetime displayFormat="HH:mm a" id="hrDormir" placeholder="Selecione um horário" minuteValues="00, 15, 30, 45" formControlName="horaDormir"></ion-datetime>
              </ion-item>
 
              <br>
              <ion-item padding-horizontal lines="none">
-                <ion-label class="label" position="stacked" text-wrap>Você despertou durante o sono?</ion-label>
+                <ion-label class="label" position="stacked" text-wrap>2. Você despertou durante o sono?</ion-label>
              </ion-item>
              <ion-radio-group>
                 <ion-item lines="none" padding-horizontal>
@@ -209,7 +230,7 @@
                 </ion-item>
                 <ion-item lines="none" padding-horizontal>
                   <ion-label>Não</ion-label>
-                  <ion-radio slot="start" value="nao4" (ionSelect)="ndespertou()" checked></ion-radio>
+                  <ion-radio slot="start" value="nao4" (ionSelect)="despertou()" checked></ion-radio>
                 </ion-item>
               </ion-radio-group>
 
@@ -218,17 +239,18 @@
               <div id="desperto" style="display: none;">
                   <ion-list>
                       <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap>Quantas vezes? <br> <p> (Quantidade de dias na semana) </p></ion-label>
+                          <ion-label class="label" position="stacked" text-wrap>3. Quantas vezes? <br> <p> (Vezes durante a semana) </p></ion-label>
                       </ion-item>
                       <ion-item>    
-                          <ion-label class="label" placeholder="1"> </ion-label>
-                          <ion-icon icon="add"></ion-icon>
+                          <ion-label padding-horizontal class="label" id="mostraVzs" value="3">1</ion-label>
+                          <ion-button (click)="menosVzs()"><ion-icon icon="remove"></ion-icon></ion-button>
+                          <ion-button (click)="maisVzs()"><ion-icon icon="add"></ion-icon></ion-button>
                       </ion-item>
 
                       <br>
 
                       <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap>Acordou precocemente? <p> Sentiu fadiga</p></ion-label>
+                          <ion-label class="label" position="stacked" text-wrap>4. Acordou precocemente? <p> Sentiu fadiga</p></ion-label>
                         </ion-item>
                         <ion-radio-group>
                           <ion-item lines="none" padding-horizontal>
@@ -243,189 +265,39 @@
                   </ion-list>
                 </div>
 
-
+                <ion-item lines="none">
+                  <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
+                  <ion-button id="btnProx" (click)="proxSlide4()" fill="outline" color="verdemud4" slot="end">Concluir</ion-button>
+                </ion-item>
+              </form>
             </ion-card-content>
           </ion-card>
         </ion-list>
       </ion-slide >
         
-      </ion-slides>
+    <ion-slide id="slide5">
+        <ion-list>
+        <ion-card>
+          <ion-card-content id="card5"> 
+              <ion-item padding-horizontal lines="none">
+                  <ion-label class="label" position="stacked" text-wrap>Gostaria de adicionar algum comentário?</ion-label>
+               </ion-item>
+               <ion-item lines="none" id="comentFinal"> 
+                 <ion-textarea rows="4" id="comentFinalInput" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
+               </ion-item>
+
+               <ion-item lines="none" id="salvaBtns">
+                  <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
+                  <ion-button id="btnProx" (click)="salva()" fill="outline" color="verdemud4" slot="end">Concluir</ion-button>
+                </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </ion-slide>
+
+  </ion-slides>
   </ion-content>
   
-  <ion-footer>
-      <div id="butProx">
-          <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
-          <ion-button id="btnProx" (click)="proxSlide()" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
-      </div>
-  </ion-footer>
-      
-  
 
 
   
-  <!----<ion-content>
-    <ion-img id="logoLogin" src="../../assets/logomud.png"></ion-img>
-    
-
-
-    <ion-slides>
-        <ion-slide id="slide1">
-            <ion-list lines="none" id="listoptions2">
-              <ion-item padding-horizontal>
-                  <ion-button (click)="alimentacao()" padding-horizontal fill="outline" color="verdemud4" expand="block">
-                      <ion-icon slot="start" name="add"></ion-icon>
-                      Alimentação
-                    </ion-button>
-              </ion-item>
-              <ion-item padding-horizontal>
-                  <ion-button (click)="atividade_fisica()" padding-horizontal fill="outline" color="verdemud4" expand="block">
-                      <ion-icon slot="start" name="add"></ion-icon>
-                      Atividade Física
-                    </ion-button>
-              </ion-item>
-              <ion-item padding-horizontal>
-                  <ion-button (click)="onClick()" padding-horizontal fill="outline" color="verdemud4" expand="block">
-                      <ion-icon slot="start" name="add"></ion-icon>
-                      Bem Estar
-                    </ion-button>
-              </ion-item>
-              <ion-item padding-horizontal>
-                  <ion-button (click)="onClick()" padding-horizontal fill="outline" color="verdemud4" expand="block">
-                      <ion-icon slot="start" name="add"></ion-icon>
-                      Sono
-                    </ion-button>
-                  </ion-item>
-            </ion-list>
-            <ion-item id="ph" padding-horizontal>
-              <ion-button id="registrar"> Registrar </ion-button>
-              <ion-button id="limpar"> Novo </ion-button>
-            </ion-item>
-        </ion-slide>
-
-        <ion-slide id="slide2">
-
-            
-            <form [formGroup]="slide2form" (ngSubmit)="onSubmit()">
-              <ion-item padding-horizontal>
-                <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required formControlName="email" type="text"></ion-input>
-              </ion-item>
-              <ion-item padding-horizontal>
-                <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required formControlName="password" type="text"></ion-input>
-              </ion-item>
-              <ion-button padding-horizontal type="submit" fill="outline" color="verdemud4" expand="block">
-                Login
-              </ion-button>
-            </form>
-          
-          </ion-slide>
-
-          <ion-slide id="slide3">
-
-          <ion-list>
-              <ion-card>          
-                  <ion-card-content>
-                      <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap>Fez atividade física durante a semana?</ion-label>
-                          </ion-item>
-                          <ion-radio-group>
-                                <ion-item lines="none" padding-horizontal>
-                                  <ion-label>Sim</ion-label>
-                                  <ion-radio slot="start" value="sim"  (ionSelect)="fezAtvd()"></ion-radio>
-                                </ion-item>
-                                <ion-item lines="none" padding-horizontal>
-                                  <ion-label>Não</ion-label>
-                                  <ion-radio slot="start" value="nao" (ionSelect)="fezAtvd()" checked></ion-radio>
-                                </ion-item>
-                          </ion-radio-group>
-                          
-                    <div id="fezatv" style="display: none;">
-                    <ion-list>
-                        <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap> Qual a duração média da(s) atividade(s)?</ion-label>
-                        </ion-item>
-                        <ion-item lines="none">
-                          <ion-range (ionFocus)="duracAtv()" (keyup)="duracAtv()" (ionChange)="duracAtv()" id="temp" min="0" max="800" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
-                        </ion-item>
-                        <ion-label class="label" id="lblTemp" position="fixed"></ion-label>
-                    </ion-list>
-
-                    <ion-list>
-                        <ion-item lines="none">
-                          <ion-label positions="stacked" text-wrap> Qual a intensidade da(s) atividade(s)? </ion-label>
-                        </ion-item>
-                        <ion-radio-group>
-                        <ion-item lines="none" padding-horizontal>
-                          <ion-label>Leve</ion-label>
-                          <ion-radio slot="start"></ion-radio>
-                        </ion-item>
-                        <ion-item lines="none" padding-horizontal>
-                          <ion-label>Moderado</ion-label>
-                          <ion-radio slot="start"></ion-radio>
-                        </ion-item>
-                        <ion-item lines="none" padding-horizontal>
-                          <ion-label>Alto</ion-label>
-                          <ion-radio slot="start"></ion-radio>
-                        </ion-item>
-                      </ion-radio-group>
-                    </ion-list>
-                  
-                  </div>
-
-                </ion-card-content>
-              </ion-card>
-            </ion-list>
-                  
-<!---
-          <form [formGroup]="slide3form" (ngSubmit)="onSubmit()">
-            <ion-item>
-              <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
-              <ion-input required formControlName="email" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
-              <ion-input required formControlName="password" type="text"></ion-input>
-            </ion-item>
-            <ion-button block color="primary" type="submit">
-              Login
-            </ion-button>
-          </form>
-
-        </ion-slide>
-         
-        <ion-slide id="slide4">
-          <form [formGroup]="slide4form" (ngSubmit)="onSubmit()">
-            <ion-item>
-              <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
-              <ion-input required formControlName="email" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
-              <ion-input required formControlName="password" type="text"></ion-input>
-            </ion-item>
-            <ion-button block color="primary" type="submit">
-              Login
-            </ion-button>
-          </form>
-        </ion-slide>
-            
-        <ion-slide id="slide5">
-          <form [formGroup]="slide5form" (ngSubmit)="onSubmit()">
-            <ion-item>
-              <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
-              <ion-input required formControlName="email" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
-              <ion-input required formControlName="password" type="text"></ion-input>
-            </ion-item>
-            <ion-button block color="primary" type="submit">
-              Login
-            </ion-button>
-          </form>
-        </ion-slide>
-
-    </ion-slides>
-  </ion-content>
--->

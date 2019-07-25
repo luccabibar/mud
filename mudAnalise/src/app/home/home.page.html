@@ -21,8 +21,10 @@
       <p *ngIf="user">CRP:{{user.crp}}</p>
     </ion-label>
     <ion-buttons slot="end">
+
       <ion-button routerLink="/cadastro">
-        <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+        Perfil
+        <ion-icon name="information-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-item>
@@ -43,8 +45,14 @@
         <ion-item tappable routerLink="/tabs">
           <ion-avatar slot="start">
             <img [src]="sessao.img">
+
           </ion-avatar>
-          <ion-label>{{sessao.nome}}</ion-label>
+          <ion-label>{{sessao.nome}}
+          </ion-label>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, provident eligendi. Quo, cumque. Fuga
+          maxime nam officia, quasi praesentium similique illo ratione recusandae facilis repellendus omnis odit et
+          perferendis sapiente!
+
         </ion-item>
         <ion-item-options side="end">
           <ion-item-option color="danger" (click)="alertaDeletar()">
