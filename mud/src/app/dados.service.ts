@@ -7,6 +7,16 @@ export class DadosService {
 
   constructor() { }
 
+  dados = [];
+
+  getDados(chave: string):any{
+    return this.dados[chave];
+  }
+
+  setDados(chave: string|number, valor:any){
+    this.dados[chave] = valor;
+  }
+
   Nome = "";
   Cpf = "";
   Email = "";
