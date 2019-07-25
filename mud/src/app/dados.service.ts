@@ -9,12 +9,16 @@ export class DadosService {
 
   dados = [];
 
-  getDados(chave: string):any{
-    return this.dados[chave];
+  setDados(nome: string, valor: any){
+    if(nome && nome.trim() !== ""){
+
+    }
+    this.dados[nome] = valor;
+
   }
 
-  setDados(chave: string|number, valor:any){
-    this.dados[chave] = valor;
+  getDados(nome: string): any{
+    return (nome && typeof this.dados[nome] !== "undefined") ? this.dados[nome] : false;  
   }
 
   Nome = "";
