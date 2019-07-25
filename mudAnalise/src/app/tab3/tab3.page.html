@@ -45,24 +45,13 @@
 
 
   <!-- CARDS -->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button>
-        <ion-icon name="trash"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-    <ion-fab-list side="start">
-      <ion-fab-button>
-        <ion-icon name="create"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-    <ion-fab-list side="end">
-      <ion-fab-button>
-        <ion-icon name="share"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
+  <ion-item>
+    <ion-label position="stacked">Notes</ion-label>
+    <ion-item>
+      <ion-label position="stacked">Título <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required type="text" id="1" name="inserirtitulo"></ion-input>
+    </ion-item>
+    <ion-textarea id="2" name="inserirtxt"></ion-textarea>
+    <ion-button (click)="inserirMural()" size="small">Adicionar</ion-button>
+  </ion-item>
 </ion-content>
