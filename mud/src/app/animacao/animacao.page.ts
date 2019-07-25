@@ -1,5 +1,6 @@
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-animacao',
@@ -8,19 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnimacaoPage implements OnInit {
 
-  constructor(private AlertController: AlertController) { }
+  constructor(private AlertController: AlertController,  private router: Router) { }
+  
+  public counter = 0;
 
   ngOnInit() {
-    var counter = 0;
+    var contatempo = 0;
     var teste = 124;
     var chegou = 0;
     var fonte = 14;
     var aux = 0;
     var opacidade = 1;   //parei aqui!
     var timer = setInterval(function() {
-      if( counter >= 10 ) {
+      if( this.counter >= 10 ) {
         clearInterval( timer );
       }
+      /*if(contatempo == 8000)
+      {}*/
       if( chegou == 0){
         teste+=3;
         opacidade-=0.023;
@@ -67,7 +72,7 @@ export class AnimacaoPage implements OnInit {
           opacidade = 1;
         }
       }
-      
+      contatempo++;
     }, 75);
   }
 
@@ -76,7 +81,46 @@ export class AnimacaoPage implements OnInit {
     
       const alert = await this.AlertController.create({
         message: 'Já está se sentindo melhor?',
-        buttons: ['Não', 'Sim']
+        buttons: [
+          {
+            text: 'Não',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              this.ngOnInit();
+            }
+          }, {
+            text: 'Sim',
+            handler: () => {
+              this.router.navigateByUrl('/relatorio-crise');
+            }
+          }
+        ]
+      });
+      return await alert.present();
+  
+  }
+
+  async mandaAlerta()
+  {
+      const alert = await this.AlertController.create({
+        header: 'Ajuda',
+        message: 'Você já está na respiração há 9 minutos, deseja contatar alguém?',
+        buttons: [
+          {
+            text: 'Não',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+            
+            }
+          }, {
+            text: 'Sim',
+            handler: () => {
+              this.router.navigateByUrl('/relatorio-crise');
+            }
+          }
+        ]
       });
       return await alert.present();
   
