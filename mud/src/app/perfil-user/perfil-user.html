@@ -25,13 +25,14 @@
     <img src="https://www.w3schools.com/howto/img_avatar2.png" style="width: 10rem; height: 10rem; margin-left: 3rem; margin-top: 1rem;"/>
     <ion-card-header>
       <ion-card-title style="font-size: 1.6rem;"><ion-input value="{{nome}}" type="text" name="nome" id="0"></ion-input></ion-card-title>
-      <ion-card-subtitle><ion-input style="margin-top: -1rem; margin-bottom: -2rem;" value="{{email}}" type="text" name="email" id="1"></ion-input></ion-card-subtitle>
+      <ion-card-subtitle><ion-input style="margin-top: -1rem; margin-bottom: -2rem;" value="{{email}}" type="email" name="email" id="1"></ion-input></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item>
           <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Data da Nascimento </ion-label>
-          <ion-input value="{{dtnasc}}" type="date" name="nome" id="2" placeholder="Informe sua data de Nascimento"></ion-input>
+          <!--<ion-input value="{{dtnasc}}" type="date" name="nome" id="2" placeholder="Informe sua data de Nascimento"></ion-input>-->
+          <ion-datetime backdropDismiss name="datanasc" value="{{dtnasc}}" id="2" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Celular</ion-label>

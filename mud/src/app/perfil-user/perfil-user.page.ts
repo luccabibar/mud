@@ -91,27 +91,48 @@ export class PerfilUserPage {
                   let celular = (<HTMLInputElement>document.getElementById("3")).value;
                   let cpf = (<HTMLInputElement>document.getElementById("4")).value;
 
-                  /*this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senhaA)
+                  this.bancoService.alteraUsuario(this.dadosService.getId().toString(),nome,email,data_nasc,celular,cpf)
                   .then(async(response)=>{
-                    
+                    const alert = await this.alertController.create({
+                      header: 'Confirmação',
+                      subHeader: 'Sucesso!',
+                      message: 'Alteração Realizada com sucesso!',
+                      buttons:  [
+                        {
+                          text: 'OK',
+                        }
+                      ],
+                      });
+                      alert.present();
                   })
                   .catch(async(response)=>{
-                  })*/
+                    const alert = await this.alertController.create({
+                      header: 'Erro',
+                      message: 'Erro ao salvar alterações. Tente novamente',
+                      buttons:  [
+                        {
+                          text: 'OK',
+                        }
+                      ],
+                      });
+    
+                      await alert.present();
+                  })
                 }
                 else
                 {
                   const alert = await this.alertController.create({
                   header: 'Erro',
-                        message: 'As senhas não batem. Tente novamente.',
-                        buttons:  [
-                          {
-                            text: 'OK',
-                          }
-                        ],
-                        });
-
-                        await alert.present();
+                  message: 'As senhas não batem. Tente novamente.',
+                  buttons:  [
+                    {
+                      text: 'OK',
                     }
+                  ],
+                  });
+
+                  await alert.present();
+                }
             })
               .catch(async(response)=>{
                 const alert = await this.alertController.create({
@@ -180,22 +201,38 @@ export class PerfilUserPage {
           handler: data => {
             this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senhaA)
             .then(async(response)=>{
-              if(response[0].senha == data.senha)
+              if(response[0].senha == data.senhaA)
               {
                 if(data.senhaN == data.senhaN2)
                 {
+                  this.bancoService.alteraSenha(this.dadosService.getId().toString(),data.senhaN)
+                  .then(async(response)=>{
+                    const alert = await this.alertController.create({
+                      header: 'Confirmação',
+                      subHeader: 'Sucesso!',
+                      message: 'Alteração Realizada com sucesso!',
+                      buttons:  [
+                        {
+                          text: 'OK',
+                        }
+                      ],
+                      });
+                      alert.present();
+                  })
+                  .catch(async(response)=>{
+                    const alert = await this.alertController.create({
+                      header: 'Erro!',
+                      message: 'Erro ao alterar senha. Tente novamente.',
+                      buttons:  [
+                        {
+                          text: 'OK',
+                        }
+                      ],
+                      });
+                      alert.present();
+                  })
 
-                  const alert = await this.alertController.create({
-                    header: 'Confirmação',
-                    subHeader: 'Sucesso!',
-                    message: 'Alteração Realizada com sucesso!',
-                    buttons:  [
-                      {
-                        text: 'OK',
-                      }
-                    ],
-                    });
-                    alert.present();
+                    
                 }
                 else
                 {
@@ -213,11 +250,11 @@ export class PerfilUserPage {
                 }
                 //passou pela verificação de senha, agora será feita a auteração em si
               }
-              else
-              {
+            })
+              .catch(async(response)=>{
                 const alert = await this.alertController.create({
                   header: 'Erro',
-                  message: 'As senhas não batem. Tente novamente.',
+                  message: 'Senha antiga incorreta. Tente novamente.',
                   buttons:  [
                     {
                       text: 'OK',
@@ -226,9 +263,6 @@ export class PerfilUserPage {
                   });
 
                   await alert.present();
-              }
-            })
-              .catch(async(response)=>{
                })
           }
         }
