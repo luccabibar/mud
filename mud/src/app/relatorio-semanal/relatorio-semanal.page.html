@@ -278,15 +278,15 @@
     <ion-slide id="slide5">
         <ion-list>
         <ion-card>
-          <ion-card-content> 
+          <ion-card-content id="card5"> 
               <ion-item padding-horizontal lines="none">
                   <ion-label class="label" position="stacked" text-wrap>Gostaria de adicionar algum comentário?</ion-label>
                </ion-item>
-               <ion-item padding-horizontal lines="none">
-                 <ion-textarea rows="4" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
+               <ion-item lines="none" id="comentFinal"> 
+                 <ion-textarea rows="4" id="comentFinalInput" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
                </ion-item>
 
-               <ion-item lines="none">
+               <ion-item lines="none" id="salvaBtns">
                   <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
                   <ion-button id="btnProx" (click)="salva()" fill="outline" color="verdemud4" slot="end">Concluir</ion-button>
                 </ion-item>

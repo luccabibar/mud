@@ -13,6 +13,8 @@ ion-label {
     color:  #165044ff !important; 
 }
 
+
+
 p {
     font-size: 0.8 em;
     color: #989aa2;
@@ -62,4 +64,18 @@ ion-slides {
 #btnProx
 {
     margin-left: 50%;
+}
+
+#comentFinal
+{
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 5px;
+    width: 80%;
+    margin: 0;
+    margin-top: 60px;
+    margin-bottom: -30px;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
