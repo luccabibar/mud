@@ -1,3 +1,4 @@
+import { GraficoCrisePage } from './../opcoes-menu/grafico-crise/grafico-crise.page';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -9,6 +10,20 @@ export class BancoService {
   constructor(private http: HttpClient) {
 
   }
+
+  inserirMural(titulo: string, texto: string, id: number, crp: string)
+  {
+    var data={
+      titulo: titulo,
+      texto: texto,
+      id: id,
+      crp: crp,
+    }
+
+    let header = new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL + '', data, {headers: header}).toPromise();
+  }
+
   insertGenerico(sql: string) {
     var data = {
       sql: sql,
