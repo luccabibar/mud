@@ -12,6 +12,44 @@ import { async } from 'q';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  public murais = [
+  ];
+
+
+
+  // ngOnInit() {
+  //   this.addMural();
+  // }
+
+  // public addMural()
+  // {
+  //   let id=this.dadosService.getId();
+  //   this.BancoService.selecionarMuralProf(this.user.crp).then(async(response)=>{
+  //     const alert = await this.AlertController.create({
+  //       header: 'Confirmação',
+  //       subHeader: 'Sucesso!',
+  //       message: JSON.stringify(response[0].id_usuario),
+  //       buttons: ['OK']
+  //     });
+      
+  //     this.murais.push(response[0]);
+
+  //     await alert.present();
+  //   }
+  // )
+  // .catch(async(response)=>{
+
+  //   const alert = await this.AlertController.create({
+  //     header: 'Confirmação',
+  //     subHeader: 'Erro!',
+  //     message: JSON.stringify(response),
+  //     buttons: ['OK']
+  //   });
+
+  //   await alert.present()
+  // })
+     
+  //}
   public user: IUsuario;
   constructor(private dadosService: DadosService, private BancoService: BancoService,private AlertController: AlertController)
   { 
@@ -24,18 +62,16 @@ export class Tab3Page {
   {
     let titulo = (<HTMLInputElement>document.getElementById("1")).value;
     let texto = (<HTMLInputElement>document.getElementById("2")).value;
-    let id=this.dadosService.getId();
+    let id=null;
 
     this.BancoService.inserirMural(titulo,texto,id,this.user.crp).then(async(response)=>{
       const alert = await this.AlertController.create({
         header: 'Confirmação',
         subHeader: 'Sucesso!',
-        message: JSON.stringify(response[0].id_usuario),
+        message: JSON.stringify(response),
         buttons: ['OK']
       });
       
-      
-
       await alert.present();
     }
   )
