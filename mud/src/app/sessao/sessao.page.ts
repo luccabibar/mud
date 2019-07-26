@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { BancoService } from "../banco.service";
 import { DadosService } from "../dados.service";
 
+import { ZBar, ZBarOptions } from '@ionic-native/zbar/ngx';
+import { AlertController } from '@ionic/angular';
+import { BoundDirectivePropertyAst } from '@angular/compiler';
 
 @Component({
   selector: 'app-sessao',
@@ -26,12 +29,13 @@ export class SessaoPage implements OnInit {
     }
   }
 
-  constructor(db: BancoService, dados: DadosService) 
+  constructor(db: BancoService, dados: DadosService, qrReader: ZBar) 
   {  
     this.dados = dados;
   }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
     this.checksession();
   }
 
