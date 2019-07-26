@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'relatorio-semanal', loadChildren: './relatorio-semanal/relatorio-semanal.module#RelatorioSemanalPageModule' },
   { path: 'relatorio-crise', loadChildren: './relatorio-crise/relatorio-crise.module#RelatorioCrisePageModule' },
   { path: 'mural', loadChildren: './mural/mural.module#MuralPageModule' },
+  { path: 'editar-sintoma', loadChildren: './editar-sintoma/editar-sintoma.module#EditarSintomaPageModule' },
   { path: 'sessao', loadChildren: './sessao/sessao.module#SessaoPageModule' },
   { path: '', loadChildren: './animacao/animacao.module#AnimacaoPageModule' },
   
