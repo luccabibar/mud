@@ -13,6 +13,7 @@ export class BancoService {
 
   inserirMural(titulo: string, texto: string, id: number, crp: string)
   {
+    id=4;
     var data={
       titulo: titulo,
       texto: texto,
@@ -21,7 +22,7 @@ export class BancoService {
     }
 
     let header = new HttpHeaders({'Content-type':'application/json'});
-    return this.http.post(this.API_URL + '', data, {headers: header}).toPromise();
+    return this.http.post(this.API_URL + 'inserirMural', data, {headers: header}).toPromise();
   }
 
   insertGenerico(sql: string) {
