@@ -184,14 +184,13 @@ export class AuthPage implements OnInit {
       
     }while(!userId && !this.cancel);
     
-    //ativa permissao, e o timer
     this.sessionDados = {
       status : 1,
       hash : hash,
       idUser : userId
     };
-    //TODO: impelentar timer
 
+    this.back();
   }
 
   constructor(private router: Router, private db:BancoService) {  
