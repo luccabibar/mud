@@ -85,13 +85,13 @@ export class PerfilUserPage {
               if(response[0].senha == data.senha)
               {
                 //passou pela verificação de senha, agora será feita a auteração em si
-                  let nome = (<HTMLInputElement>document.getElementById("0")).value;
-                  let email = (<HTMLInputElement>document.getElementById("1")).value;
-                  let data_nasc = (<HTMLInputElement>document.getElementById("2")).value;
-                  let celular = (<HTMLInputElement>document.getElementById("3")).value;
-                  let cpf = (<HTMLInputElement>document.getElementById("4")).value;
+                  let nome = (<HTMLInputElement>document.getElementById("6")).value;
+                  let email = (<HTMLInputElement>document.getElementById("7")).value;
+                  let data_nasc = (<HTMLInputElement>document.getElementById("3")).value;
+                  let celular = (<HTMLInputElement>document.getElementById("4")).value;
+                  let cpf = (<HTMLInputElement>document.getElementById("5")).value;
 
-                  this.bancoService.alteraUsuario(this.dadosService.getId().toString(),nome,email,data_nasc,celular,cpf)
+                  this.bancoService.alteraUsuario(this.dadosService.getId().toString(),nome,email.toString(),data_nasc.toString(),celular,cpf)
                   .then(async(response)=>{
                     const alert = await this.alertController.create({
                       header: 'Confirmação',
@@ -108,6 +108,7 @@ export class PerfilUserPage {
                   .catch(async(response)=>{
                     const alert = await this.alertController.create({
                       header: 'Erro',
+                      subHeader: email,
                       message: 'Erro ao salvar alterações. Tente novamente',
                       buttons:  [
                         {

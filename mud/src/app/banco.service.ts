@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NOMEM } from 'dns';
 import { EmailValidator } from '@angular/forms';
 import { CelularValidator } from './validators/celular';
 
