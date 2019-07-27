@@ -205,8 +205,8 @@ export class AuthPage implements OnInit {
       hash: hash,
       idUser: userId
     };
-    //TODO: impelentar timer
 
+    this.back();
   }
 
   constructor(private router: Router, private db: BancoService, private ds: DadosService) {

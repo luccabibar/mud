@@ -14,55 +14,35 @@
 </ion-header>
 
 <ion-content>
-
-
-  <ion-card class="card-1">
-    <ion-item>
-      <ion-icon name="man" slot="start"></ion-icon>
-      <ion-label><strong>Meditação</strong></ion-label>
-    </ion-item>
-
-    <ion-card-content>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe consequuntur officia magni, quod atque, aut eum mollitia placeat delectus fugit nostrum sapiente hic tempore vitae voluptatibus perspiciatis, quas voluptas ad.
-
-
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card class="card-2">
-    <ion-item>
-      <ion-icon name="flask" slot="start"></ion-icon>
-      <ion-label><strong>Remédios</strong></ion-label>
-    </ion-item>
-
-    <ion-card-content>
-      The modal is lazy loaded, BUT, it will not be loaded when you open it, as you probably would except, but rather
-      when the module, where the modal’s module is use, will be loaded.
-
-
-    </ion-card-content>
-  </ion-card>
+  <ion-list>
+    <ion-item-sliding *ngFor="let mural of murais">
+      <ion-item tappable routerLink="/tabs">
+        <ion-avatar slot="start">
+          <img [src]="sessao.img">
+        </ion-avatar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{mural.titulo}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{mural.texto}}
+          </ion-card-content>
+        </ion-card>         
+      </ion-item>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
 
   <!-- CARDS -->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button>
-        <ion-icon name="trash"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-    <ion-fab-list side="start">
-      <ion-fab-button>
-        <ion-icon name="create"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-    <ion-fab-list side="end">
-      <ion-fab-button>
-        <ion-icon name="share"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
+  <ion-item>
+    <ion-label position="stacked">Notas</ion-label>
+    <ion-item>
+      <ion-label position="stacked">Título <ion-text color="danger"></ion-text></ion-label>
+      <ion-input required type="text" id="1" name="inserirtitulo"></ion-input>
+    <ion-label position="stacked">Corpo da mensagem <ion-text color="danger"></ion-text></ion-label>
+  </ion-item>
+    <ion-textarea id="2" name="inserirtxt"></ion-textarea>
+    <ion-button (click)="inserirMural()" size="small">Adicionar</ion-button>
+  </ion-item>
 </ion-content>

@@ -14,6 +14,14 @@ export class AnimacaoPage implements OnInit {
   public counter = 0;
 
   ngOnInit() {
+    var aux = 0;
+    this.animacao();
+    this.mandaAlerta();
+  }
+
+  
+  animacao()
+  {
     var contatempo = 0;
     var teste = 124;
     var chegou = 0;
@@ -24,8 +32,6 @@ export class AnimacaoPage implements OnInit {
       if( this.counter >= 10 ) {
         clearInterval( timer );
       }
-      /*if(contatempo == 8000)
-      {}*/
       if( chegou == 0){
         teste+=3;
         opacidade-=0.023;
@@ -84,11 +90,6 @@ export class AnimacaoPage implements OnInit {
         buttons: [
           {
             text: 'Não',
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler: () => {
-              this.ngOnInit();
-            }
           }, {
             text: 'Sim',
             handler: () => {
@@ -103,16 +104,15 @@ export class AnimacaoPage implements OnInit {
 
   async mandaAlerta()
   {
+    await new Promise(resolve => setTimeout(resolve, 540000));
       const alert = await this.AlertController.create({
         header: 'Ajuda',
-        message: 'Você já está na respiração há 9 minutos, deseja contatar alguém?',
+        message: 'Você já está na respiração há algum tempo, deseja contatar alguém?',
         buttons: [
           {
             text: 'Não',
-            role: 'cancel',
-            cssClass: 'secondary',
             handler: () => {
-            
+              this.mandaAlerta();
             }
           }, {
             text: 'Sim',
@@ -123,7 +123,6 @@ export class AnimacaoPage implements OnInit {
         ]
       });
       return await alert.present();
-  
-  }
-
+    }
+    
 }

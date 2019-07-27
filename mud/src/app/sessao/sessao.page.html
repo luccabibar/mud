@@ -4,6 +4,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-button id="notsessao" (click)="startSessao()">
+    iniciar sessão
+  </ion-button>
 
+  <ion-button id="sessao" (click)="stopSessao()">
+    interromper sessão
+  </ion-button>
 </ion-content>

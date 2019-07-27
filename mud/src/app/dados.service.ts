@@ -7,6 +7,22 @@ export class DadosService {
 
   constructor() { }
 
+  dados = [];
+
+  setDados(nome: string, valor: any)
+  {
+    if(nome && nome.trim() !== ""){
+
+      return;
+    }
+    this.dados[nome] = valor;
+  }
+
+  getDados(nome: string): any
+  {
+    return (nome && typeof this.dados[nome] !== "undefined") ? this.dados[nome] : false;  
+  }
+
   Nome = "";
   Cpf = "";
   Email = "";
