@@ -1,9 +1,11 @@
+import { DadosService } from './../servicos/dados.service';
 import { Component, OnInit } from '@angular/core';
 
 import { Router, NavigationExtras } from '@angular/router';
 
 import { BancoService } from "../servicos/banco.service"
 import QRious from "qrious"
+import { IUsuario } from '../interfaces/IUsuario';
 
 @Component({
   selector: 'app-auth',
@@ -14,6 +16,8 @@ export class AuthPage implements OnInit {
 
   private sessionDados: Object;
   private cancel: boolean;
+  public user: IUsuario;
+  public timeQR = 0;
 
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -26,36 +30,37 @@ export class AuthPage implements OnInit {
    * @param tam o tamaho do hash
    * @returns uma string aleatoria de length = tam 
    */
-  gerarhash(tam){
+  gerarhash(tam) {
     let chars: String = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
     let text: String = "";
     for (let c = 0; c < tam; c++) {
       text += chars[Math.floor(Math.random() * (chars.length - 1))];
-      
     }
 
     return text;
   }
-  
+
   /**
    * gera codigo qr com base num id e num hash 
    * e joga ele num elemento da pagina
    * 
    * @param hash hash gerado aleatoriamente com id do user
    */
-  geraQr(hash){
+  geraQr() {
+    let id = this.user.id_usuario;
+    let hash = id + "-" + this.gerarhash(20);
+
     let target = document.getElementById('qr-img');
-    console.log(target);
-    
+    console.log("target: ", target);
+
     //gera codigo e joga ele num elem
     let qr = new QRious({
       element: target,
       foreground: 'blue',
-      size:250,
+      size: 250,
       value: hash,
-      
     });
-    
+    return hash;
   }
 
   /**
@@ -73,9 +78,9 @@ export class AuthPage implements OnInit {
 
     //bota ele no view
     parent.appendChild(clear);
-    
+
   }
-  
+
   /**
    * gera um objeto sessao no banco de acordo com os dados
    * que ja foram gerados
@@ -86,38 +91,36 @@ export class AuthPage implements OnInit {
    * @param hash hash gerado aleatoriamente com o id do user
    * @returns a promisse com o sucesso da sessao
    */
-  geraSessao(id, hash){
+  geraSessao(id, hash) {
 
     return new Promise((resolve, reject) => {
-      let sql = "INSERT INTO public.sessao VALUES (" + 
-                  "default, " +
-                  "'" + hash + "', " +
-                  "NULL, " +
-                  id + ", " +
-                  "0, " +
-                  "NOW(), " +
-                  "NULL, " +
-                  "NULL " +
-                ");";
+      let sql = "INSERT INTO public.sessao VALUES (" +
+        "default, " +
+        "'" + hash + "', " +
+        "NULL, " +
+        id + ", " +
+        "0, " +
+        "NOW(), " +
+        "NULL, " +
+        "NULL " +
+        ");";
 
       this.db.insertGenerico(sql).then((response) => {
         console.log(response);
-        
+
         resolve(true);
 
-      }).catch((ex) => {  
-        if(ex.error.text == "sucesso"){
+      }).catch((ex) => {
+        if (ex.error.text == "sucesso") {
           resolve(true);
-        
-        }else{
+        } else {
           resolve(false);
-
         }
 
       });
-      
-  });
-}
+
+    });
+  }
 
   /**
    * procura por uma sessao pra ver se ela existe.
@@ -131,81 +134,105 @@ export class AuthPage implements OnInit {
   checkSessao(hash) {
     //(╯°□°）╯︵ ┻━┻
     return new Promise((resolve, reject) => {
-      let sql = "SELECT usuario_id FROM sessao WHERE hash='" + hash + "';";  
+      let sql = "SELECT usuario_id FROM sessao WHERE hash='" + hash + "';";
 
       this.db.selectGenerico(sql).then(response => {
-        if(response[0].usuario_id !== null) {
+        if (response[0].usuario_id !== null) {
           resolve(response[0].usuario_id);
-       
+
         } else {
           resolve(0);
-       
+
         }
 
       }).catch(ex => {
-        resolve(0); 
-      
+        resolve(0);
+
       });
-    
+
     });
-  
+
   }
-  
+
   /**
    * inicia o processo de sessao, criando um hash pra id da sessao,
    * cira um qrcode com ela e cria um objeto sessao no banco,
    * depois espera por confirmacao que a sessao comecou,
    * pra entao buscar os dados da sessao do usuario
    */
-  async iniciaSessao(){
-    let id = 1;
-    let hash = id + "-" + this.gerarhash(20);
-    
+  async iniciaSessao() {
+    let id = this.user.id_usuario;
     //gera qr
-    this.geraQr(hash);
-    
+    let hash = this.geraQr();
+    let hashAnterior = hash;
+
     //cria a session no banco
     let success = await this.geraSessao(id, hash);
     //if deu errado, limpa tudo e prepara pra nova sessao
-    if(!success){
+    if (!success) {
       this.limpaQr();
       alert("houve um erro inesperado. tente novamente");
       return;
-
     }
 
     //espera por confirmacao
-    let userId:any = 0;
-    do{
+    let userId: any = 0;
+    do {
       //espera um teco e dps procura pela sessao ate achar
       await this.sleep(2 * 1000);
       userId = await this.checkSessao(hash);
-      console.log(this.cancel);
-      
-    }while(!userId && !this.cancel);
-    
+      console.log(" passou ", this.cancel);
+
+      // Passa o hash atual e recebe o novo hash
+      hash = this.atualizaQR(hash);
+
+      if (hash != hashAnterior) {
+        hashAnterior = hash;
+        //cria a session no banco
+        let success = await this.geraSessao(this.user.id_usuario, hash);
+        if (!success) {
+          this.limpaQr();
+          alert("houve um erro inesperado. tente novamente");
+          return;
+        }
+      }
+
+    } while (!userId && !this.cancel);
+
     //ativa permissao, e o timer
     this.sessionDados = {
-      status : 1,
-      hash : hash,
-      idUser : userId
+      status: 1,
+      hash: hash,
+      idUser: userId
     };
     //TODO: impelentar timer
 
   }
 
-  constructor(private router: Router, private db:BancoService) {  
-    
+  constructor(private router: Router, private db: BancoService, private ds: DadosService) {
+    this.user = this.ds.getDados("user");
   }
 
   ngOnInit() {
+
     this.iniciaSessao();
     this.cancel = false;
 
   }
 
-  back(){
-    let navDados:NavigationExtras = {
+  public atualizaQR(hashAnterior) {
+    this.timeQR += 1;
+    if (this.timeQR == 15) {
+      let hash = this.geraQr();
+      console.log("gerou");
+      this.timeQR = 0;
+      return hash;
+    }
+    return hashAnterior;
+  }
+
+  back() {
+    let navDados: NavigationExtras = {
       state: {
         dados: this.sessionDados
       }
@@ -213,7 +240,7 @@ export class AuthPage implements OnInit {
 
     this.cancel = true;
     console.log(this.cancel);
-    
+
     this.router.navigate(["/home"], navDados);
 
   }

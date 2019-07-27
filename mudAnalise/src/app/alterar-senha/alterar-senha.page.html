@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="escuro">
+    <ion-title *ngIf="this.user.nome">Alteração de Senha</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formCadastro">
+
+    <ion-item>
+      <ion-label position="stacked">Senha Atual</ion-label>
+      <ion-input #senhaAtual formControlName="senhaAtual" type="password" placeholder="..."></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.senhaAtual">
+          <span
+            *ngIf="formCadastro.get('senhaAtual').hasError(erro.tipo) && (formCadastro.get('senhaAtual').dirty || formCadastro.get('senhaAtual').touched)"
+            class="msg-erro">
+            {{erro.mensagem}}
+          </span>
+        </ng-container>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nova Senha</ion-label>
+      <ion-input formControlName="senha" type="password" placeholder="..."></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.senha">
+        <span
+          *ngIf="formCadastro.get('senha').hasError(erro.tipo) && (formCadastro.get('senha').dirty || formCadastro.get('senha').touched)"
+          class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Confirmar Senha</ion-label>
+      <ion-input formControlName="confirmaSenha" type="password" placeholder="..."></ion-input>
+      <ng-container *ngFor="let erro of mensagens_validacao.confirmaSenha">
+        <span
+          *ngIf="formCadastro.get('confirmaSenha').hasError(erro.tipo) && (formCadastro.get('confirmaSenha').dirty || formCadastro.get('confirmaSenha').touched)"
+          class="msg-erro">
+          {{erro.mensagem}}
+        </span>
+      </ng-container>
+    </ion-item>
+    <br>
+    <ion-button *ngIf="formCadastro.valid" expand="full" (click)="salvar()">Salvar</ion-button>
+  </form>
+</ion-content>
