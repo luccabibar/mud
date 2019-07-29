@@ -228,37 +228,56 @@ export class RelatorioSemanalPage implements OnInit {
   }
   
 
-  salva()
+  async salva()
   {
     //alimentação
-    let carboidratos = (<HTMLInputElement>document.getElementById("1")).value;
-    let proteinas = (<HTMLInputElement>document.getElementById("1")).value;
-    let lacticinios = (<HTMLInputElement>document.getElementById("1")).value;
-    let verdfrut = (<HTMLInputElement>document.getElementById("1")).value;
-    let agua = (<HTMLInputElement>document.getElementById("1")).value;
+    let carboidratos = (<HTMLInputElement>document.getElementById("carb")).value;
+    let proteinas = (<HTMLInputElement>document.getElementById("prot")).value;
+    let lacticinios = (<HTMLInputElement>document.getElementById("lac")).value;
+    let verdfrut = (<HTMLInputElement>document.getElementById("verfrut")).value;
+    let agua = (<HTMLInputElement>document.getElementById("agua")).value;
 
     //Atividade-Física
-    let fez_atv = (<HTMLInputElement>document.getElementById("1")).value;
-    let duracao_atv = (<HTMLInputElement>document.getElementById("1")).value;
-    let intensidade_atv = (<HTMLInputElement>document.getElementById("1")).value;
+    let fez_atv_sim = (<HTMLInputElement>document.getElementById("atv_sim")).value;
+    let fez_atv_nao = (<HTMLInputElement>document.getElementById("atv_nao")).value;
+    let duracao_atv = (<HTMLInputElement>document.getElementById("atv_temp")).value;
+    let intensidade_atv_l = (<HTMLInputElement>document.getElementById("atv_leve")).value;
+    let intensidade_atv_m = (<HTMLInputElement>document.getElementById("atv_moderado")).value;
+    let intensidade_atv_a = (<HTMLInputElement>document.getElementById("atv_alto")).value;
     
     //Lazer
-    let fez_lazer = (<HTMLInputElement>document.getElementById("1")).value;
-    let vezes_Lazer = (<HTMLInputElement>document.getElementById("1")).value;
-    let acomp_lazer = (<HTMLInputElement>document.getElementById("1")).value;
+    let fez_lazer_sim = (<HTMLInputElement>document.getElementById("dedicous")).value;
+    let fez_lazer_nao = (<HTMLInputElement>document.getElementById("dedicoun")).value;
+    let vezes_Lazer = (<HTMLInputElement>document.getElementById("lazer_vezes")).value;
+    let acomp_lazer_sim = (<HTMLInputElement>document.getElementById("lazer_sim")).value;
+    let acomp_lazer_nao = (<HTMLInputElement>document.getElementById("lazer_nao")).value;
     
 
     //Sono
-    let horario_dorm = (<HTMLInputElement>document.getElementById("1")).value;
-    let despertou = (<HTMLInputElement>document.getElementById("1")).value;
-    let vezes_sono = (<HTMLInputElement>document.getElementById("1")).value;
-    let acorou_precoce = (<HTMLInputElement>document.getElementById("1")).value;
+    let horario_dorm = (<HTMLInputElement>document.getElementById("hrDormir")).value;
+    let despertou_sim = (<HTMLInputElement>document.getElementById("sono_sim")).value;
+    let despertou_nao = (<HTMLInputElement>document.getElementById("sono_nao")).value;
+    let vezes_sono = (<HTMLInputElement>document.getElementById("mostraVzs")).value;
+    let acordou_precoce_sim = (<HTMLInputElement>document.getElementById("sono_sim2")).value;
+    let acordou_precoce_nao = (<HTMLInputElement>document.getElementById("sono_nao2")).value;
 
     //comentários
-    let coment_lazer = (<HTMLInputElement>document.getElementById("1")).value;
-    let coment_final = (<HTMLInputElement>document.getElementById("1")).value;
+    let coment_lazer = (<HTMLInputElement>document.getElementById("comentLazerInput")).value;
+    let coment_final = (<HTMLInputElement>document.getElementById("comentFinalInput")).value;
 
 
+
+    const alert = await this.AlertController.create({
+      header: 'Erro',
+      message: carboidratos+"\n"+proteinas+"n"+lacticinios+"\n"+verdfrut+"\n"+agua+"\n"+
+      fez_atv_sim+"n"+fez_atv_nao+"\n"+duracao_atv+"\n"+intensidade_atv_l+"\n"+intensidade_atv_m+"\n"+intensidade_atv_a+
+      "\n"+fez_lazer_sim+"\n"+fez_lazer_nao+"\n"+vezes_Lazer+"\n"+acomp_lazer_sim+"\n"+acomp_lazer_nao+"\n"+
+      horario_dorm+"\n"+despertou_sim+"\n"+despertou_nao+"\n"+vezes_sono+"\n"+acordou_precoce_sim+"\n"+acordou_precoce_nao+
+      "\n"+coment_lazer+"\n"+coment_final,
+      buttons: ['OK']
+    });
+    
+    await alert.present();
 
     
 
