@@ -1,3 +1,1 @@
-<link rel="stylesheet" href="./css/home.css">
-<section class="banner">
-</section>
+<?php session_start();?><link rel="stylesheet" href="./css/home.css"><section class="banner"> <div class="h-slide"> <div class="h-s-text"> <h3>MUD</h3> <P> Desenvolvido e pensado para você! Assim, o sistema MUD visa facilitar a vida do profissional da mente em que mediante o uso, o profissional poderá focar no paciente em vez de perder tempo com cálculos e atividades intermediárias! </P> </div> </div> </section> 

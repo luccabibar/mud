@@ -1,0 +1,27 @@
+.window-options{
+    width: 100%;
+    display: flex;
+    padding: var(--padding-default-page);
+    background: var(--color-blue-clear-specific);
+    background: var(--background-linear);
+    justify-content: space-between;
+    align-items: center
+}
+.btn-w-options{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    align-items: center;
+    color:white!important;
+    border-color:white!important
+}
+.btn-w-options > * {
+    margin: 5%;
+    color:white!important
+}
+.btn-w-options:hover,.btn-w-options:hover > *{
+    color: var(--color-green-2)!important
+}
+.btn-w-options > span::before,.btn-w-options > span::after{
+    background-color: white!important
+}
