@@ -34,17 +34,17 @@ export class CadastroPage implements OnInit {
     dt_nasc: [
       { tipo: 'required', mensagem: 'O campo Data de Nascimento é obrigatório.' },
     ],
-    senha: [
-      { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
-      { tipo: 'minlength', mensagem: 'A senha deve ter pelo menos 6 caracteres.' },
-      { tipo: 'maxlength', mensagem: 'A senha deve ter no máximo 8 caractéres.' }
-    ],
-    confirmaSenha: [
-      { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
-      { tipo: 'minlength', mensagem: 'A senha deve ter pelo menos 6 caracteres.' },
-      { tipo: 'maxlength', mensagem: 'A senha deve ter no máximo 8 caractéres.' },
-      { tipo: 'comparacao', mensagem: 'Deve ser igual a senha.' }
-    ],
+    // senha: [
+    //   { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
+    //   { tipo: 'minlength', mensagem: 'A senha deve ter pelo menos 6 caracteres.' },
+    //   { tipo: 'maxlength', mensagem: 'A senha deve ter no máximo 8 caractéres.' }
+    // ],
+    // confirmaSenha: [
+    //   { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
+    //   { tipo: 'minlength', mensagem: 'A senha deve ter pelo menos 6 caracteres.' },
+    //   { tipo: 'maxlength', mensagem: 'A senha deve ter no máximo 8 caractéres.' },
+    //   { tipo: 'comparacao', mensagem: 'Deve ser igual a senha.' }
+    // ],
     celular: [
       { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
       { tipo: 'minlength', mensagem: 'O celular deve ter pelo menos 15 caracteres.' },
@@ -94,13 +94,16 @@ export class CadastroPage implements OnInit {
       email: [this.user.email, Validators.compose([Validators.required, Validators.email])],
       celular: [this.user.celular, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])],
       crp: [this.user.crp, Validators.compose([Validators.required, Validators.minLength(9), Validators.maxLength(9)])],
-      senha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      confirmaSenha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      // senha: [this.user.senha],
+      // confirmaSenha: [],
       dt_nasc: [this.user.dt_nasc, Validators.compose([Validators.required])],
       sexo: [this.user.sexo]
-    }, {
-        validator: ComparaValidator('senha', 'confirmaSenha')
-      });
+    },
+
+      // {
+      //   validator: ComparaValidator('senha', 'confirmaSenha')
+      // }
+    );
 
 
   }
@@ -158,37 +161,41 @@ export class CadastroPage implements OnInit {
         }, {
           text: 'Sim',
           handler: () => {
+            // chama o password tester
 
-            this.user = this.formCadastro.value;
+            if (this.senhaAlterar()) {
+              this.user = this.formCadastro.value;
 
-            let sql = `UPDATE usuario 
-        SET  nome=   '${this.user.nome}',
-             cpf=    '${this.user.cpf}',
-             celular='${this.user.celular}',
-             crp=    '${this.user.crp}',
-             dt_nasc='${this.user.dt_nasc}',
-             updated_at= CURRENT_DATE
-        WHERE email ='${this.user.email}'
-          ;`;
+              let sql = `UPDATE usuario 
+                          SET  nome=   '${this.user.nome}',
+                                cpf=    '${this.user.cpf}',
+                                celular='${this.user.celular}',
+                                crp=    '${this.user.crp}',
+                                dt_nasc='${this.user.dt_nasc}',
+                                updated_at= CURRENT_DATE
+                          WHERE email ='${this.user.email}'
+                ;`;
 
-            this.bd.updateGenerico(sql).then(async resposta => {
-              console.log(resposta);
-              const alert = await this.alertController.create({
-                message: 'Alteração Efetuada com sucesso!',
-                buttons: ['OK']
+              this.bd.updateGenerico(sql).then(async resposta => {
+                console.log(resposta);
+                const alert = await this.alertController.create({
+                  message: 'Alteração Efetuada com sucesso!',
+                  buttons: ['OK']
+                });
+                await alert.present();
+                // aqui deve atualizar os dados do registro quando ele voltar pro menu
+                this.ds.setDados("user", this.user);
+                this.router.navigateByUrl('/home');
+              }).catch(async resposta => {
+                const alert = await this.alertController.create({
+                  message: 'ERRO NA ALTERAÇÃO',
+                  buttons: ['OK']
+                });
+                console.log("Erro: ", resposta)
+                await alert.present();
               });
-              await alert.present();
-              // aqui deve atualizar os dados do registro quando ele voltar pro menu
-              this.ds.setDados("user", this.user);
-              this.router.navigateByUrl('/home');
-            }).catch(async resposta => {
-              const alert = await this.alertController.create({
-                message: 'ERRO NA ALTERAÇÃO',
-                buttons: ['OK']
-              });
-              console.log("Erro: ", resposta)
-              await alert.present();
-            });
+            }
+
           }
         }
       ]
@@ -196,6 +203,97 @@ export class CadastroPage implements OnInit {
     await alert.present();
   }
 
+  public async senhaAlterar() {
+
+    const alert = await this.alertController.create({
+        header: "Confirmação",
+        subHeader: "Confirmar alteração",
+        message: "Deseja mesmo alterar seu perfil com as informações preenchidas?",
+        inputs: [
+          {
+            name: 'senha',
+            placeholder: 'Senha',
+            type: 'password'
+          }
+        ],
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancelar',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Alterar',
+            // handler: data => {
+            //   if(data.senha == data.senha2)
+            //   {
+            //     // senhas batem, então conferir no banco de dados se o usuário digitou a senha certa.
+            //     this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senha)
+            //     .then(async(response)=>{
+            //       if(response[0].senha == data.senha)
+            //       {
+            //         //passou pela verificação de senha, agora será feita a auteração em si
+            //           let nome = (<HTMLInputElement>document.getElementById("0")).value;
+            //           let email = (<HTMLInputElement>document.getElementById("1")).value;
+            //           let data_nasc = (<HTMLInputElement>document.getElementById("2")).value;
+            //           let celular = (<HTMLInputElement>document.getElementById("3")).value;
+            //           let cpf = (<HTMLInputElement>document.getElementById("4")).value;
+    
+            //           /*this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senhaA)
+            //           .then(async(response)=>{
+    
+            //           })
+            //           .catch(async(response)=>{
+            //           })*/
+            //         }
+            //         else
+            //         {
+            //           const alert = await this.alertController.create({
+            //           header: 'Erro',
+            //                 message: 'As senhas não batem. Tente novamente.',
+            //                 buttons:  [
+            //                   {
+            //                     text: 'OK',
+            //                   }
+            //                 ],
+            //                 });
+    
+            //                 await alert.present();
+            //             }
+            //     })
+            //       .catch(async(response)=>{
+            //         const alert = await this.alertController.create({
+            //           header: 'Erro',
+            //           message: 'Senha incorreta! Tente novamente!.',
+            //           buttons:  [
+            //             {
+            //               text: 'OK',
+            //             }       ],
+            //          });
+            //         await alert.present();
+            //        })
+            //   }
+            //   else
+            //   {
+            //     this.alertController.create({
+            //       header: 'Erro',
+            //       message: 'As senhas não batem. Tente novamente.',
+            //       buttons: ['Ok']
+            //     }).then(alert => {
+            //       alert.present();
+            //     });
+            //   }
+            //   //se clicar em alterar tem que dar o loading com sucesso ou falha na alteração
+            // }
+          }
+        ]
+      });
+
+        await alert.present();
+        return false;
+  }
 
   //#region Shibaki
   // async salvarPerfil()

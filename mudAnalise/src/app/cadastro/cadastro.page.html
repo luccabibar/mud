@@ -87,8 +87,7 @@
         </span>
       </ng-container>
     </ion-item>
-
-    <ion-item *ngIf="!this.user.nome">
+    <!-- <ion-item *ngIf="!this.user.nome">
       <ion-label position="stacked">Senha</ion-label>
       <ion-input formControlName="senha" type="password" placeholder="..."></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.senha">
@@ -110,7 +109,7 @@
           {{erro.mensagem}}
         </span>
       </ng-container>
-    </ion-item>
+    </ion-item> -->
     <br>
     <ion-button expand="full" (click)="salvar()">Salvar</ion-button>
   </form>
