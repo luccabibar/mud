@@ -20,50 +20,50 @@
                     <ion-item padding-horizontal lines="none">
                         <ion-label class="label" position="stacked" text-wrap>Carboidratos</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
-                          <ion-select formControlName="qtdCarboidratos" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
-                                <ion-select-option class="option" value="pouco" >Pouco (1 a 2 dias)</ion-select-option>
-                                <ion-select-option class="option" value="medio" >Médio (3 a 5 dias)</ion-select-option>
-                                <ion-select-option class="option" value="muito" >Muito (6 a 7 dias)</ion-select-option>
+                          <ion-select formControlName="qtdCarboidratos" id="carb" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option class="option" value="0" >Pouco (1 a 2 dias)</ion-select-option>
+                                <ion-select-option class="option" value="1" >Médio (3 a 5 dias)</ion-select-option>
+                                <ion-select-option class="option" value="2" >Muito (6 a 7 dias)</ion-select-option>
                           </ion-select>
                     </ion-item>
 
                     <ion-item padding-horizontal lines="none">
                         <ion-label class="label" position="stacked" text-wrap>Proteínas</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
-                          <ion-select formControlName="qtdProteinas" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado" >
-                                <ion-select-option class="option" value="pouco">Pouco (1 a 2 dias)</ion-select-option>
-                                <ion-select-option class="option" value="medio">Médio (3 a 5 dias)</ion-select-option>
-                                <ion-select-option class="option" value="muito">Muito (6 a 7 dias)</ion-select-option>
+                          <ion-select formControlName="qtdProteinas" id="prot" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado" >
+                                <ion-select-option class="option" value="0">Pouco (1 a 2 dias)</ion-select-option>
+                                <ion-select-option class="option" value="1">Médio (3 a 5 dias)</ion-select-option>
+                                <ion-select-option class="option" value="2">Muito (6 a 7 dias)</ion-select-option>
                           </ion-select>
                     </ion-item>
 
                     <ion-item padding-horizontal lines="none">
                         <ion-label class="label" position="stacked" text-wrap>Laticínios</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
-                          <ion-select formControlName="qtdLaticinios" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado" >
-                                <ion-select-option class="option" value="pouco">Pouco (1 a 2 dias)</ion-select-option>
-                                <ion-select-option class="option" value="medio">Médio (3 a 5 dias)</ion-select-option>
-                                <ion-select-option class="option" value="muito">Muito (6 a 7 dias)</ion-select-option>
+                          <ion-select formControlName="qtdLaticinios" id="lac" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado" >
+                                <ion-select-option class="option" value="0">Pouco (1 a 2 dias)</ion-select-option>
+                                <ion-select-option class="option" value="1">Médio (3 a 5 dias)</ion-select-option>
+                                <ion-select-option class="option" value="2">Muito (6 a 7 dias)</ion-select-option>
                           </ion-select>
                     </ion-item>
 
                     <ion-item padding-horizontal lines="none">
                         <ion-label class="label" position="stacked" text-wrap>Verduras e frutas</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
-                          <ion-select formControlName="qtdVerdFrut" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
-                                <ion-select-option class="option" value="pouco">Pouco (1 a 2 dias)</ion-select-option>
-                                <ion-select-option class="option" value="medio">Médio (3 a 5 dias)</ion-select-option>
-                                <ion-select-option class="option" value="muito">Muito (6 a 7 dias)</ion-select-option>
+                          <ion-select formControlName="qtdVerdFrut" id="verfrut" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option class="option" value="0">Pouco (1 a 2 dias)</ion-select-option>
+                                <ion-select-option class="option" value="1">Médio (3 a 5 dias)</ion-select-option>
+                                <ion-select-option class="option" value="2">Muito (6 a 7 dias)</ion-select-option>
                           </ion-select>
                     </ion-item>
                   
                     <br>
                     <ion-item padding-horizontal lines="none">
                         <ion-label class="label" position="stacked" text-wrap>2. Qual a média de copos de água tomados? <br> <p>(Quantidade diária) </p></ion-label>
-                          <ion-select formControlName="qtdAgua" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
-                                <ion-select-option class="option" value="pouco">menos de 5 copos </ion-select-option>
-                                <ion-select-option class="option" value="medio">6 a 11 copos</ion-select-option>
-                                <ion-select-option class="option" value="muito"> mais de 11 copos</ion-select-option>
+                          <ion-select formControlName="qtdAgua" id="agua" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
+                                <ion-select-option class="option" value="0">menos de 5 copos </ion-select-option>
+                                <ion-select-option class="option" value="1">6 a 11 copos</ion-select-option>
+                                <ion-select-option class="option" value="2"> mais de 11 copos</ion-select-option>
                           </ion-select>
                     </ion-item>
                   
@@ -91,11 +91,11 @@
                         <ion-radio-group>
                           <ion-item lines="none" padding-horizontal>
                             <ion-label>Sim</ion-label>
-                            <ion-radio slot="start" value="sim"  (ionSelect)="fezAtvd()"></ion-radio>
+                            <ion-radio slot="start" value="sim" id="atv_sim" (ionSelect)="fezAtvd()"></ion-radio>
                           </ion-item>
                           <ion-item lines="none" padding-horizontal>
                             <ion-label>Não</ion-label>
-                            <ion-radio slot="start" value="nao" (ionSelect)="fezAtvd()" checked></ion-radio>
+                            <ion-radio slot="start" value="nao" id="atv_nao" (ionSelect)="fezAtvd()" checked></ion-radio>
                           </ion-item>
                         </ion-radio-group>
                             
@@ -105,7 +105,7 @@
                             <ion-label class="label" position="stacked" text-wrap>2. Qual a duração média da(s) atividade(s)?</ion-label>
                           </ion-item>
                           <ion-item lines="none">
-                            <ion-range (ionFocus)="duracAtv()" (keyup)="duracAtv()" (ionChange)="duracAtv()" id="temp" min="0" max="800" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
+                            <ion-range (ionFocus)="duracAtv()" (keyup)="duracAtv()" (ionChange)="duracAtv()" id="atv_temp" min="0" max="800" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
                           </ion-item>
                             <ion-label class="label" id="lblTemp" position="fixed"></ion-label>
                         </ion-list>

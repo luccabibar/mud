@@ -147,4 +147,9 @@ export class BancoService {
     return this.http.post(this.API_URL+'selecionarMurais', data,{headers: header}).toPromise();
 
   }
+
+  enviarRelatorioSemanal()
+  {
+    
+  }
 }

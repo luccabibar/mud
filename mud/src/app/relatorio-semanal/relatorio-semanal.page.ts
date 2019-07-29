@@ -217,6 +217,45 @@ export class RelatorioSemanalPage implements OnInit {
     this.IonSlides.lockSwipes(true);
   }
   
+
+  salva()
+  {
+    //alimentação
+    let carboidratos = (<HTMLInputElement>document.getElementById("1")).value;
+    let proteinas = (<HTMLInputElement>document.getElementById("1")).value;
+    let lacticinios = (<HTMLInputElement>document.getElementById("1")).value;
+    let verdfrut = (<HTMLInputElement>document.getElementById("1")).value;
+    let agua = (<HTMLInputElement>document.getElementById("1")).value;
+
+    //Atividade-Física
+    let fez_atv = (<HTMLInputElement>document.getElementById("1")).value;
+    let duracao_atv = (<HTMLInputElement>document.getElementById("1")).value;
+    let intensidade_atv = (<HTMLInputElement>document.getElementById("1")).value;
+    
+    //Lazer
+    let fez_lazer = (<HTMLInputElement>document.getElementById("1")).value;
+    let vezes_Lazer = (<HTMLInputElement>document.getElementById("1")).value;
+    let acomp_lazer = (<HTMLInputElement>document.getElementById("1")).value;
+    
+
+    //Sono
+    let horario_dorm = (<HTMLInputElement>document.getElementById("1")).value;
+    let despertou = (<HTMLInputElement>document.getElementById("1")).value;
+    let vezes_sono = (<HTMLInputElement>document.getElementById("1")).value;
+    let acorou_precoce = (<HTMLInputElement>document.getElementById("1")).value;
+
+    //comentários
+    let coment_lazer = (<HTMLInputElement>document.getElementById("1")).value;
+    let coment_final = (<HTMLInputElement>document.getElementById("1")).value;
+
+
+
+    
+
+
+
+    
+  }
 }
 
 
