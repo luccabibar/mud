@@ -12,7 +12,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class Tab2Page {
   
   
-  constructor(private nav: NavController, public alertController: AlertController) {}
+  constructor(private nav: NavController, public alertController: AlertController,   private router: Router) {}
 
   dataInicio = "TesteInicio";
   dataFinal = "TestFinal";
@@ -22,6 +22,10 @@ export class Tab2Page {
     
   }
 
+  relatcrise()
+  {
+    this.router.navigateByUrl('/animacao');
+  }
   async relatsem()
   {
     this.pegarUltimoRelatorio();

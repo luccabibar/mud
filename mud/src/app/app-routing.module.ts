@@ -4,8 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [ 
   { path: 'perfil-user', loadChildren: './perfil-user/perfil-user.module#PerfilUserPageModule' },
   { path: '', loadChildren: './login-page/login-page.module#LoginPagePageModule' },
-  { path: 'relatorio-semanal', loadChildren: './relatorio-semanal/relatorio-semanal.module#RelatorioSemanalPageModule' },
-  { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
+  { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'load', loadChildren: './load/load.module#LoadPageModule' },
   { path: 'cadastro', loadChildren: './cadastro-user/cadastro-user.module#CadastroUserPageModule' },
   { path: 'relatorio-semanal', loadChildren: './relatorio-semanal/relatorio-semanal.module#RelatorioSemanalPageModule' },

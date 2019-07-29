@@ -21,6 +21,35 @@ export class SessaoPage implements OnInit {
   qr: ZBar;
   hash;
 
+  updateSessao(hash, id)
+  {
+    return new Promise((resolve, reject) => {
+      
+      let sql = "UPDATE public.sessao SET" +
+        "status = 1, " +  
+        "usuario_id = " + id + ", "
+        "updated_at = now() " +  
+        ");";
+
+      this.db.updateGenerico(sql).then((response) => {
+
+        console.log(response);
+        resolve(true);
+      })
+      .catch((ex) => {
+        
+        if (ex.error.text == "sucesso") {
+        
+          resolve(true);
+        } 
+        else {
+        
+          resolve(false);
+        }
+      });
+    });
+  }
+
   /**
    * procura pela exsitecia de uma sssao no banco a partir de um hash
    *  
@@ -29,11 +58,23 @@ export class SessaoPage implements OnInit {
    */
   buscaSessao(hash)
   {
-    let sql = " SELECT * FROM sessao WHERE hash = '" + hash + "' AND status = 0;";
-    this.db.selectGenerico(sql)
-    .then(result => {
+    return new Promise((resolve, reject) => {
+      let sql = " SELECT hash FROM sessao WHERE hash = '" + hash + "' AND status = 0;";
 
-    })
+      this.db.selectGenerico(sql).then(response => {
+        
+        if (response[0].hash !== null) {
+          
+          resolve(true);
+        } else {
+          
+          resolve(false);
+        }
+      }).catch(ex => {
+        
+        resolve(false);
+      });
+    });
   }
 
   /**
@@ -41,7 +82,7 @@ export class SessaoPage implements OnInit {
    * 
    * liga a camera pra ler o qrcode, e dps valida e ativa a sessao no banco
    */
-  scanFoda(){
+  async scanFoda(){
     //leitura do codigo
     this.qr.scan(this.zbarOptions)
     //sucesso
@@ -53,17 +94,23 @@ export class SessaoPage implements OnInit {
    .catch(error => {
      
       alert(error);
-      this.hash = 1414124;
+      this.hash = "return";
     });
 
     //if erro, retorna
-    if(this.hash == 1414124){
+    if(this.hash == "return"){
 
       return;
     }
 
     //validacao
-    this.buscaSessao(this.hash);
+    if(!(await this.buscaSessao(this.hash))){
+      
+      return;
+    }
+    
+    this.updateSessao(this.hash, /*this.dados.getDados("id")*/ "2");
+    
 
   }
 

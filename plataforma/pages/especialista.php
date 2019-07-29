@@ -1,27 +1,8 @@
-<link rel="stylesheet" href="./css/component_window.css">
-<section>
-    <section class="component-window">
-		<header class="window-header">
-			<h2>MENU</h2>
-			<div>
-				<button><i class="fas fa-minus-circle"></i></button>
-				<button><i class="fas fa-window-restore"></i></button>
-				<button><i class="fas fa-times-circle"></i></button>
-			</div>
-		</header>
-		<section class="window-contains-content">
-			<ul class="window-listener">
-				<li>1-</li>
-				<li>2-</li>
-				<li>3-</li>
-				<li>4-</li>
-				<li>5-</li>
-				<li>6-</li>
-				<li>7-</li>
-			<ul>
-		</section>
-		<footer class="window-footer">
-			<p>menu</p>	
-		</footer>
-	</section>
+<?php session_start();?>
+<link rel="stylesheet" href="./css/especialista.css">
+
+<section class='window-options'>
+	<a href="#" class='button btn-w-options'><i class="fas fa-list"></i>SESSÕES EXISTENTES<span></span></a>
+	<a href="#" class='button btn-w-options' onclick="muda_session('page','qr_code.php')"><i class="fas fa-qrcode"></i>GERAR QR-CODE<span></span></a>
 </section>
+

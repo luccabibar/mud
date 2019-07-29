@@ -1,0 +1,23 @@
+Confirm()
+->args{
+1:
+}
+Alert()
+->args{
+1:título principal
+2:texto principal
+3:título secundário
+4:ícone font awsonre
+5:padding de controle do fundo, para delimitar o alert em si.Sempre o nome da classe, não valores
+6:tipo booleano, aqui vc coloca false,
+7:Mande uma string vazia
+}
+Modal()
+->args{
+1:título principal
+2:elemento que tornar-se-á filho do modal, coloca o id(#id) dele ou class(.name) ou variável js
+3:1->para colocar valores  no arg como id(#id) ou class(.name).2-> para colocar element js direto, como variáveis.
+4:padding de controle do fundo, para delimitar o alert em si.Sempre o nome da classe, não valores
+5:tipo booleano, vc coloca true(!0), caso queira a preservação da div-child; Se não, false(!1) assim o elemento será destruído com o modal ao ser fechado
+6:Se colocou true no 5 arg, aqui vc colocará a onde esse elemento retornará, lembre-se que ele voltará com display:none e portanto, inexistente.
+}
