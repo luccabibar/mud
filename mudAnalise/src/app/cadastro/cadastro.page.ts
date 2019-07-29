@@ -120,7 +120,7 @@ export class CadastroPage implements OnInit {
         this.desejaAlterar();
       }
     } else if (!this.formCadastro.valid) {
-      this.presentAlert();
+      this.presentAlert(0);
     }
   }
 
@@ -149,21 +149,27 @@ export class CadastroPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Registro',
       message: 'Deseja Salvar as alterações do perfil?',
+      inputs: [
+        {
+          name: 'senha',
+          placeholder: 'Senha',
+          type: 'password'
+        }
+      ],
       buttons: [
         {
           text: 'Não',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
+          handler: data => {
             console.log('Confirm Cancel: não deseja salvar as alterações');
             return false;
           }
         }, {
           text: 'Sim',
-          handler: () => {
-            // chama o password tester
+          handler: data => {
+            if (data.senha == this.user.senha) {
 
-            if (this.senhaAlterar()) {
               this.user = this.formCadastro.value;
 
               let sql = `UPDATE usuario 
@@ -186,6 +192,7 @@ export class CadastroPage implements OnInit {
                 // aqui deve atualizar os dados do registro quando ele voltar pro menu
                 this.ds.setDados("user", this.user);
                 this.router.navigateByUrl('/home');
+
               }).catch(async resposta => {
                 const alert = await this.alertController.create({
                   message: 'ERRO NA ALTERAÇÃO',
@@ -194,105 +201,108 @@ export class CadastroPage implements OnInit {
                 console.log("Erro: ", resposta)
                 await alert.present();
               });
+            } else {
+              this.presentAlert(1);
             }
-
           }
+
         }
+
       ]
     });
     await alert.present();
   }
 
   public async senhaAlterar() {
-
     const alert = await this.alertController.create({
-        header: "Confirmação",
-        subHeader: "Confirmar alteração",
-        message: "Deseja mesmo alterar seu perfil com as informações preenchidas?",
-        inputs: [
-          {
-            name: 'senha',
-            placeholder: 'Senha',
-            type: 'password'
+      header: "Confirmação",
+      subHeader: "Confirmar alteração",
+      message: "Deseja mesmo alterar seu perfil com as informações preenchidas?",
+      inputs: [
+        {
+          name: 'senha',
+          placeholder: 'Senha',
+          type: 'password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
           }
-        ],
-        buttons: [
-          {
-            text: 'Cancelar',
-            role: 'cancelar',
-            handler: data => {
-              console.log('Cancel clicked');
-            }
-          },
-          {
-            text: 'Alterar',
-            // handler: data => {
-            //   if(data.senha == data.senha2)
-            //   {
-            //     // senhas batem, então conferir no banco de dados se o usuário digitou a senha certa.
-            //     this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senha)
-            //     .then(async(response)=>{
-            //       if(response[0].senha == data.senha)
-            //       {
-            //         //passou pela verificação de senha, agora será feita a auteração em si
-            //           let nome = (<HTMLInputElement>document.getElementById("0")).value;
-            //           let email = (<HTMLInputElement>document.getElementById("1")).value;
-            //           let data_nasc = (<HTMLInputElement>document.getElementById("2")).value;
-            //           let celular = (<HTMLInputElement>document.getElementById("3")).value;
-            //           let cpf = (<HTMLInputElement>document.getElementById("4")).value;
-    
-            //           /*this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senhaA)
-            //           .then(async(response)=>{
-    
-            //           })
-            //           .catch(async(response)=>{
-            //           })*/
-            //         }
-            //         else
-            //         {
-            //           const alert = await this.alertController.create({
-            //           header: 'Erro',
-            //                 message: 'As senhas não batem. Tente novamente.',
-            //                 buttons:  [
-            //                   {
-            //                     text: 'OK',
-            //                   }
-            //                 ],
-            //                 });
-    
-            //                 await alert.present();
-            //             }
-            //     })
-            //       .catch(async(response)=>{
-            //         const alert = await this.alertController.create({
-            //           header: 'Erro',
-            //           message: 'Senha incorreta! Tente novamente!.',
-            //           buttons:  [
-            //             {
-            //               text: 'OK',
-            //             }       ],
-            //          });
-            //         await alert.present();
-            //        })
-            //   }
-            //   else
-            //   {
-            //     this.alertController.create({
-            //       header: 'Erro',
-            //       message: 'As senhas não batem. Tente novamente.',
-            //       buttons: ['Ok']
-            //     }).then(alert => {
-            //       alert.present();
-            //     });
-            //   }
-            //   //se clicar em alterar tem que dar o loading com sucesso ou falha na alteração
-            // }
-          }
-        ]
-      });
+        },
+        {
+          text: 'Alterar',
+          handler: data => {
+            // if(data.senha == data.senha2)
+            // {
+            //   // senhas batem, então conferir no banco de dados se o usuário digitou a senha certa.
+            //   this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senha)
+            //   .then(async(response)=>{
+            //     if(response[0].senha == data.senha)
+            //     {
+            //       //passou pela verificação de senha, agora será feita a auteração em si
+            //         let nome = (<HTMLInputElement>document.getElementById("0")).value;
+            //         let email = (<HTMLInputElement>document.getElementById("1")).value;
+            //         let data_nasc = (<HTMLInputElement>document.getElementById("2")).value;
+            //         let celular = (<HTMLInputElement>document.getElementById("3")).value;
+            //         let cpf = (<HTMLInputElement>document.getElementById("4")).value;
 
-        await alert.present();
-        return false;
+            //         /*this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senhaA)
+            //         .then(async(response)=>{
+
+            //         })
+            //         .catch(async(response)=>{
+            //         })*/
+            //       }
+            //       else
+            //       {
+            //         const alert = await this.alertController.create({
+            //         header: 'Erro',
+            //               message: 'As senhas não batem. Tente novamente.',
+            //               buttons:  [
+            //                 {
+            //                   text: 'OK',
+            //                 }
+            //               ],
+            //               });
+
+            //               await alert.present();
+            //           }
+            //   })
+            //     .catch(async(response)=>{
+            //       const alert = await this.alertController.create({
+            //         header: 'Erro',
+            //         message: 'Senha incorreta! Tente novamente!.',
+            //         buttons:  [
+            //           {
+            //             text: 'OK',
+            //           }       ],
+            //        });
+            //       await alert.present();
+            //      })
+            // }
+            // else
+            // {
+            //   this.alertController.create({
+            //     header: 'Erro',
+            //     message: 'As senhas não batem. Tente novamente.',
+            //     buttons: ['Ok']
+            //   }).then(alert => {
+            //     alert.present();
+            //   });
+            // }
+            // //se clicar em alterar tem que dar o loading com sucesso ou falha na alteração
+          }
+        }
+      ]
+    });
+    await alert.present();
+    return false;
+
+
   }
 
   //#region Shibaki
@@ -585,8 +595,6 @@ export class CadastroPage implements OnInit {
           });
           this.existente = true;
           await alert.present();
-
-
         } else {
           this.existente = false
         }
@@ -598,16 +606,24 @@ export class CadastroPage implements OnInit {
   }
 
   // metodos auxiliares 
-  async presentAlert() {
-
-    const alert = await this.alertController.create({
-      header: 'ERRO!!',
-      subHeader: 'Erro ao salvar',
-      message: 'Existem campos inválidos ou vazios',
-      buttons: ['OK']
-    });
-
-    await alert.present();
+  async presentAlert(qual) {
+    if (qual == 1) {
+      const alert = await this.alertController.create({
+        header: 'ERRO!!',
+        subHeader: 'Senha inválida',
+        message: 'Não pode efetivar a alteração',
+        buttons: ['OK']
+      });
+      await alert.present();
+    } else {
+      const alert = await this.alertController.create({
+        header: 'ERRO!!',
+        subHeader: 'Erro ao salvar',
+        message: 'Existem campos inválidos ou vazios',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
   }
 
   async sairCad() {
