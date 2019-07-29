@@ -102,88 +102,44 @@ export class CadastroPage implements OnInit {
         validator: ComparaValidator('senha', 'confirmaSenha')
       });
 
-    this.controleSenha();
+
   }
   ngOnInit() {
-    this.controleSenha();
 
   }
-
-  private controleSenha() {
-    if (this.user.nome) {
-      this.formCadastro.controls.senha.setValidators(null);
-      this.formCadastro.controls.senha.updateValueAndValidity();
-      this.formCadastro.controls.confirmaSenha.setValidators(null);
-      this.formCadastro.controls.confirmaSenha.updateValueAndValidity();
-    }
-  }
-
-
 
 
   public async salvar() {
-
     if (this.formCadastro.valid) {
       if (!this.existente && this.user.id_usuario == 0) {
-        this.user = this.formCadastro.value;
-
-        this.bd.cadProf(this.user).then(async resposta => {
-          console.log(resposta);
-          const alert = await this.alertController.create({
-            message: 'Cadastro Efetuado com sucesso!',
-            buttons: ['OK']
-          });
-          await alert.present();
-          this.router.navigateByUrl('/login');
-          this.formCadastro.reset()
-        }).catch(async resposta => {
-          const alert = await this.alertController.create({
-            message: 'ERRO NO CADASTROOOOO!',
-            buttons: ['OK']
-          });
-          console.log("Erro: ", resposta)
-          await alert.present();
-        });
+        this.desejaCadastrar();
       } else if (this.user.id_usuario != 0) {
-
-        if (this.desejaAlterar()) {
-
-          this.user = this.formCadastro.value;
-          let sql = `UPDATE usuario 
-        SET  nome=   '${this.user.nome}',
-             cpf=    '${this.user.cpf}',
-             celular='${this.user.celular}',
-             crp=    '${this.user.crp}',
-             senha=  '${this.user.senha}',
-             dt_nasc='${this.user.dt_nasc}',
-             updated_at= CURRENT_DATE
-        WHERE email ='${this.user.email}'
-          ;`;
-
-          this.bd.updateGenerico(sql).then(async resposta => {
-            console.log(resposta);
-            const alert = await this.alertController.create({
-              message: 'Alteração Efetuada com sucesso!',
-              buttons: ['OK']
-            });
-            await alert.present();
-            // aqui deve atualizar os dados do registro quando ele voltar pro menu
-            // this.user = this.ds.getDados("user");
-            this.router.navigateByUrl('/home');
-          }).catch(async resposta => {
-            const alert = await this.alertController.create({
-              message: 'ERRO NA ALTERAÇÃO',
-              buttons: ['OK']
-            });
-            console.log("Erro: ", resposta)
-            await alert.present();
-          });
-        }
-
+        this.desejaAlterar();
       }
     } else if (!this.formCadastro.valid) {
       this.presentAlert();
     }
+  }
+
+  public async desejaCadastrar() {
+    this.user = this.formCadastro.value;
+    this.bd.cadProf(this.user).then(async resposta => {
+      console.log(resposta);
+      const alert = await this.alertController.create({
+        message: 'Cadastro Efetuado com sucesso!',
+        buttons: ['OK']
+      });
+      await alert.present();
+      this.router.navigateByUrl('/login');
+      this.formCadastro.reset()
+    }).catch(async resposta => {
+      const alert = await this.alertController.create({
+        message: 'ERRO NO CADASTROOOOO!',
+        buttons: ['OK']
+      });
+      console.log("Erro: ", resposta)
+      await alert.present();
+    });
   }
 
   public async desejaAlterar() {
@@ -202,17 +158,45 @@ export class CadastroPage implements OnInit {
         }, {
           text: 'Sim',
           handler: () => {
-            
+
+            this.user = this.formCadastro.value;
+
+            let sql = `UPDATE usuario 
+        SET  nome=   '${this.user.nome}',
+             cpf=    '${this.user.cpf}',
+             celular='${this.user.celular}',
+             crp=    '${this.user.crp}',
+             dt_nasc='${this.user.dt_nasc}',
+             updated_at= CURRENT_DATE
+        WHERE email ='${this.user.email}'
+          ;`;
+
+            this.bd.updateGenerico(sql).then(async resposta => {
+              console.log(resposta);
+              const alert = await this.alertController.create({
+                message: 'Alteração Efetuada com sucesso!',
+                buttons: ['OK']
+              });
+              await alert.present();
+              // aqui deve atualizar os dados do registro quando ele voltar pro menu
+              this.ds.setDados("user", this.user);
+              this.router.navigateByUrl('/home');
+            }).catch(async resposta => {
+              const alert = await this.alertController.create({
+                message: 'ERRO NA ALTERAÇÃO',
+                buttons: ['OK']
+              });
+              console.log("Erro: ", resposta)
+              await alert.present();
+            });
           }
         }
       ]
-
     });
     await alert.present();
-    return true;
   }
 
-  
+
   //#region Shibaki
   // async salvarPerfil()
   // {
@@ -404,8 +388,6 @@ export class CadastroPage implements OnInit {
   //   await alert.present();
   // }
   //#endregion
-
-
   // validação no bd de campos unicos para cada usuario
 
   public async validaCPF(evento) {
@@ -549,6 +531,7 @@ export class CadastroPage implements OnInit {
               this.router.navigateByUrl('/login');
             } else {
               this.router.navigateByUrl('/home');
+
             }
             this.formCadastro.reset()
           }
