@@ -2,7 +2,11 @@
 
   
   
-  <ion-content>
+  <ion-content
+      [scrollEvents]="true"
+      (ionScrollStart)="logScrollStart()"
+      (ionScroll)="logScrolling($event)" >
+
     <ion-img id="logoLogin" src="../../assets/logomud.png"></ion-img>
     <ion-slides>
       <ion-slide id="slide1">
@@ -69,7 +73,7 @@
                   
                     <br>
                     <ion-item lines="none">
-                      <ion-button id="btnVoltar" disabled="true" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
+                      <ion-button id="btnVoltar" (click)="volta()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
                       <ion-button id="btnProx" (click)="proxSlide1()" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
                     </ion-item>
                   </form>
@@ -193,6 +197,13 @@
                             <ion-radio slot="start" value="nao3" (ionSelect)="nacomp()" checked></ion-radio>
                           </ion-item>
                         </ion-radio-group>
+                        
+                        <ion-item padding-horizontal lines="none"> 
+                          <ion-label class="label" position="stacked" text-wrap>Adicione um comentário quanto aos momentos de lazer dessa semana</ion-label>
+                        </ion-item>
+                        <ion-item lines="none" id="comentFinal"> 
+                            <ion-textarea maxLength="150" rows="4" id="comentFinalInput" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
+                        </ion-item>
                   </ion-list>
                 </div>
 
@@ -283,7 +294,7 @@
                   <ion-label class="label" position="stacked" text-wrap>Gostaria de adicionar algum comentário?</ion-label>
                </ion-item>
                <ion-item lines="none" id="comentFinal"> 
-                 <ion-textarea rows="4" id="comentFinalInput" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
+                 <ion-textarea maxLength="150" rows="4" id="comentFinalInput" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
                </ion-item>
 
                <ion-item lines="none" id="salvaBtns">
