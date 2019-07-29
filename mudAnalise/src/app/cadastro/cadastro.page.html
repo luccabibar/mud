@@ -78,7 +78,7 @@
 
     <ion-item>
       <ion-label position="stacked">CRP</ion-label>
-      <ion-input (ionBlur)="validaCRP($event)" formControlName="crp" type="number" placeholder="..."></ion-input>
+      <ion-input (ionBlur)="validaCRP($event)" formControlName="crp" type="tel" placeholder="..."></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.crp">
         <span
           *ngIf="formCadastro.get('crp').hasError(erro.tipo) && (formCadastro.get('crp').dirty || formCadastro.get('crp').touched)"
@@ -88,7 +88,7 @@
       </ng-container>
     </ion-item>
 
-    <ion-item>
+    <ion-item *ngIf="!this.user.nome">
       <ion-label position="stacked">Senha</ion-label>
       <ion-input formControlName="senha" type="password" placeholder="..."></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.senha">
@@ -100,7 +100,7 @@
       </ng-container>
     </ion-item>
 
-    <ion-item>
+    <ion-item *ngIf="!this.user.nome">
       <ion-label position="stacked">Confirmar Senha</ion-label>
       <ion-input formControlName="confirmaSenha" type="password" placeholder="..."></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.confirmaSenha">

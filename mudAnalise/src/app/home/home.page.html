@@ -21,10 +21,11 @@
       <p *ngIf="user">CRP:{{user.crp}}</p>
     </ion-label>
     <ion-buttons slot="end">
-
       <ion-button routerLink="/cadastro">
-        Perfil
-        <ion-icon name="information-circle-outline"></ion-icon>
+        <ion-icon slot="icon-only" name="contact"></ion-icon>
+      </ion-button>
+      <ion-button routerLink="/alterar-senha">
+        <ion-icon slot="icon-only" name="key"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-item>
