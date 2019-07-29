@@ -1,3 +1,4 @@
+
 import { DadosService } from './../dados.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, NavController, AlertController } from '@ionic/angular';
@@ -7,6 +8,8 @@ import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { getElementDepthCount } from '@angular/core/src/render3/state';
 import { async, delay } from 'q';
 import { validateConfig } from '@angular/router/src/config';
+import { IonContent } from '@ionic/angular';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -17,6 +20,8 @@ import { validateConfig } from '@angular/router/src/config';
 
 export class RelatorioSemanalPage implements OnInit {
   @ViewChild(IonSlides) IonSlides: IonSlides;
+  @ViewChild(IonContent) content: IonContent;
+  dummyList:any;
   public slide1form: FormGroup;
   public slide3form: FormGroup;
   public slide4form: FormGroup;
@@ -26,7 +31,7 @@ export class RelatorioSemanalPage implements OnInit {
   public cont3 = 0;
   public solta = 0;
 
-  constructor(public navCtrl: NavController, private BD: BancoService,public formBuilder: FormBuilder,private AlertController: AlertController) { 
+  constructor(public navCtrl: NavController, private BD: BancoService,public formBuilder: FormBuilder,private AlertController: AlertController, private router: Router) { 
     
     this.slide1form = formBuilder.group({
         qtdCarboidratos: ['' ,  Validators.compose([Validators.required])],
@@ -158,6 +163,7 @@ export class RelatorioSemanalPage implements OnInit {
     {
       this.IonSlides.lockSwipes(false);
       this.IonSlides.slideNext();
+      this.ScrollToTop();
       this.IonSlides.lockSwipes(true);
     }
   }
@@ -166,6 +172,7 @@ export class RelatorioSemanalPage implements OnInit {
   {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slideNext();
+    this.ScrollToTop();
     this.IonSlides.lockSwipes(true);
   }
 
@@ -186,6 +193,7 @@ export class RelatorioSemanalPage implements OnInit {
     {
       this.IonSlides.lockSwipes(false);
       this.IonSlides.slideNext();
+      this.ScrollToTop();
       this.IonSlides.lockSwipes(true);
     }
   }
@@ -206,6 +214,7 @@ export class RelatorioSemanalPage implements OnInit {
     {
       this.IonSlides.lockSwipes(false);
       this.IonSlides.slideNext();
+      this.ScrollToTop();
       this.IonSlides.lockSwipes(true);
     }
   }
@@ -214,6 +223,7 @@ export class RelatorioSemanalPage implements OnInit {
   {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slidePrev();
+    this.ScrollToTop();
     this.IonSlides.lockSwipes(true);
   }
   
@@ -256,7 +266,36 @@ export class RelatorioSemanalPage implements OnInit {
 
     
   }
-}
+  logScrollStart(){
+    console.log("logScrollStart : When Scroll Starts");
+  }
+ 
+  logScrolling(){
+    console.log("logScrolling : When Scrolling");
+  }
+ 
+  logScrollEnd(){
+    console.log("logScrollEnd : When Scroll Ends");
+  }
+ 
+  ScrollToBottom(){
+    this.content.scrollToBottom(1500);
+  }
+ 
+  ScrollToTop(){
+    this.content.scrollToTop();
+  }
+ 
+  
+  ScrollToPoint(X,Y){
+    this.content.scrollToPoint(X,Y,1500);
+  }
 
+  volta()
+  {
+    this.router.navigateByUrl('/tabs/tabs2');
+  }
+
+}
 
 /* Falta: Campo de observação do relatório em geral, campo de observação do tópico de lazer */

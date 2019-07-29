@@ -3,7 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [ 
   { path: 'perfil-user', loadChildren: './perfil-user/perfil-user.module#PerfilUserPageModule' },
-  { path: 'login-page', loadChildren: './login-page/login-page.module#LoginPagePageModule' },
+  { path: '', loadChildren: './login-page/login-page.module#LoginPagePageModule' },
+  { path: 'relatorio-semanal', loadChildren: './relatorio-semanal/relatorio-semanal.module#RelatorioSemanalPageModule' },
   { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'load', loadChildren: './load/load.module#LoadPageModule' },
   { path: 'cadastro', loadChildren: './cadastro-user/cadastro-user.module#CadastroUserPageModule' },
@@ -12,7 +13,7 @@ const routes: Routes = [
   { path: 'mural', loadChildren: './mural/mural.module#MuralPageModule' },
   { path: 'editar-sintoma', loadChildren: './editar-sintoma/editar-sintoma.module#EditarSintomaPageModule' },
   { path: 'sessao', loadChildren: './sessao/sessao.module#SessaoPageModule' },
-  { path: '', loadChildren: './animacao/animacao.module#AnimacaoPageModule' },
+  { path: 'animacao', loadChildren: './animacao/animacao.module#AnimacaoPageModule' },
   
 ];
 
