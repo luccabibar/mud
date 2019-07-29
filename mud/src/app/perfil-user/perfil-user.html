@@ -24,22 +24,23 @@
   <ion-card>
     <img src="https://www.w3schools.com/howto/img_avatar2.png" style="width: 10rem; height: 10rem; margin-left: 3rem; margin-top: 1rem;"/>
     <ion-card-header>
-      <ion-card-title style="font-size: 1.6rem;"><ion-input value="{{nome}}" type="text" name="nome" id="0"></ion-input></ion-card-title>
-      <ion-card-subtitle><ion-input style="margin-top: -1rem; margin-bottom: -2rem;" value="{{email}}" type="text" name="email" id="1"></ion-input></ion-card-subtitle>
+      <ion-card-title style="font-size: 1.5rem;"><ion-input value="{{nome}}" type="text" name="nome" id="6"></ion-input></ion-card-title>
+      <ion-card-subtitle style="margin-top: -1rem; margin-bottom: -2rem;"><ion-input value="{{email}}" type="email" name="email" id="7"></ion-input></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item>
           <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Data da Nascimento </ion-label>
-          <ion-input value="{{dtnasc}}" type="date" name="nome" id="2" placeholder="Informe sua data de Nascimento"></ion-input>
+          <!--<ion-input value="{{dtnasc}}" type="date" name="nome" id="2" placeholder="Informe sua data de Nascimento"></ion-input>-->
+          <ion-datetime backdropDismiss name="datanasc" value="{{dtnasc}}" id="3" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Celular</ion-label>
-          <ion-input value="{{celular}}" type="text" name="nome" id="3" placeholder="Informe seu número de celular"></ion-input>
+          <ion-input value="{{celular}}" type="text" name="nome" id="4" placeholder="Informe seu número de celular"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> CPF</ion-label>
-          <ion-input value="{{cpf}}" type="text" name="nome" id="4" placeholder="Informe seu CPF"></ion-input>
+          <ion-input value="{{cpf}}" type="text" name="nome" id="5" placeholder="Informe seu CPF"></ion-input>
         </ion-item>
         <ion-button (click)="alterarSenha()" expand="block" style="margin-top: 1rem;" color="danger">Alterar Senha</ion-button>
         <ion-button (click)="editarSintomas()" expand="block" style="margin-top: 1rem;" color="secondary">Editar Sintomas</ion-button>

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { EmailValidator } from '@angular/forms';
+import { CelularValidator } from './validators/celular';
 
 @Injectable({
   providedIn: 'root'
@@ -111,6 +113,31 @@ export class BancoService {
     return this.http.post(this.API_URL + 'verificarSenha',data, {headers: header}).toPromise();
   }
 
+  alteraSenha(id_usuario: string,senha: string)
+  {
+    var data = {
+      id_usuario: id_usuario,
+      senha: senha
+    };
+    let header = new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL + 'alteraSenha',data, {headers: header}).toPromise();
+  }
+
+  alteraUsuario(id_usuario: string,nome: string,email: string,data_nasc: string,celular: string,cpf: string)
+  {
+    var date=new Date(data_nasc).toDateString();
+    var data = {
+      id_usuario: id_usuario,
+      nome: nome,
+      email: email,
+      data_nasc: date,
+      celular: celular,
+      cpf: cpf,
+    };
+    let header = new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL + 'alteraUsuario',data, {headers: header}).toPromise();
+  }
+
   selecionarMural(id_usuario: number)
   {
     var data = {
@@ -119,5 +146,10 @@ export class BancoService {
     let header=new HttpHeaders({'Content-type':'application/json'});
     return this.http.post(this.API_URL+'selecionarMurais', data,{headers: header}).toPromise();
 
+  }
+
+  enviarRelatorioSemanal()
+  {
+    
   }
 }
