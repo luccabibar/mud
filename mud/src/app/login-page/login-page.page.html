@@ -1,13 +1,12 @@
 <ion-content>
   <ion-img id="logoLogin" src="../../assets/logomud.png"></ion-img>
-  <h2 id="loginTitle">Login</h2><br><br><br>
 
 <!--ITEM EMAIL-->
-<br><br><br><br><br><br><br><br>
+
 <form [formGroup]="loginForm">
     <p *ngIf="submitAttempt" style="color: #ea6153;">Por favor, preencha todos os campos corretamente.</p>
 
-<ion-item padding-horizontal>
+<ion-item id="email" padding-horizontal>
   <ion-label position="stacked"> E-mail </ion-label>
   <ion-input #mail id="1"  [(ngModel)]="emai" size="11" placeholder="Insira seu email" name="email"  formControlName="email" type="Email" required> </ion-input>
 </ion-item>  
@@ -16,7 +15,7 @@
 
 <!--ITEM SENHA-->
 
-<ion-item padding-horizontal>
+<ion-item id="senha" padding-horizontal>
   <ion-label position="stacked"> Senha </ion-label>
   <ion-input #enha id="2" [(ngModel)]="senh" size="11" placeholder="Insira sua senha" name="senha" type="password" formControlName="senha" required > </ion-input>
 </ion-item>
