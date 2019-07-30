@@ -148,8 +148,34 @@ export class BancoService {
 
   }
 
-  enviarRelatorioSemanal()
-  {
-    
+  enviarRelatorioSemanal(id_usuario: string,coment_final: string,Data_relatorioS_I: string,Data_relatorioS_F: string,carboidratos: string,proteinas: string,lacticinios: string,verdfrut: string,agua: string,fez_atv: string,duracao_atv: string,intensidade_atv: string,fez_lazer: string,coment_lazer: string,vezes_Lazer: string,acomp_lazer: string,horario_dorm: string,despertou: string,vezes_sono: string,acordou_precoce: string)
+  { 
+    var dateI=new Date(Data_relatorioS_I).toDateString();
+    var dateF=new Date(Data_relatorioS_F).toDateString();
+    var dateSono=new Date(horario_dorm).toDateString();
+    var data={ 
+    id_usuario : id_usuario,
+    coment_final:coment_final,
+    Data_relatorioS_I: dateI,
+    Data_relatorioS_F: dateF,
+    carboidratos: carboidratos,
+    proteinas: proteinas,
+    lacticinios: lacticinios,
+    verdfrut: verdfrut,
+    agua: agua,
+    fez_atv: fez_atv,
+    duracao_atv: duracao_atv,
+    intensidade_atv: intensidade_atv,
+    fez_lazer: fez_lazer,
+    coment_lazer: coment_lazer,
+    vezes_Lazer: vezes_Lazer,
+    acomp_lazer: acomp_lazer,
+    horario_dorm: dateSono,
+    despertou: despertou,
+    vezes_sono:vezes_sono,
+    acordou_precoce: acordou_precoce
+  };
+  let header=new HttpHeaders({'Content-type':'application/json'});
+  return this.http.post(this.API_URL+'relatorioSemanal', data,{headers: header}).toPromise();
   }
 }
