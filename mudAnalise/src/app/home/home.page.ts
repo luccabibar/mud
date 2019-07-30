@@ -40,31 +40,34 @@ export class HomePage implements OnInit {
   }
 
   public async logout(trava) {
-    if(trava==0){
+    if (trava == 0) {
       this.ds.removeDados(true, '');
       this.router.navigateByUrl("/login");
     }
-    const alert = await this.AlertController.create({
-      header: 'Sair',
-      message: 'Deseja realmente sair?',
-      buttons: [
-        {
-          text: 'Não',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('nem saiu');
+    else {
+      const alert = await this.AlertController.create({
+        header: 'Sair',
+        message: 'Deseja realmente sair?',
+        buttons: [
+          {
+            text: 'Não',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('nem saiu');
+            }
+          }, {
+            text: 'Sim',
+            handler: () => {
+              this.ds.removeDados(true, '');
+              this.router.navigateByUrl("/login");
+            }
           }
-        }, {
-          text: 'Sim',
-          handler: () => {
-            this.ds.removeDados(true, '');
-            this.router.navigateByUrl("/login");
-          }
-        }
-      ]
-    });
-    await alert.present();
+        ]
+      });
+      await alert.present();
+    }
+
   }
 
   async deletadoSucesso() {

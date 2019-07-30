@@ -59,6 +59,13 @@ export class AlterarSenhaPage implements OnInit {
   }
 
   public async salvar() {
+
+    // const alert = await this.alertController.create({
+    //   message: this.user.senha,
+    //   buttons: ['OK']
+    // });
+    // await alert.present();
+
     if (this.formCadastro.valid && (this.user.senha == this.formCadastro.value.senhaAtual)) {
       this.desejaAlterar();
     } else if ((this.formCadastro.valid && (this.user.senha != this.formCadastro.value.senhaAtual))) {
@@ -85,7 +92,7 @@ export class AlterarSenhaPage implements OnInit {
           text: 'Não',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
+          handler: (blah) => { 
             console.log('Confirm Cancel: não deseja alterar senha');
             return false;
           }

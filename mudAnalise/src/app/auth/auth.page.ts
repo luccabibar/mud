@@ -94,33 +94,52 @@ export class AuthPage implements OnInit {
   geraSessao(id, hash) {
 
     return new Promise((resolve, reject) => {
-      let sql = "INSERT INTO public.sessao VALUES (" +
-        "default, " +
-        "'" + hash + "', " +
-        "NULL, " +
-        id + ", " +
-        "0, " +
-        "NOW(), " +
-        "NULL, " +
-        "NULL " +
-        ");";
 
-      this.db.insertGenerico(sql).then((response) => {
-        console.log(response);
-
-        resolve(true);
-
-      }).catch((ex) => {
-        if (ex.error.text == "sucesso") {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-
+         this.db.inserirSessao(hash,id).then((response)=>{
+           console.log(response);
+  
+           resolve(true);
+  
+         }).catch((ex) => {
+           if (ex.error.text == "sucesso") {
+             resolve(true);
+           } else {
+             resolve(false);
+           }
+  
+         });
+  
       });
+    // return new Promise((resolve, reject) => {
+    //   let sql = "INSERT INTO public.sessao VALUES (" +
+    //     "default, " +
+    //     "'" + hash + "', " +
+    //     "NULL, " +
+    //     id + ", " +
+    //     "0, " +
+    //     "NOW(), " +
+    //     "NULL, " +
+    //     "NULL " +
+    //     ");";
 
-    });
+    //   this.db.insertGenerico(sql).then((response) => {
+    //     console.log(response);
+
+    //     resolve(true);
+
+    //   }).catch((ex) => {
+    //     if (ex.error.text == "sucesso") {
+    //       resolve(true);
+    //     } else {
+    //       resolve(false);
+    //     }
+
+    //   });
+
+   // });
   }
+
+  
 
   /**
    * procura por uma sessao pra ver se ela existe.
@@ -165,7 +184,7 @@ export class AuthPage implements OnInit {
     //gera qr
     let hash = this.geraQr();
     let hashAnterior = hash;
-
+    
     //cria a session no banco
     let success = await this.geraSessao(id, hash);
     //if deu errado, limpa tudo e prepara pra nova sessao
