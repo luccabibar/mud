@@ -160,3 +160,29 @@
   --ion-color-shade: #000000;
   --ion-color-tint: #1a1a1a;
 }
+
+@font-face {
+  font-family: 'Muli-Regular';
+  src: url('../assets/fonts/Muli-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Muli-Bold';
+  src: url('../assets/fonts/Muli-Bold.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Muli-Black';
+  src: url('../assets/fonts/Muli-Black.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/** {
+  font-family: 'Futura';
+  font-style: bold;
+}*/

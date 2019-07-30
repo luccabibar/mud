@@ -1,9 +1,7 @@
 import { Router, RouterModule } from '@angular/router';
 import { Component, OnInit, Renderer, ViewChild, Input} from '@angular/core';
 import { NavController, AlertController, IonInput} from '@ionic/angular';
-import { BancoService } from './../banco.service';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-
+import { DadosService } from '../dados.service';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -12,7 +10,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class Tab2Page {
   
   
-  constructor(private nav: NavController, public alertController: AlertController,   private router: Router) {}
+  constructor(private nav: NavController, public alertController: AlertController,   private router: Router, private dadosService: DadosService) {}
 
   dataInicio = "TesteInicio";
   dataFinal = "TestFinal";
@@ -56,6 +54,8 @@ export class Tab2Page {
       {
         text: 'Confirmar',
         handler: data => {
+          this.dadosService.setData_relatorioS_I = data.dataInicio;
+          this.dadosService.setData_relatorioS_F = data.dataFim;
           this.nav.navigateForward('relatorio-semanal');
         }
       }
