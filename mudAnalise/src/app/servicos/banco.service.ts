@@ -11,6 +11,17 @@ export class BancoService {
 
   }
 
+  inserirSessao(hash: string, profissional_id: number)
+  {
+      var data={
+        hash: hash,
+        profissional_id: profissional_id,
+      }
+
+      let header = new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL + 'inserirSessao', data, {headers: header}).toPromise();
+  }
+
   inserirMural(titulo: string, texto: string, id: number, crp: string)
   {
     id=4;
