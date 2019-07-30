@@ -284,7 +284,7 @@ export class RelatorioSemanalPage implements OnInit {
 
 
     
-  }*/
+  }
   logScrollStart(){
     console.log("logScrollStart : When Scroll Starts");
   }
