@@ -9,11 +9,11 @@ import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { validateConfig } from '@angular/router/src/config';
 
 @Component({
-  selector: 'app-sessao',
-  templateUrl: './sessao.page.html',
-  styleUrls: ['./sessao.page.scss'],
+  selector: 'app-sessoes',
+  templateUrl: './sessoes.page.html',
+  styleUrls: ['./sessoes.page.scss'],
 })
-export class SessaoPage implements OnInit {
+export class SessoesPage implements OnInit {
 
   dados;
   db:BancoService;
