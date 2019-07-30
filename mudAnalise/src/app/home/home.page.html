@@ -16,7 +16,7 @@
     </ion-avatar>
     <ion-label>
       <h2 *ngIf="user">
-        Psicólogo {{user.nome}}
+        {{user.nome}}
       </h2>
       <p *ngIf="user">CRP:{{user.crp}}</p>
     </ion-label>
@@ -24,8 +24,9 @@
       <ion-button routerLink="/cadastro">
         <ion-icon slot="icon-only" name="contact"></ion-icon>
       </ion-button>
-      <ion-button routerLink="/alterar-senha">
-        <ion-icon slot="icon-only" name="key"></ion-icon>
+      <ion-button class="tamanho" routerLink="/alterar-senha" >
+        <ion-icon name="key"></ion-icon>
+        <ion-icon name="lock"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-item>

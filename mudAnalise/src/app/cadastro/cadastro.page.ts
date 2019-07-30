@@ -34,17 +34,17 @@ export class CadastroPage implements OnInit {
     dt_nasc: [
       { tipo: 'required', mensagem: 'O campo Data de Nascimento é obrigatório.' },
     ],
-    // senha: [
-    //   { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
-    //   { tipo: 'minlength', mensagem: 'A senha deve ter pelo menos 6 caracteres.' },
-    //   { tipo: 'maxlength', mensagem: 'A senha deve ter no máximo 8 caractéres.' }
-    // ],
-    // confirmaSenha: [
-    //   { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
-    //   { tipo: 'minlength', mensagem: 'A senha deve ter pelo menos 6 caracteres.' },
-    //   { tipo: 'maxlength', mensagem: 'A senha deve ter no máximo 8 caractéres.' },
-    //   { tipo: 'comparacao', mensagem: 'Deve ser igual a senha.' }
-    // ],
+    senha: [
+      { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
+      { tipo: 'minlength', mensagem: 'A senha deve ter pelo menos 6 caracteres.' },
+      { tipo: 'maxlength', mensagem: 'A senha deve ter no máximo 8 caractéres.' }
+    ],
+    confirmaSenha: [
+      { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
+      { tipo: 'minlength', mensagem: 'A senha deve ter pelo menos 6 caracteres.' },
+      { tipo: 'maxlength', mensagem: 'A senha deve ter no máximo 8 caractéres.' },
+      { tipo: 'comparacao', mensagem: 'Deve ser igual a senha.' }
+    ],
     celular: [
       { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
       { tipo: 'minlength', mensagem: 'O celular deve ter pelo menos 15 caracteres.' },
@@ -94,22 +94,32 @@ export class CadastroPage implements OnInit {
       email: [this.user.email, Validators.compose([Validators.required, Validators.email])],
       celular: [this.user.celular, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])],
       crp: [this.user.crp, Validators.compose([Validators.required, Validators.minLength(9), Validators.maxLength(9)])],
-      // senha: [this.user.senha],
-      // confirmaSenha: [],
+      senha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      confirmaSenha: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       dt_nasc: [this.user.dt_nasc, Validators.compose([Validators.required])],
       sexo: [this.user.sexo]
     },
 
-      // {
-      //   validator: ComparaValidator('senha', 'confirmaSenha')
-      // }
+      {
+        validator: ComparaValidator('senha', 'confirmaSenha')
+      }
     );
-
+      this.controleSenha();
 
   }
   ngOnInit() {
-
+    this.controleSenha();
   }
+
+  private controleSenha() {
+    if (this.user.nome) {
+      this.formCadastro.controls.senha.setValidators(null);
+      this.formCadastro.controls.senha.updateValueAndValidity();
+      this.formCadastro.controls.confirmaSenha.setValidators(null);
+      this.formCadastro.controls.confirmaSenha.updateValueAndValidity();
+    }
+  }
+
 
 
   public async salvar() {
