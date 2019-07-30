@@ -120,15 +120,15 @@
                           <ion-radio-group>
                             <ion-item lines="none" padding-horizontal>
                               <ion-label>Leve</ion-label>
-                              <ion-radio slot="start" checked></ion-radio>
+                              <ion-radio id="atv_leve" slot="start" checked></ion-radio>
                             </ion-item>
                             <ion-item lines="none" padding-horizontal>
                               <ion-label>Moderado</ion-label>
-                              <ion-radio slot="start"></ion-radio>
+                              <ion-radio id="atv_moderado" slot="start"></ion-radio>
                             </ion-item>
                             <ion-item lines="none" padding-horizontal>
                               <ion-label>Alto</ion-label>
-                              <ion-radio slot="start"></ion-radio>
+                              <ion-radio id="atv_alto" slot="start"></ion-radio>
                             </ion-item>
                           </ion-radio-group>
                         </ion-list>
@@ -175,10 +175,10 @@
                   <ion-list>
                       <ion-item padding-horizontal lines="none">
                           <ion-label class="label" position="stacked" text-wrap>2. Quantas vezes? <br> <p> (Quantidade de dias na semana) </p></ion-label>
-                            <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado" formControlName="qtdLazer">
-                                  <ion-select-option class="option" value="pouco">1 a 2 dias</ion-select-option>
-                                  <ion-select-option class="option" value="medio">3 a 5 dias</ion-select-option>
-                                  <ion-select-option class="option" value="muito">6 a 7 dias</ion-select-option>
+                            <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" id="lazer_vezes" okText="Selecionado" formControlName="qtdLazer">
+                                  <ion-select-option class="option" value="pouco" id="0">1 a 2 dias</ion-select-option>
+                                  <ion-select-option class="option" value="medio" id="1">3 a 5 dias</ion-select-option>
+                                  <ion-select-option class="option" value="muito" id="2">6 a 7 dias</ion-select-option>
                             </ion-select>
                       </ion-item>
 
@@ -190,19 +190,19 @@
                         <ion-radio-group>
                           <ion-item lines="none" padding-horizontal>
                             <ion-label>Sim</ion-label>
-                            <ion-radio slot="start" value="sim3"  (ionSelect)="acomp()"></ion-radio>
+                            <ion-radio slot="start" value="sim3" id="lazer_sim" (ionSelect)="acomp()"></ion-radio>
                           </ion-item>
                           <ion-item lines="none" padding-horizontal>
                             <ion-label>Não</ion-label>
-                            <ion-radio slot="start" value="nao3" (ionSelect)="nacomp()" checked></ion-radio>
+                            <ion-radio slot="start" value="nao3" id="lazer_nao" (ionSelect)="nacomp()" checked></ion-radio>
                           </ion-item>
                         </ion-radio-group>
                         
                         <ion-item padding-horizontal lines="none"> 
                           <ion-label class="label" position="stacked" text-wrap>Adicione um comentário quanto aos momentos de lazer dessa semana</ion-label>
                         </ion-item>
-                        <ion-item lines="none" id="comentFinal"> 
-                            <ion-textarea maxLength="150" rows="4" id="comentFinalInput" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
+                        <ion-item lines="none" id="comentLazer"> 
+                            <ion-textarea maxLength="150" rows="4" id="comentLazerInput" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
                         </ion-item>
                   </ion-list>
                 </div>
@@ -237,11 +237,11 @@
              <ion-radio-group>
                 <ion-item lines="none" padding-horizontal>
                   <ion-label>Sim</ion-label>
-                  <ion-radio slot="start" value="sim4"  (ionSelect)="despertou()"></ion-radio>
+                  <ion-radio slot="start" value="sim4" id="sono_sim" (ionSelect)="despertou()"></ion-radio>
                 </ion-item>
                 <ion-item lines="none" padding-horizontal>
                   <ion-label>Não</ion-label>
-                  <ion-radio slot="start" value="nao4" (ionSelect)="despertou()" checked></ion-radio>
+                  <ion-radio slot="start" value="nao4" id="sono_nao" (ionSelect)="despertou()" checked></ion-radio>
                 </ion-item>
               </ion-radio-group>
 
@@ -266,11 +266,11 @@
                         <ion-radio-group>
                           <ion-item lines="none" padding-horizontal>
                             <ion-label>Sim</ion-label>
-                            <ion-radio slot="start" value="sim5"  (ionSelect)="fadiga()"></ion-radio>
+                            <ion-radio slot="start" value="sim5"  id="sono_sim2" (ionSelect)="fadiga()"></ion-radio>
                           </ion-item>
                           <ion-item lines="none" padding-horizontal>
                             <ion-label>Não</ion-label>
-                            <ion-radio slot="start" value="nao5" (ionSelect)="nfadiga()" checked></ion-radio>
+                            <ion-radio slot="start" value="nao5"id="sono_nao2" (ionSelect)="nfadiga()" checked></ion-radio>
                           </ion-item>
                         </ion-radio-group>
                   </ion-list>
