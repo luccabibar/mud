@@ -15,16 +15,16 @@
       <img src="assets/logoMudAnalise.png">
     </ion-avatar>
     <ion-label>
-      <h2 *ngIf="user">
-        {{user.nome}}
+      <h2 *ngIf="profissional">
+        <strong> {{profissional.nome}}</strong>
       </h2>
-      <p *ngIf="user">CRP:{{user.crp}}</p>
+      <p *ngIf="profissional"> <small>CRP: </small> {{profissional.crp}}</p>
     </ion-label>
     <ion-buttons slot="end">
       <ion-button routerLink="/cadastro">
         <ion-icon slot="icon-only" name="contact"></ion-icon>
       </ion-button>
-      <ion-button class="tamanho" routerLink="/alterar-senha" >
+      <ion-button class="tamanho" routerLink="/alterar-senha">
         <ion-icon name="key"></ion-icon>
         <ion-icon name="lock"></ion-icon>
       </ion-button>
@@ -35,7 +35,7 @@
     <ion-item color="claro">
       <ion-label color="branco"><strong>Nova Sessão / Pareamento</strong> </ion-label>
       <!-- <ion-button fill="outline" slot="end" shape="round" color="branco" (click)="addSessao()"> -->
-      <ion-button fill="outline" slot="end" shape="round" color="branco" (click)="addSessao()" routerLink="/auth">
+      <ion-button fill="outline" slot="end" shape="round" color="branco" routerLink="/auth">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </ion-item>
@@ -44,17 +44,16 @@
   <ion-card>
     <ion-list>
       <ion-item-sliding *ngFor="let sessao of sessoes">
-        <ion-item tappable routerLink="/tabs">
+        <ion-item tappable (click)="abreSessao(sessao)">
           <ion-avatar slot="start">
-            <img [src]="sessao.img">
-
+            <img src="assets/perfil_generico.png">
           </ion-avatar>
-          <ion-label>{{sessao.nome}}
-          </ion-label>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, provident eligendi. Quo, cumque. Fuga
-          maxime nam officia, quasi praesentium similique illo ratione recusandae facilis repellendus omnis odit et
-          perferendis sapiente!
-
+          <div>
+            <ion-label><strong>{{sessao.nome}}</strong></ion-label>
+            <ion-label>
+              <small>CPF: </small> {{sessao.cpf}}
+            </ion-label>
+          </div>
         </ion-item>
         <ion-item-options side="end">
           <ion-item-option color="danger" (click)="alertaDeletar()">

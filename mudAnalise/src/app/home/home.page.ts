@@ -1,7 +1,9 @@
+import { BancoService } from './../servicos/banco.service';
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { DadosService } from '../servicos/dados.service';
 import { Router } from '@angular/router';
+import { IUsuario } from '../interfaces/IUsuario';
 
 @Component({
   selector: 'app-home',
@@ -9,34 +11,60 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  public user;
-  public sessoes = [
-    { nome: "paciente1", img: "https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png" },
-    { nome: "paciente2", img: "https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png" },
-    { nome: "paciente3", img: "https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png" },
+  public profissional;
+  public sessoes;
 
-  ];
-  public addSessao() {
-    let sessao = { nome: "paciente4", img: "https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png" };
-    this.sessoes.push(sessao);
-  }
 
   constructor(
     private AlertController: AlertController,
     private ds: DadosService,
-    private router: Router
+    private router: Router,
+    private bd: BancoService,
+    private alertController: AlertController
+
   ) {
-    this.user = this.ds.getDados("user");
+    this.profissional = this.ds.getDados("user");
   }
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
-    this.user = this.ds.getDados("user");
-    if (!this.user) {
+    this.profissional = this.ds.getDados("user");
+    if (!this.profissional) {
       this.logout(0);
+    } else {
+      this.carregaSessoes();
     }
+  }
+
+  public async carregaSessoes() {
+    this.bd.selectGenerico("SELECT * FROM sessao INNER JOIN usuario ON sessao.usuario_id=usuario.id_usuario WHERE profissional_id='" + this.profissional.id_usuario + "' AND status = 1;").then(async (resposta) => {
+      console.log(resposta);
+      this.sessoes = resposta;
+    }).catch(async (resposta) => {
+      const alert = await this.alertController.create({
+        header: 'ERRO!!',
+        subHeader: 'Dados inválidos!',
+        message: 'Erro ao buscar sessões! Verifique se há conexão com a internet',
+        buttons: ['OK']
+      });
+      await alert.present();
+    })
+  }
+
+  public abreSessao(sessao){
+    let usuario : IUsuario = {
+      id_usuario: sessao.id_usuario,
+      nome: sessao.nome,
+      cpf: sessao.cpf,
+      email: sessao.email,
+      celular: sessao.celular,
+      dt_nasc: sessao.dt_nasc,
+      sexo: sessao.sexo
+    };
+    this.ds.setDados("user_sessao", usuario);
+    this.router.navigateByUrl("/tabs");
   }
 
   public async logout(trava) {
@@ -80,8 +108,6 @@ export class HomePage implements OnInit {
     });
     await alert.present();
   }
-
-
 
   async alertaDeletar() {
     const alert = await this.AlertController.create({

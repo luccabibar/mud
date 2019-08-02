@@ -18,7 +18,8 @@ ion-content {
 }
 
 .section-active {
-    --ion-item-background: #ffc400;
+    --ion-item-background: #3742fa;
+    color: #fff;
     font-weight: 600;
 
     ion-icon{
@@ -40,7 +41,7 @@ ion-content {
 }
 
 .child-active{
-    --ion-item-background: #fad86b;
+    --ion-item-background: #1e90ff;
     --ion-item-color: #fff;
 
 }
