@@ -16,21 +16,22 @@
 
       <!-- <ion-card-title>Joana Silva Francisca</ion-card-title> -->
     </ion-card-header>
-    <ion-item  lines="none">
-      <ion-avatar slot="start" class="avatar-home ">
-        <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-373-456325.png">
+    <ion-item lines="none">
+      <ion-avatar slot="start" >
+        <img src="assets/perfil_generico.png">
       </ion-avatar>
-      <ion-card  style="height:100%; width: 100%">
-        <ion-label clas>Joana Francisca</ion-label>
-        <ion-buttons slot="end">
-          <ion-button (click)=" callNow(1432274032)">
-            <ion-icon slot="icon-only" name="call"></ion-icon>
-          </ion-button>
-          <ion-button routerLink="/ficha-paciente">
-            <ion-icon slot="icon-only" name="person"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-card>
+        <div>
+          <ion-label><strong>{{user_sessao.nome}}</strong></ion-label>
+          <ion-label><small>CPF: </small>{{user_sessao.cpf}}</ion-label>
+          <ion-buttons slot="end">
+            <ion-button (click)=" callNow(1432274032)">
+              <ion-icon slot="icon-only" name="call"></ion-icon>
+            </ion-button>
+            <ion-button routerLink="/ficha-paciente">
+              <ion-icon slot="icon-only" name="person"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
     </ion-item>
     <ion-card-content>
     </ion-card-content>

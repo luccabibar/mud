@@ -4,13 +4,13 @@ export interface IUsuario {
     cpf: string;
     email: string;
     celular: string;
-    profissional: boolean;
+    profissional?: boolean;
     crp?: string;
-    senha: string;
-    key: string;
+    senha?: string; // nao pode trazer a senha do usuario
+    key?: string;   
     dt_nasc: string;
     sexo?: string;
-    created_at: string;
+    created_at?: string;
     updated_at?: string;
     deleted_at?: string;
 }
