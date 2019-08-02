@@ -1,6 +1,6 @@
 #logoLogin 
 {
-    width: 35%;
+    height: 10%;
     position: relative;
     margin: 0;
     position: absolute;
@@ -22,23 +22,6 @@
     transform: translate(-50%, -50%); 
 }
 
-#itemEmail
-{
-    top: 60%;
-    width: 80%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%) 
-}
-
-#itemSenha
-{
-    top: 60%;
-    width: 80%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%) 
-}
 
 #esqSenha
 {
@@ -70,3 +53,23 @@
     top: 92%;
     font-size: 80%;
 }
+
+#email 
+{
+    top: 33%;
+    width: 100%;
+    position: absolute;
+}
+
+#senha
+{
+    width: 100%;
+    top: 46%;
+    position: absolute;
+}
+
+/*@media screen and (max-width:640px){
+    #esqSenha{
+        color: red
+    }
+}*/

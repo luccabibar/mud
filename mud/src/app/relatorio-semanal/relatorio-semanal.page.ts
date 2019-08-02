@@ -4,10 +4,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, NavController, AlertController } from '@ionic/angular';
 import { BancoService } from '../banco.service';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
-import { BoundDirectivePropertyAst } from '@angular/compiler';
-import { getElementDepthCount } from '@angular/core/src/render3/state';
-import { async, delay } from 'q';
-import { validateConfig } from '@angular/router/src/config';
 import { IonContent } from '@ionic/angular';
 import { Router, RouterModule } from '@angular/router';
 
@@ -31,7 +27,7 @@ export class RelatorioSemanalPage implements OnInit {
   public cont3 = 0;
   public solta = 0;
 
-  constructor(public navCtrl: NavController, private BD: BancoService,public formBuilder: FormBuilder,private AlertController: AlertController, private router: Router) { 
+  constructor(public navCtrl: NavController, private BD: BancoService,public formBuilder: FormBuilder,private AlertController: AlertController, private router: Router, private dadosService: DadosService) { 
     
     this.slide1form = formBuilder.group({
         qtdCarboidratos: ['' ,  Validators.compose([Validators.required])],
@@ -148,7 +144,7 @@ export class RelatorioSemanalPage implements OnInit {
  
    async proxSlide1()
   {
-    if(this.slide1form.valid)
+    if(this.slide1form.invalid)
     {
       this.IonSlides.slideTo(0);
       const alert = await this.AlertController.create({
@@ -238,28 +234,58 @@ export class RelatorioSemanalPage implements OnInit {
     let agua = (<HTMLInputElement>document.getElementById("agua")).value;
 
     //Atividade-Física
-    let fez_atv_sim = (<HTMLInputElement>document.getElementById("atv_sim")).value;
-    let fez_atv_nao = (<HTMLInputElement>document.getElementById("atv_nao")).value;
+    let fez_atv_sim = (<HTMLInputElement>document.getElementById("atv_sim")).checked;
+    let fez_atv = false;
+    if(fez_atv_sim)
+    {
+      fez_atv = true;
+    }
     let duracao_atv = (<HTMLInputElement>document.getElementById("atv_temp")).value;
-    let intensidade_atv_l = (<HTMLInputElement>document.getElementById("atv_leve")).value;
-    let intensidade_atv_m = (<HTMLInputElement>document.getElementById("atv_moderado")).value;
-    let intensidade_atv_a = (<HTMLInputElement>document.getElementById("atv_alto")).value;
+    let intensidade_atv = 0;
+    if((<HTMLInputElement>document.getElementById("atv_leve")).checked)
+    {
+      intensidade_atv = 0; // leve
+    }
+    if((<HTMLInputElement>document.getElementById("atv_moderado")).checked)
+    {
+      intensidade_atv = 1;
+    }
+    if((<HTMLInputElement>document.getElementById("atv_alto")).checked)
+    {
+      intensidade_atv = 2;
+    }
     
     //Lazer
-    let fez_lazer_sim = (<HTMLInputElement>document.getElementById("dedicous")).value;
-    let fez_lazer_nao = (<HTMLInputElement>document.getElementById("dedicoun")).value;
+    let fez_lazer_sim = (<HTMLInputElement>document.getElementById("dedicous")).checked;
+    let fez_lazer = false;
+    if(fez_lazer_sim)
+    {
+      fez_lazer = true;
+    }
     let vezes_Lazer = (<HTMLInputElement>document.getElementById("lazer_vezes")).value;
-    let acomp_lazer_sim = (<HTMLInputElement>document.getElementById("lazer_sim")).value;
-    let acomp_lazer_nao = (<HTMLInputElement>document.getElementById("lazer_nao")).value;
+    let acomp_lazer_sim = (<HTMLInputElement>document.getElementById("lazer_sim")).checked;
+    let acomp_lazer = false;
+    if(acomp_lazer_sim)
+    {
+      acomp_lazer = true;
+    }
     
 
     //Sono
     let horario_dorm = (<HTMLInputElement>document.getElementById("hrDormir")).value;
-    let despertou_sim = (<HTMLInputElement>document.getElementById("sono_sim")).value;
-    let despertou_nao = (<HTMLInputElement>document.getElementById("sono_nao")).value;
-    let vezes_sono = (<HTMLInputElement>document.getElementById("mostraVzs")).value;
-    let acordou_precoce_sim = (<HTMLInputElement>document.getElementById("sono_sim2")).value;
-    let acordou_precoce_nao = (<HTMLInputElement>document.getElementById("sono_nao2")).value;
+    let despertou_sim = (<HTMLInputElement>document.getElementById("sono_sim")).checked;
+    let despertou = false;
+    if(despertou_sim)
+    {
+      despertou = true;
+    }
+    let vezes_sono = (<HTMLInputElement>document.getElementById("mostraVzs")).innerText;
+    let acordou_precoce_sim = (<HTMLInputElement>document.getElementById("sono_sim2")).checked;
+    let acordou_precoce = false;
+    if(acordou_precoce_sim)
+    {
+      acordou_precoce = true;
+    }
 
     //comentários
     let coment_lazer = (<HTMLInputElement>document.getElementById("comentLazerInput")).value;
@@ -269,22 +295,41 @@ export class RelatorioSemanalPage implements OnInit {
 
     const alert = await this.AlertController.create({
       header: 'Erro',
-      message: carboidratos+"\n"+proteinas+"n"+lacticinios+"\n"+verdfrut+"\n"+agua+"\n"+
-      fez_atv_sim+"n"+fez_atv_nao+"\n"+duracao_atv+"\n"+intensidade_atv_l+"\n"+intensidade_atv_m+"\n"+intensidade_atv_a+
-      "\n"+fez_lazer_sim+"\n"+fez_lazer_nao+"\n"+vezes_Lazer+"\n"+acomp_lazer_sim+"\n"+acomp_lazer_nao+"\n"+
-      horario_dorm+"\n"+despertou_sim+"\n"+despertou_nao+"\n"+vezes_sono+"\n"+acordou_precoce_sim+"\n"+acordou_precoce_nao+
-      "\n"+coment_lazer+"\n"+coment_final,
+      message: carboidratos+"<br>"+proteinas+"<br>"+lacticinios+"<br>"+verdfrut+"<br>"+agua+"<br>"+
+      fez_atv+"<br>"+duracao_atv+"<br>"+intensidade_atv+
+      "<br>"+fez_lazer+"<br>"+vezes_Lazer+"<br>"+acomp_lazer+"<br>"+
+      horario_dorm+"<br>"+despertou+"<br>"+vezes_sono+"<br>"+acordou_precoce+
+      "<br>"+coment_lazer+"<br>"+coment_final,
       buttons: ['OK']
     });
     
     await alert.present();
 
     
+    this.BD.enviarRelatorioSemanal(this.dadosService.getId().toString(),coment_final,this.dadosService.getData_relatorioS_I(),this.dadosService.getData_relatorioS_F(),carboidratos,proteinas,lacticinios,verdfrut,agua,fez_atv.toString(),duracao_atv,intensidade_atv.toString(),fez_lazer.toString(),coment_lazer,vezes_Lazer,acomp_lazer.toString(),horario_dorm,despertou.toString(),vezes_sono,acordou_precoce.toString())
+    .then(async(response)=>{
+        const alert = await this.AlertController.create({
+          header: 'Confirmação',
+          subHeader: 'Sucesso!',
+          message: JSON.stringify(response[0].id_usuario),
+          buttons: ['OK']
+        });
+        await alert.present();
+      }
+    )
+    .catch(async(response)=>{
 
+      const alert = await this.AlertController.create({
+        header: 'Erro',
+        message: JSON.stringify(response),
+        buttons: ['OK']
+      });
+      await alert.present()
+    })
 
 
     
-  }*/
+  }
   logScrollStart(){
     console.log("logScrollStart : When Scroll Starts");
   }
