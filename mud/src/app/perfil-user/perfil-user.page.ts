@@ -39,8 +39,10 @@ export class PerfilUserPage {
       this.nav.navigateForward('relatorio-semanal');
   }
 
-  pagsessao(){
-    this.router.navigate(['auth']);
+  pagsessao()
+  {
+      this.nav.navigateForward('sessoes');
+      
   }
 
   async editarSintomas()

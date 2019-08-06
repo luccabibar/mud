@@ -1,18 +1,13 @@
 <ion-header>
   <ion-toolbar color="escuro">
     <ion-title>Mural</ion-title>
-    <!--
-
-  <ion-buttons slot="end">
+    <ion-buttons slot="end">
       <ion-button routerLink="/home">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
     </ion-buttons>
-
-    -->
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let mural of murais">
@@ -27,7 +22,7 @@
           <ion-card-content>
             {{mural.texto}}
           </ion-card-content>
-        </ion-card>         
+        </ion-card>
       </ion-item>
     </ion-item-sliding>
   </ion-list>
@@ -37,10 +32,12 @@
   <ion-item>
     <ion-label position="stacked">Notas</ion-label>
     <ion-item>
-      <ion-label position="stacked">Título <ion-text color="danger"></ion-text></ion-label>
+      <ion-label position="stacked">Título <ion-text color="danger"></ion-text>
+      </ion-label>
       <ion-input required type="text" id="1" name="inserirtitulo"></ion-input>
-    <ion-label position="stacked">Corpo da mensagem <ion-text color="danger"></ion-text></ion-label>
-  </ion-item>
+      <ion-label position="stacked">Corpo da mensagem <ion-text color="danger"></ion-text>
+      </ion-label>
+    </ion-item>
     <ion-textarea id="2" name="inserirtxt"></ion-textarea>
     <ion-button (click)="inserirMural()" size="small">Adicionar</ion-button>
   </ion-item>

@@ -31,6 +31,25 @@ export class DadosService {
   Crp = "";
   DataNasc = "";
   Id = 0;
+  data_relatorioS_I = null;
+  data_relatorioS_F = null;
+
+  getData_relatorioS_I()
+  {
+    return this.data_relatorioS_I;
+  }
+  setData_relatorioS_I(x: Date)
+  {
+    this.data_relatorioS_I = x;
+  }
+  getData_relatorioS_F()
+  {
+    return this.data_relatorioS_F;
+  }
+  setData_relatorioS_F(x: Date)
+  {
+    this.data_relatorioS_F = x;
+  }
 
   getNome()
   {
@@ -115,4 +134,6 @@ export class DadosService {
     this.setDataNasc("");
     this.setCelular("");
   }
+
+
 }

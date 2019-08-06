@@ -15,7 +15,7 @@ import { SharedComponentsModule } from '../components/shared-components.module';
       path: '', 
       component: Tab2Page 
     }
-  ]),
+  ]), 
   SharedComponentsModule // Ah
   ],
   declarations: [Tab2Page]

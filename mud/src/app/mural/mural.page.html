@@ -17,9 +17,6 @@
   <ion-list>
     <ion-item-sliding *ngFor="let mural of murais">
       <ion-item tappable routerLink="/tabs">
-        <ion-avatar slot="start">
-          <img [src]="sessao.img">
-        </ion-avatar>
         <ion-card>
           <ion-card-header>
             <ion-card-title>{{mural.titulo}}</ion-card-title>

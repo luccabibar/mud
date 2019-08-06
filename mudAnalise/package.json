@@ -34,6 +34,7 @@
     "cordova-browser": "6.0.0",
     "cordova-plugin-qrscanner": "3.0.1",
     "core-js": "^2.5.4",
+    "moment": "^2.24.0",
     "mx.ferreyra.callnumber": "0.0.2",
     "qrious": "^4.0.2",
     "rxjs": "~6.3.3",
