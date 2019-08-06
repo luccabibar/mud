@@ -124,6 +124,7 @@ export class HomePage implements OnInit {
         }, {
           text: 'Sim',
           handler: () => {
+            
             this.deletadoSucesso();
           }
         }
