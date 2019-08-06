@@ -1,3 +1,4 @@
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Router, RouterModule } from '@angular/router';
 import { Component, OnInit, Renderer, ViewChild, Input} from '@angular/core';
 import { NavController, AlertController, IonInput} from '@ionic/angular';
@@ -20,16 +21,29 @@ export class LoginPagePage {
 
   public submitAttempt: boolean = false;
 
- 
-
-  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router) { 
+  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router, private ScreenOrientation: ScreenOrientation) { 
     
+  }
+
+  ngOnInit()
+  {
+    this.lockScreenOrientation();
   }
 
   public loginForm:FormGroup = new FormGroup({
     'email' : new FormControl(null, [Validators.required, Validators.email]),
     'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)])
   })
+
+  async lockScreenOrientation()
+  {
+    try{
+      this.ScreenOrientation.lock(this.ScreenOrientation.ORIENTATIONS.PORTRAIT);
+    }
+    catch(error){
+      console.error(error);
+    }
+  }
 
   foca(oque: string)
   {
