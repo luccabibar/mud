@@ -152,7 +152,7 @@ export class BancoService {
   { 
     var dateI=new Date(Data_relatorioS_I).toDateString();
     var dateF=new Date(Data_relatorioS_F).toDateString();
-    var dateSono=new Date(horario_dorm).toDateString();
+    //var dateSono=new Date(horario_dorm).toDateString();
     var data={ 
     id_usuario : id_usuario,
     coment_final:coment_final,
@@ -170,7 +170,7 @@ export class BancoService {
     coment_lazer: coment_lazer,
     vezes_Lazer: vezes_Lazer,
     acomp_lazer: acomp_lazer,
-    horario_dorm: dateSono,
+    horario_dorm: horario_dorm,
     despertou: despertou,
     vezes_sono:vezes_sono,
     acordou_precoce: acordou_precoce
