@@ -37,6 +37,7 @@ export class LoginPagePage {
 
   async lockScreenOrientation()
   {
+    
     try{
       this.ScreenOrientation.lock(this.ScreenOrientation.ORIENTATIONS.PORTRAIT);
     }
@@ -45,6 +46,7 @@ export class LoginPagePage {
     }
   }
 
+  //
   foca(oque: string)
   {
     if(oque == "senha")
