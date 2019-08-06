@@ -45,6 +45,7 @@ export class LoginPagePage {
     }
   }
 
+  //
   foca(oque: string)
   {
     if(oque == "senha")
