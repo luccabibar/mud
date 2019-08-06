@@ -37,6 +37,7 @@ export class LoginPagePage {
 
   async lockScreenOrientation()
   {
+    
     try{
       this.ScreenOrientation.lock(this.ScreenOrientation.ORIENTATIONS.PORTRAIT);
     }
