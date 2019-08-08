@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { BancoService } from "../banco.service";
 import { DadosService } from "../dados.service";
 
-import { ZBar, ZBarOptions } from '@ionic-native/zbar/ngx';
 import { AlertController } from '@ionic/angular';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { validateConfig } from '@angular/router/src/config';
@@ -17,8 +16,6 @@ export class SessoesPage implements OnInit {
 
   dados;
   db:BancoService;
-  zbarOptions: ZBarOptions;
-  qr: ZBar;
   hash;
 
   updateSessao(hash, id)
@@ -83,6 +80,7 @@ export class SessoesPage implements OnInit {
    * liga a camera pra ler o qrcode, e dps valida e ativa a sessao no banco
    */
   async scanFoda(){
+    /*
     //leitura do codigo
     this.qr.scan(this.zbarOptions)
     //sucesso
@@ -111,21 +109,13 @@ export class SessoesPage implements OnInit {
     
     this.updateSessao(this.hash, /*this.dados.getDados("id")*/ "2");
     
-
+    */
   }
 
-  constructor(db: BancoService, dados: DadosService, qr: ZBar) 
+  constructor(db: BancoService, dados: DadosService) 
   {  
     this.db = db;
     this.dados = dados;
-    this.qr = qr;
-    this.zbarOptions = {
-      text_title: "scanner",
-      text_instructions: "aponte sua camera para o QR-code",
-      camera: "back",
-      flash: "off",
-      drawSight: true
-    }
   }
 
   ngOnInit() 
