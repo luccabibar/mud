@@ -42,12 +42,13 @@ export class MuralPage implements OnInit {
         message: JSON.stringify(response),
         buttons: ['OK']
       });
-    
-        
-        for(let c=0;c<=response;c++)
+
+        let a=0;
+        do
         {
-         this.murais.push(response[c]);
-        }
+          this.murais.push(response[a]);
+          a++;
+        }while(response[a]!=null)
       
       await alert.present();
     }
