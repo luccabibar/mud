@@ -109,7 +109,7 @@ export class LoginPagePage {
           const alert = await this.alertController.create({
           header: 'Confirmação',
           subHeader: 'Erro!',
-          message: 'A senha está incorreta',
+          message: 'Senha incorreta!',
           buttons:[
             {
               text: 'OK',
@@ -126,7 +126,7 @@ export class LoginPagePage {
       const alert = await this.alertController.create({
         header: 'Confirmação',
         subHeader: 'Erro!',
-        message: 'A conta não existe',
+        message: response,
         buttons:  [
           {
             text: 'OK',
