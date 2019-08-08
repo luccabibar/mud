@@ -12,14 +12,23 @@ export class AnimacaoPage implements OnInit {
   constructor(private AlertController: AlertController,  private router: Router) { }
   
   public counter = 0;
+  public timer;
 
   ngOnInit() {
-    var aux = 0;
     this.animacao();
     this.mandaAlerta();
   }
 
-  
+  ngOnDestroy()
+  {
+    clearInterval( this.timer );
+  }
+
+  para()
+  {
+    clearInterval( this.timer );
+  }
+
   animacao()
   {
     var contatempo = 0;
@@ -27,11 +36,8 @@ export class AnimacaoPage implements OnInit {
     var chegou = 0;
     var fonte = 14;
     var aux = 0;
-    var opacidade = 1;   //parei aqui!
-    var timer = setInterval(function() {
-      if( this.counter >= 10 ) {
-        clearInterval( timer );
-      }
+    var opacidade = 1;  
+    this.timer = setInterval(function() {
       if( chegou == 0){
         teste+=3;
         opacidade-=0.023;
@@ -94,6 +100,7 @@ export class AnimacaoPage implements OnInit {
             text: 'Sim',
             handler: () => {
               this.router.navigateByUrl('/relatorio-crise');
+              clearInterval( this.timer );
             }
           }
         ]
@@ -118,6 +125,7 @@ export class AnimacaoPage implements OnInit {
             text: 'Sim',
             handler: () => {
               this.router.navigateByUrl('/relatorio-crise');
+              clearInterval( this.timer );
             }
           }
         ]
