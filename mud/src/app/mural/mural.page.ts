@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BancoService } from './../banco.service';
 import { DadosService } from '../dados.service';
 import { NavController, IonSlides, AlertController, IonInput } from '@ionic/angular';
+import { TmplAstBoundAttribute } from '@angular/compiler';
 
 
 @Component({
@@ -10,6 +11,13 @@ import { NavController, IonSlides, AlertController, IonInput } from '@ionic/angu
   styleUrls: ['./mural.page.scss'],
 })
 export class MuralPage implements OnInit {
+
+  public semanas;
+  public user_sessao;
+
+
+  information: any[] = [];
+
 
   public murais = [
   ];
@@ -27,16 +35,21 @@ export class MuralPage implements OnInit {
   public addMural()
   {
     let id=this.dadosService.getId();
-    this.BancoService.selecionarMural(id).then(async(response)=>{
+    this.BancoService.selecionarMural(4).then(async(response)=>{
       const alert = await this.AlertController.create({
         header: 'Confirmação',
         subHeader: 'Sucesso!',
-        message: JSON.stringify(response[0].id_usuario),
+        message: JSON.stringify(response),
         buttons: ['OK']
       });
-      
-      this.murais.push(response[0]);
 
+        let a=0;
+        do
+        {
+          this.murais.push(response[a]);
+          a++;
+        }while(response[a]!=null)
+      
       await alert.present();
     }
   )

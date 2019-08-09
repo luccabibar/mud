@@ -13,6 +13,7 @@ export class RelatorioCrisePage implements OnInit {
 
   public conta = 0;
   public contar = 0;
+  public conta3 = 0;
 
   constructor(public navCtrl: NavController) { }
 
@@ -25,6 +26,17 @@ export class RelatorioCrisePage implements OnInit {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slidePrev();
     this.IonSlides.lockSwipes(true);
+    this.conta3--;
+    if(this.conta3 == 0)
+    {
+      document.getElementById("botoes").style.display='none';
+      document.getElementById("btnProximo").style.display='unset';
+    }
+    if(this.conta3 == 2)
+    {
+      document.getElementById("concluir").style.display='none';
+      document.getElementById("botoes").style.display='unset';
+    }
   }
 
   proxSlide()
@@ -32,6 +44,22 @@ export class RelatorioCrisePage implements OnInit {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slideNext();
     this.IonSlides.lockSwipes(true);
+    this.conta3++;
+    if(this.conta3 == 3)
+    {
+      document.getElementById("botoes").style.display='none';
+      document.getElementById("concluir").style.display='unset';
+    }
+  }
+
+  troca()
+  {
+    this.IonSlides.lockSwipes(false);
+    this.IonSlides.slideNext();
+    this.IonSlides.lockSwipes(true);
+    this.conta3++;
+    document.getElementById("btnProximo").style.display='none';
+    document.getElementById("botoes").style.display='unset';
   }
 
   mudaLabel()

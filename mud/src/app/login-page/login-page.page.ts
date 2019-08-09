@@ -1,3 +1,4 @@
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Router, RouterModule } from '@angular/router';
 import { Component, OnInit, Renderer, ViewChild, Input} from '@angular/core';
 import { NavController, AlertController, IonInput} from '@ionic/angular';
@@ -20,10 +21,13 @@ export class LoginPagePage {
 
   public submitAttempt: boolean = false;
 
- 
-
-  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router) { 
+  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router, private ScreenOrientation: ScreenOrientation) { 
     
+  }
+
+  ngOnInit()
+  {
+    this.lockScreenOrientation();
   }
 
   public loginForm:FormGroup = new FormGroup({
@@ -31,6 +35,18 @@ export class LoginPagePage {
     'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)])
   })
 
+  async lockScreenOrientation()
+  {
+    
+    try{
+      this.ScreenOrientation.lock(this.ScreenOrientation.ORIENTATIONS.PORTRAIT);
+    }
+    catch(error){
+      console.error(error);
+    }
+  }
+
+  //
   foca(oque: string)
   {
     if(oque == "senha")
@@ -93,7 +109,7 @@ export class LoginPagePage {
           const alert = await this.alertController.create({
           header: 'Confirmação',
           subHeader: 'Erro!',
-          message: 'A senha está incorreta',
+          message: 'Senha incorreta!',
           buttons:[
             {
               text: 'OK',
@@ -110,7 +126,7 @@ export class LoginPagePage {
       const alert = await this.alertController.create({
         header: 'Confirmação',
         subHeader: 'Erro!',
-        message: 'A conta não existe',
+        message: response,
         buttons:  [
           {
             text: 'OK',

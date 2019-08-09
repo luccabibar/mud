@@ -227,7 +227,8 @@
             <form [formGroup]="slide4form">
              <ion-item padding-horizontal>
                 <ion-label class="label" position="stacked" text-wrap>1. Que horário você geralmente foi dormir?</ion-label>
-                <ion-datetime displayFormat="HH:mm a" id="hrDormir" placeholder="Selecione um horário" minuteValues="00, 15, 30, 45" formControlName="horaDormir"></ion-datetime>
+                <ion-input type="number" id="hrDormir" placeholder="Horas (1 - 24)" formControlName="horaDormir" min="1" max="24"></ion-input>
+                <!--<ion-datetime pickerFormat="HH:mm a" displayFormat="HH:mm a" id="hrDormir" placeholder="Selecione um horário" minuteValues="00, 15, 30, 45" formControlName="horaDormir"></ion-datetime>-->
              </ion-item>
 
              <br>
