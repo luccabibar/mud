@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 import { BancoService } from "../banco.service";
 import { DadosService } from "../dados.service";
 
-import { ZBar, ZBarOptions } from '@ionic-native/zbar/ngx';
 import { AlertController } from '@ionic/angular';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { validateConfig } from '@angular/router/src/config';
@@ -16,9 +16,8 @@ import { validateConfig } from '@angular/router/src/config';
 export class SessoesPage implements OnInit {
 
   dados;
-  db:BancoService;
-  zbarOptions: ZBarOptions;
-  qr: ZBar;
+  qr: BarcodeScanner;
+  db: BancoService;
   hash;
 
   updateSessao(hash, id)
@@ -83,18 +82,35 @@ export class SessoesPage implements OnInit {
    * liga a camera pra ler o qrcode, e dps valida e ativa a sessao no banco
    */
   async scanFoda(){
+    
+    //options
+    let opts = {
+      preferFrontCamera : true,
+      showFlipCameraButton : true,
+      showTorchButton : true,
+      torchOn: false,
+      saveHistory: false,
+      prompt : "Escaneie o codigo QR", // Android
+      resultDisplayDuration: 500,
+      formats : "QR_CODE",
+      orientation : "portrait",
+      disableAnimations : true,
+      disableSuccessBeep: true
+    };
+
     //leitura do codigo
-    this.qr.scan(this.zbarOptions)
+    this.qr.scan(opts)
     //sucesso
     .then(result => {
-
+      
       this.hash = result;
+      console.log('qr foda: ', result);
     })
     //erro
-   .catch(error => {
-     
-      alert(error);
+    .catch(ex => {
+       
       this.hash = "return";
+      console.log('Error', ex);
     });
 
     //if erro, retorna
@@ -111,21 +127,13 @@ export class SessoesPage implements OnInit {
     
     this.updateSessao(this.hash, /*this.dados.getDados("id")*/ "2");
     
-
   }
 
-  constructor(db: BancoService, dados: DadosService, qr: ZBar) 
-  {  
+  constructor(db: BancoService, dados: DadosService, qr: BarcodeScanner) 
+  {
     this.db = db;
     this.dados = dados;
     this.qr = qr;
-    this.zbarOptions = {
-      text_title: "scanner",
-      text_instructions: "aponte sua camera para o QR-code",
-      camera: "back",
-      flash: "off",
-      drawSight: true
-    }
   }
 
   ngOnInit() 
