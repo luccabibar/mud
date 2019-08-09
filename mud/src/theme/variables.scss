@@ -162,27 +162,40 @@
 }
 
 @font-face {
-  font-family: 'Muli-Regular';
-  src: url('../assets/fonts/Muli-Regular.ttf');
+  font-family: 'Hero-Regular';
+  src: url('../assets/fonts/Hero-Regular.ttf');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Muli-Bold';
-  src: url('../assets/fonts/Muli-Bold.ttf');
+  font-family: 'Hero-Bold';
+  src: url('../assets/fonts/Hero-Bold.ttf');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Muli-Black';
-  src: url('../assets/fonts/Muli-Black.ttf');
+  font-family: 'Hero-Light';
+  src: url('../assets/fonts/Hero-Light.ttf');
   font-weight: normal;
   font-style: normal;
 }
 
-/** {
-  font-family: 'Futura';
-  font-style: bold;
-}*/
+* {
+  font-family: 'Hero-Bold';
+  font-style: normal;
+}
+
+ion-label{
+  font-family: 'Hero-Bold' !important;
+  font-size: 1.2em !important;
+  }
+
+ion-input{
+  font-family: 'Hero-Regular' !important;
+}
+
+ion-button{
+  --border-width: 0.13em !important;
+}

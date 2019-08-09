@@ -21,6 +21,7 @@
                 </ion-item>
                 <ion-item padding-horizontal lines="none">
                     <ion-label class="label" position="stacked" text-wrap>Quanto tempo durou a crise?</ion-label>
+                    <ion-input disabled></ion-input>
                     <ion-range (ionFocus)="mudaLabel()" (keyup)="mudaLabel()" (ionChange)="mudaLabel()" id="tempo" min="0" max="1000" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
                 </ion-item>
                 <ion-label class="label" id="lblTempo" position="fixed"></ion-label>
@@ -137,7 +138,8 @@
                     <hr><hr><hr><hr><hr>
                 </div>  
                 <ion-item padding-horizontal lines="none">
-                   <ion-label class="label" position="stacked" text-wrap>Preocupação com a possibilidade de outro ataque:</ion-label>
+                   <ion-label class="label" position="stacked" text-wrap>Preocupação com a possibilidade de outra crise:</ion-label>
+                   <ion-input disabled></ion-input>
                    <ion-range (ionFocus)="mudaLabel2()" (keyup)="mudaLabel2()" (ionChange)="mudaLabel2()" id="preocupa" min="0" max="8" step="2" snaps="true" ticks="false" color="verdemud4" ></ion-range>
                 </ion-item>
                 <ion-label class="label" id="lblGrau" position="fixed"></ion-label>
@@ -150,9 +152,16 @@
 </ion-content>
 
 <ion-footer>
-    <div id="butProx">
-        <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
-        <ion-button id="btnProx" (click)="proxSlide()" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
+    <div id="botoes" style="display: none;">
+        <ion-button id="btnVoltar" (click)="antSlide()" shape="round" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
+        <ion-button id="btnProx" (click)="proxSlide()" shape="round" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
+    </div>
+    <div id="btnProximo">
+      <ion-button padding-horizontal shape="round" (click)="troca()" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
+    </div>
+    <div id="concluir" style="display: none;">
+      <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" shape="round" color="verdemud4" slot="start">Voltar</ion-button>
+      <ion-button id="btnConcluir" fill="outline" shape="round" color="verdemud4" slot="end">Concluir</ion-button>
     </div>
 </ion-footer>
     
