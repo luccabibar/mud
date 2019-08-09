@@ -35,7 +35,7 @@ export class MuralPage implements OnInit {
   public addMural()
   {
     let id=this.dadosService.getId();
-    this.BancoService.selecionarMural(4).then(async(response)=>{
+    this.BancoService.selecionarMural(id).then(async(response)=>{
       const alert = await this.AlertController.create({
         header: 'Confirmação',
         subHeader: 'Sucesso!',

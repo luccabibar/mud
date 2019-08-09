@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { IUsuario } from './../interfaces/IUsuario';
 import { BancoService } from './../servicos/banco.service';
 import { Component, OnInit } from '@angular/core';
@@ -31,7 +32,7 @@ export class Tab3Page {
   //       message: JSON.stringify(response[0].id_usuario),
   //       buttons: ['OK']
   //     });
-      
+
   //     this.murais.push(response[0]);
 
   //     await alert.present();
@@ -48,44 +49,60 @@ export class Tab3Page {
 
   //   await alert.present()
   // })
-     
+
   //}
-  public user: IUsuario;
-  constructor(private dadosService: DadosService, private BancoService: BancoService,private AlertController: AlertController)
-  { 
-  this.user=dadosService.getDados("user")
+
+  public profissional: IUsuario;
+  public user_sessao;
+
+
+  constructor(
+    private dadosService: DadosService,
+    private BancoService: BancoService,
+    private AlertController: AlertController,
+    private router: Router
+  ) {
+    this.profissional = dadosService.getDados("user");
+    this.user_sessao = this.dadosService.getDados("user_sessao");
+
   }
-  
+
+  ionViewDidEnter() {
+    this.profissional = this.dadosService.getDados("user");
+    if (!this.profissional) {
+      this.dadosService.removeDados(true, '');
+      this.router.navigateByUrl("/login");
+    }
+  }
 
 
-  async inserirMural()
-  {
+  async inserirMural() {
     let titulo = (<HTMLInputElement>document.getElementById("1")).value;
     let texto = (<HTMLInputElement>document.getElementById("2")).value;
-    let id=null;
+    let id = null;
 
-    this.BancoService.inserirMural(titulo,texto,id,this.user.crp).then(async(response)=>{
+    this.BancoService.inserirMural(titulo, texto, this.user_sessao.id_usuario, this.profissional.id_usuario).then(async (response) => {
       const alert = await this.AlertController.create({
         header: 'Confirmação',
         subHeader: 'Sucesso!',
         message: JSON.stringify(response),
         buttons: ['OK']
       });
-      
+
       await alert.present();
     }
-  )
-  .catch(async(response)=>{
+    )
+      .catch(async (response) => {
 
-    const alert = await this.AlertController.create({
-      header: 'Confirmação',
-      subHeader: 'Erro!',
-      message: JSON.stringify(response),
-      buttons: ['OK']
-    });
+        const alert = await this.AlertController.create({
+          header: 'Confirmação',
+          subHeader: 'Erro!',
+          message: JSON.stringify(response),
+          buttons: ['OK']
+        });
 
-    await alert.present()
-  })
-     
+        await alert.present()
+      })
+
   }
 }
