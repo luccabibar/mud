@@ -42,7 +42,7 @@
           <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> CPF</ion-label>
           <ion-input value="{{cpf}}" (ionChange)="ativa()" type="text" name="nome" id="5" placeholder="Informe seu CPF"></ion-input>
         </ion-item>
-        <ion-button (click)="salvarPerfil()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;" disabled>Salvar Perfil</ion-button>
+        <ion-button (click)="salvarPerfil()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;" disabled="{{desativado}}">Salvar Perfil</ion-button>
         
         <ion-button (click)="editarSintomas()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Editar Sintomas</ion-button>
       </ion-list>

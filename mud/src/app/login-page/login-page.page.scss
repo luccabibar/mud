@@ -1,33 +1,19 @@
 #logoLogin 
 {
     height: 10%;
-    position: relative;
     margin: 0;
-    position: absolute;
+    position: fixed;
     top: 17%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%); 
 }
 
-#loginTitle
-{
-    width: 18%;
-    font-size: 130%;
-    margin: 0;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%); 
-}
-
-
 #esqSenha
 {
     width: 40%;
     margin: 0;
-    position: absolute;
+    position: fixed;
     top: 63%;
     font-size: 85%;
     left: 58%;
@@ -37,7 +23,7 @@
 .btnEntrar
 {
     width: 80%;
-    position: absolute;
+    position: fixed;
     top: 75%;
     left: 50%;
     margin-right: -50%;
@@ -49,7 +35,7 @@
     color:#2ca089ff;
     width: 85%;
     margin: 0;
-    position: absolute;
+    position: fixed;
     top: 92%;
     font-size: 80%;
 }
@@ -58,14 +44,14 @@
 {
     top: 33%;
     width: 100%;
-    position: absolute;
+    position: fixed;
 }
 
 #senha
 {
     width: 100%;
     top: 46%;
-    position: absolute;
+    position: fixed;
 }
 
 /*@media screen and (max-width:640px){
