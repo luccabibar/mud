@@ -18,43 +18,14 @@ export class Tab3Page {
 
 
 
-  // ngOnInit() {
-  //   this.addMural();
-  // }
-
-  // public addMural()
-  // {
-  //   let id=this.dadosService.getId();
-  //   this.BancoService.selecionarMuralProf(this.user.crp).then(async(response)=>{
-  //     const alert = await this.AlertController.create({
-  //       header: 'Confirmação',
-  //       subHeader: 'Sucesso!',
-  //       message: JSON.stringify(response[0].id_usuario),
-  //       buttons: ['OK']
-  //     });
-
-  //     this.murais.push(response[0]);
-
-  //     await alert.present();
-  //   }
-  // )
-  // .catch(async(response)=>{
-
-  //   const alert = await this.AlertController.create({
-  //     header: 'Confirmação',
-  //     subHeader: 'Erro!',
-  //     message: JSON.stringify(response),
-  //     buttons: ['OK']
-  //   });
-
-  //   await alert.present()
-  // })
-
-  //}
+   ngOnInit() {
+     this.addMural();
+   }
 
   public profissional: IUsuario;
   public user_sessao;
 
+  
 
   constructor(
     private dadosService: DadosService,
@@ -75,11 +46,44 @@ export class Tab3Page {
     }
   }
 
+  public addMural()
+  {
+    let id=this.dadosService.getId();
+    this.BancoService.selecionarMuralProf(this.user_sessao.id_usuario,this.profissional.id_usuario).then(async(response)=>{
+      const alert = await this.AlertController.create({
+        header: 'Confirmação',
+        subHeader: 'Sucesso!',
+        message: JSON.stringify(response[0].id_usuario),
+        buttons: ['OK']
+      });
+
+      let a=0;
+      do
+      {
+        this.murais.push(response[a]);
+        a++;
+      }while(response[a]!=null)
+
+      await alert.present();
+    }
+  )
+  .catch(async(response)=>{
+
+    const alert = await this.AlertController.create({
+      header: 'Confirmação',
+      subHeader: 'Erro!',
+      message: JSON.stringify(response),
+      buttons: ['OK']
+    });
+
+    await alert.present()
+  })
+
+ }
 
   async inserirMural() {
     let titulo = (<HTMLInputElement>document.getElementById("1")).value;
     let texto = (<HTMLInputElement>document.getElementById("2")).value;
-    let id = null;
 
     this.BancoService.inserirMural(titulo, texto, this.user_sessao.id_usuario, this.profissional.id_usuario).then(async (response) => {
       const alert = await this.AlertController.create({
