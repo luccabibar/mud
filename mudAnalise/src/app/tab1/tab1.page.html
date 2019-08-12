@@ -11,48 +11,59 @@
 
 <ion-content>
   <ion-card>
-
+    <!-- 
     <ion-card-header>
-
-      <!-- <ion-card-title>Joana Silva Francisca</ion-card-title> -->
-    </ion-card-header>
+      <ion-card-title>Joana Silva Francisca</ion-card-title>
+    </ion-card-header> -->
     <ion-item lines="none">
-      <ion-avatar slot="start" class="avatar">
+      <ion-avatar slot="start" class="avatar" tappable routerLink="/ficha-paciente">
         <img src="assets/perfil_generico.png">
       </ion-avatar>
       <div slot="start">
         <ion-label><strong>{{user_sessao.nome}}</strong></ion-label>
         <ion-label><small>CPF: </small>{{user_sessao.cpf}}</ion-label>
       </div>
-      <div slot="end"> 
+      <div slot="end">
         <ion-buttons slot="end">
-          <ion-button (click)="callNow()">
+          <ion-button (click)="callNow()" class="botao">
             <ion-icon slot="icon-only" name="call"></ion-icon>
           </ion-button>
-          <ion-button routerLink="/ficha-paciente">
+          <ion-button routerLink="/ficha-paciente" class="botao">
             <ion-icon slot="icon-only" name="person"></ion-icon>
           </ion-button>
         </ion-buttons>
       </div>
     </ion-item>
-    <ion-card-content>
-    </ion-card-content>
   </ion-card>
   <ion-list lines="none">
     <ion-list-header>
       <ion-label>Recursos</ion-label>
     </ion-list-header>
-    <!-- <ion-item tappable routerLink="/ficha-paciente">
-      <ion-icon slot="start" color="big" name="clipboard"></ion-icon>
-      <ion-label>Ficha de Paciente</ion-label>
-    </ion-item> -->
-    <ion-item tappable routerLink="/grafico-semanal">
-      <ion-icon slot="start" color="big" name="calendar"></ion-icon>
-      <ion-label>Histórico de Relatório Semanal</ion-label>
-    </ion-item>
-    <ion-item tappable routerLink="/grafico-crise">
-      <ion-icon slot="start" color="big" name="pulse"></ion-icon>
-      <ion-label>Histórico de Relatório de Crise</ion-label>
-    </ion-item>
+    <ion-card>
+      <ion-card-header>
+        <ion-item tappable routerLink="/grafico-semanal">
+          <ion-icon slot="start" color="big" name="calendar"></ion-icon>
+          <ion-label>Histórico de Relatório Semanal</ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut iste qui optio nam ullam rem ex. Tempore fuga
+        repudiandae sequi similique praesentium! Dignissimos aut quaerat suscipit ad voluptatibus maxime nesciunt?
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-item tappable routerLink="/grafico-crise">
+          <ion-icon slot="start" color="big" name="pulse"></ion-icon>
+          <ion-label>Histórico de Relatório de Crise</ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio eaque voluptatibus veniam, quod iste
+        repellat numquam ipsam deleniti! Minus error amet dicta aspernatur repellendus voluptates omnis impedit quis
+        alias.
+      </ion-card-content>
+    </ion-card>
+
   </ion-list>
 </ion-content>

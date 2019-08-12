@@ -12,7 +12,11 @@
    <ion-content padding>
      <ion-card>
         <ion-item>
-          <ion-icon name="pizza" slot="start"></ion-icon>
+          <ion-icon *ngIf="icone=='sono'" name="bed" slot="start"></ion-icon>
+          <ion-icon *ngIf="icone=='alimentacao'" name="pizza" slot="start"></ion-icon>
+          <ion-icon *ngIf="icone=='atividade'" name="fitness" slot="start"></ion-icon>
+          <ion-icon *ngIf="icone=='lazer'" name="brush" slot="start"></ion-icon>
+
           <ion-label><strong>{{ myId }}</strong></ion-label>
         </ion-item>
         <ion-card-content>

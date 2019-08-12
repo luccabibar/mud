@@ -1,12 +1,26 @@
-<ion-item class="child-item" text-wrap detail="false" lines="none">
-  <ion-row no-padding align-items-center>
+<ion-item class="child-item" text-wrap detail="false" tappable (click)="onClick(timeline.name)">
+  <ion-label>
+    <section>
+      <ul class="my-nav">
+        <li>
+          <strong>{{timeline.name}}</strong>
+        </li>
+      </ul>
+    </section>
+  </ion-label>
+  <ion-buttons slot="end">
+    <ion-button (click)='onClick(timeline.name)'>
+      <ion-icon slot="icon-only" name="open"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+
+  <!-- <ion-row no-padding align-items-center>
     <ion-col size="9">
       <ion-row no-padding>
         <ion-col size="12">
           <h3>
             {{timeline.name}}
           </h3>
-
         </ion-col>
         <ion-col size="12">
           <p text-lowercase color="primary">
@@ -20,6 +34,6 @@
           <ion-icon slot="icon-only" name="open"></ion-icon>
         </ion-button> 
     </ion-col>
-  </ion-row>
+  </ion-row> -->
 </ion-item>
 <!--oh pai-->

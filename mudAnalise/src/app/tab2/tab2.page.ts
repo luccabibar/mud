@@ -73,7 +73,17 @@ export class Tab2Page {
               "price": "$25"
             },
             {
-              "name": "Bem-Estar",
+              "name": "Alimentação",
+              "information": "Foi 3x ao cinema com os colegas",
+              "price": "$45"
+            },
+            {
+              "name": "Atividade Física",
+              "information": "Foi 3x ao cinema com os colegas",
+              "price": "$45"
+            },
+            {
+              "name": "Lazer",
               "information": "Foi 3x ao cinema com os colegas",
               "price": "$45"
             }
