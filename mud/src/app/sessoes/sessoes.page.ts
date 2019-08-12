@@ -125,7 +125,7 @@ export class SessoesPage implements OnInit {
       return;
     }
     
-    this.updateSessao(this.hash, /*this.dados.getDados("id")*/ "2");
+    this.updateSessao(this.hash, this.dados.getDados("id"));
     
   }
 

@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content>
     <ion-fab horizontal="start" vertical="top" slot="fixed" edge>
         <ion-fab-button>
           <ion-icon name="arrow-dropdown"></ion-icon>
@@ -30,25 +30,26 @@
     <ion-card-content>
       <ion-list>
         <ion-item>
-          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Data da Nascimento </ion-label>
+          <ion-label class="label" position="stacked"><ion-icon name="calendar"></ion-icon> Data da Nascimento </ion-label>
           <!--<ion-input value="{{dtnasc}}" type="date" name="nome" id="2" placeholder="Informe sua data de Nascimento"></ion-input>-->
-          <ion-datetime backdropDismiss name="datanasc" value="{{dtnasc}}" id="3" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
+          <ion-datetime (ionChange)="ativa()" backdropDismiss name="datanasc" value="{{dtnasc}}" id="3" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> Celular</ion-label>
-          <ion-input value="{{celular}}" type="text" name="nome" id="4" placeholder="Informe seu número de celular"></ion-input>
+          <ion-label class="label" position="stacked"><ion-icon name="call"></ion-icon> Celular</ion-label>
+          <ion-input (ionChange)="ativa()" value="{{celular}}" type="text" name="nome" id="4" placeholder="Informe seu número de celular"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> CPF</ion-label>
-          <ion-input value="{{cpf}}" type="text" name="nome" id="5" placeholder="Informe seu CPF"></ion-input>
+          <ion-input value="{{cpf}}" (ionChange)="ativa()" type="text" name="nome" id="5" placeholder="Informe seu CPF"></ion-input>
         </ion-item>
-        <ion-button (click)="alterarSenha()" expand="block" style="margin-top: 1rem;" color="danger">Alterar Senha</ion-button>
-        <ion-button (click)="editarSintomas()" expand="block" style="margin-top: 1rem;" color="secondary">Editar Sintomas</ion-button>
+        <ion-button (click)="salvarPerfil()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;" disabled>Salvar Perfil</ion-button>
+        
+        <ion-button (click)="editarSintomas()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Editar Sintomas</ion-button>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
-    <ion-button (click)="salvarPerfil()" expand="block" style="margin-bottom: 4rem;">Salvar Perfil</ion-button>
+  <ion-button (click)="alterarSenha()" expand="block" shape="round" fill="outline" style="margin-bottom: 2em; margin-top: 1em;" color="danger">Alterar Senha</ion-button>
 
 </ion-content>
 
