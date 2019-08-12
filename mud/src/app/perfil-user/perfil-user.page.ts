@@ -3,7 +3,7 @@ import { NavController, IonInput, AlertController } from '@ionic/angular';
 import { Component, ViewChild, Input} from '@angular/core';
 import { DadosService } from '../dados.service';
 
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 import { BancoService } from '../banco.service';
@@ -300,4 +300,7 @@ export class PerfilUserPage {
     
     await alert.present();
   }
+
+
 }
+
