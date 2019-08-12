@@ -14,6 +14,8 @@ const routes: Routes = [
   { path: 'editar-sintoma', loadChildren: './editar-sintoma/editar-sintoma.module#EditarSintomaPageModule' },
   { path: 'animacao', loadChildren: './animacao/animacao.module#AnimacaoPageModule' },
   { path: 'sessoes', loadChildren: './sessoes/sessoes.module#SessoesPageModule' },
+  { path: 'modalans', loadChildren: './modalans/modalans.module#ModalansPageModule'},
+  { path: 'modal-mind', loadChildren: './modal-mind/modal-mind.module#ModalMindPageModule'},
 
   
 ];

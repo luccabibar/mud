@@ -44,10 +44,29 @@ export class MuralPage implements OnInit {
       });
 
         let a=0;
+        let colorControl=0;
+        let corzita = "";
         do
         {
+          switch(colorControl){
+            case 0:
+              corzita = "#FFE4E1";
+              break;
+            case 1:
+                corzita = "#FFE4E1";
+              break;
+            case 2:
+                corzita = "#FFE4E1";
+              break;
+            case 3:
+                corzita = "#FFE4E1";
+              colorControl = 0;
+              break;
+          }
           this.murais.push(response[a]);
+          document.getElementsByTagName("ion-card")[a].style.background = corzita;
           a++;
+          colorControl++;
         }while(response[a]!=null)
       
       await alert.present();
