@@ -4,7 +4,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [ 
   { path: 'perfil-user', loadChildren: './perfil-user/perfil-user.module#PerfilUserPageModule' },
   { path: '', loadChildren: './login-page/login-page.module#LoginPagePageModule' },
-  { path: 'login-page', loadChildren: './login-page/login-page.module#LoginPagePageModule' },
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'load', loadChildren: './load/load.module#LoadPageModule' },
   { path: 'cadastro', loadChildren: './cadastro-user/cadastro-user.module#CadastroUserPageModule' },
@@ -14,8 +13,6 @@ const routes: Routes = [
   { path: 'editar-sintoma', loadChildren: './editar-sintoma/editar-sintoma.module#EditarSintomaPageModule' },
   { path: 'animacao', loadChildren: './animacao/animacao.module#AnimacaoPageModule' },
   { path: 'sessoes', loadChildren: './sessoes/sessoes.module#SessoesPageModule' },
-  { path: 'modalans', loadChildren: './modalans/modalans.module#ModalansPageModule'},
-  { path: 'modal-mind', loadChildren: './modal-mind/modal-mind.module#ModalMindPageModule'},
 
   
 ];
