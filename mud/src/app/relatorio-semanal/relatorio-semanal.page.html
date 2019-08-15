@@ -8,17 +8,16 @@
       <ion-slide id="slide1">
         <ion-list>
             <ion-item padding-horizontal lines="none">
-                <ion-label class="label" text-wrap> Alimentação </ion-label>
+                <ion-text color="verdemud4" text-wrap><h4>Alimentação</h4></ion-text>
             </ion-item>
             <ion-card>          
                 <ion-card-content> 
                  <form [formGroup]="slide1form">
-
                     <ion-item padding-horizontal lines="none">
-                      <ion-label class="label" position="stacked" text-wrap>1. O quanto você ingeriu de cada tipo de alimento? </ion-label>
+                        <ion-text color="verdemud4" text-wrap><h5>1. O quanto você ingeriu de cada tipo de alimento?</h5></ion-text>
                     </ion-item>
                     <ion-item padding-horizontal lines="none">
-                        <ion-label class="label" position="stacked" text-wrap>Carboidratos</ion-label>
+                        <ion-label position="stacked" text-wrap>Carboidratos</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
                           <ion-select formControlName="qtdCarboidratos" id="carb" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
                                 <ion-select-option class="option" value="0" >Pouco (1 a 2 dias)</ion-select-option>
@@ -28,7 +27,7 @@
                     </ion-item>
 
                     <ion-item padding-horizontal lines="none">
-                        <ion-label class="label" position="stacked" text-wrap>Proteínas</ion-label>
+                        <ion-label position="stacked" text-wrap>Proteínas</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
                           <ion-select formControlName="qtdProteinas" id="prot" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado" >
                                 <ion-select-option class="option" value="0">Pouco (1 a 2 dias)</ion-select-option>
@@ -38,7 +37,7 @@
                     </ion-item>
 
                     <ion-item padding-horizontal lines="none">
-                        <ion-label class="label" position="stacked" text-wrap>Laticínios</ion-label>
+                        <ion-label position="stacked" text-wrap>Laticínios</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
                           <ion-select formControlName="qtdLaticinios" id="lac" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado" >
                                 <ion-select-option class="option" value="0">Pouco (1 a 2 dias)</ion-select-option>
@@ -48,7 +47,7 @@
                     </ion-item>
 
                     <ion-item padding-horizontal lines="none">
-                        <ion-label class="label" position="stacked" text-wrap>Verduras e frutas</ion-label>
+                        <ion-label position="stacked" text-wrap>Verduras e frutas</ion-label>
                         <!--- fazer setinha com exemplos de carboidratos-->
                           <ion-select formControlName="qtdVerdFrut" id="verfrut" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
                                 <ion-select-option class="option" value="0">Pouco (1 a 2 dias)</ion-select-option>
@@ -56,10 +55,9 @@
                                 <ion-select-option class="option" value="2">Muito (6 a 7 dias)</ion-select-option>
                           </ion-select>
                     </ion-item>
-                  
-                    <br>
+
                     <ion-item padding-horizontal lines="none">
-                        <ion-label class="label" position="stacked" text-wrap>2. Qual a média de copos de água tomados? <br> <p>(Quantidade diária) </p></ion-label>
+                        <ion-label position="stacked" text-wrap>Água</ion-label>
                           <ion-select formControlName="qtdAgua" id="agua" placeholder="Selecionar quantidade" cancelText="Cancelar" okText="Selecionado">
                                 <ion-select-option class="option" value="0">menos de 5 copos </ion-select-option>
                                 <ion-select-option class="option" value="1">6 a 11 copos</ion-select-option>
@@ -67,7 +65,6 @@
                           </ion-select>
                     </ion-item>
                   
-                    <br>
                     <ion-item lines="none">
                       <ion-button id="btnVoltar" (click)="volta()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
                       <ion-button id="btnProx" (click)="proxSlide1()" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
@@ -81,12 +78,12 @@
         <ion-slide id="slide2">
             <ion-list>
                 <ion-item padding-horizontal lines="none">
-                    <ion-label class="label" text-wrap> Atividade física </ion-label>
+                    <ion-text color="verdemud4" text-wrap><h4>Atividade física</h4></ion-text>
                 </ion-item>
                 <ion-card>          
                     <ion-card-content>
                         <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap>1. Fez atividade física durante a semana?</ion-label>
+                            <ion-text color="verdemud4" text-wrap><h5>1. Fez atividade física durante a semana?</h5></ion-text>
                         </ion-item>
                         <ion-radio-group>
                           <ion-item lines="none" padding-horizontal>
@@ -102,7 +99,7 @@
                       <div id="fezatv" style="display: none;">
                         <ion-list>
                           <ion-item padding-horizontal lines="none">
-                            <ion-label class="label" position="stacked" text-wrap>2. Qual a duração média da(s) atividade(s)?</ion-label>
+                              <ion-text color="verdemud4" text-wrap><h5>2. Qual a duração média da(s) atividade(s)?</h5></ion-text>
                           </ion-item>
                           <ion-item lines="none">
                             <ion-range (ionFocus)="duracAtv()" (keyup)="duracAtv()" (ionChange)="duracAtv()" id="atv_temp" min="0" max="800" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
@@ -110,8 +107,8 @@
                             <ion-label class="label" id="lblTemp" position="fixed"></ion-label>
                         </ion-list>
                         <ion-list>
-                          <ion-item lines="none">
-                            <ion-label positions="stacked" text-wrap>3. Qual a intensidade da(s) atividade(s)? </ion-label>
+                          <ion-item padding-horizontal lines="none">
+                              <ion-text color="verdemud4" text-wrap><h5>3. Qual a intensidade da(s) atividade(s)?</h5></ion-text>
                           </ion-item>
                           <ion-radio-group>
                             <ion-item lines="none" padding-horizontal>
@@ -146,14 +143,14 @@
       <ion-slide id="slide3"> 
         <ion-list>
           <ion-item padding-horizontal lines="none">
-              <ion-label class="label" text-wrap> Lazer </ion-label>
+                    <ion-text color="verdemud4" text-wrap><h4>Lazer</h4></ion-text>
           </ion-item>
           <ion-card>
             <ion-card-content>
               <form [formGroup]="slide3form">
                 <ion-item padding-horizontal lines="none">
-                    <ion-label class="label" position="stacked" text-wrap>1. Você dedicou algum tempo para atividades de lazer?</ion-label>
-                  </ion-item>
+                  <ion-text color="verdemud4" text-wrap><h5>Você dedicou algum tempo para atividades de lazer?</h5></ion-text>
+                </ion-item>
                   <ion-radio-group>
                     <ion-item lines="none" padding-horizontal>
                       <ion-label>Sim</ion-label>
@@ -164,13 +161,11 @@
                       <ion-radio slot="start" value="nao2" id="dedicoun" (ionSelect)="dedicou()" checked></ion-radio>
                     </ion-item>
                   </ion-radio-group>
-                      
-                <br>
 
                 <div id="dedico" style="display: none;">
                   <ion-list>
                       <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap>2. Quantas vezes? <br> <p> (Quantidade de dias na semana) </p></ion-label>
+                          <ion-label class="label" position="stacked" text-wrap>Quantos dias?</ion-label>
                             <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" id="lazer_vezes" okText="Selecionado" formControlName="qtdLazer">
                                   <ion-select-option class="option" value="0" id="0">1 a 2 dias</ion-select-option>
                                   <ion-select-option class="option" value="1" id="1">3 a 5 dias</ion-select-option>
@@ -178,10 +173,8 @@
                             </ion-select>
                       </ion-item>
 
-                      <br>
-
                       <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap>3. Você geralmente estava acompanhado na realização das atividades?</ion-label>
+                          <ion-text color="verdemud4" text-wrap><h5>Você estava acompanhado ao realizar as atividades?</h5></ion-text>
                         </ion-item>
                         <ion-radio-group>
                           <ion-item lines="none" padding-horizontal>
@@ -195,10 +188,8 @@
                         </ion-radio-group>
                         
                         <ion-item padding-horizontal lines="none"> 
-                          <ion-label class="label" position="stacked" text-wrap>Adicione um comentário quanto aos momentos de lazer dessa semana</ion-label>
-                        </ion-item>
-                        <ion-item lines="none" id="comentLazer"> 
-                            <ion-textarea maxLength="150" rows="4" id="comentLazerInput" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
+                          <ion-label class="label" position="stacked" text-wrap>Adicionar comentário?</ion-label>
+                          <ion-textarea maxLength="150" rows="4" id="comentLazerInput" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
                         </ion-item>
                   </ion-list>
                 </div>
