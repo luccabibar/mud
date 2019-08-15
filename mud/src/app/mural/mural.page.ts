@@ -32,6 +32,15 @@ export class MuralPage implements OnInit {
     this.addMural();
   }
 
+  doRefresh(event) {
+    this.addMural();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
   public addMural()
   {
     let id=this.dadosService.getId();
@@ -44,11 +53,19 @@ export class MuralPage implements OnInit {
       });
 
         let a=0;
+        let j=0;
+        let y =0;
         let colorControl=0;
         let corzita = "";
+        
         do
         {
-          switch(colorControl){
+          this.murais.push(response[a]);
+          a++;
+        }while(response[a]!=null)
+/*
+      do{  
+            switch(j){
             case 0:
               corzita = "#FFE4E1";
               break;
@@ -60,23 +77,23 @@ export class MuralPage implements OnInit {
               break;
             case 3:
                 corzita = "#FFE4E1";
-              colorControl = 0;
+              j = 0;
               break;
-          }
-          this.murais.push(response[a]);
-          document.getElementsByTagName("ion-card")[a].style.background = corzita;
-          a++;
-          colorControl++;
-        }while(response[a]!=null)
-      
+            }
+            
+          document.getElementsByTagName("ion-card")[y].style.backgroundColor = corzita; 
+          j++;
+          y++;
+        }while(this.murais[y]!= null)
+*/
+
       await alert.present();
-    }
-  )
-  .catch(async(response)=>{
+      }
+  ).catch(async(response)=>{
 
     const alert = await this.AlertController.create({
-      header: 'Confirmação',
-      subHeader: 'Erro!',
+      header: 'ERRO ERRO',
+      subHeader: 'aaaaaa',
       message: JSON.stringify(response),
       buttons: ['OK']
     });
