@@ -38,6 +38,7 @@ export class Tab3Page {
 
   }
 
+
   ionViewDidEnter() {
     this.profissional = this.dadosService.getDados("user");
     if (!this.profissional) {
@@ -56,6 +57,13 @@ export class Tab3Page {
         message: JSON.stringify(response[0].id_usuario),
         buttons: ['OK']
       });
+
+      let n=0;
+      do
+      {
+        this.murais.splice(0,n);
+        n++;
+      }while(response[n]!=null)
 
       let a=0;
       do
@@ -80,7 +88,32 @@ export class Tab3Page {
   })
 
  }
+async alerteDeletar()
+{
 
+  this.BancoService.deletarMural(this.user_sessao.id_usuario, this.profissional.id_usuario).then(async (response) => {
+    const alert = await this.AlertController.create({
+      header: 'Confirmação',
+      subHeader: 'Deletado!',
+      message: JSON.stringify(response),
+      buttons: ['OK']
+    });
+    this.addMural();
+    await alert.present();
+  }
+  )
+    .catch(async (response) => {
+
+      const alert = await this.AlertController.create({
+        header: 'Confirmação',
+        subHeader: 'Erro ao deletar!',
+        message: JSON.stringify(response),
+        buttons: ['OK']
+      });
+
+      await alert.present();
+    })
+}
   async inserirMural() {
     let titulo = (<HTMLInputElement>document.getElementById("1")).value;
     let texto = (<HTMLInputElement>document.getElementById("2")).value;
@@ -92,7 +125,7 @@ export class Tab3Page {
         message: JSON.stringify(response),
         buttons: ['OK']
       });
-
+      this.addMural();
       await alert.present();
     }
     )
@@ -105,7 +138,7 @@ export class Tab3Page {
           buttons: ['OK']
         });
 
-        await alert.present()
+        await alert.present();
       })
 
   }
