@@ -1,4 +1,4 @@
-<ion-item class="child-item" text-wrap detail="false" tappable (click)="onClick(timeline.name)">
+<ion-item class="child-item" text-wrap detail="false" tappable (click)="onClick(timeline.name,timeline.semanaId,timeline.icone)">
   <ion-label>
     <section>
       <ul class="my-nav">
@@ -9,7 +9,7 @@
     </section>
   </ion-label>
   <ion-buttons slot="end">
-    <ion-button (click)='onClick(timeline.name)'>
+    <ion-button (click)='onClick(timeline.name,timeline.semanaId,timeline.icone)'>
       <ion-icon slot="icon-only" name="open"></ion-icon>
     </ion-button>
   </ion-buttons>

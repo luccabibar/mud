@@ -4,21 +4,26 @@
 }
 
 .avatar-home {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 125px !important; //any size
+  width: auto !important;
+  height: auto !important;
+  //max-width: 125px !important; //any size
   max-height: 125px !important; //any size
   margin: auto;
 }
 
 
 .avatar{
-  border-radius: 10%;
+  border-radius: 5%;
   width: 15%;
   height: 100%;
 }
 
 .botao{
- padding-right: 3%; 
+ margin: auto; 
 
+}
+
+.divao{
+  padding: 0%;
+  margin: 0%;
 }
