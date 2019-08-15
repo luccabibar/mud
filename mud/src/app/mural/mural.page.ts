@@ -58,12 +58,19 @@ export class MuralPage implements OnInit {
         let colorControl=0;
         let corzita = "";
         
+        let n=0;
+        do
+        {
+          this.murais.splice(0,n);
+          n++;
+        }while(response[n]!=null)
+
         do
         {
           this.murais.push(response[a]);
           a++;
         }while(response[a]!=null)
-/*
+
       do{  
             switch(j){
             case 0:
@@ -82,10 +89,11 @@ export class MuralPage implements OnInit {
             }
             
           document.getElementsByTagName("ion-card")[y].style.backgroundColor = corzita; 
+          
+          
           j++;
           y++;
         }while(this.murais[y]!= null)
-*/
 
       await alert.present();
       }
