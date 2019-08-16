@@ -1,9 +1,18 @@
+<ion-header no-border>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-img id="logoLogin" src="../../assets/logomud.png"></ion-img>
+    </ion-toolbar>
+</ion-header>
+
   <ion-content
       [scrollEvents]="true"
       (ionScrollStart)="logScrollStart()"
       (ionScroll)="logScrolling($event)" >
 
-    <ion-img id="logoLogin" src="../../assets/logomud.png"></ion-img>
+    
     <ion-slides>
       <ion-slide id="slide1">
         <ion-list>
@@ -14,7 +23,7 @@
                 <ion-card-content> 
                  <form [formGroup]="slide1form">
                     <ion-item padding-horizontal lines="none">
-                        <ion-text color="verdemud4" text-wrap><h5>1. O quanto você ingeriu de cada tipo de alimento?</h5></ion-text>
+                        <ion-text color="verdemud4" text-wrap><h5>O quanto você ingeriu de cada tipo de alimento?</h5></ion-text>
                     </ion-item>
                     <ion-item padding-horizontal lines="none">
                         <ion-label position="stacked" text-wrap>Carboidratos</ion-label>
@@ -65,10 +74,6 @@
                           </ion-select>
                     </ion-item>
                   
-                    <ion-item lines="none">
-                      <ion-button id="btnVoltar" (click)="volta()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
-                      <ion-button id="btnProx" (click)="proxSlide1()" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
-                    </ion-item>
                   </form>
                 </ion-card-content>
               </ion-card>
@@ -83,7 +88,7 @@
                 <ion-card>          
                     <ion-card-content>
                         <ion-item padding-horizontal lines="none">
-                            <ion-text color="verdemud4" text-wrap><h5>1. Fez atividade física durante a semana?</h5></ion-text>
+                            <ion-text color="verdemud4" text-wrap><h5>Fez atividade física durante a semana?</h5></ion-text>
                         </ion-item>
                         <ion-radio-group>
                           <ion-item lines="none" padding-horizontal>
@@ -99,7 +104,7 @@
                       <div id="fezatv" style="display: none;">
                         <ion-list>
                           <ion-item padding-horizontal lines="none">
-                              <ion-text color="verdemud4" text-wrap><h5>2. Qual a duração média da(s) atividade(s)?</h5></ion-text>
+                              <ion-text color="verdemud4" text-wrap><h5>Qual a duração média da(s) atividade(s)?</h5></ion-text>
                           </ion-item>
                           <ion-item lines="none">
                             <ion-range (ionFocus)="duracAtv()" (keyup)="duracAtv()" (ionChange)="duracAtv()" id="atv_temp" min="0" max="800" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
@@ -108,7 +113,7 @@
                         </ion-list>
                         <ion-list>
                           <ion-item padding-horizontal lines="none">
-                              <ion-text color="verdemud4" text-wrap><h5>3. Qual a intensidade da(s) atividade(s)?</h5></ion-text>
+                              <ion-text color="verdemud4" text-wrap><h5>Qual a intensidade da(s) atividade(s)?</h5></ion-text>
                           </ion-item>
                           <ion-radio-group>
                             <ion-item lines="none" padding-horizontal>
@@ -127,12 +132,6 @@
                         </ion-list>
                       </div>
 
-                      <br>
-                      <ion-item lines="none">
-                        <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
-                        <ion-button id="btnProx" (click)="proxSlide2()" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
-                      </ion-item>
-
                     </ion-card-content>
                 </ion-card>
               </ion-list>
@@ -143,7 +142,7 @@
       <ion-slide id="slide3"> 
         <ion-list>
           <ion-item padding-horizontal lines="none">
-                    <ion-text color="verdemud4" text-wrap><h4>Lazer</h4></ion-text>
+            <ion-text color="verdemud4" text-wrap><h4>Lazer</h4></ion-text>
           </ion-item>
           <ion-card>
             <ion-card-content>
@@ -189,15 +188,12 @@
                         
                         <ion-item padding-horizontal lines="none"> 
                           <ion-label class="label" position="stacked" text-wrap>Adicionar comentário?</ion-label>
-                          <ion-textarea maxLength="150" rows="4" id="comentLazerInput" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
+                          <ion-textarea maxLength="150" rows="4" id="comentLazerInput" position="stacked" placeholder=" Informações adicionais" multiline="4"> </ion-textarea>
                         </ion-item>
                   </ion-list>
                 </div>
 
-                <ion-item lines="none">
-                  <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
-                  <ion-button id="btnProx" (click)="proxSlide3()" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
-                </ion-item>
+      
               </form>
             </ion-card-content>
           </ion-card>
@@ -206,22 +202,22 @@
 
       <ion-slide id="slide4">
         <ion-list>
-          <ion-item padding-horizontal lines="none">
-              <ion-label class="label" text-wrap> Sono </ion-label>
-          </ion-item>
+            <ion-item padding-horizontal lines="none">
+                <ion-text color="verdemud4" text-wrap><h4>Sono</h4></ion-text>
+            </ion-item>
           <ion-card>
             <ion-card-content>
             <form [formGroup]="slide4form">
+              <ion-item padding-horizontal lines="none">
+               <ion-text color="verdemud4" text-wrap><h5>Na maioria dos dias, você dormiu por volta de qual horário?</h5></ion-text>
+              </ion-item>
              <ion-item padding-horizontal>
-                <ion-label class="label" position="stacked" text-wrap>1. Que horário você geralmente foi dormir?</ion-label>
-                <ion-input type="number" id="hrDormir" placeholder="Horas (1 - 24)" formControlName="horaDormir" min="1" max="24"></ion-input>
-                <!--<ion-datetime pickerFormat="HH:mm a" displayFormat="HH:mm a" id="hrDormir" placeholder="Selecione um horário" minuteValues="00, 15, 30, 45" formControlName="horaDormir"></ion-datetime>-->
+                <ion-datetime pickerFormat="HH:mm a" displayFormat="HH:mm a" id="hrDormir" placeholder="Selecione um horário" minuteValues="00, 15, 30, 45" formControlName="horaDormir"></ion-datetime>
              </ion-item>
-
-             <br>
+             
              <ion-item padding-horizontal lines="none">
-                <ion-label class="label" position="stacked" text-wrap>2. Você despertou durante o sono?</ion-label>
-             </ion-item>
+                <ion-text color="verdemud4" text-wrap><h5>Você despertou durante o sono?</h5></ion-text>
+              </ion-item>
              <ion-radio-group>
                 <ion-item lines="none" padding-horizontal>
                   <ion-label>Sim</ion-label>
@@ -233,12 +229,10 @@
                 </ion-item>
               </ion-radio-group>
 
-              <br>
-
               <div id="desperto" style="display: none;">
                   <ion-list>
                       <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap>3. Quantas vezes? <br> <p> (Vezes durante a semana) </p></ion-label>
+                       <ion-text color="verdemud4" text-wrap><h5>Quantas vezes? (durante o sono)</h5></ion-text>
                       </ion-item>
                       <ion-item>    
                           <ion-label padding-horizontal class="label" id="mostraVzs" value="3">1</ion-label>
@@ -246,11 +240,9 @@
                           <ion-button (click)="maisVzs()"><ion-icon icon="add"></ion-icon></ion-button>
                       </ion-item>
 
-                      <br>
-
                       <ion-item padding-horizontal lines="none">
-                          <ion-label class="label" position="stacked" text-wrap>4. Acordou precocemente? <p> Sentiu fadiga</p></ion-label>
-                        </ion-item>
+                        <ion-text color="verdemud4" text-wrap><h5>Acordou precocemente?</h5></ion-text>
+                      </ion-item>
                         <ion-radio-group>
                           <ion-item lines="none" padding-horizontal>
                             <ion-label>Sim</ion-label>
@@ -264,10 +256,6 @@
                   </ion-list>
                 </div>
 
-                <ion-item lines="none">
-                  <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
-                  <ion-button id="btnProx" (click)="proxSlide4()" fill="outline" color="verdemud4" slot="end">Concluir</ion-button>
-                </ion-item>
               </form>
             </ion-card-content>
           </ion-card>
@@ -278,17 +266,12 @@
         <ion-list>
         <ion-card>
           <ion-card-content id="card5"> 
-              <ion-item padding-horizontal lines="none">
-                  <ion-label class="label" position="stacked" text-wrap>Gostaria de adicionar algum comentário?</ion-label>
-               </ion-item>
-               <ion-item lines="none" id="comentFinal"> 
-                 <ion-textarea maxLength="150" rows="4" id="comentFinalInput" position="stacked" placeholder="Deixe um comentário..." multiline="4"> </ion-textarea>
-               </ion-item>
-
-               <ion-item lines="none" id="salvaBtns">
-                  <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
-                  <ion-button id="btnProx" (click)="salva()" fill="outline" color="verdemud4" slot="end">Concluir</ion-button>
+            <ion-list>
+                <ion-item padding-horizontal lines="none"> 
+                    <ion-label class="label" position="stacked" text-wrap>Adicionar comentário?</ion-label>
+                    <ion-textarea maxLength="150" rows="4" id="comentFinalInput" position="stacked" placeholder=" Informações adicionais" multiline="4"> </ion-textarea>
                 </ion-item>
+            </ion-list>
           </ion-card-content>
         </ion-card>
       </ion-list>
@@ -297,6 +280,18 @@
   </ion-slides>
   </ion-content>
   
-
+<ion-footer>
+    <div id="botoes" style="display: none;">
+        <ion-button id="btnVoltar" (click)="antSlide()" shape="round" fill="outline" color="verdemud4" slot="start">Voltar</ion-button>
+        <ion-button id="btnProx" (click)="proxSlide()" shape="round" fill="outline" color="verdemud4" slot="end">Próximo</ion-button>
+    </div>
+    <div id="btnProximo">
+      <ion-button padding-horizontal shape="round" (click)="troca()" fill="outline" color="verdemud4" expand="block">Próximo</ion-button>
+    </div>
+    <div id="concluir" style="display: none;">
+      <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" shape="round" color="verdemud4" slot="start">Voltar</ion-button>
+      <ion-button id="btnConcluir" (click)="proxSlide()" fill="outline" shape="round" color="verdemud4" slot="end">Concluir</ion-button>
+    </div>
+</ion-footer>
 
   
