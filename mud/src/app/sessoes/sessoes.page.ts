@@ -19,6 +19,7 @@ export class SessoesPage implements OnInit {
   qr: BarcodeScanner;
   db: BancoService;
   hash;
+  dado: any;
 
   updateSessao(hash, id)
   {
@@ -81,7 +82,7 @@ export class SessoesPage implements OnInit {
    * 
    * liga a camera pra ler o qrcode, e dps valida e ativa a sessao no banco
    */
-  async scanFoda(){
+  async startSessao(){
     
     //options
     let opts = {
@@ -104,7 +105,7 @@ export class SessoesPage implements OnInit {
     .then(result => {
       
       this.hash = result;
-      console.log('qr foda: ', result);
+      this.dado = this.hash;
     })
     //erro
     .catch(ex => {
@@ -112,7 +113,7 @@ export class SessoesPage implements OnInit {
       this.hash = "return";
       console.log('Error', ex);
     });
-
+    /*
     //if erro, retorna
     if(this.hash == "return"){
 
@@ -125,7 +126,7 @@ export class SessoesPage implements OnInit {
       return;
     }
     
-    this.updateSessao(this.hash, this.dados.getDados("id"));
+    this.updateSessao(this.hash, this.dados.getDados("id"));*/
     
   }
 
