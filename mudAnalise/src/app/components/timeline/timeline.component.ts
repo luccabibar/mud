@@ -23,8 +23,8 @@ export class TimelineComponent implements OnInit {
     toast.present();
   }
   
-  async onClick(info){
-    this.router.navigateByUrl('/detalhes-semanal/'+info);
+  async onClick(info,semanaId,icone){
+    this.router.navigateByUrl('/detalhes-semanal/'+info+"-"+semanaId+"-"+icone);
   }
 
   /*

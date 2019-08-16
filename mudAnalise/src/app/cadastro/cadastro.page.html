@@ -7,7 +7,14 @@
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <!-- <div slot="end" class="botao" *ngIf="!this.user.nome">
+      <ion-button class="tamanho" routerLink="/alterar-senha" slot="end">
+        <ion-icon name="key"></ion-icon>
+        <ion-icon name="lock"></ion-icon>
+      </ion-button>
+    </div> -->
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
@@ -123,10 +130,10 @@
     </ion-item>
 
     <ion-item *ngIf="!this.user.nome">
-        <ion-label position="stacked">
-            <ion-icon name="lock"></ion-icon>
-            Confirmar Senha
-          </ion-label>
+      <ion-label position="stacked">
+        <ion-icon name="lock"></ion-icon>
+        Confirmar Senha
+      </ion-label>
       <ion-input formControlName="confirmaSenha" type="password" placeholder="..."></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.confirmaSenha">
         <span

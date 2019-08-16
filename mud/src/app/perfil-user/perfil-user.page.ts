@@ -43,7 +43,6 @@ export class PerfilUserPage {
   pagsessao()
   {
       this.nav.navigateForward('sessoes');
-      
   }
 
   async editarSintomas()

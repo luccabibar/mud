@@ -69,13 +69,23 @@ export class Tab2Page {
           "children": [
             {
               "name": "Sono",
-              "id": "8h/dia em média de sono sem interrupções.",
-              "price": "$25"
+              "semanaId": sem.id_semana,
+              "icone": "bed"
             },
             {
-              "name": "Bem-Estar",
-              "information": "Foi 3x ao cinema com os colegas",
-              "price": "$45"
+              "name": "Alimentação",
+              "semanaId": sem.id_semana,
+              "icone": "pizza"
+            }, 
+            {
+              "name": "Atividade Fisica",
+              "semanaId": sem.id_semana,
+              "icone": "fitness"
+            },
+            {
+              "name": "Lazer",
+              "semanaId": sem.id_semana,
+              "icone": "brush"
             }
           ]
         }
