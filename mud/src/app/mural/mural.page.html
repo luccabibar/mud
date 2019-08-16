@@ -1,15 +1,9 @@
 <ion-header>
-  <ion-toolbar color="escuro">
-    <ion-title>Mural</ion-title>
-    <!--
-
-  <ion-buttons slot="end">
-      <ion-button routerLink="/home">
-        <ion-icon slot="icon-only" name="exit"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
-    -->
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title id="ttitle">Mural</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -27,7 +21,7 @@
       <ion-list lines="none">
         <ion-item-sliding *ngFor="let mural of murais">
           <ion-item tappable routerLink="/tabs">
-            <ion-card name="ion-card">
+            <ion-card name="ion-card" id="cardos">
               <ion-card-header>
                 <ion-card-title>{{mural.titulo}}</ion-card-title>
               </ion-card-header>
