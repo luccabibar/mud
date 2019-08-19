@@ -62,7 +62,7 @@ export class MuralPage implements OnInit {
         let n=0;
         do
         {
-          this.murais.splice(0,n);
+          this.murais.splice(0,n+1);
           n++;
         }while(response[n]!=null)
 
@@ -70,7 +70,7 @@ export class MuralPage implements OnInit {
         do
         { 
           dato = response[a]['created_at'];
-          dato = dato.substr(0,10);
+          dato = dato.substr(8,2) + "/" + dato.substr(5,2) + "/" + dato.substr(0,4);
           this.murais.push(response[a]);
           this.murais[a].created_at = dato;
           a++;
