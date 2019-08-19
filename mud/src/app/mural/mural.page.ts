@@ -62,19 +62,19 @@ export class MuralPage implements OnInit {
         let n=0;
         do
         {
-          this.murais.splice(0,n);
+          this.murais.splice(0,n+1);
           n++;
         }while(response[n]!=null)
 
 
         do
-        {
-          dato = response[a][1];/*
-          response[a][1] = dato;*/
-          /*document.getElementById('ttile').innerHTML = dato;*/
+        { 
+          dato = response[a]['created_at'];
+          dato = dato.substr(8,2) + "/" + dato.substr(5,2) + "/" + dato.substr(0,4);
           this.murais.push(response[a]);
+          this.murais[a].created_at = dato;
           a++;
-          dato="";
+          dato= "";
         }while(response[a]!=null)
 
       do{  

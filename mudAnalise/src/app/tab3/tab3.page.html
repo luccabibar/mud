@@ -9,6 +9,14 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
     <!-- CARDS INSERIR -->
     <ion-item>
         <ion-label position="stacked" text-wrap>Notas</ion-label>
@@ -24,11 +32,12 @@
         <ion-textarea id="2" name="inserirtxt"></ion-textarea>
         <ion-button (click)="inserirMural()" size="small">Adicionar</ion-button>
       </ion-item>
+<!--Cards mostrar-->
 
           <ion-list lines="none">
-            <ion-item-sliding *ngFor="let mural of murais">
+            <ion-item-sliding *ngFor="let mural of murais" id="11">
               <ion-item tappable routerLink="/tabs">
-                <ion-card>
+                <ion-card name="ion-card">
                   <ion-card-header>
                     <ion-card-title>{{mural.titulo}}</ion-card-title>
                   </ion-card-header>
@@ -36,9 +45,12 @@
                     {{mural.texto}}
                   </ion-card-content>
                 </ion-card>
+                <ion-label id="3">
+                    {{mural.created_at}}
+                </ion-label>
                 </ion-item>
                 <ion-item-options side="end">
-                  <ion-item-option color="danger" (click)="alertaDeletar()">
+                  <ion-item-option color="danger" (click)="alertaDeletar(mural)">
                     <ion-icon slot="icon-only" name="trash"></ion-icon>
                   </ion-item-option>
                 </ion-item-options>

@@ -6,6 +6,7 @@ import { DadosService } from '../servicos/dados.service';
 import { NavController, IonSlides, AlertController, IonInput } from '@ionic/angular';
 import { from } from 'rxjs';
 import { async } from 'q';
+import { setFirstTemplatePass } from '@angular/core/src/render3/state';
 
 @Component({
   selector: 'app-tab3',
@@ -21,7 +22,15 @@ export class Tab3Page {
    ngOnInit() {
      this.addMural();
    }
+   doRefresh(event) {
+    this.addMural();
 
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+  
   public profissional: IUsuario;
   public user_sessao;
 
@@ -47,6 +56,33 @@ export class Tab3Page {
     }
   }
 
+  public deleteMural(mural)
+  {
+    
+  this.BancoService.deletarMural(this.user_sessao.id_usuario, this.profissional.id_usuario, mural.id_mural).then(async (response) => {
+    const alert = await this.AlertController.create({
+      header: 'deletou',
+      subHeader: 'Deletado!',
+      message: JSON.stringify(response),
+      buttons: ['OK']
+    });
+    let index = this.findContatoIndex(mural.id_mural);
+    this.murais.splice(index, 1);
+    await alert.present();
+  }
+  )
+    .catch(async (response) => {
+
+      const alert = await this.AlertController.create({
+        header: 'deu ruim',
+        subHeader: 'Erro ao deletar!',
+        message: JSON.stringify(response),
+        buttons: ['OK']
+      });
+
+      await alert.present();
+    })
+  }
   public addMural()
   {
     let id=this.dadosService.getId();
@@ -57,20 +93,49 @@ export class Tab3Page {
         message: JSON.stringify(response[0].id_usuario),
         buttons: ['OK']
       });
-
+      let a=0;
       let n=0;
+
       do
       {
-        this.murais.splice(0,n);
+        this.murais.splice(0,n+1);
         n++;
-      }while(response[n]!=null)
+      }while(response[n]!=null);
 
-      let a=0;
+
       do
       {
         this.murais.push(response[a]);
         a++;
-      }while(response[a]!=null)
+      }while(response[a]!=null);
+
+      let j=0;
+      let y =0;
+      let colorControl=0;
+      let corzita = "";
+ do{  
+          switch(j){
+          case 0:
+            corzita = "#FFE4E1";
+            break;
+          case 1:
+              corzita = "#FFE4E1";
+            break;
+          case 2:
+              corzita = "#FFE4E1";
+            break;
+          case 3:
+              corzita = "#FFE4E1";
+            j = 0;
+            break;
+          }
+          
+        document.getElementsByTagName("ion-card")[y].style.backgroundColor = corzita; 
+        
+        
+        j++;
+        y++;
+      }while(this.murais[y]!= null)
 
       await alert.present();
     }
@@ -78,7 +143,7 @@ export class Tab3Page {
   .catch(async(response)=>{
 
     const alert = await this.AlertController.create({
-      header: 'Confirmação',
+      header: 'xiiiii',
       subHeader: 'Erro!',
       message: JSON.stringify(response),
       buttons: ['OK']
@@ -88,38 +153,45 @@ export class Tab3Page {
   })
 
  }
-async alerteDeletar()
-{
-
-  this.BancoService.deletarMural(this.user_sessao.id_usuario, this.profissional.id_usuario).then(async (response) => {
-    const alert = await this.AlertController.create({
-      header: 'Confirmação',
-      subHeader: 'Deletado!',
-      message: JSON.stringify(response),
-      buttons: ['OK']
-    });
-    this.addMural();
-    await alert.present();
+ findContatoIndex(id) {
+  for (let i=0; i < this.murais.length; i++) {
+    if(this.murais[i].id_mural == id) {
+      return i;
+    }
   }
-  )
-    .catch(async (response) => {
+  return null;
+}
 
-      const alert = await this.AlertController.create({
-        header: 'Confirmação',
-        subHeader: 'Erro ao deletar!',
-        message: JSON.stringify(response),
-        buttons: ['OK']
-      });
+public async alertaDeletar(mural){
+  const alert = await this.AlertController.create({
+    header: 'Apagar Resgistro',
+    message: 'realmente quer deletar mural?',
+    buttons: [
+      {
+        text: 'Não',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Sim',
+        handler: () => {
+          
+          this.deleteMural(mural);
+        }
+      }
+    ]
 
-      await alert.present();
-    })
+  });
+  await alert.present();
 }
   async inserirMural() {
     let titulo = (<HTMLInputElement>document.getElementById("1")).value;
     let texto = (<HTMLInputElement>document.getElementById("2")).value;
 
     // JP, coloquei o campo this.profissional.id_usuario para sring pq o inserir  mural pede isso
-    this.BancoService.inserirMural(titulo, texto, this.user_sessao.id_usuario, this.profissional.id_usuario.toString()).then(async (response) => {
+    this.BancoService.inserirMural(titulo, texto, this.user_sessao.id_usuario, this.profissional.id_usuario).then(async (response) => {
       const alert = await this.AlertController.create({
         header: 'Confirmação',
         subHeader: 'Sucesso!',
