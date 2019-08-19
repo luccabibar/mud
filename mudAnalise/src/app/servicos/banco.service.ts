@@ -46,6 +46,17 @@ export class BancoService {
 
   }
 
+  deletarMural(id_usuario: number, id_prof:number, id_mural:number)
+  {
+    var data = {
+      id_usuario: id_usuario,
+      id_prof:id_prof,
+      id_mural: id_mural
+    };
+    let header=new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL+'deletarMural', data,{headers: header}).toPromise();
+  }
+
   insertGenerico(sql: string) {
     var data = {
       sql: sql,

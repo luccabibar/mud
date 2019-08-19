@@ -13,7 +13,10 @@ ion-label {
     color:  #165044ff !important; 
 }
 
-
+.label
+{
+    text-align: justify !important;
+}
 
 p {
     font-size: 0.8 em;
@@ -38,10 +41,6 @@ ion-slides {
     top: 17%;
 }
 
-#slide1
-{
-    background-color: aqua;
-}
 
 #lbl1
 {

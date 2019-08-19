@@ -144,7 +144,7 @@ export class RelatorioSemanalPage implements OnInit {
  
    async proxSlide1()
   {
-    if(this.slide1form.invalid)
+    if(this.slide1form.valid) //mudar pra invalido dps
     {
       this.IonSlides.slideTo(0);
       const alert = await this.AlertController.create({

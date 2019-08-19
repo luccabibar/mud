@@ -38,3 +38,58 @@
     position: absolute;
     top: 80%;
 }
+
+.message{
+    text-align: justify ;
+}
+
+.marcola{
+    height: 17%;
+    width: 75%;
+    position: relative; 
+    font-size: 60%;
+    border-bottom-style: dashed;
+    margin-top: 1%;
+    
+}
+
+.marcola1{
+    height: 17%;
+    width: 75%;
+    font-size: 60%;
+    margin-top: 1%;
+}
+
+.titlec{
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 150%;
+}
+
+
+
+.modals{
+    margin-top: 1%;
+    height: 17%;
+    width: 75%;
+    position: relative; 
+    font-size: 60%;
+    border-bottom-style: dashed
+}
+.modals1{
+    margin-top: 2%;
+    height: 17%;
+    width: 75%;
+    position: relative; 
+    font-size: 60%;
+    border-bottom-style: dashed
+}
+
+#bots
+{
+    height: 20%;
+    width: 100%;
+}
