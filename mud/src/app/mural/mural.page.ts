@@ -68,13 +68,13 @@ export class MuralPage implements OnInit {
 
 
         do
-        {
-          dato = response[a][1];/*
-          response[a][1] = dato;*/
-          /*document.getElementById('ttile').innerHTML = dato;*/
+        { 
+          dato = response[a]['created_at'];
+          dato = dato.substr(0,10);
           this.murais.push(response[a]);
+          this.murais[a].created_at = dato;
           a++;
-          dato="";
+          dato= "";
         }while(response[a]!=null)
 
       do{  
