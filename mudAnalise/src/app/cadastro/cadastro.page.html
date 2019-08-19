@@ -1,23 +1,26 @@
 <ion-header>
   <ion-toolbar color="escuro">
+    <div slot="start">
+
+      <ion-buttons slot="start">
+        <ion-button (click)="sairCad()">
+          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </div>
     <ion-title *ngIf="this.user.nome">Alteração </ion-title>
     <ion-title *ngIf="!this.user.nome">Cadastro </ion-title>
-    <ion-buttons slot="start">
-      <ion-button (click)="sairCad()">
-        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <!-- <div slot="end" class="botao" *ngIf="!this.user.nome">
+    <div slot="end" class="botao" *ngIf="this.user.nome">
       <ion-button class="tamanho" routerLink="/alterar-senha" slot="end">
         <ion-icon name="key"></ion-icon>
         <ion-icon name="lock"></ion-icon>
       </ion-button>
-    </div> -->
+    </div>
   </ion-toolbar>
 
 </ion-header>
-
 <ion-content>
+
   <form [formGroup]="formCadastro">
     <ion-item>
       <ion-label position="stacked">
