@@ -14,3 +14,4 @@ export interface IUsuario {
     updated_at?: string;
     deleted_at?: string;
 }
+ 
