@@ -42,7 +42,8 @@ export class MuralPage implements OnInit {
   }
 
   public addMural()
-  {
+  { 
+    var dato ="";
     let id=this.dadosService.getId();
     this.BancoService.selecionarMural(id).then(async(response)=>{
       const alert = await this.AlertController.create({
@@ -55,8 +56,8 @@ export class MuralPage implements OnInit {
         let a=0;
         let j=0;
         let y =0;
-        let colorControl=0;
         let corzita = "";
+        
         
         let n=0;
         do
@@ -65,43 +66,47 @@ export class MuralPage implements OnInit {
           n++;
         }while(response[n]!=null)
 
+
         do
-        {
+        { 
+          dato = response[a]['created_at'];
+          dato = dato.substr(0,10);
           this.murais.push(response[a]);
+          this.murais[a].created_at = dato;
           a++;
+          dato= "";
         }while(response[a]!=null)
 
       do{  
             switch(j){
             case 0:
-              corzita = "#FFE4E1";
+              corzita = "#FFCCBC";
               break;
             case 1:
-                corzita = "#FFE4E1";
+                corzita = "#FFF9C4";
               break;
             case 2:
-                corzita = "#FFE4E1";
+                corzita = "#DCEDC8";
               break;
             case 3:
-                corzita = "#FFE4E1";
-              j = 0;
+                corzita = "#B3E5FC";
+              j = -1;
               break;
             }
-            
+
+          await alert.present();  
           document.getElementsByTagName("ion-card")[y].style.backgroundColor = corzita; 
-          
-          
           j++;
           y++;
-        }while(this.murais[y]!= null)
+          }while(this.murais[y]!= null)
 
-      await alert.present();
+         
       }
   ).catch(async(response)=>{
 
     const alert = await this.AlertController.create({
       header: 'ERRO ERRO',
-      subHeader: 'aaaaaa',
+      subHeader: 'aaaaaa' + dato,
       message: JSON.stringify(response),
       buttons: ['OK']
     });

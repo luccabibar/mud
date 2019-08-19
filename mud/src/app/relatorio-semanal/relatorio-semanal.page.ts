@@ -26,6 +26,7 @@ export class RelatorioSemanalPage implements OnInit {
   public cont2 = 0;
   public cont3 = 0;
   public solta = 0;
+  public conta3 = 0;
 
   constructor(public navCtrl: NavController, private BD: BancoService,public formBuilder: FormBuilder,private AlertController: AlertController, private router: Router, private dadosService: DadosService) { 
     
@@ -49,6 +50,103 @@ export class RelatorioSemanalPage implements OnInit {
   ngOnInit() {
     this.IonSlides.lockSwipes(true);
     document.getElementById("lblTemp").innerHTML = '- de 30 mins';
+  }
+
+  antSlide()
+  {
+    this.IonSlides.lockSwipes(false);
+    this.IonSlides.slidePrev();
+    this.IonSlides.lockSwipes(true);
+    this.conta3--;
+    if(this.conta3 == 0)
+    {
+      document.getElementById("botoes").style.display='none';
+      document.getElementById("btnProximo").style.display='unset';
+    }
+    if(this.conta3 == 2)
+    {
+      document.getElementById("concluir").style.display='none';
+      document.getElementById("botoes").style.display='unset';
+    }
+  }
+
+  async proxSlide()
+  {
+    if(this.conta3 == 3)
+    {
+      if(this.slide4form.invalid)
+      {
+        this.IonSlides.slideTo(0);
+        const alert = await this.AlertController.create({
+          header: 'Erro',
+          message: 'Por favor, preencha todos os campos.',
+          buttons: ['OK']
+        });
+        
+        await alert.present();
+      }
+      else
+      {
+        this.salva()
+      }
+    }
+    if(this.conta3 == 2)
+    {
+      let dedics = (<HTMLInputElement>document.getElementById("dedicous")).checked;
+      if(this.slide3form.invalid && dedics == true)
+      {
+        this.IonSlides.slideTo(0);
+        const alert = await this.AlertController.create({
+          header: 'Erro',
+          message: 'Por favor, preencha todos os campos.',
+          buttons: ['OK']
+        });
+        
+        await alert.present();
+      }
+      else
+      {
+        this.IonSlides.lockSwipes(false);
+        this.IonSlides.slideNext();
+        this.ScrollToTop();
+        this.IonSlides.lockSwipes(true);
+        this.conta3++;
+        document.getElementById("botoes").style.display='none';
+        document.getElementById("concluir").style.display='unset';
+      }
+    }
+    if(this.conta3 == 1)
+    {
+      this.IonSlides.lockSwipes(false);
+      this.IonSlides.slideNext();
+      this.IonSlides.lockSwipes(true);
+      this.conta3++;
+    }
+  }
+
+  async troca()
+  {
+    if(this.slide1form.invalid)
+    {
+      this.IonSlides.slideTo(0);
+      const alert = await this.AlertController.create({
+        header: 'Erro',
+        message: 'Por favor, preencha todos os campos.',
+        buttons: ['OK']
+      });
+      
+      await alert.present();
+    }
+    else
+    {
+      this.IonSlides.lockSwipes(false);
+      this.IonSlides.slideNext();
+      this.ScrollToTop();
+      this.IonSlides.lockSwipes(true);
+      this.conta3++;
+      document.getElementById("btnProximo").style.display='none';
+      document.getElementById("botoes").style.display='unset';
+    }
   }
 
   fezAtvd()
@@ -95,7 +193,7 @@ export class RelatorioSemanalPage implements OnInit {
 
   duracAtv()
   {
-    let temp = (<HTMLInputElement>document.getElementById("temp")).value;
+    let temp = (<HTMLInputElement>document.getElementById("atv_temp")).value;
     if(temp == "0")
     {
       document.getElementById("lblTemp").innerHTML = '- de 30 mins';
@@ -142,87 +240,6 @@ export class RelatorioSemanalPage implements OnInit {
     } 
   }
  
-   async proxSlide1()
-  {
-    if(this.slide1form.valid) //mudar pra invalido dps
-    {
-      this.IonSlides.slideTo(0);
-      const alert = await this.AlertController.create({
-        header: 'Erro',
-        message: 'Por favor, preencha todos os campos.',
-        buttons: ['OK']
-      });
-      
-      await alert.present();
-    }
-    else
-    {
-      this.IonSlides.lockSwipes(false);
-      this.IonSlides.slideNext();
-      this.ScrollToTop();
-      this.IonSlides.lockSwipes(true);
-    }
-  }
-
-  proxSlide2()
-  {
-    this.IonSlides.lockSwipes(false);
-    this.IonSlides.slideNext();
-    this.ScrollToTop();
-    this.IonSlides.lockSwipes(true);
-  }
-
-  async proxSlide3()
-  {
-    let dedics = (<HTMLInputElement>document.getElementById("dedicous")).checked;
-    if(this.slide3form.invalid && dedics == true)
-    {
-      const alert = await this.AlertController.create({
-        header: 'Erro',
-        message: 'Por favor, preencha todos os campos.',
-        buttons: ['OK']
-      });
-      
-      await alert.present();
-    }
-    else
-    {
-      this.IonSlides.lockSwipes(false);
-      this.IonSlides.slideNext();
-      this.ScrollToTop();
-      this.IonSlides.lockSwipes(true);
-    }
-  }
-
-  async proxSlide4()
-  {
-    if(this.slide4form.invalid)
-    {
-      const alert = await this.AlertController.create({
-        header: 'Erro',
-        message: 'Por favor, preencha todos os campos.',
-        buttons: ['OK']
-      });
-      
-      await alert.present();
-    }
-    else
-    {
-      this.IonSlides.lockSwipes(false);
-      this.IonSlides.slideNext();
-      this.ScrollToTop();
-      this.IonSlides.lockSwipes(true);
-    }
-  }
-
-  antSlide()
-  {
-    this.IonSlides.lockSwipes(false);
-    this.IonSlides.slidePrev();
-    this.ScrollToTop();
-    this.IonSlides.lockSwipes(true);
-  }
-  
 
   async salva()
   {
