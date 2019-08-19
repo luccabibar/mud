@@ -1,23 +1,51 @@
 <ion-header>
-    <ion-toolbar color="escuro">
-      <ion-title>Detalhes</ion-title>
-      <ion-buttons slot="start">
-        <ion-button routerLink="/tabs/tab2">
-          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-   <ion-content padding>
-     <ion-card>
-        <ion-item>
-          <ion-icon  name='{{icone}}' slot="start"></ion-icon>
-          <ion-label><strong>{{ myId }} </strong></ion-label>
-        </ion-item>
-        <ion-card-content>
-          <h1>
-            Aqui vou mostrar as informacoes de {{myId}} para o idSemana:{{semanaId}}
-          </h1>
-        </ion-card-content>
-      </ion-card>
-   </ion-content> <!--opa so para teste dps-->
+  <ion-toolbar color="escuro">
+    <ion-title>Detalhes</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/tabs/tab2">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-card *ngIf="sono">
+    <ion-item>
+      <ion-icon name='{{icone}}' slot="start"></ion-icon>
+      <ion-label><strong>{{ myId }} </strong></ion-label>
+    </ion-item>
+    <ion-card-content>
+      <p>Início do Sono: {{sono.hora_comeco}} </p>
+      <p>Acordou durante o sono: {{sono.vezes_acordou}} </p>
+      <p>Acordou Naturalmente: {{sono.acordou_naturalmente}} </p>
+    </ion-card-content>
+  </ion-card>
+  <!--CARDS DE LAZER, ATIV, ALIMENTACAO-->
+
+  <ion-card *ngIf="atividade">
+      <ion-item>
+        <ion-icon name='{{icone}}' slot="start"></ion-icon>
+        <ion-label><strong>{{ myId }} </strong></ion-label>
+      </ion-item>
+      <ion-card-content>
+        <p>Fez atividade física: {{atividade.realizou}} </p>
+        <p>Tempo médio de treino: {{atividade.tempo}} </p>
+      </ion-card-content>
+    </ion-card>
+
+  <ion-card *ngIf="existe===2">
+    <ion-card-header>
+      <strong> ERRO!</strong>
+    </ion-card-header>
+    <ion-card-content>
+      Detalhes não disponíveis! O registro se encontra vazio ou foi corrompido.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="existe===1">
+    <ion-card-header>
+      <strong> Buscando Dados...</strong>
+    </ion-card-header>
+  </ion-card>
+</ion-content>
+<!--opa so para teste dps-->
