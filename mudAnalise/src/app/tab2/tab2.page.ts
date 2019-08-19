@@ -65,17 +65,27 @@ export class Tab2Page {
     for (let sem of semanas) {
       temp.push(
         {
-          "name": moment(sem.data_inicial).format('DD/MM') + " à " + moment(sem.data_final).format('DD/MM/YYYY'),
+          "name": moment(sem.data_inicial).format('DD/MM') + " à " + moment(sem.data_final).format('DD/MM/YYYY') +"ID:"+ sem.id_semana,
           "children": [
             {
               "name": "Sono",
-              "id": "8h/dia em média de sono sem interrupções.",
-              "price": "$25"
+              "semanaId": sem.id_semana,
+              "icone": "bed"
             },
             {
-              "name": "Bem-Estar",
-              "information": "Foi 3x ao cinema com os colegas",
-              "price": "$45"
+              "name": "Alimentação",
+              "semanaId": sem.id_semana,
+              "icone": "pizza"
+            }, 
+            {
+              "name": "Atividade Fisica",
+              "semanaId": sem.id_semana,
+              "icone": "fitness"
+            },
+            {
+              "name": "Lazer",
+              "semanaId": sem.id_semana,
+              "icone": "brush"
             }
           ]
         }
