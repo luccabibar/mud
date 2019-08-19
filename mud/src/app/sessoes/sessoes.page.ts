@@ -22,9 +22,40 @@ export class SessoesPage implements OnInit {
 
   dado: any;
 
-  updateSessao(hash)
+  /**
+   * altera a view de acordo com a existencia de sessao de um id
+   * 
+   * @param id id a ser usado como 
+   */
+  async updateSessoesView(id)
   {
-    this.bancoService.updateGenerico("UPDATE sessao set usuario_id="+this.dadosService.getId()+",status=1,updated_at=now() WHERE hash='"+hash+"';")
+    let resp = await this.buscaSessoes(id);
+
+    if(resp === false){
+      //view sem sessao
+    }
+    else{
+      //view com sessao
+
+    }
+  }
+
+  /**
+   * atualiza um registro de uma sessao no banco de acordo com o hash escaneado
+   * 
+   * @param hash hash a ser ustilizado como parametro de busca no banco
+   * @param id id do usuario que participa da sessao
+   * @return Promise, que resolve true ou false para sucesso ou fracasso da operacao
+   */
+  updateSessao(hash, id)
+  {
+    let sql = "UPDATE sessao SET " + 
+      "usuario_id = " + id + ", " +
+      "status = 1, " + 
+      "updated_at=now() " +
+      "WHERE hash = '" + hash + "';";
+      
+    this.bancoService.updateGenerico(sql)
     .then(async(response)=>{
       const alert = await this.alertController.create({
         header: 'Sucesso!',
@@ -54,21 +85,24 @@ export class SessoesPage implements OnInit {
   }
 
   /**
-   * procura pela exsitecia de uma sssao no banco a partir de um hash
+   * busca dados de todas as sessoes vinculadas com um id
+   * thougth of the day: por que o typescript implemta overloading, mas so pra funcoes com o mesmo numero de args?
    *  
-   * @param hash o hash a ser buscado
-   * @returns a existencia da sessao no bacno
+   * @param id id do usuario que participa da sessao
+   * @returns Promisse, com o resultado da query de busca
    */
-  buscaSessao(hash)
+  buscaSessoes(id)
   {
     return new Promise((resolve, reject) => {
-      let sql = " SELECT hash FROM sessao WHERE hash = '" + hash + "' AND status = 0;";
+      let sql = "SELECT nome, s.created_at FROM sessao AS s " +
+        "INNER JOIN usuario AS u ON u.id_usuario = s.profissional_id " + 
+        "WHERE usuario_id = " + id + " AND status = 1;";
 
       this.bancoService.selectGenerico(sql).then(response => {
         
-        if (response[0].hash !== null) {
+        if (response[0].created_at !== null) {
           
-          resolve(true);
+          resolve(response[0]);
         } else {
           
           resolve(false);
@@ -81,7 +115,7 @@ export class SessoesPage implements OnInit {
   }
 
   /**
-   * scanFoda
+   * startSessao
    * 
    * liga a camera pra ler o qrcode, e dps valida e ativa a sessao no banco
    */
@@ -89,7 +123,7 @@ export class SessoesPage implements OnInit {
     
     //options
     let opts = {
-      preferFrontCamera : true,
+      preferFrontCamera : false,
       showFlipCameraButton : true,
       showTorchButton : true,
       torchOn: false,
@@ -107,26 +141,13 @@ export class SessoesPage implements OnInit {
     //sucesso
     .then(result => {
       this.dado = result.text;
-      this.updateSessao(this.dado);
+      this.updateSessao(this.dado, this.dadosService.getId());
+      this.updateSessoesView(this.dadosService.getId());
     })
     //erro
     .catch(ex => {
        
     });
-    /*
-    //if erro, retorna
-    if(this.hash == "return"){
-
-      return;
-    }
-
-    //validacao
-    if(!(await this.buscaSessao(this.hash))){
-      
-      return;
-    }
-    
-    this.updateSessao(this.hash, this.dados.getDados("id"));*/
     
   }
 
