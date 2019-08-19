@@ -211,8 +211,9 @@
               <ion-item padding-horizontal lines="none">
                <ion-text color="verdemud4" text-wrap><h5>Na maioria dos dias, você dormiu por volta de qual horário?</h5></ion-text>
               </ion-item>
+              <!-- minuteValues="00, 15, 30, 45" -->
              <ion-item padding-horizontal>
-                <ion-datetime pickerFormat="HH:mm a" displayFormat="HH:mm a" id="hrDormir" placeholder="Selecione um horário" minuteValues="00, 15, 30, 45" formControlName="horaDormir"></ion-datetime>
+                <ion-datetime pickerFormat="HH" displayFormat="HH" id="hrDormir" placeholder="Selecione um horário"  formControlName="horaDormir"></ion-datetime>
              </ion-item>
              
              <ion-item padding-horizontal lines="none">
