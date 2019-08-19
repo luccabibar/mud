@@ -7,6 +7,7 @@ import { DadosService } from "../dados.service";
 import { AlertController } from '@ionic/angular';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { validateConfig } from '@angular/router/src/config';
+import { alertController } from '@ionic/core';
 
 @Component({
   selector: 'app-sessoes',
@@ -15,39 +16,41 @@ import { validateConfig } from '@angular/router/src/config';
 })
 export class SessoesPage implements OnInit {
 
-  dados;
-  qr: BarcodeScanner;
-  db: BancoService;
-  hash;
+  constructor(private bancoService: BancoService,private dadosService: DadosService,private barcodeScanner: BarcodeScanner, private alertController: AlertController) 
+  {
+  }
+
   dado: any;
 
-  updateSessao(hash, id)
+  updateSessao(hash)
   {
-    return new Promise((resolve, reject) => {
-      
-      let sql = "UPDATE public.sessao SET" +
-        "status = 1, " +  
-        "usuario_id = " + id + ", "
-        "updated_at = now() " +  
-        ");";
+    this.bancoService.updateGenerico("UPDATE sessao set usuario_id="+this.dadosService.getId()+",status=1,updated_at=now() WHERE hash='"+hash+"';")
+    .then(async(response)=>{
+      const alert = await this.alertController.create({
+        header: 'Sucesso!',
+        message: 'Sessão Iniciada com sucesso!',
+        buttons:  [
+          {
+            text: 'OK',
+          }
+        ],
+        });
 
-      this.db.updateGenerico(sql).then((response) => {
+        await alert.present();
+     })
+    .catch(async(response)=>{
+        const alert = await this.alertController.create({
+          header: 'Erro',
+          message: 'Erro ao iniciar sessão com o código lido',
+          buttons:  [
+            {
+              text: 'OK',
+            }
+          ],
+          });
 
-        console.log(response);
-        resolve(true);
-      })
-      .catch((ex) => {
-        
-        if (ex.error.text == "sucesso") {
-        
-          resolve(true);
-        } 
-        else {
-        
-          resolve(false);
-        }
-      });
-    });
+          await alert.present();
+       })
   }
 
   /**
@@ -61,7 +64,7 @@ export class SessoesPage implements OnInit {
     return new Promise((resolve, reject) => {
       let sql = " SELECT hash FROM sessao WHERE hash = '" + hash + "' AND status = 0;";
 
-      this.db.selectGenerico(sql).then(response => {
+      this.bancoService.selectGenerico(sql).then(response => {
         
         if (response[0].hash !== null) {
           
@@ -100,18 +103,15 @@ export class SessoesPage implements OnInit {
     };
 
     //leitura do codigo
-    this.qr.scan(opts)
+    this.barcodeScanner.scan(opts)
     //sucesso
     .then(result => {
-      
-      this.hash = result;
-      this.dado = this.hash;
+      this.dado = result.text;
+      this.updateSessao(this.dado);
     })
     //erro
     .catch(ex => {
        
-      this.hash = "return";
-      console.log('Error', ex);
     });
     /*
     //if erro, retorna
@@ -130,12 +130,7 @@ export class SessoesPage implements OnInit {
     
   }
 
-  constructor(db: BancoService, dados: DadosService, qr: BarcodeScanner) 
-  {
-    this.db = db;
-    this.dados = dados;
-    this.qr = qr;
-  }
+  
 
   ngOnInit() 
   {
