@@ -22,7 +22,15 @@ export class Tab3Page {
    ngOnInit() {
      this.addMural();
    }
+   doRefresh(event) {
+    this.addMural();
 
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+  
   public profissional: IUsuario;
   public user_sessao;
 
@@ -58,7 +66,8 @@ export class Tab3Page {
       message: JSON.stringify(response),
       buttons: ['OK']
     });
-    this.addMural();
+    let index = this.findContatoIndex(mural.id_mural);
+    this.murais.splice(index, 1);
     await alert.present();
   }
   )
@@ -84,20 +93,49 @@ export class Tab3Page {
         message: JSON.stringify(response[0].id_usuario),
         buttons: ['OK']
       });
-
+      let a=0;
       let n=0;
+
       do
       {
-        this.murais.splice(0,n);
+        this.murais.splice(0,n+1);
         n++;
-      }while(response[n]!=null)
+      }while(response[n]!=null);
 
-      let a=0;
+
       do
       {
         this.murais.push(response[a]);
         a++;
-      }while(response[a]!=null)
+      }while(response[a]!=null);
+
+      let j=0;
+      let y =0;
+      let colorControl=0;
+      let corzita = "";
+ do{  
+          switch(j){
+          case 0:
+            corzita = "#FFE4E1";
+            break;
+          case 1:
+              corzita = "#FFE4E1";
+            break;
+          case 2:
+              corzita = "#FFE4E1";
+            break;
+          case 3:
+              corzita = "#FFE4E1";
+            j = 0;
+            break;
+          }
+          
+        document.getElementsByTagName("ion-card")[y].style.backgroundColor = corzita; 
+        
+        
+        j++;
+        y++;
+      }while(this.murais[y]!= null)
 
       await alert.present();
     }
@@ -115,6 +153,14 @@ export class Tab3Page {
   })
 
  }
+ findContatoIndex(id) {
+  for (let i=0; i < this.murais.length; i++) {
+    if(this.murais[i].id_mural == id) {
+      return i;
+    }
+  }
+  return null;
+}
 
 public async alertaDeletar(mural){
   const alert = await this.AlertController.create({
@@ -145,7 +191,7 @@ public async alertaDeletar(mural){
     let texto = (<HTMLInputElement>document.getElementById("2")).value;
 
     // JP, coloquei o campo this.profissional.id_usuario para sring pq o inserir  mural pede isso
-    this.BancoService.inserirMural(titulo, texto, this.user_sessao.id_usuario, this.profissional.id_usuario.toString()).then(async (response) => {
+    this.BancoService.inserirMural(titulo, texto, this.user_sessao.id_usuario, this.profissional.id_usuario).then(async (response) => {
       const alert = await this.AlertController.create({
         header: 'Confirmação',
         subHeader: 'Sucesso!',

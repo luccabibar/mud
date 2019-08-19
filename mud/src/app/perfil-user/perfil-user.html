@@ -1,26 +1,25 @@
 <ion-header>
     
   <ion-toolbar color="verdemud3">
-    <ion-title id="title1">
-      Perfil
-    </ion-title>
+      <ion-icon (click)="pagsessao()" id="cog" name="reverse-camera"></ion-icon>
+      <ion-icon (click)="sair()" id="exit" name="exit"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-fab horizontal="start" vertical="top" slot="fixed" edge>
+    <!--<ion-fab horizontal="start" vertical="top" slot="fixed" edge>
         <ion-fab-button>
           <ion-icon name="arrow-dropdown"></ion-icon>
         </ion-fab-button>
         <ion-fab-list>
-          <ion-fab-button color="light" (click)="pagsessao()">
+          <ion-fab-button color="light" >
               <ion-icon name="cog"></ion-icon>
           </ion-fab-button>Sessões
           <ion-fab-button color="light" (click)="sair()">
               <ion-icon name="exit"></ion-icon>
           </ion-fab-button>Logoff
         </ion-fab-list>
-      </ion-fab>
+      </ion-fab>-->
   <ion-card>
       <img id="img" src="../../assets/perfilmud.png" />
     <ion-card-header>

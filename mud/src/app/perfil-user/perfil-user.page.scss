@@ -32,3 +32,21 @@ ion-item {
   display: block;
   margin: auto;
 }
+
+#exit
+{
+  right: 3%;
+    position: absolute;               
+    top: 50%;                         
+    transform: translate(0, -50%);  
+  font-size: 180%;
+}
+
+#cog
+{
+  left: 3%;
+    position: absolute;               
+    top: 50%;                         
+    transform: translate(0, -50%);  
+  font-size: 180%;
+}
