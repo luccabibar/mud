@@ -44,16 +44,13 @@
               <ion-item tappable routerLink="/tabs">
                 <ion-card name="ion-card" id="carditos">
                   <ion-card-header>
-                    <ion-card-title>{{mural.titulo}}</ion-card-title>
-                    <ion-label id="3">
-                    {{mural.created_at}}
-                </ion-label>
+                    <ion-card-title>{{mural.titulo}}</ion-card-title> 
+                    <ion-label id="3">{{mural.created_at}}</ion-label>
                   </ion-card-header>
                   <ion-card-content>
                     {{mural.texto}}
                   </ion-card-content>
-                </ion-card>
-                
+                </ion-card>              
                 </ion-item>
                 <ion-item-options side="end">
                   <ion-item-option color="danger" (click)="alertaDeletar(mural)">

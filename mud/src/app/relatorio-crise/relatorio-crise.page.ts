@@ -19,6 +19,8 @@ export class RelatorioCrisePage implements OnInit {
 
   ngOnInit() {
     this.IonSlides.lockSwipes(true);
+    document.getElementById("lblTempo").innerHTML = '- de 10 mins';
+    document.getElementById("lblGrau").innerHTML = 'Nenhuma';
   }
 
   antSlide()
