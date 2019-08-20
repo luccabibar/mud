@@ -20,7 +20,7 @@
         <div>
           Início do Sono:
         </div>
-        <div>
+        <div slot="end">
           <strong> {{sono.hora_comeco}}hrs </strong>
         </div>
       </ion-item>
@@ -69,16 +69,67 @@
         <div>
           Fez atividade física:
         </div>
+        <div slot="end">
+          <strong *ngIf="atividade.realizou">Sim</strong>
+          <strong *ngIf="!atividade.realizou">Não</strong>
+
+        </div>
+      </ion-item>
+      <ion-item *ngIf="atividade.realizou">
         <div>
-          <strong>{{atividade.realizou}}</strong>
+          Tempo médio de treino:
+        </div>
+        <div slot="end">
+          <strong *ngIf="atividade.tempo==='0'">até 30min</strong>
+          <strong *ngIf="atividade.tempo==='200'">de 30min à 1h</strong>
+          <strong *ngIf="atividade.tempo==='400'">1h-2hrs</strong>
+          <strong *ngIf="atividade.tempo==='600'">2h-3hrs</strong>
+          <strong *ngIf="atividade.tempo==='800'">+ de 3hrs</strong>
         </div>
       </ion-item>
       <ion-item>
         <div>
-          Tempo médio de treino:
+          Intensidade da(s) atividade(s):
         </div>
+        <div slot="end">
+          <strong *ngIf="atividade.intensidade==='0'">Leve</strong>
+          <strong *ngIf="atividade.intensidade==='1'">Moderado</strong>
+          <strong *ngIf="atividade.intensidade==='2'">Alto</strong>
+        </div>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <!--Lazer-->
+  <ion-card *ngIf="lazer">
+    <ion-item>
+      <ion-icon name='{{icone}}' slot="start"></ion-icon>
+      <ion-label><strong>{{ myId }} </strong></ion-label>
+    </ion-item>
+    <ion-card-content>
+      <ion-item>
         <div>
-          <strong>{{atividade.tempo}}</strong>
+          Fez alguma atividade de lazer:
+        </div>
+        <div slot="end">
+          <strong *ngIf="lazer.realizou">Sim</strong>
+          <strong *ngIf="!lazer.realizou">Não</strong>
+        </div>
+      </ion-item>
+      <ion-item *ngIf="lazer.realizou">
+        <div>
+          Quantidade de vezes:
+        </div>
+        <div slot="end">
+          <strong>{{lazer.vezes}}</strong>
+        </div>
+      </ion-item>
+      <ion-item *ngIf="lazer.realizou">
+        <div>
+          Esteve acompanhado:
+        </div>
+        <div slot="end">
+          <strong *ngIf="lazer.acompanhamento">Sim</strong>
+          <strong *ngIf="!lazer.acompanhamento">Não</strong>
         </div>
       </ion-item>
     </ion-card-content>
@@ -99,10 +150,13 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="existe===1">
-    <ion-card-header>
-      <strong> Buscando Dados...</strong>
-    </ion-card-header>
-  </ion-card>
+  <div *ngIf="existe===1">
+    <ion-card>
+      <ion-card-content>
+        <strong>Carregando dados:</strong>
+        <ion-spinner name="crescent" slot="end"> </ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
 <!--opa so para teste dps-->
