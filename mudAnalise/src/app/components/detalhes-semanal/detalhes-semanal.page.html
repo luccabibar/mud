@@ -9,29 +9,86 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
+  <!--SONO-->
   <ion-card *ngIf="sono">
     <ion-item>
       <ion-icon name='{{icone}}' slot="start"></ion-icon>
       <ion-label><strong>{{ myId }} </strong></ion-label>
     </ion-item>
     <ion-card-content>
-      <p>Início do Sono: {{sono.hora_comeco}} </p>
-      <p>Acordou durante o sono: {{sono.vezes_acordou}} </p>
-      <p>Acordou Naturalmente: {{sono.acordou_naturalmente}} </p>
+      <ion-item>
+        <div>
+          Início do Sono:
+        </div>
+        <div>
+          <strong> {{sono.hora_comeco}}hrs </strong>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div>
+          Acordou durante o sono:
+        </div>
+        <div slot="end">
+          <strong *ngIf="sono.acordou">
+            Sim
+          </strong>
+          <strong *ngIf="!sono.acordou">
+            Não
+          </strong>
+        </div>
+      </ion-item>
+      <ion-item *ngIf="sono.acordou">
+        <div>
+          Vezes que acordou:
+        </div>
+        <div slot="end">
+          <strong>
+            {{sono.vezes_acordou}}
+          </strong>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div>
+          Acordou Naturalmente:
+        </div>
+        <div slot="end">
+          <strong *ngIf="sono.acordo_naturalmente">Sim</strong>
+          <strong *ngIf="!sono.acordo_naturalmente">Não</strong>
+        </div>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <!--Atividade Fisica-->
+  <ion-card *ngIf="atividade">
+    <ion-item>
+      <ion-icon name='{{icone}}' slot="start"></ion-icon>
+      <ion-label><strong>{{ myId }} </strong></ion-label>
+    </ion-item>
+    <ion-card-content>
+      <ion-item>
+        <div>
+          Fez atividade física:
+        </div>
+        <div>
+          <strong>{{atividade.realizou}}</strong>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div>
+          Tempo médio de treino:
+        </div>
+        <div>
+          <strong>{{atividade.tempo}}</strong>
+        </div>
+      </ion-item>
     </ion-card-content>
   </ion-card>
   <!--CARDS DE LAZER, ATIV, ALIMENTACAO-->
 
-  <ion-card *ngIf="atividade">
-      <ion-item>
-        <ion-icon name='{{icone}}' slot="start"></ion-icon>
-        <ion-label><strong>{{ myId }} </strong></ion-label>
-      </ion-item>
-      <ion-card-content>
-        <p>Fez atividade física: {{atividade.realizou}} </p>
-        <p>Tempo médio de treino: {{atividade.tempo}} </p>
-      </ion-card-content>
-    </ion-card>
+
+
+
+  <!--Cards para outros casos-->
 
   <ion-card *ngIf="existe===2">
     <ion-card-header>

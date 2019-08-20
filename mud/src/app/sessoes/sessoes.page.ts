@@ -18,9 +18,20 @@ export class SessoesPage implements OnInit {
 
   constructor(private bancoService: BancoService,private dadosService: DadosService,private barcodeScanner: BarcodeScanner, private alertController: AlertController) 
   {
+    this.id = this.dadosService.getId();
+    console.log(this.dadosService.getId());
+    this.updateSessoesView(this.id);
   }
 
+  id: any;
   dado: any;
+  hasSessao: any;
+  sessCreated: any;
+  profName: any;
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   /**
    * altera a view de acordo com a existencia de sessao de um id
@@ -29,14 +40,15 @@ export class SessoesPage implements OnInit {
    */
   async updateSessoesView(id)
   {
-    let resp = await this.buscaSessoes(id);
+    await this.sleep(2000); //deixa o banco processar os dados k
+    let resp = await this.buscaSessao(id);
+    console.log(resp);
 
     if(resp === false){
-      //view sem sessao
+      this.hasSessao = false;
     }
     else{
-      //view com sessao
-
+      this.hasSessao = true;
     }
   }
 
@@ -91,17 +103,17 @@ export class SessoesPage implements OnInit {
    * @param id id do usuario que participa da sessao
    * @returns Promisse, com o resultado da query de busca
    */
-  buscaSessoes(id)
+  buscaSessao(id)
   {
     return new Promise((resolve, reject) => {
       let sql = "SELECT nome, s.created_at FROM sessao AS s " +
         "INNER JOIN usuario AS u ON u.id_usuario = s.profissional_id " + 
         "WHERE usuario_id = " + id + " AND status = 1;";
-
-      this.bancoService.selectGenerico(sql).then(response => {
         
+        
+      this.bancoService.selectGenerico(sql).then(response => {
         if (response[0].created_at !== null) {
-          
+  
           resolve(response[0]);
         } else {
           
@@ -141,8 +153,8 @@ export class SessoesPage implements OnInit {
     //sucesso
     .then(result => {
       this.dado = result.text;
-      this.updateSessao(this.dado, this.dadosService.getId());
-      this.updateSessoesView(this.dadosService.getId());
+      this.updateSessao(this.dado, this.id);
+      this.updateSessoesView(this.id);
     })
     //erro
     .catch(ex => {
