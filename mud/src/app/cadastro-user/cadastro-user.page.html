@@ -156,8 +156,10 @@
                             <p>Insira a data da primeira crise.</p>
                             </ion-item>
 
+                            <ion-item padding-horizontal  lines="none">
+                             <ion-text color="verdemud4" style="font-size: 15px !important;" text-wrap>Selecione quais sintomas você geralmente apresenta durante uma crise</ion-text>
+                            </ion-item>  
                             <ion-item padding-horizontal>
-                                    <ion-label position="stacked" text-wrap>Selecione quais sintomas você geralmente apresenta durante uma crise</ion-label>
                                     <ion-select ok-text="Selecionar" cancel-text="Cancelar" multiple="true" id="12" text-wrap>
                                         <ion-select-option text-wrap value="1">Dificuldade para Respirar</ion-select-option>
                                         <ion-select-option value="2">Ritmo Cardíacao Acelerado / Taquicardia</ion-select-option>
@@ -179,21 +181,22 @@
                                 <p>Insira um número válido.</p>
                             </ion-item>
                             
-                            <ion-item style="height: 12rem;">
+                            <!--<ion-item style="height: 12rem;">
                                 <ion-label position="stacked" text-wrap>Descreva quais são as principais situações que desencadeiam as crises (Isso pode ser alterado depois)</ion-label>
                                 <ion-textarea rows="5" autoGrow="true" maxlength="500" placeholder="Simples descrição sobre as situações que desencadeiam as crises" id="13"></ion-textarea>
-                            </ion-item>
-                            <!--<ion-item padding-horizontal>
-                             <ion-label class="label" position="stacked" text-wrap>Quais as principais situações que desencadeiam as crises?</ion-label>
+                            </ion-item>-->
+
+                            <ion-item padding-horizontal>
+                             <ion-label class="label" position="stacked" text-wrap>Qual a principail situação que desencadeia as crises?</ion-label>
                              <hr>
-                             <ion-input type="text" formControlname="situ1" name="situ1" id="situ1" placeholder="Situação 1" [class.invalid]="!slideThreeForm.controls.situ1.valid && (slideThreeForm.controls.situ1.dirty || submitAttempt3)"></ion-input>
+                             <ion-input type="text" formControlname="situ1" name="situ1" id="13" placeholder="Situação 1" [class.invalid]="!slideThreeForm.controls.situ1.valid && (slideThreeForm.controls.situ1.dirty || submitAttempt3)"></ion-input>
                             </ion-item>
 
                             <ion-item padding-horizontal *ngIf="!slideThreeForm.controls.situ1.valid  && (slideThreeForm.controls.situ1.dirty || submitAttempt3)">
                                 <p>Insira no mínimo uma situação.</p>
                             </ion-item>
 
-                            <div id="situacao2" style="display: none;">
+                            <!--<div id="situacao2" style="display: none;">
                                 <ion-item padding-horizontal>
                                 <ion-input type="text" formControlname="situ2" name="situ2" id="situ2" placeholder="Situação 2" id="13"></ion-input>
                                 </ion-item>
@@ -207,7 +210,7 @@
                                 <ion-item padding-horizontal>
                                 <ion-input type="text" formControlname="situ4" name="situ4" id="situ4" placeholder="Situação 4"></ion-input>
                                 </ion-item>
-                            </div>-->
+                            </div>
                             <div id="fab2">
                             <ion-fab padding-horizontal horizontal="end">
                             <ion-fab-button  size="small" (click)="addsitu1()" color="verdemud4">
@@ -215,7 +218,7 @@
                             </ion-fab-button>
                             </ion-fab>
                             <hr><hr><hr>
-                            </div>
+                            </div>-->
                             <hr><hr><hr><hr>
                           </form>
                         </ion-list>
