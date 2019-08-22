@@ -49,7 +49,7 @@ export class DetalhesSemanalPage implements OnInit {
     if (this.myId == "Sono") { this.pegaSono(); }
     if (this.myId == "Atividade Física") {  this.pegaAtividade(); }
     if (this.myId == "Lazer") {this.pegaLazer(); }
-    if (this.myId == "Alimentação") { }
+    if (this.myId == "Alimentação") { this.pegaAlimentacao() }
 
 
   }
@@ -115,6 +115,17 @@ export class DetalhesSemanalPage implements OnInit {
       } else if (resposta[0].realizou == 'f') {
         this.lazer.realizou = false;
       }
+      this.existe = 0;
+    }).catch(async (resposta) => {
+      console.log(resposta);
+      this.existe = 2;
+    })
+  }
+
+  public async pegaAlimentacao(){
+    this.bd.selectGenerico("SELECT * FROM alimentacao WHERE semana_id=" + this.semanaId + " ;").then(async (resposta) => {
+      console.log("Alimentação:", resposta)
+      this.alimentacao = resposta[0];
       this.existe = 0;
     }).catch(async (resposta) => {
       console.log(resposta);

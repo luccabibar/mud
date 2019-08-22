@@ -4,7 +4,7 @@ export interface ISemanalAlimentacao{
     carboidratos: number;
     proteinas: number;
     laticinios: number;
-    ver_frut: number;
+    verd_frut: number;
     hidratacao: number;
     created_at?: string;
     updated_at?: string;

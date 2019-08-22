@@ -134,6 +134,69 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
+  <!--Alimentacao-->
+  <ion-card *ngIf="alimentacao">
+    <ion-item>
+      <ion-icon name='{{icone}}' slot="start"></ion-icon>
+      <ion-label><strong>{{ myId }} </strong></ion-label>
+    </ion-item>
+    <ion-card-content>
+        <ion-label><strong>Consumo Semanal de </strong></ion-label>
+
+        <ion-item>
+          <div>
+            Carboidratos:
+          </div>
+          <div slot="end">
+            <strong *ngIf="alimentacao.carboidratos==='0'">Pouco (1 a 2 dias)</strong>
+            <strong *ngIf="alimentacao.carboidratos==='1'">Médio (3 a 5 dias)</strong>
+            <strong *ngIf="alimentacao.carboidratos==='2'">Muito (6 a 7 dias)</strong>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div>
+            Proteinas:
+          </div>
+          <div slot="end">
+            <strong *ngIf="alimentacao.proteinas==='0'">Pouco (1 a 2 dias)</strong>
+            <strong *ngIf="alimentacao.proteinas==='1'">Médio (3 a 5 dias)</strong>
+            <strong *ngIf="alimentacao.proteinas==='2'">Muito (6 a 7 dias)</strong>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div>
+            Laticínios:
+          </div>
+          <div slot="end">
+            <strong *ngIf="alimentacao.laticinios==='0'">Pouco (1 a 2 dias)</strong>
+            <strong *ngIf="alimentacao.laticinios==='1'">Médio (3 a 5 dias)</strong>
+            <strong *ngIf="alimentacao.laticinios==='2'">Muito (6 a 7 dias)</strong>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div>
+            Verduras e Frutas:
+          </div>
+          <div slot="end">
+            <strong *ngIf="alimentacao.verd_frut==='0'">Pouco (1 a 2 dias)</strong>
+            <strong *ngIf="alimentacao.verd_frut==='1'">Médio (3 a 5 dias)</strong>
+            <strong *ngIf="alimentacao.verd_frut==='2'">Muito (6 a 7 dias)</strong>
+          </div>
+        </ion-item>
+
+      <ion-item>
+        <div>
+          Copos de água por dia:
+        </div>
+        <div slot="end">
+          <strong *ngIf="alimentacao.verd_frut==='0'">Menos de 5</strong>
+          <strong *ngIf="alimentacao.verd_frut==='1'">6 a 11</strong>
+          <strong *ngIf="alimentacao.verd_frut==='2'">Mais de 11</strong>
+        </div>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
   <!--CARDS DE LAZER, ATIV, ALIMENTACAO-->
 
 
