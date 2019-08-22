@@ -9,6 +9,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  
+    <ion-item expand="full" lines="none" color="primary">
+      <ion-text> Notas </ion-text>
+      <ion-icon slot="end" icon="add" (click)="novanota()"></ion-icon>
+    </ion-item>
+
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content
           pullingIcon="arrow-dropdown"
@@ -18,37 +24,33 @@
         </ion-refresher-content>
       </ion-refresher>
     <!-- CARDS INSERIR -->
-    <ion-item>
-        <ion-label position="stacked" text-wrap>Notas</ion-label>
-        <ion-input disabled></ion-input>
-        <ion-item>
-          <ion-label position="stacked">Título <ion-text color="danger"></ion-text>
-          </ion-label>
-          <ion-input required type="text" maxLength="44" id="1" name="inserirtitulo"></ion-input>
-          <ion-label position="stacked" text-wrap>Corpo da mensagem <ion-text color="danger"></ion-text>
-          <ion-input disabled></ion-input>
-          </ion-label>
-        </ion-item>
-        <ion-textarea id="2" name="inserirtxt" maxLength="120"></ion-textarea>
-        <ion-button (click)="inserirMural()" size="small">Adicionar</ion-button>
-      </ion-item>
-<!--Cards mostrar-->
+      <!---<ion-card> 
+        <ion-card-header>
+          <ion-label position="stacked">Título <ion-text color="danger"></ion-text></ion-label>
+          <ion-textarea required type="text" maxLength="44" id="1" name="inserirtitulo"></ion-textarea>
+        </ion-card-header> 
+        <ion-card-content>
+          <ion-label position="stacked" text-wrap>Corpo da mensagem <ion-text color="danger"></ion-text></ion-label>
+          <ion-textarea id="2" name="inserirtxt" maxLength="120"></ion-textarea>
+        </ion-card-content>
+        <ion-button (click)="inserirMural()" size="small" expand="full" id="but">Adicionar</ion-button>
+    </ion-card>--->
+    <!--- / CARDS INSERIR FIM-->
 
+    
+    <!--Cards mostrar-->
           <ion-list lines="none">
             <ion-item-sliding *ngFor="let mural of murais" id="11">
               <ion-item tappable routerLink="/tabs">
-                <ion-card name="ion-card">
+                <ion-card name="ion-card" id="carditos">
                   <ion-card-header>
-                    <ion-card-title>{{mural.titulo}}</ion-card-title>
-                    <ion-label id="3">
-                    {{mural.created_at}}
-                </ion-label>
+                    <ion-card-title>{{mural.titulo}}</ion-card-title> 
+                    <ion-label id="3">{{mural.created_at}}</ion-label>
                   </ion-card-header>
                   <ion-card-content>
                     {{mural.texto}}
                   </ion-card-content>
-                </ion-card>
-                
+                </ion-card>              
                 </ion-item>
                 <ion-item-options side="end">
                   <ion-item-option color="danger" (click)="alertaDeletar(mural)">
