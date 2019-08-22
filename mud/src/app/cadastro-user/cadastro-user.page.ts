@@ -300,8 +300,8 @@ export class CadastroUserPage implements OnInit {
   cadUsu1()
   {
     let nome = (<HTMLInputElement>document.getElementById("0")).value;
-    let email = (<HTMLInputElement>document.getElementById("15")).value;
-    let dt_nasc = (<HTMLInputElement>document.getElementById("16")).value;
+    let email = (<HTMLInputElement>document.getElementById("1")).value;
+    let dt_nasc = (<HTMLInputElement>document.getElementById("2")).value;
     let celular = (<HTMLInputElement>document.getElementById("3")).value;
     let cpf = (<HTMLInputElement>document.getElementById("4")).value;
     let senha = (<HTMLInputElement>document.getElementById("5")).value;

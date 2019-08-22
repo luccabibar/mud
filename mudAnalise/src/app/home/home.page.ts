@@ -13,7 +13,6 @@ import { IUsuario } from '../interfaces/IUsuario';
 export class HomePage implements OnInit {
   public profissional;
   public sessoes;
-  public existe = 1;
 
 
   constructor(
@@ -43,7 +42,6 @@ export class HomePage implements OnInit {
     this.bd.selectGenerico("SELECT * FROM sessao INNER JOIN usuario ON sessao.usuario_id=usuario.id_usuario WHERE profissional_id='" + this.profissional.id_usuario + "' AND status = 1;").then(async (resposta) => {
       console.log(resposta);
       this.sessoes = resposta;
-      this.existe = 0;
     }).catch(async (resposta) => {
       const alert = await this.alertController.create({
         header: 'ERRO!!',
@@ -51,13 +49,12 @@ export class HomePage implements OnInit {
         message: 'Erro ao buscar sessões! Verifique se há conexão com a internet',
         buttons: ['OK']
       });
-      this.existe = 2;
       await alert.present();
     })
   }
 
-  public abreSessao(sessao) {
-    let usuario: IUsuario = {
+  public abreSessao(sessao){
+    let usuario : IUsuario = {
       id_usuario: sessao.id_usuario,
       nome: sessao.nome,
       cpf: sessao.cpf,
@@ -127,7 +124,7 @@ export class HomePage implements OnInit {
         }, {
           text: 'Sim',
           handler: () => {
-
+            
             this.deletadoSucesso();
           }
         }

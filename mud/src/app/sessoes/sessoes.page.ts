@@ -27,7 +27,6 @@ export class SessoesPage implements OnInit {
   dado: any;
   hasSessao: any;
   sessCreated: any;
-  sessId: any;
   profName: any;
 
   sleep(ms) {
@@ -51,48 +50,6 @@ export class SessoesPage implements OnInit {
     else{
       this.hasSessao = true;
     }
-  }
-
-  removeSessao(idSess)
-  {
-    //alerta de confirmacao vc deseja mesmo apagar pipipipopopo
-
-    let sql = "UPDATE sessao SET " +
-      "status = 2, " + 
-      "udeleted_at=now() " +
-      "WHERE id_sessao = " + idSess + ";";
-      
-    this.bancoService.updateGenerico(sql)
-    .then(async(response)=>{
-      const alert = await this.alertController.create({
-        header: 'Sucesso!',
-        message: 'Sessão finalizada com sucesso!',
-        buttons:  [
-          {
-            text: 'OK',
-          }
-        ],
-      });
-
-      await alert.present();
-
-      //arruma a view
-      await this.sleep(2000);
-      this.updateSessoesView(this.id);
-     })
-    .catch(async(response)=>{
-        const alert = await this.alertController.create({
-          header: 'Erro',
-          message: 'Erro ao encerrar a sessao',
-          buttons:  [
-            {
-              text: 'OK',
-            }
-          ],
-        });
-
-      await alert.present();
-    })
   }
 
   /**
@@ -133,10 +90,10 @@ export class SessoesPage implements OnInit {
               text: 'OK',
             }
           ],
-        });
+          });
 
-      await alert.present();
-    })
+          await alert.present();
+       })
   }
 
   /**
@@ -149,7 +106,7 @@ export class SessoesPage implements OnInit {
   buscaSessao(id)
   {
     return new Promise((resolve, reject) => {
-      let sql = "SELECT nome, s.created_at, id_sessao FROM sessao AS s " +
+      let sql = "SELECT nome, s.created_at FROM sessao AS s " +
         "INNER JOIN usuario AS u ON u.id_usuario = s.profissional_id " + 
         "WHERE usuario_id = " + id + " AND status = 1;";
         

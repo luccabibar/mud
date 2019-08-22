@@ -6,17 +6,16 @@
 
 <ion-content padding>
 
-    <div *ngIf="hasSessao; else newSessao">
-      <!--gerenciar sessao existente-->
-      <div id="sessao">
-        <h1>dr(a). {{profName}}</h1>
-        <p>criada em {{sessCreated}}</p>
-        <ion-button (click)="stopSessao({{sessId}})">terminar esta sessao</ion-button>
-      </div>
+    <div *ngIf="hasSessoes; else newSessao">
+    <!--gerenciar sessao existente-->
+    <div id="sessao">
+      <h1>dr(a). {{profName}}</h1>
+      <p>criada em {{sessCreated}}</p>
+    </div>
     </div>
 
     <ng-template #newSessao>
-      <!--iniciar nova sessao-->
-      <ion-button (click)="startSessao()">Iniciar nova sessao</ion-button>
+    <!--iniciar nova sessao-->
+    <ion-button (click)="startSessao()">Iniciar nova sessao</ion-button>
     </ng-template>
 </ion-content>

@@ -4,7 +4,6 @@ import { DadosService } from '../servicos/dados.service';
 import { Router } from '@angular/router';
 import { BancoService } from '../servicos/banco.service';
 import { AlertController } from '@ionic/angular';
-//import { LoadingController } from '@ionic/angular';
 
 import * as moment from 'moment';
 
@@ -16,7 +15,6 @@ import * as moment from 'moment';
 export class Tab2Page {
   public semanas;
   public user_sessao;
-  public existe = 1;
 
 
   information: any[] = [];
@@ -29,7 +27,6 @@ export class Tab2Page {
     private bd: BancoService,
     private alertController: AlertController,
     private http: HttpClient
-   // private load: LoadingController
   ) {
     this.user_sessao = this.ds.getDados("user_sessao");
     this.carregaSemanas();
@@ -60,11 +57,6 @@ export class Tab2Page {
         buttons: ['OK']
       });
       await alert.present();
-      this.existe = 0;
-
-    }).catch(async (resposta) => {
-      console.log(resposta);
-      this.existe = 2;
     })
   }
 
@@ -73,7 +65,7 @@ export class Tab2Page {
     for (let sem of semanas) {
       temp.push(
         {
-          "name": moment(sem.data_inicial).format('DD/MM') + " à " + moment(sem.data_final).format('DD/MM/YYYY') + "ID:" + sem.id_semana,
+          "name": moment(sem.data_inicial).format('DD/MM') + " à " + moment(sem.data_final).format('DD/MM/YYYY') +"ID:"+ sem.id_semana,
           "children": [
             {
               "name": "Sono",
@@ -84,9 +76,9 @@ export class Tab2Page {
               "name": "Alimentação",
               "semanaId": sem.id_semana,
               "icone": "pizza"
-            },
+            }, 
             {
-              "name": "Atividade Física",
+              "name": "Atividade Fisica",
               "semanaId": sem.id_semana,
               "icone": "fitness"
             },
@@ -119,8 +111,5 @@ export class Tab2Page {
   toggleItem(index, childIndex) {
     this.information[index].children[childIndex].open = !this.information[index].children[childIndex].open;
   }
-  // LOADING STUFF
-  
-
 
 }

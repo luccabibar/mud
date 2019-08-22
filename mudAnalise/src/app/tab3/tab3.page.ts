@@ -1,13 +1,12 @@
 import { Router } from '@angular/router';
 import { IUsuario } from './../interfaces/IUsuario';
 import { BancoService } from './../servicos/banco.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DadosService } from '../servicos/dados.service';
 import { NavController, IonSlides, AlertController, IonInput } from '@ionic/angular';
 import { from } from 'rxjs';
 import { async } from 'q';
 import { setFirstTemplatePass } from '@angular/core/src/render3/state';
-import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -41,8 +40,7 @@ export class Tab3Page {
     private dadosService: DadosService,
     private BancoService: BancoService,
     private AlertController: AlertController,
-    private router: Router,
-    public actionSheetController: ActionSheetController
+    private router: Router
   ) {
     this.profissional = dadosService.getDados("user");
     this.user_sessao = this.dadosService.getDados("user_sessao");
@@ -115,7 +113,7 @@ export class Tab3Page {
       let y =0;
       let colorControl=0;
       let corzita = "";
-      do{  
+ do{  
           switch(j){
           case 0:
             corzita = "#FFE4E1";
@@ -188,9 +186,6 @@ public async alertaDeletar(mural){
   });
   await alert.present();
 }
-
-
-
   async inserirMural() {
     let titulo = (<HTMLInputElement>document.getElementById("1")).value;
     let texto = (<HTMLInputElement>document.getElementById("2")).value;
@@ -220,44 +215,4 @@ public async alertaDeletar(mural){
       })
 
   }
-/**/ 
-  async novanota()
-  {
-    const alert = await this.AlertController.create({
-      header: 'Nova mensagem',
-      inputs: [
-        {
-          name: 'name1',
-          id: '1',
-          type: 'text',
-          placeholder: 'Insira o título'
-        },
-        {
-          name: 'name2',
-          type: 'text',
-          id: '2',
-          value: '',
-          placeholder: 'Insira o texto...'
-        }],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Enviar',
-          handler: () => {/*
-            console.log('Confirm Ok');*/
-            this.inserirMural();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
- }
-
+}

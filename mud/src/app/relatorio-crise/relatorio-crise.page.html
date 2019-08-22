@@ -20,9 +20,8 @@
                     <ion-datetime backdropDismiss display-format="D MMM, YYYY" name="data_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
                 </ion-item>
                 <ion-item padding-horizontal lines="none">
-                    <ion-text style="font-size: 15px !important;" color="verdemud4" text-wrap>Quanto tempo durou a crise?</ion-text>
-                </ion-item>
-                <ion-item padding-horizontal lines="none">
+                    <ion-label class="label" position="stacked" text-wrap>Quanto tempo durou a crise?</ion-label>
+                    <ion-input disabled></ion-input>
                     <ion-range (ionFocus)="mudaLabel()" (keyup)="mudaLabel()" (ionChange)="mudaLabel()" id="tempo" min="0" max="1000" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
                 </ion-item>
                 <ion-label class="label" id="lblTempo" position="fixed"></ion-label>
@@ -34,16 +33,16 @@
       <ion-list>
         <ion-card>          
             <ion-card-content>
-                <ion-item padding-horizontal lines="none">
-                    <ion-text color="verdemud4" style="font-size: 15px !important;" text-wrap>Você estava acompanhado?</ion-text>
-                </ion-item>
+                    <ion-item lines="none" padding-horizontal>  
+                        <ion-label class="label" position="stacked" text-wrap>Você estava acompanhado?</ion-label>
+                    </ion-item>
                     <ion-radio-group>
                         <ion-item lines="none" padding-horizontal>
-                          <ion-label style="font-size: 15px !important;" >Sim</ion-label>
+                          <ion-label>Sim</ion-label>
                           <ion-radio (ionSelect)="porquem()" slot="start" value="biff"></ion-radio>
                         </ion-item>
                         <ion-item lines="none" padding-horizontal>
-                          <ion-label style="font-size: 15px !important;">Não</ion-label>
+                          <ion-label>Não</ion-label>
                           <ion-radio slot="start" (ionSelect)="porquem()" value="griff" checked></ion-radio>
                         </ion-item>
                     </ion-radio-group>
@@ -54,15 +53,15 @@
                           <ion-label id="padding-horizontal" position="stacked" text-wrap>Por quem?</ion-label>
                       </ion-item>
                       <ion-item lines="none" padding-horizontal>
-                        <ion-label style="font-size: 15px !important;">Amigo</ion-label>
+                        <ion-label>Amigo</ion-label>
                         <ion-checkbox slot="start"></ion-checkbox>
                       </ion-item>
                       <ion-item lines="none" padding-horizontal>
-                        <ion-label style="font-size: 15px !important;">Familiar</ion-label>
+                        <ion-label>Familiar</ion-label>
                         <ion-checkbox slot="start"></ion-checkbox>
                       </ion-item>
                       <ion-item lines="none" padding-horizontal>
-                        <ion-label style="font-size: 15px !important;">Desconhecido</ion-label>
+                        <ion-label>Desconhecido</ion-label>
                         <ion-checkbox slot="start"></ion-checkbox>
                       </ion-item>
                     </ion-list>
@@ -76,59 +75,60 @@
         <ion-card>
           <ion-card-content>
                   <ion-list>
-                    <ion-item  lines="none">
-                      <ion-text color="verdemud4" style="font-size: 15px !important;" text-wrap>Quais sintomas foram predominantes na crise?</ion-text>
-                    </ion-item>
                     <ion-item lines="none">
-                      <ion-label text-wrap style="font-size: 15px !important; padding-right: 0px !important;">Dificuldade para Respirar</ion-label>
-                      <ion-checkbox slot="start" value="80" style="padding-left: 0px !important;"></ion-checkbox>
+                        <ion-label id="padding-horizontal" position="stacked" text-wrap>Quais sintomas foram predominantes na crise?</ion-label>
+                        <br><br><br><br>
                     </ion-item>
-                    <ion-item lines="none">
-                      <ion-label text-wrap style="font-size: 15px !important;">Ritmo Cardíacao Acelerado / Taquicardia</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Dificuldade para Respirar</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Sensações de Asfixia</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Ritmo Cardíacao Acelerado / Taquicardia</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Sudorese</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Sensações de Asfixia</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Tremores/abalos</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Sudorese</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Naúsea/indisposição abdominal</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Tremores/abalos</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Dor/desconforto toráxico</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Naúsea/indisposição abdominal</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none">
-                      <ion-label text-wrap style="font-size: 15px !important;">Ondas de calor/frio</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Dor/desconforto toráxico</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Anestesia/formigamento</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Ondas de calor/frio</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Sensações de irrealidade</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Anestesia/formigamento</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Instabilidade/tontura/desmaio</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label>Sensações de irrealidade</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Medo de morrer</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Instabilidade/tontura/desmaio</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Medo de perder o controle/enlouquecer</ion-label>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Medo de morrer</ion-label>
+                      <ion-checkbox slot="start" value="80"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none" padding-horizontal>
+                      <ion-label text-wrap>Medo de perder o controle/enlouquecer</ion-label>
                       <ion-checkbox slot="start" value="80"></ion-checkbox>
                     </ion-item>
                   </ion-list>
