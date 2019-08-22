@@ -47,7 +47,9 @@ export class DetalhesSemanalPage implements OnInit {
     this.myId = this.array[0];
 
     if (this.myId == "Sono") { this.pegaSono(); }
-    if (this.myId == "Atividade") { this.pegaAtividade(); }
+    if (this.myId == "Atividade Física") {  this.pegaAtividade(); }
+    if (this.myId == "Lazer") {this.pegaLazer(); }
+    if (this.myId == "Alimentação") { this.pegaAlimentacao() }
 
 
   }
@@ -83,7 +85,7 @@ export class DetalhesSemanalPage implements OnInit {
   public async pegaAtividade() {
     this.bd.selectGenerico("SELECT * FROM atividade_fisica WHERE semana_id=" + this.semanaId + " ;").then(async (resposta) => {
       console.log("ATIVIDADE FISICA:", resposta)
-      this.sono = resposta[0];
+      this.atividade = resposta[0];
 
       // ARRUMAR OS t e f que vem do banco 
 
@@ -100,6 +102,36 @@ export class DetalhesSemanalPage implements OnInit {
     })
   }
 
+  public async pegaLazer(){
+    this.bd.selectGenerico("SELECT * FROM bem_estar WHERE semana_id=" + this.semanaId + " ;").then(async (resposta) => {
+      console.log("Bem-Estar:", resposta)
+      this.lazer = resposta[0];
+
+      // ARRUMAR OS t e f que vem do banco 
+
+      // t/s bem-estar
+      if (resposta[0].realizou == 't') {
+        this.lazer.realizou = true;
+      } else if (resposta[0].realizou == 'f') {
+        this.lazer.realizou = false;
+      }
+      this.existe = 0;
+    }).catch(async (resposta) => {
+      console.log(resposta);
+      this.existe = 2;
+    })
+  }
+
+  public async pegaAlimentacao(){
+    this.bd.selectGenerico("SELECT * FROM alimentacao WHERE semana_id=" + this.semanaId + " ;").then(async (resposta) => {
+      console.log("Alimentação:", resposta)
+      this.alimentacao = resposta[0];
+      this.existe = 0;
+    }).catch(async (resposta) => {
+      console.log(resposta);
+      this.existe = 2;
+    })
+  }
 
 
 

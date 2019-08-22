@@ -20,7 +20,7 @@
         <div>
           Início do Sono:
         </div>
-        <div>
+        <div slot="end">
           <strong> {{sono.hora_comeco}}hrs </strong>
         </div>
       </ion-item>
@@ -69,18 +69,132 @@
         <div>
           Fez atividade física:
         </div>
+        <div slot="end">
+          <strong *ngIf="atividade.realizou">Sim</strong>
+          <strong *ngIf="!atividade.realizou">Não</strong>
+
+        </div>
+      </ion-item>
+      <ion-item *ngIf="atividade.realizou">
         <div>
-          <strong>{{atividade.realizou}}</strong>
+          Tempo médio de treino:
+        </div>
+        <div slot="end">
+          <strong *ngIf="atividade.tempo==='0'">até 30min</strong>
+          <strong *ngIf="atividade.tempo==='200'">de 30min à 1h</strong>
+          <strong *ngIf="atividade.tempo==='400'">1h-2hrs</strong>
+          <strong *ngIf="atividade.tempo==='600'">2h-3hrs</strong>
+          <strong *ngIf="atividade.tempo==='800'">+ de 3hrs</strong>
         </div>
       </ion-item>
       <ion-item>
         <div>
-          Tempo médio de treino:
+          Intensidade da(s) atividade(s):
         </div>
-        <div>
-          <strong>{{atividade.tempo}}</strong>
+        <div slot="end">
+          <strong *ngIf="atividade.intensidade==='0'">Leve</strong>
+          <strong *ngIf="atividade.intensidade==='1'">Moderado</strong>
+          <strong *ngIf="atividade.intensidade==='2'">Alto</strong>
         </div>
       </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <!--Lazer-->
+  <ion-card *ngIf="lazer">
+    <ion-item>
+      <ion-icon name='{{icone}}' slot="start"></ion-icon>
+      <ion-label><strong>{{ myId }} </strong></ion-label>
+    </ion-item>
+    <ion-card-content>
+      <ion-item>
+        <div>
+          Fez alguma atividade de lazer:
+        </div>
+        <div slot="end">
+          <strong *ngIf="lazer.realizou">Sim</strong>
+          <strong *ngIf="!lazer.realizou">Não</strong>
+        </div>
+      </ion-item>
+      <ion-item *ngIf="lazer.realizou">
+        <div>
+          Quantidade de vezes:
+        </div>
+        <div slot="end">
+          <strong>{{lazer.vezes}}</strong>
+        </div>
+      </ion-item>
+      <ion-item *ngIf="lazer.realizou">
+        <div>
+          Esteve acompanhado:
+        </div>
+        <div slot="end">
+          <strong *ngIf="lazer.acompanhamento">Sim</strong>
+          <strong *ngIf="!lazer.acompanhamento">Não</strong>
+        </div>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <!--Alimentacao-->
+  <ion-card *ngIf="alimentacao">
+    <ion-item>
+      <ion-icon name='{{icone}}' slot="start"></ion-icon>
+      <ion-label><strong>{{ myId }} </strong></ion-label>
+    </ion-item>
+    <ion-card-content>
+        <ion-label><strong>Consumo Semanal de </strong></ion-label>
+
+        <ion-item>
+          <div>
+            Carboidratos:
+          </div>
+          <div slot="end">
+            <strong *ngIf="alimentacao.carboidratos==='0'">Pouco (1 a 2 dias)</strong>
+            <strong *ngIf="alimentacao.carboidratos==='1'">Médio (3 a 5 dias)</strong>
+            <strong *ngIf="alimentacao.carboidratos==='2'">Muito (6 a 7 dias)</strong>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div>
+            Proteinas:
+          </div>
+          <div slot="end">
+            <strong *ngIf="alimentacao.proteinas==='0'">Pouco (1 a 2 dias)</strong>
+            <strong *ngIf="alimentacao.proteinas==='1'">Médio (3 a 5 dias)</strong>
+            <strong *ngIf="alimentacao.proteinas==='2'">Muito (6 a 7 dias)</strong>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div>
+            Laticínios:
+          </div>
+          <div slot="end">
+            <strong *ngIf="alimentacao.laticinios==='0'">Pouco (1 a 2 dias)</strong>
+            <strong *ngIf="alimentacao.laticinios==='1'">Médio (3 a 5 dias)</strong>
+            <strong *ngIf="alimentacao.laticinios==='2'">Muito (6 a 7 dias)</strong>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div>
+            Verduras e Frutas:
+          </div>
+          <div slot="end">
+            <strong *ngIf="alimentacao.verd_frut==='0'">Pouco (1 a 2 dias)</strong>
+            <strong *ngIf="alimentacao.verd_frut==='1'">Médio (3 a 5 dias)</strong>
+            <strong *ngIf="alimentacao.verd_frut==='2'">Muito (6 a 7 dias)</strong>
+          </div>
+        </ion-item>
+
+      <ion-item>
+        <div>
+          Copos de água por dia:
+        </div>
+        <div slot="end">
+          <strong *ngIf="alimentacao.verd_frut==='0'">Menos de 5</strong>
+          <strong *ngIf="alimentacao.verd_frut==='1'">6 a 11</strong>
+          <strong *ngIf="alimentacao.verd_frut==='2'">Mais de 11</strong>
+        </div>
+      </ion-item>
+
     </ion-card-content>
   </ion-card>
   <!--CARDS DE LAZER, ATIV, ALIMENTACAO-->
@@ -99,10 +213,13 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="existe===1">
-    <ion-card-header>
-      <strong> Buscando Dados...</strong>
-    </ion-card-header>
-  </ion-card>
+  <div *ngIf="existe===1">
+    <ion-card>
+      <ion-card-content>
+        <strong>Carregando dados:</strong>
+        <ion-spinner name="crescent" slot="end"> </ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
 <!--opa so para teste dps-->
