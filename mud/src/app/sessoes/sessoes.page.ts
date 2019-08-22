@@ -30,10 +30,6 @@ export class SessoesPage implements OnInit {
   sessId: any;
   profName: any;
 
-  sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
   /**
    * altera a view de acordo com a existencia de sessao de um id
    * 
@@ -41,8 +37,7 @@ export class SessoesPage implements OnInit {
    */
   async updateSessoesView(id)
   {
-    await this.sleep(2000); //deixa o banco processar os dados k
-    let resp = await this.buscaSessao(id);
+    let resp: any = await this.buscaSessao(id);
     console.log(resp);
 
     if(resp === false){
@@ -50,6 +45,9 @@ export class SessoesPage implements OnInit {
     }
     else{
       this.hasSessao = true;
+      this.sessId = resp.id_sessao; 
+      this.profName = resp.nome; 
+      this.sessCreated = resp.created_at; 
     }
   }
 
@@ -59,7 +57,7 @@ export class SessoesPage implements OnInit {
 
     let sql = "UPDATE sessao SET " +
       "status = 2, " + 
-      "udeleted_at=now() " +
+      "deleted_at=now() " +
       "WHERE id_sessao = " + this.sessId + ";";
       
     this.bancoService.updateGenerico(sql)
@@ -77,10 +75,10 @@ export class SessoesPage implements OnInit {
       await alert.present();
 
       //arruma a view
-      await this.sleep(2000);
       this.updateSessoesView(this.id);
      })
     .catch(async(response)=>{
+        console.log(response)
         const alert = await this.alertController.create({
           header: 'Erro',
           message: 'Erro ao encerrar a sessao',
