@@ -1,16 +1,15 @@
 <ion-header>
-  <ion-toolbar color="verdeclaro">
-    <ion-title>
-      Tab Three
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar color="verdemud3">
+      <ion-icon (click)="Mural()" id="mural" name="clipboard"></ion-icon>
+      <ion-img id="sobre" src="../../assets/sobre.png"></ion-img>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content>
-  <ion-button (click)="Mural()" padding-horizontal color="verdemud2" id="mural">
+  <!--<ion-button  padding-horizontal color="verdemud2" id="mural">
     <ion-img src="\assets\aaa.png" id="iconPasta"></ion-img>
     <ion-label id="rs" >Mural</ion-label>   
-  </ion-button>
+  </ion-button>-->
 
   <ion-button class="modals1" id="bots" expand="block" (click)="showModal()"> Ansiedade</ion-button>
   <ion-button class="modals" id="bots" expand="block" (click)="showModal2()"> Mindfulness</ion-button>
