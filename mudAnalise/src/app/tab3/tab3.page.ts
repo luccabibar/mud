@@ -7,7 +7,8 @@ import { NavController, IonSlides, AlertController, IonInput } from '@ionic/angu
 import { from } from 'rxjs';
 import { async } from 'q';
 import { setFirstTemplatePass } from '@angular/core/src/render3/state';
-import { ActionSheetController } from '@ionic/angular';
+import { IonContent } from '@ionic/angular';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-tab3',
@@ -15,6 +16,10 @@ import { ActionSheetController } from '@ionic/angular';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+
+  @ViewChild(IonSlides) IonSlides: IonSlides;
+  @ViewChild(IonContent) content: IonContent;
+
   public murais = [
   ];
 
@@ -22,7 +27,9 @@ export class Tab3Page {
 
    ngOnInit() {
      this.addMural();
+     this.IonSlides.lockSwipes(true);
    }
+
    doRefresh(event) {
     this.addMural();
 
@@ -42,7 +49,10 @@ export class Tab3Page {
     private BancoService: BancoService,
     private AlertController: AlertController,
     private router: Router,
+<<<<<<< HEAD
     public actionSheetController: ActionSheetController
+=======
+>>>>>>> f324c330d8ad76d0cfed44b8ad76678cafad69c0
   ) {
     this.profissional = dadosService.getDados("user");
     this.user_sessao = this.dadosService.getDados("user_sessao");
@@ -223,16 +233,31 @@ public async alertaDeletar(mural){
 /**/ 
   async novanota()
   {
+<<<<<<< HEAD
+=======
+    this.IonSlides.lockSwipes(false);
+    this.IonSlides.slideNext();
+    this.IonSlides.lockSwipes(true);
+/*
+>>>>>>> f324c330d8ad76d0cfed44b8ad76678cafad69c0
     const alert = await this.AlertController.create({
       header: 'Nova mensagem',
       inputs: [
         {
+<<<<<<< HEAD
+=======
+          label: 'Título',
+>>>>>>> f324c330d8ad76d0cfed44b8ad76678cafad69c0
           name: 'name1',
           id: '1',
           type: 'text',
           placeholder: 'Insira o título'
         },
         {
+<<<<<<< HEAD
+=======
+          label: 'Texto',
+>>>>>>> f324c330d8ad76d0cfed44b8ad76678cafad69c0
           name: 'name2',
           type: 'text',
           id: '2',
@@ -249,8 +274,12 @@ public async alertaDeletar(mural){
           }
         }, {
           text: 'Enviar',
+<<<<<<< HEAD
           handler: () => {/*
             console.log('Confirm Ok');*/
+=======
+          handler: () => {
+>>>>>>> f324c330d8ad76d0cfed44b8ad76678cafad69c0
             this.inserirMural();
           }
         }
@@ -258,6 +287,12 @@ public async alertaDeletar(mural){
     });
 
     await alert.present();
+<<<<<<< HEAD
   }
  }
 
+=======
+  }*/
+ }
+}
+>>>>>>> f324c330d8ad76d0cfed44b8ad76678cafad69c0
