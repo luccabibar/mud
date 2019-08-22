@@ -166,7 +166,7 @@
                       <ion-item padding-horizontal lines="none">
                           <ion-label class="label" position="stacked" text-wrap>Quantos dias?</ion-label>
                             <ion-select placeholder="Selecionar quantidade" cancelText="Cancelar" id="lazer_vezes" okText="Selecionado" formControlName="qtdLazer">
-                                  <ion-select-option class="option" value="0" id="0">1 a 2 dias</ion-select-option>
+                                  <ion-select-option class="option" checked value="0" id="0">1 a 2 dias</ion-select-option>
                                   <ion-select-option class="option" value="1" id="1">3 a 5 dias</ion-select-option>
                                   <ion-select-option class="option" value="2" id="2">6 a 7 dias</ion-select-option>
                             </ion-select>
@@ -213,7 +213,8 @@
               </ion-item>
               <!-- minuteValues="00, 15, 30, 45" -->
              <ion-item padding-horizontal>
-                <ion-datetime pickerFormat="HH" displayFormat="HH" id="hrDormir" placeholder="Selecione um horário"  formControlName="horaDormir"></ion-datetime>
+               <ion-input id="hrDormir" type="number" Min=00 Max=24 placeholder="Selecione um horário" formControlName="horaDormir"></ion-input>
+                <!-- <ion-datetime pickerFormat="HH" displayFormat="HH" id="hrDormir" placeholder="Selecione um horário"  formControlName="horaDormir"></ion-datetime> -->
              </ion-item>
              
              <ion-item padding-horizontal lines="none">

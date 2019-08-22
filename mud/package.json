@@ -35,7 +35,7 @@
     "core-js": "^2.5.4",
     "es6-promise-plugin": "^4.2.2",
     "jquery": "^3.4.1",
-    "phonegap-plugin-barcodescanner": "^8.1.0",
+    "phonegap-plugin-barcodescanner": "8.1.0",
     "rxjs": "^6.5.2",
     "rxjs-compat": "^6.5.1",
     "zone.js": "~0.8.29"
@@ -84,9 +84,7 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "phonegap-plugin-barcodescanner": {
-        "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      },
+      "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-screen-orientation": {}
     },
     "platforms": [

@@ -55,9 +55,7 @@
       "id": "phonegap-plugin-barcodescanner@^8.1.0"
     },
     "is_top_level": true,
-    "variables": {
-      "ANDROID_SUPPORT_V4_VERSION": "27.+"
-    }
+    "variables": {}
   },
   "cordova-plugin-screen-orientation": {
     "source": {

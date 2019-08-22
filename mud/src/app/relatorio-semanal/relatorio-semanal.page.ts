@@ -280,6 +280,10 @@ export class RelatorioSemanalPage implements OnInit {
       fez_lazer = true;
     }
     let vezes_Lazer = (<HTMLInputElement>document.getElementById("lazer_vezes")).value;
+    if(!vezes_Lazer)
+    {
+      vezes_Lazer="0";
+    }
     let acomp_lazer_sim = (<HTMLInputElement>document.getElementById("lazer_sim")).checked;
     let acomp_lazer = false;
     if(acomp_lazer_sim)
@@ -306,8 +310,15 @@ export class RelatorioSemanalPage implements OnInit {
 
     //comentários
     let coment_lazer = (<HTMLInputElement>document.getElementById("comentLazerInput")).value;
+    if(!coment_lazer)
+    {
+        coment_lazer="null";
+    }
     let coment_final = (<HTMLInputElement>document.getElementById("comentFinalInput")).value;
-
+    if(!coment_final)
+    {
+        coment_final="null";
+    }
 
 
     const alert = await this.AlertController.create({
