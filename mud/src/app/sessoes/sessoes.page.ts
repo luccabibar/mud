@@ -53,14 +53,14 @@ export class SessoesPage implements OnInit {
     }
   }
 
-  removeSessao(idSess)
+  removeSessao()
   {
     //alerta de confirmacao vc deseja mesmo apagar pipipipopopo
 
     let sql = "UPDATE sessao SET " +
       "status = 2, " + 
       "udeleted_at=now() " +
-      "WHERE id_sessao = " + idSess + ";";
+      "WHERE id_sessao = " + this.sessId + ";";
       
     this.bancoService.updateGenerico(sql)
     .then(async(response)=>{
