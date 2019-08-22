@@ -17,27 +17,18 @@
           refreshingText="Refreshing...">
         </ion-refresher-content>
       </ion-refresher>
-    <!-- CARDS INSERIR -->
-    <ion-item>
-        <ion-label position="stacked" text-wrap>Notas</ion-label>
-        <ion-input disabled></ion-input>
-        <ion-item>
-          <ion-label position="stacked">Título <ion-text color="danger"></ion-text>
-          </ion-label>
-          <ion-input required type="text" maxLength="44" id="1" name="inserirtitulo"></ion-input>
-          <ion-label position="stacked" text-wrap>Corpo da mensagem <ion-text color="danger"></ion-text>
-          <ion-input disabled></ion-input>
-          </ion-label>
-        </ion-item>
-        <ion-textarea id="2" name="inserirtxt" maxLength="120"></ion-textarea>
-        <ion-button (click)="inserirMural()" size="small">Adicionar</ion-button>
+    
+<ion-slides>
+  <ion-slide id="slido1">
+      <ion-item color="secondary" lines="none">
+        <ion-text> Notas </ion-text>
+        <ion-icon icon="add" slot="end" (click)="novanota()"></ion-icon>
       </ion-item>
-<!--Cards mostrar-->
-
+      <!--Cards mostrar-->
           <ion-list lines="none">
             <ion-item-sliding *ngFor="let mural of murais" id="11">
               <ion-item tappable routerLink="/tabs">
-                <ion-card name="ion-card">
+                <ion-card name="ion-card" id="cardoo">
                   <ion-card-header>
                     <ion-card-title>{{mural.titulo}}</ion-card-title>
                     <ion-label id="3">
@@ -57,4 +48,24 @@
                 </ion-item-options>
               </ion-item-sliding>
             </ion-list>
+  </ion-slide>
+  <ion-slide id="slido2">
+    <!-- CARDS INSERIR-->
+    <ion-card>
+        <ion-label position="stacked" text-wrap>Notas</ion-label>
+        <ion-input disabled></ion-input>
+        <ion-item>
+          <ion-label position="stacked">Título <ion-text color="danger"></ion-text>
+          </ion-label>
+          <ion-input required type="text" maxLength="44" id="1" name="inserirtitulo"></ion-input>
+          <ion-label position="stacked" text-wrap>Corpo da mensagem <ion-text color="danger"></ion-text>
+          <ion-input disabled></ion-input>
+          </ion-label>
+        </ion-item>
+        <ion-textarea id="2" name="inserirtxt" maxLength="120"></ion-textarea>
+        <ion-button (click)="inserirMural()" size="small">Adicionar</ion-button>
+      </ion-card>
+  </ion-slide>
+</ion-slides>
+      
 </ion-content>
