@@ -33,7 +33,7 @@
        
             <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Data de Nascimento</ion-label>
-               <ion-datetime backdropDismiss name="datanasc" id="16" formControlName="datanasc" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" [class.invalid]="!slideOneForm.controls.datanasc.valid && (slideOneForm.controls.datanasc.dirty || submitAttempt)"></ion-datetime>
+               <ion-datetime backdropDismiss name="datanasc" id="21" formControlName="datanasc" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY" [class.invalid]="!slideOneForm.controls.datanasc.valid && (slideOneForm.controls.datanasc.dirty || submitAttempt)"></ion-datetime>
              </ion-item>
        
              <ion-item padding-horizontal *ngIf="!slideOneForm.controls.datanasc.valid  && (slideOneForm.controls.datanasc.dirty || submitAttempt1)">
