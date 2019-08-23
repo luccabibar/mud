@@ -49,7 +49,8 @@ export class SessoesPage implements OnInit {
       this.hasSessao = true;
       this.sessId = resp.id_sessao; 
       this.profName = resp.nome; 
-      this.sessCreated = resp.created_at; 
+      this.sessCreated = (resp.created_at).split(" ")[0];
+      this.sessCreated = this.sessCreated.split("-")[2] + "/" + this.sessCreated.split("-")[1] + "/" + this.sessCreated.split("-")[0];
     }
   }
 

@@ -1,24 +1,49 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>sessoes</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar color=verdemud3>
+        <ion-icon (click)="goBack()" class="back-arrow" slot="start" name="arrow-round-back"></ion-icon>
+        <ion-title>Sessao</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content padding>
+<ion-content>
 
     <div *ngIf="hasSessao; else newSessao">
+      <div padding>
+        <h3><strong>Sessão ativa:</strong></h3>
+      </div>
       <!--gerenciar sessao existente-->
-      <div id="sessao">
-        <h1>dr(a). {{profName}}</h1>
-        <p>criada em {{sessCreated}}</p>
-        <ion-button (click)="removeSessao()">terminar esta sessao</ion-button>
+      <div color="verdemud3" class="sessao-wrap">
+        <ion-item-sliding class="sessao-slider">
+          <ion-item class="slider" color="aqua">
+            <ion-avatar slot="start">
+              <img src="assets/perfil_generico.png">
+            </ion-avatar>
+            <div>
+              <ion-label><strong>dr(a). {{profName}}</strong></ion-label>
+              <ion-label>
+                <small>criada em</small> {{sessCreated}}
+              </ion-label>
+            </div>
+          </ion-item>
+          <!-- slide pra direita -->
+          <ion-item-options side="end">
+            <ion-item-option color="danger" (click)="removeSessao()">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
       </div>
     </div>
 
     <ng-template #newSessao>
       <!--iniciar nova sessao-->
-      <ion-button (click)="startSessao()">Iniciar nova sessao</ion-button>
+      <div padding>
+        <ion-button (click)="onClick()" style="font-size: 105%" expand="block">
+          <ion-icon slot="start" name="camera"></ion-icon>
+          Iniciar nova sessao
+        </ion-button>
+      </div>
+      <!-- TODO: adicionar texto explicando como funciona sesssao pipipipopopo -->
     </ng-template>
-
-    <ion-button (click)="goBack()"> voltar </ion-button>
+    
 </ion-content>
