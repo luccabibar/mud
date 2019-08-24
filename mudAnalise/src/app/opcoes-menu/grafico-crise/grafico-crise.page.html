@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-header>
       Gráfico de Crise I
     </ion-card-header>
@@ -22,8 +22,15 @@
         </ion-card-header>
     <img src="assets/imagensGraficos/g2.PNG" alt="">
 
-  </ion-card>
+  </ion-card> -->
 
+  <ion-card>
+    <div class="ion-padding">
+      <ngx-charts-bar-vertical [view]="view" [results]="data" xAxis="true" yAxis="true" legend="false"
+        legendTitle="Meses" showXAxisLabel="true" showYAxisLabel="true" xAxisLabel="Meses" yAxisLabel="Crises por Mês">
+      </ngx-charts-bar-vertical>
+    </div>
+  </ion-card>
 
 
 </ion-content>
