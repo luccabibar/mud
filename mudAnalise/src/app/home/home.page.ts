@@ -112,7 +112,7 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  async alertaDeletar() {
+  async alertaDeletar(idSessao) {
     const alert = await this.AlertController.create({
       header: 'Apagar Resgistro',
       message: 'Deseja realmente apagar todos os dados deste <strong>paciente</strong>?',
@@ -122,11 +122,11 @@ export class HomePage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Sim',
           handler: () => {
+            this.apagarSessao(idSessao);
 
             this.deletadoSucesso();
           }
@@ -137,6 +137,14 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
+
+  public apagarSessao(idSessao) {
+    let sql = "UPDATE sessao SET  status = 0, deleted_at=NOW() WHERE id_sessao="+idSessao+";";
+    this.bd.updateGenerico(sql).then(async resposta => {
+      console.log(resposta);
+    });
+    this.carregaSessoes();
+  }
 }
 
 
