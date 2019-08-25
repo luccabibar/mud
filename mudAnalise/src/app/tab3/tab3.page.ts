@@ -49,7 +49,6 @@ export class Tab3Page {
     private BancoService: BancoService,
     private AlertController: AlertController,
     private router: Router,
-    /*public actionSheetController: ActionSheetController*/
   ) {
     this.profissional = dadosService.getDados("user");
     this.user_sessao = this.dadosService.getDados("user_sessao");
@@ -92,8 +91,13 @@ export class Tab3Page {
       await alert.present();
     })
   }
+
   public addMural()
   {
+    document.getElementById("divo1").style.display='unset';
+    document.getElementById("divo2").style.display='none';
+
+    let dato = "";
     let id=this.dadosService.getId();
     this.BancoService.selecionarMuralProf(this.user_sessao.id_usuario,this.profissional.id_usuario).then(async(response)=>{
       const alert = await this.AlertController.create({
@@ -104,6 +108,10 @@ export class Tab3Page {
       });
       let a=0;
       let n=0;
+      let j=0;
+      let y=0;
+      let corzita = "";
+      
 
       do
       {
@@ -114,39 +122,37 @@ export class Tab3Page {
 
       do
       {
+        dato = response[a]['created_at'];
+        dato = dato.substr(8,2) + "/" + dato.substr(5,2) + "/" + dato.substr(0,4);
         this.murais.push(response[a]);
+        this.murais[a].created_at = dato;
         a++;
+        dato ="";
       }while(response[a]!=null);
 
-      let j=0;
-      let y =0;
-      let colorControl=0;
-      let corzita = "";
+     
       do{  
           switch(j){
           case 0:
-            corzita = "#FFE4E1";
+            corzita = "#FFCCBC";
             break;
           case 1:
-              corzita = "#FFE4E1";
+              corzita = "#FFF9C4";
             break;
           case 2:
-              corzita = "#FFE4E1";
+              corzita = "#DCEDC8";
             break;
           case 3:
-              corzita = "#FFE4E1";
-            j = 0;
+              corzita = "#B3E5FC";
+            j = -1;
             break;
           }
           
-        document.getElementsByTagName("ion-card")[y].style.backgroundColor = corzita; 
-        
-        
+        await alert.present();
+        document.getElementsByName("ion-card")[y].style.backgroundColor = corzita;
         j++;
         y++;
       }while(this.murais[y]!= null)
-
-      await alert.present();
     }
   )
   .catch(async(response)=>{
@@ -162,6 +168,8 @@ export class Tab3Page {
   })
 
  }
+
+
  findContatoIndex(id) {
   for (let i=0; i < this.murais.length; i++) {
     if(this.murais[i].id_mural == id) {
@@ -199,6 +207,7 @@ public async alertaDeletar(mural){
 
 
   async inserirMural() {
+
     let titulo = (<HTMLInputElement>document.getElementById("1")).value;
     let texto = (<HTMLInputElement>document.getElementById("2")).value;
 
@@ -226,6 +235,11 @@ public async alertaDeletar(mural){
         await alert.present();
       })
 
+    document.getElementById("1").innerHTML = "";
+    document.getElementById("2").innerHTML = "";
+    this.IonSlides.lockSwipes(false);
+    this.IonSlides.slidePrev();
+    this.IonSlides.lockSwipes(true);
   }
 /**/ 
   async novanota()
@@ -233,43 +247,17 @@ public async alertaDeletar(mural){
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slideNext();
     this.IonSlides.lockSwipes(true);
-/*
-    const alert = await this.AlertController.create({
-      header: 'Nova mensagem',
-      inputs: [
-        {
-          label: 'Título',
-          name: 'name1',
-          id: '1',
-          type: 'text',
-          placeholder: 'Insira o título'
-        },
-        {
-          label: 'Texto',
-          name: 'name2',
-          type: 'text',
-          id: '2',
-          value: '',
-          placeholder: 'Insira o texto...'
-        }],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Enviar',
-          handler: () => {
-            this.inserirMural();
-          }
-        }
-      ]
-    });
 
-    await alert.present();
-  }*/
+    document.getElementById("divo1").style.display='none';
+    document.getElementById("divo2").style.display='unset';
+ }
+
+ voltanovanota()
+ {
+  this.IonSlides.lockSwipes(false);
+  this.IonSlides.slidePrev();
+  this.IonSlides.lockSwipes(true);
+
+  this.addMural();
  }
 }
