@@ -31,6 +31,9 @@ export class SessoesPage implements OnInit {
   sessCreated: any;
   sessId: any;
   profName: any;
+  profEmail: any;
+  profCelular: any;
+  profCRP: any;
 
   /**
    * altera a view de acordo com a existencia de sessao de um id
@@ -48,59 +51,81 @@ export class SessoesPage implements OnInit {
     else{
       this.hasSessao = true;
       this.sessId = resp.id_sessao; 
-      this.profName = resp.nome; 
+      this.profName = resp.nome;
+      this.profCRP = resp.crp;
+      this.profCelular = resp.celular;
+      this.profEmail = resp.email;
       this.sessCreated = resp.created_at; 
     }
   }
 
   goBack()
   {
-    this.router.navigate(["perfil-user"]);
+    this.router.navigateByUrl('/tabs/perfil-user');
   }
 
   /**
    * termina uma sessao entre usuario e profissional. disponivel para chamada apens se um usuario tem uma sessao ativa
    */
-  removeSessao()
+  async removeSessao()
   {
-    //alerta de confirmacao vc deseja mesmo apagar pipipipopopo
-
-    let sql = "UPDATE sessao SET " +
-      "status = 2, " + 
-      "deleted_at=now() " +
-      "WHERE id_sessao = " + this.sessId + ";";
-      
-    this.bancoService.updateGenerico(sql)
-    .then(async(response)=>{
-      const alert = await this.alertController.create({
-        header: 'Sucesso!',
-        message: 'Sessão finalizada com sucesso!',
-        buttons:  [
-          {
-            text: 'OK',
+    const alert = await this.alertController.create({
+      header: "Confirmar Encerramento",
+      message: "Deseja mesmo encerrar esta sessão?",
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
           }
-        ],
-      });
-
+        },
+        {
+          text: 'Sim',
+          handler: data => {
+            let sql = "UPDATE sessao SET " +
+            "status = 2, " + 
+            "deleted_at=now() " +
+            "WHERE id_sessao = " + this.sessId + ";";
+            
+          this.bancoService.updateGenerico(sql)
+          .then(async(response)=>{
+            const alert = await this.alertController.create({
+              header: 'Sucesso!',
+              message: 'Sessão finalizada com sucesso!',
+              buttons:  [
+                {
+                  text: 'OK',
+                }
+              ],
+            });
+      
+            await alert.present();
+      
+            //arruma a view
+            this.updateSessoesView(this.id);
+           })
+          .catch(async(response)=>{
+              console.log(response)
+              const alert = await this.alertController.create({
+                header: 'Erro',
+                message: 'Erro ao encerrar a sessao',
+                buttons:  [
+                  {
+                    text: 'OK',
+                  }
+                ],
+              });
+      
+            await alert.present();
+          })
+          }
+        }
+      ]
+    });
+      
       await alert.present();
-
-      //arruma a view
-      this.updateSessoesView(this.id);
-     })
-    .catch(async(response)=>{
-        console.log(response)
-        const alert = await this.alertController.create({
-          header: 'Erro',
-          message: 'Erro ao encerrar a sessao',
-          buttons:  [
-            {
-              text: 'OK',
-            }
-          ],
-        });
-
-      await alert.present();
-    })
+    //alerta de confirmacao vc deseja mesmo apagar pipipipopopo
   }
 
   /**
@@ -157,7 +182,7 @@ export class SessoesPage implements OnInit {
   buscaSessao(id)
   {
     return new Promise((resolve, reject) => {
-      let sql = "SELECT nome, s.created_at, id_sessao FROM sessao AS s " +
+      let sql = "SELECT nome,celular,email,crp, s.created_at, id_sessao FROM sessao AS s " +
         "INNER JOIN usuario AS u ON u.id_usuario = s.profissional_id " + 
         "WHERE usuario_id = " + id + " AND status = 1;";
         

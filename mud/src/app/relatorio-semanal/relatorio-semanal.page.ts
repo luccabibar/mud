@@ -243,6 +243,7 @@ export class RelatorioSemanalPage implements OnInit {
 
   async salva()
   {
+    let horario_dorm="";
     //alimentação
     let carboidratos = (<HTMLInputElement>document.getElementById("carb")).value;
     let proteinas = (<HTMLInputElement>document.getElementById("prot")).value;
@@ -293,7 +294,10 @@ export class RelatorioSemanalPage implements OnInit {
     
 
     //Sono
-    let horario_dorm = (<HTMLInputElement>document.getElementById("hrDormir")).value;
+    let horario_dorm1 = (<HTMLInputElement>document.getElementById("hrDormir")).value;
+    horario_dorm=horario_dorm1;
+    horario_dorm=horario_dorm.substr(11,2);
+
     let despertou_sim = (<HTMLInputElement>document.getElementById("sono_sim")).checked;
     let despertou = false;
     if(despertou_sim)
@@ -321,28 +325,37 @@ export class RelatorioSemanalPage implements OnInit {
     }
 
 
-    const alert = await this.AlertController.create({
-      header: 'Erro',
-      message: carboidratos+"<br>"+proteinas+"<br>"+lacticinios+"<br>"+verdfrut+"<br>"+agua+"<br>"+
-      fez_atv+"<br>"+duracao_atv+"<br>"+intensidade_atv+
-      "<br>"+fez_lazer+"<br>"+vezes_Lazer+"<br>"+acomp_lazer+"<br>"+
-      horario_dorm+"<br>"+despertou+"<br>"+vezes_sono+"<br>"+acordou_precoce+
-      "<br>"+coment_lazer+"<br>"+coment_final,
-      buttons: ['OK']
-    });
+    // const alert = await this.AlertController.create({
+    //   header: 'Erro',
+    //   message: carboidratos+"<br>"+proteinas+"<br>"+lacticinios+"<br>"+verdfrut+"<br>"+agua+"<br>"+
+    //   fez_atv+"<br>"+duracao_atv+"<br>"+intensidade_atv+
+    //   "<br>"+fez_lazer+"<br>"+vezes_Lazer+"<br>"+acomp_lazer+"<br>"+
+    //   horario_dorm+"<br>"+despertou+"<br>"+vezes_sono+"<br>"+acordou_precoce+
+    //   "<br>"+coment_lazer+"<br>"+coment_final,
+    //   buttons: ['OK']
+    // });
     
-    await alert.present();
-
+    //await alert.present();
     
-    this.BD.enviarRelatorioSemanal(this.dadosService.getId().toString(),coment_final,this.dadosService.getData_relatorioS_I(),this.dadosService.getData_relatorioS_F(),carboidratos,proteinas,lacticinios,verdfrut,agua,fez_atv.toString(),duracao_atv,intensidade_atv.toString(),fez_lazer.toString(),coment_lazer,vezes_Lazer,acomp_lazer.toString(),horario_dorm,despertou.toString(),vezes_sono,acordou_precoce.toString())
+    this.BD.enviarRelatorioSemanal(this.dadosService.getId().toString(),coment_final,this.dadosService.getData_relatorioS_I(),this.dadosService.getData_relatorioS_F(),carboidratos,proteinas,lacticinios,verdfrut,agua,fez_atv.toString(),duracao_atv,intensidade_atv.toString(),fez_lazer.toString(),coment_lazer,vezes_Lazer,acomp_lazer.toString(),parseInt(horario_dorm,10),despertou.toString(),vezes_sono,acordou_precoce.toString())
     .then(async(response)=>{
         const alert = await this.AlertController.create({
-          header: 'Confirmação',
-          subHeader: 'Sucesso!',
+          header: 'Relátorio enviado',
+          subHeader: 'Novo relátorio enviado',
           message: JSON.stringify(response[0].id_usuario),
-          buttons: ['OK']
+          buttons: [
+            {
+              text: "OK",
+              role: "ok",
+              handler: data => {
+                this.navCtrl.navigateForward('/tabs/tab2');
+                // this.router.navigateByUrl('/tabs/tabs2');
+              }
+            },
+        ]
         });
-        await alert.present();
+         await alert.present();
+        
       }
     )
     .catch(async(response)=>{
