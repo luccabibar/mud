@@ -12,7 +12,7 @@
 <ion-content>
   <ion-item tappable routerLink="/cadastro">
     <ion-avatar slot="start">
-      <img src="assets/logoMudAnalise.png">
+      <img src="assets/perfil_psi.png">
     </ion-avatar>
     <ion-label>
       <h2 *ngIf="profissional">
@@ -21,9 +21,6 @@
       <p *ngIf="profissional"> <small>CRP: </small> {{profissional.crp}}</p>
     </ion-label>
     <ion-buttons slot="end">
-      <ion-button routerLink="/cadastro">
-        <ion-icon slot="icon-only" name="contact"></ion-icon>
-      </ion-button>
       <!-- <ion-button class="tamanho" routerLink="/alterar-senha">
         <ion-icon name="key"></ion-icon>
         <ion-icon name="lock"></ion-icon>
@@ -31,9 +28,9 @@
     </ion-buttons>
   </ion-item>
 
-  <ion-card color="claro">
-    <ion-item color="claro">
-      <ion-label color="branco"><strong>Nova Sessão / Pareamento</strong> </ion-label>
+  <ion-card color="escuro">
+    <ion-item color="escuro">
+      <ion-label color="branco" text-wrap>Nova Sessão / Pareamento</ion-label>
       <!-- <ion-button fill="outline" slot="end" shape="round" color="branco" (click)="addSessao()"> -->
       <ion-button fill="outline" slot="end" shape="round" color="branco" routerLink="/auth">
         <ion-icon slot="icon-only" name="add"></ion-icon>
@@ -50,7 +47,7 @@
       <ion-item-sliding *ngFor="let sessao of sessoes">
         <ion-item tappable  (click)="abreSessao(sessao)">
           <ion-avatar slot="start">
-            <img src="assets/perfil_generico.png">
+            <img src="assets/perfil_generico2.png">
           </ion-avatar>
           <div>
             <ion-label><strong>{{sessao.nome}}</strong></ion-label>
