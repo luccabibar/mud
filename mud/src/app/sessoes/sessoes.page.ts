@@ -4,6 +4,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { BancoService } from "../banco.service";
 import { DadosService } from "../dados.service";
 
+import { Router } from '@angular/router';
+
 import { AlertController } from '@ionic/angular';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { validateConfig } from '@angular/router/src/config';
@@ -16,7 +18,7 @@ import { alertController } from '@ionic/core';
 })
 export class SessoesPage implements OnInit {
 
-  constructor(private bancoService: BancoService,private dadosService: DadosService,private barcodeScanner: BarcodeScanner, private alertController: AlertController) 
+  constructor(private bancoService: BancoService,private dadosService: DadosService,private barcodeScanner: BarcodeScanner, private alertController: AlertController, private router: Router) 
   {
     this.id = this.dadosService.getId();
     console.log(this.dadosService.getId());
@@ -51,6 +53,14 @@ export class SessoesPage implements OnInit {
     }
   }
 
+  goBack()
+  {
+    this.router.navigate(["perfil-user"]);
+  }
+
+  /**
+   * termina uma sessao entre usuario e profissional. disponivel para chamada apens se um usuario tem uma sessao ativa
+   */
   removeSessao()
   {
     //alerta de confirmacao vc deseja mesmo apagar pipipipopopo

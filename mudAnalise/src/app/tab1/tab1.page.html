@@ -36,34 +36,45 @@
     </ion-item>
   </ion-card>
   <ion-list lines="none">
-    <ion-list-header>
+    <!-- <ion-list-header>
       <ion-label>Recursos</ion-label>
-    </ion-list-header>
+    </ion-list-header> -->
+
+    <ion-card>
+      <ion-item tappable routerLink="/grafico-crise">
+        <ion-icon slot="start" color="big" name="pulse"></ion-icon>
+        <ion-label>Gráfico de crise</ion-label>
+        <ion-buttons slot="end">
+          <ion-button routerLink="/grafico-crise">
+            <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-card>
+
     <ion-card>
       <ion-card-header>
-        <ion-item tappable routerLink="/grafico-semanal">
+        <ion-item lines="full">
           <ion-icon slot="start" color="big" name="calendar"></ion-icon>
-          <ion-label>Histórico de Relatório Semanal</ion-label>
+          <ion-label>Histórico de Crises</ion-label>
         </ion-item>
       </ion-card-header>
-      <ion-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut iste qui optio nam ullam rem ex. Tempore fuga
-        repudiandae sequi similique praesentium! Dignissimos aut quaerat suscipit ad voluptatibus maxime nesciunt?
-      </ion-card-content>
+      <ion-item tappable routerLink="/detalhes-crise" *ngFor="let c of crises" [attr.track]="c.tipo | lowercase"
+        lines="full">
+        <ion-label>
+          <div>
+            <h2>{{c.data}} - <strong>{{c.tipo}}</strong></h2>
+            <p>Durou XX minutos</p>
+          </div>
+        </ion-label>
+        <ion-buttons slot="end">
+          <ion-button routerLink="/detalhes-crise">
+            <ion-icon slot="icon-only" name="arrow-dropright"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
     </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-item tappable routerLink="/grafico-crise">
-          <ion-icon slot="start" color="big" name="pulse"></ion-icon>
-          <ion-label>Histórico de Relatório de Crise</ion-label>
-        </ion-item>
-      </ion-card-header>
-      <ion-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio eaque voluptatibus veniam, quod iste
-        repellat numquam ipsam deleniti! Minus error amet dicta aspernatur repellendus voluptates omnis impedit quis
-        alias.
-      </ion-card-content>
-    </ion-card>
+
 
   </ion-list>
 </ion-content>

@@ -45,7 +45,7 @@
   <ion-card>
     <ion-list>
       <ion-item-sliding *ngFor="let sessao of sessoes">
-        <ion-item tappable (click)="abreSessao(sessao)">
+        <ion-item tappable  (click)="abreSessao(sessao)">
           <ion-avatar slot="start">
             <img src="assets/perfil_generico.png">
           </ion-avatar>
@@ -57,7 +57,7 @@
           </div>
         </ion-item>
         <ion-item-options side="end">
-          <ion-item-option color="danger" (click)="alertaDeletar()">
+          <ion-item-option color="danger" (click)='alertaDeletar(sessao.id_sessao)'>
             <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-item-option>
         </ion-item-options>

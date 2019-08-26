@@ -15,6 +15,15 @@ export class Tab1Page {
   public user_sessao;
   public profissional;
 
+  public crises = [
+    {data: "25/08/2019", tipo: "leve"},
+    {data: "29/08/2019", tipo: "moderado"},
+    {data: "19/07/2019", tipo: "forte"},
+    {data: "06/09/2019", tipo: "extremo"},
+
+
+  ]
+
   constructor(
     private alertController: AlertController,
     private callNumber: CallNumber,
