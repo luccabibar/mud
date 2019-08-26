@@ -121,3 +121,42 @@
   --ion-color-shade: #000000;
   --ion-color-tint: #1a1a1a;
 }
+
+@font-face {
+  font-family: 'Hero-Regular';
+  src: url('../assets/fonts/Hero-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hero-Bold';
+  src: url('../assets/fonts/Hero-Bold.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hero-Light';
+  src: url('../assets/fonts/Hero-Light.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'Hero-Bold';
+  font-style: normal;
+}
+
+ion-label{
+  font-family: 'Hero-Bold' !important;
+  font-size: 1.2em !important;
+  }
+
+ion-input{
+  font-family: 'Hero-Regular' !important;
+}
+
+ion-button{
+  --border-width: 0.13em !important;
+}

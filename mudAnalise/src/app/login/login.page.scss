@@ -1,0 +1,55 @@
+#logoLogin 
+{
+    height: 15%;
+    margin: 0;
+    position: fixed;
+    top: 17%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%); 
+}
+
+#btnEntrar
+{
+    width: 80%;
+    position: fixed;
+    top: 75%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translateX(-50%) 
+}
+
+#esqSenha
+{
+    width: 40%;
+    margin: 0;
+    position: fixed;
+    top: 63%;
+    font-size: 85%;
+    left: 58%;
+    color: #4A74D9;
+}
+
+#hrefCadast
+{
+    color:#4A74D9;
+    width: 85%;
+    margin: 0;
+    position: fixed;
+    top: 92%;
+    font-size: 80%;
+}
+
+#email 
+{
+    top: 33%;
+    width: 100%;
+    position: fixed;
+}
+
+#senha
+{
+    width: 100%;
+    top: 46%;
+    position: fixed;
+}
