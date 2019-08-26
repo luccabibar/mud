@@ -18,7 +18,7 @@ export class Tab3Page {
   
   async Mural()
   {
-    this.router.navigateByUrl("/mural");
+    this.nav.navigateBack('mural');
   }
 
 

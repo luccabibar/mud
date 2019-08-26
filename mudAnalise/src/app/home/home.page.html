@@ -44,6 +44,9 @@
 
   <ion-card>
     <ion-list>
+      <div *ngIf="noSess == true" padding style="text-align: center;">
+        nenhuma sessão ativa no momento
+      </div>
       <ion-item-sliding *ngFor="let sessao of sessoes">
         <ion-item tappable  (click)="abreSessao(sessao)">
           <ion-avatar slot="start">
