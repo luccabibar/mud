@@ -28,10 +28,15 @@ export class FichaPacientePage implements OnInit {
    * @param id o id a procurar
    */
   getDadoInicial(id){
-    let sql = "select sintoma_id, priemira_crise, situacao_sintoma, intolerancia from dado_inicial " +
-      "join sintoma on dado_inicial.sintoma_id = sintoma.nome " + 
-      "where usuario_id = " + id;
-    console.log(sql);
+    //eu JURO que nao copiei esse sql do stackoverflow (nao integralmente, mas nao vem ao caso)
+    let sql = "SELECT d.primeira_crise, d.situacao_sintoma, d.intolerancia, array_agg(s.nome)" +
+      "JOIN sintoma s " +
+      "FROM dado_inicial d " +
+      "ON s.id_sintoma = ANY(d.sintoma_id)" +
+      "WHERE d.usuario_id = " + id + " " +
+      "GROUP BY d.primeira_crise, d.situacao_sintoma, d.intolerancia, s.nome";
+
+    
   }
 
   constructor(
