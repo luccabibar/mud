@@ -8,16 +8,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetalhesCrisePage implements OnInit {
 
- 
-  criseId
-  constructor(private activatedRoute: ActivatedRoute) { }
+
+  criseId = null;
+  tipo=null;
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.criseId = params["criseId"];
+      this.tipo = params["tipo"];
+
+    });
+    console.log("OLAAA",this.criseId)
+  }
 
   ngOnInit() {
-    this.criseId = this.activatedRoute.snapshot.paramMap.get('criseId');
+    // this.criseId = this.activatedRoute.snapshot.paramMap.get('criseId');
   }
 
-  public ionViewDidEnter() {
-    this.criseId = this.activatedRoute.snapshot.paramMap.get('criseId');
-
-  }
+  // public ionViewDidEnter() {
+  //   this.criseId = this.activatedRoute.snapshot.paramMap.get('criseId');
+  //   console.log(this.criseId);
+  // }
 }

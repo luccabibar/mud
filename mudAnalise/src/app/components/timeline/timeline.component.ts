@@ -3,7 +3,7 @@ import { ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import {  Platform, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+ 
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',

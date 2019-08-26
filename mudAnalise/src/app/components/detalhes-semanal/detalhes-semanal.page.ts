@@ -51,7 +51,7 @@ export class DetalhesSemanalPage implements OnInit {
     if (this.myId == "Lazer") {this.pegaLazer(); }
     if (this.myId == "Alimentação") { this.pegaAlimentacao() }
 
-
+ 
   }
   //  TODO --> conectar com o banco e puxar detalhe semanal onde semana Id = x && 
   // id usuario =x && id_prof = x
