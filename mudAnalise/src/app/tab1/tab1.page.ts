@@ -5,7 +5,8 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import * as moment from 'moment';
-
+import { NavController } from '@ionic/angular';
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -31,17 +32,31 @@ export class Tab1Page {
 
   ]
 
+
   constructor(
     private alertController: AlertController,
     private callNumber: CallNumber,
     private router: Router,
     private ds: DadosService,
-    private bd: BancoService
+    private bd: BancoService,
+    public navCtrl: NavController
   ) {
     this.user_sessao = this.ds.getDados("user_sessao");
     this.profissional = this.ds.getDados("user");
-   // this.carregarCrises();
+    // this.carregarCrises();
   }
+
+  // PARAMS
+  criseId;
+  tipo;
+  public NavigationExtras = {
+    queryParams: {
+      criseId: this.criseId,
+      tipo: this.tipo
+    }
+  };
+
+
 
   ionViewDidEnter() {
     this.profissional = this.ds.getDados("user");
@@ -61,10 +76,15 @@ export class Tab1Page {
     this.router.navigateByUrl('/opcoes-menu/ficha-usuario')
   }
 
-  async onClick(criseId){
-    this.router.navigateByUrl('/detalhes-crise/'+criseId);
-    console.log(criseId);
+  async onClick(criseId, tipo) {
+    // this.router.navigateByUrl('/detalhes-crise/'+criseId);
+    this.criseId = criseId;
+    this.tipo = tipo;
+    this.navCtrl.navigateForward(['/detalhes-crise/'], this.NavigationExtras);
+
   }
+
+
 
 
   //#region aqui vou puxar as crises do banco
@@ -79,7 +99,7 @@ export class Tab1Page {
               "name": "Sono",
               "CriseId": cri.id_crise,
             },
-           
+
           ]
         }
       );
