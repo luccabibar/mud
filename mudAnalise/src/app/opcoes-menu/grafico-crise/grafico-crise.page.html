@@ -25,11 +25,21 @@
   </ion-card> -->
 
   <ion-card>
-    <div class="ion-padding">
-      <ngx-charts-bar-vertical [view]="view" [results]="data" xAxis="true" yAxis="true" legend="false"
-        legendTitle="Meses" showXAxisLabel="true" showYAxisLabel="true" xAxisLabel="Meses" yAxisLabel="Crises por Mês">
-      </ngx-charts-bar-vertical>
-    </div>
+    <ion-item>
+      Crises do paciente:
+      <strong>{{user_sessao.nome}}</strong>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <div  class="ion-padding">
+        <ngx-charts-bar-vertical (window:resize)="onResize($event)" [view]="view" [results]="data" xAxis="true"
+          yAxis="true" legend="false" legendTitle="Meses" showXAxisLabel="true" showYAxisLabel="true" xAxisLabel="Meses"
+          yAxisLabel="Crises por Mês">
+        </ngx-charts-bar-vertical>
+      </div>
+    </ion-card-content>
+
   </ion-card>
 
 

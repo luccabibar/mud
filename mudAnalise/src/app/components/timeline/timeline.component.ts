@@ -15,7 +15,7 @@ export class TimelineComponent implements OnInit {
   constructor(private toastCtrl:ToastController, public modalController: ModalController, public router:Router ) { }
 
   ngOnInit() {}
-
+ 
   async buyItem(timeline){
     let toast = await this.toastCtrl.create({
       message: "Added to the cart: ${timeline.name}"
