@@ -148,7 +148,7 @@ export class BancoService {
 
   }
 
-  enviarRelatorioSemanal(id_usuario: string,coment_final: string,Data_relatorioS_I: string,Data_relatorioS_F: string,carboidratos: string,proteinas: string,lacticinios: string,verdfrut: string,agua: string,fez_atv: string,duracao_atv: string,intensidade_atv: string,fez_lazer: string,coment_lazer: string,vezes_Lazer: string,acomp_lazer: string,horario_dorm: string,despertou: string,vezes_sono: string,acordou_precoce: string)
+  enviarRelatorioSemanal(id_usuario: string,coment_final: string,Data_relatorioS_I: string,Data_relatorioS_F: string,carboidratos: string,proteinas: string,lacticinios: string,verdfrut: string,agua: string,fez_atv: string,duracao_atv: string,intensidade_atv: string,fez_lazer: string,coment_lazer: string,vezes_Lazer: string,acomp_lazer: string,horario_dorm: number,despertou: string,vezes_sono: string,acordou_precoce: string)
   { 
     var dateI=new Date(Data_relatorioS_I).toDateString();
     var dateF=new Date(Data_relatorioS_F).toDateString();
