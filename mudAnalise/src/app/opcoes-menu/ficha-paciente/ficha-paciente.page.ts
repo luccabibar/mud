@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FichaPacientePage implements OnInit {
 
-  public user_sessao;
+  public paciente;
   public profissional;
 
   ionViewDidEnter() {
@@ -22,14 +22,26 @@ export class FichaPacientePage implements OnInit {
     }
   }
 
+  /**
+   * busca por dados necessarios para carregar essa pagina no banco, a partir de um id fornecido
+   * 
+   * @param id o id a procurar
+   */
+  getDadoInicial(id){
+    let sql = "select sintoma_id, priemira_crise, situacao_sintoma, intolerancia from dado_inicial " +
+      "join sintoma on dado_inicial.sintoma_id = sintoma.nome " + 
+      "where usuario_id = " + id;
+    console.log(sql);
+  }
+
   constructor(
     private router: Router,
     private ds: DadosService,
     private db: BancoService,
     private alertController: AlertController
   ) {
-    this.user_sessao = this.ds.getDados("user_sessao");
-    this.profissional = this.ds.getDados("user");
+    this.paciente = this.ds.getDados("user_sessao");
+    this.getDadoInicial(this.paciente.id_usuario);
   }
 
   ngOnInit() {

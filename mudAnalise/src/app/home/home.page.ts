@@ -14,6 +14,7 @@ export class HomePage implements OnInit {
   public profissional;
   public sessoes;
   public existe = 1;
+  private noSess;
 
 
   constructor(
@@ -25,6 +26,7 @@ export class HomePage implements OnInit {
 
   ) {
     this.profissional = this.ds.getDados("user");
+    this.noSess = false;
   }
 
   ngOnInit() {
@@ -45,14 +47,9 @@ export class HomePage implements OnInit {
       this.sessoes = resposta;
       this.existe = 0;
     }).catch(async (resposta) => {
-      const alert = await this.alertController.create({
-        header: 'ERRO!!',
-        subHeader: 'Dados inválidos!',
-        message: 'Erro ao buscar sessões! Verifique se há conexão com a internet',
-        buttons: ['OK']
-      });
+      console.log(resposta);
+      this.noSess = true;
       this.existe = 2;
-      await alert.present();
     })
   }
 
