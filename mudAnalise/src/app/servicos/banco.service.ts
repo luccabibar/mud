@@ -22,18 +22,39 @@ export class BancoService {
     return this.http.post(this.API_URL + 'inserirSessao', data, {headers: header}).toPromise();
   }
 
-  inserirMural(titulo: string, texto: string, id: number, crp: string)
+  inserirMural(titulo: string, texto: string, id: number, id_prof: number)
   {
-    id=4;
     var data={
       titulo: titulo,
       texto: texto,
       id: id,
-      crp: crp,
+      id_prof: id_prof,
     }
 
     let header = new HttpHeaders({'Content-type':'application/json'});
     return this.http.post(this.API_URL + 'inserirMural', data, {headers: header}).toPromise();
+  }
+
+  selecionarMuralProf(id_usuario: number, id_prof:number)
+  {
+    var data = {
+      id_usuario: id_usuario,
+      id_prof:id_prof
+    };
+    let header=new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL+'selecionarMuraisProf', data,{headers: header}).toPromise();
+
+  }
+
+  deletarMural(id_usuario: number, id_prof:number, id_mural:number)
+  {
+    var data = {
+      id_usuario: id_usuario,
+      id_prof:id_prof,
+      id_mural: id_mural
+    };
+    let header=new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL+'deletarMural', data,{headers: header}).toPromise();
   }
 
   insertGenerico(sql: string) {

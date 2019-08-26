@@ -1,12 +1,3 @@
-#title
-{
-    margin: 0;
-    position: absolute;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%); 
-    font-size: 150%;
-}
 
 
 #regSem,#relCri {
@@ -25,8 +16,8 @@
 
 #iconAviso
 {
-    width: 50%;
-    margin-top: 50px;
+    height: 65%;
+    margin-top: 20%;
     position: absolute;
     left: 50%;
     margin-right: -50%;
@@ -35,8 +26,8 @@
 
 #iconPasta
 {
-    width: 35%;
-    margin-top: 50px;
+    height: 65%;
+    margin-top: 20%;
     position: absolute;
     left: 50%;
     margin-right: -50%;
@@ -47,4 +38,32 @@
 {
     position: absolute;
     top: 80%;
+}
+
+#logoB
+{
+    height: 50%;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%); 
+}
+
+#sobre
+{
+    height: 53%;
+    right: 1%;
+    position: absolute;               
+    top: 50%;                         
+    transform: translate(0, -50%);   
+}
+
+#sobre2
+{
+    height: 53%;
+    left: 1%;
+    position: absolute;               
+    top: 50%;                         
+    transform: translate(0, -50%);   
 }

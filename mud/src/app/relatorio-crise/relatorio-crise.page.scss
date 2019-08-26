@@ -26,8 +26,8 @@ ion-item-group {
 ion-slides {
     --bullet-background: #989aa2;
     --bullet-background-active: #165044ff; 
-    height: relative;
-    width: relative;
+    height: absolute;
+    width: absolute;
     top: 17%;
 }
 
@@ -35,10 +35,6 @@ ion-footer {
     text-align: center
 }
 
-ion-card {
-    width: 100% !important;
-    height: 70% !important;
-}
 
 #btnVoltar {
     width: 48%;
@@ -63,3 +59,5 @@ ion-card {
     color:  #165044ff !important; 
     padding: 0 16px;
 }
+
+

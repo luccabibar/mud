@@ -1,9 +1,8 @@
 #logoLogin 
 {
-    width: 25%;
+    width: 20%;
     margin: 0;
     position: absolute;
-    top: 12%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%); 
@@ -13,7 +12,10 @@ ion-label {
     color:  #165044ff !important; 
 }
 
-
+.label
+{
+    text-align: justify !important;
+}
 
 p {
     font-size: 0.8 em;
@@ -35,47 +37,50 @@ ion-slides {
     --bullet-background-active: #165044ff; 
     height: relative;
     width: relative;
-    top: 17%;
+
 }
 
-#slide1
-{
-    background-color: aqua;
-}
 
 #lbl1
 {
     width: 50%;
     margin: 0;
     position: absolute;
-    top: 20%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
 }
 
-#btnVoltar, #btnProx
-{
-    position: absolute;
-    width: 40%;
-    height: 70%;
-}
-
-#btnProx
-{
-    margin-left: 50%;
-}
-
-#comentFinal
+#comentFinalInput
 {
     border-style: inset;
     border-width: 0.5px;
     border-radius: 3px;
-    width: 80%;
-    margin: 0;
-    margin-top: 60px;
-    margin-bottom: -30px;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+    font-family: 'Hero-Regular' !important;
+}
+
+#comentLazerInput
+{
+    border-style: inset;
+    border-width: 0.5px;
+    border-radius: 3px;
+    font-family: 'Hero-Regular' !important;
+}
+
+#btnVoltar {
+    width: 48%;
+    padding-right: 1%;
+    padding-left: 1%;
+}
+
+#btnProx {
+    width: 48%;
+    padding-right: 1%;
+    padding-left: 1%;
+}
+
+#btnConcluir {
+    width: 48%;
+    padding-right: 1%;
+    padding-left: 1%;
 }

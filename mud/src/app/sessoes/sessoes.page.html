@@ -5,11 +5,20 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-button id="notsessao" (click)="startSessao()">
-    iniciar sessão
-  </ion-button>
 
-  <ion-button id="sessao" (click)="stopSessao()">
-    interromper sessão
-  </ion-button>
+    <div *ngIf="hasSessao; else newSessao">
+      <!--gerenciar sessao existente-->
+      <div id="sessao">
+        <h1>dr(a). {{profName}}</h1>
+        <p>criada em {{sessCreated}}</p>
+        <ion-button (click)="removeSessao()">terminar esta sessao</ion-button>
+      </div>
+    </div>
+
+    <ng-template #newSessao>
+      <!--iniciar nova sessao-->
+      <ion-button (click)="startSessao()">Iniciar nova sessao</ion-button>
+    </ng-template>
+
+    <ion-button (click)="goBack()"> voltar </ion-button>
 </ion-content>

@@ -1,31 +1,30 @@
 <ion-header>
     
   <ion-toolbar color="verdemud3">
-    <ion-title id="title1">
-      Perfil
-    </ion-title>
+      <ion-icon (click)="pagsessao()" id="cog" name="reverse-camera"></ion-icon>
+      <ion-icon (click)="sair()" id="exit" name="exit"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-fab horizontal="start" vertical="top" slot="fixed" edge>
+    <!--<ion-fab horizontal="start" vertical="top" slot="fixed" edge>
         <ion-fab-button>
           <ion-icon name="arrow-dropdown"></ion-icon>
         </ion-fab-button>
         <ion-fab-list>
-          <ion-fab-button color="light" (click)="pagsessao()">
+          <ion-fab-button color="light" >
               <ion-icon name="cog"></ion-icon>
           </ion-fab-button>Sessões
           <ion-fab-button color="light" (click)="sair()">
               <ion-icon name="exit"></ion-icon>
           </ion-fab-button>Logoff
         </ion-fab-list>
-      </ion-fab>
+      </ion-fab>-->
   <ion-card>
       <img id="img" src="../../assets/perfilmud.png" />
     <ion-card-header>
-      <ion-card-title style="font-size: 1.5rem;"><ion-input value="{{nome}}" type="text" name="nome" id="6"></ion-input></ion-card-title>
-      <ion-card-subtitle style="margin-top: -1rem; margin-bottom: -2rem;"><ion-input value="{{email}}" type="email" name="email" id="7"></ion-input></ion-card-subtitle>
+      <ion-card-title (ionChange)="ativa()" style="font-size: 1.5rem;"><ion-input value="{{nome}}" type="text" name="nome" id="6"></ion-input></ion-card-title>
+      <ion-card-subtitle (ionChange)="ativa()" style="margin-top: -1rem; margin-bottom: -2rem;"><ion-input value="{{email}}" type="email" name="email" id="7"></ion-input></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
@@ -42,7 +41,7 @@
           <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> CPF</ion-label>
           <ion-input value="{{cpf}}" (ionChange)="ativa()" type="text" name="nome" id="5" placeholder="Informe seu CPF"></ion-input>
         </ion-item>
-        <ion-button (click)="salvarPerfil()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;" disabled>Salvar Perfil</ion-button>
+        <ion-button (click)="salvarPerfil()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;" disabled="{{desativado}}">Salvar Perfil</ion-button>
         
         <ion-button (click)="editarSintomas()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Editar Sintomas</ion-button>
       </ion-list>

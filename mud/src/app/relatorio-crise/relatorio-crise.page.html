@@ -8,21 +8,22 @@
                 <ion-item padding-horizontal>
                     <ion-label class="label" position="stacked" text-wrap>Onde ocorreu a crise?</ion-label>
                     <ion-select placeholder="Selecionar situação" cancelText="Cancelar" okText="Selecionado">
-                        <ion-select-option class="option" value="Casa">Casa</ion-select-option>
-                        <ion-select-option class="option" value="Ambiente publico">Ambiente público</ion-select-option>
-                        <ion-select-option class="option" value="Escola">Escola</ion-select-option>
-                        <ion-select-option class="option" value="Trabalho">Trabalho</ion-select-option>
-                        <ion-select-option class="option" value="Transito">Trânsito</ion-select-option>
+                        <ion-select-option id="0" class="option" value="Casa">Casa</ion-select-option>
+                        <ion-select-option id="1" class="option" value="Ambiente publico">Ambiente público</ion-select-option>
+                        <ion-select-option id="2" class="option" value="Escola">Escola</ion-select-option>
+                        <ion-select-option id="3" class="option" value="Trabalho">Trabalho</ion-select-option>
+                        <ion-select-option id="4" class="option" value="Transito">Trânsito</ion-select-option>
                     </ion-select>
                 </ion-item>
                 <ion-item padding-horizontal>
                     <ion-label class="label" position="stacked" text-wrap>Quando ocorreu a crise?</ion-label>
-                    <ion-datetime backdropDismiss display-format="D MMM, YYYY" name="data_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
+                    <ion-datetime id="5" backdropDismiss display-format="D MMM, YYYY" name="data_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
                 </ion-item>
                 <ion-item padding-horizontal lines="none">
-                    <ion-label class="label" position="stacked" text-wrap>Quanto tempo durou a crise?</ion-label>
-                    <ion-input disabled></ion-input>
-                    <ion-range (ionFocus)="mudaLabel()" (keyup)="mudaLabel()" (ionChange)="mudaLabel()" id="tempo" min="0" max="1000" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
+                    <ion-text style="font-size: 15px !important;" color="verdemud4" text-wrap>Quanto tempo durou a crise?</ion-text>
+                </ion-item>
+                <ion-item padding-horizontal lines="none">
+                    <ion-range (ionFocus)="mudaLabel()" (keyup)="mudaLabel()" (ionChange)="mudaLabel()" id="6" min="0" max="1000" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
                 </ion-item>
                 <ion-label class="label" id="lblTempo" position="fixed"></ion-label>
             </ion-card-content>
@@ -33,17 +34,17 @@
       <ion-list>
         <ion-card>          
             <ion-card-content>
-                    <ion-item lines="none" padding-horizontal>  
-                        <ion-label class="label" position="stacked" text-wrap>Você estava acompanhado?</ion-label>
-                    </ion-item>
+                <ion-item padding-horizontal lines="none">
+                    <ion-text color="verdemud4" style="font-size: 15px !important;" text-wrap>Você estava acompanhado?</ion-text>
+                </ion-item>
                     <ion-radio-group>
                         <ion-item lines="none" padding-horizontal>
-                          <ion-label>Sim</ion-label>
-                          <ion-radio (ionSelect)="porquem()" slot="start" value="biff"></ion-radio>
+                          <ion-label style="font-size: 15px !important;" >Sim</ion-label>
+                          <ion-radio id="7" (ionSelect)="porquem()" slot="start" value="biff"></ion-radio>
                         </ion-item>
                         <ion-item lines="none" padding-horizontal>
-                          <ion-label>Não</ion-label>
-                          <ion-radio slot="start" (ionSelect)="porquem()" value="griff" checked></ion-radio>
+                          <ion-label style="font-size: 15px !important;">Não</ion-label>
+                          <ion-radio id="8" slot="start" (ionSelect)="porquem()" value="griff" checked></ion-radio>
                         </ion-item>
                     </ion-radio-group>
                     
@@ -53,16 +54,16 @@
                           <ion-label id="padding-horizontal" position="stacked" text-wrap>Por quem?</ion-label>
                       </ion-item>
                       <ion-item lines="none" padding-horizontal>
-                        <ion-label>Amigo</ion-label>
-                        <ion-checkbox slot="start"></ion-checkbox>
+                        <ion-label style="font-size: 15px !important;">Amigo</ion-label>
+                        <ion-checkbox id="9" slot="start"></ion-checkbox>
                       </ion-item>
                       <ion-item lines="none" padding-horizontal>
-                        <ion-label>Familiar</ion-label>
-                        <ion-checkbox slot="start"></ion-checkbox>
+                        <ion-label style="font-size: 15px !important;">Familiar</ion-label>
+                        <ion-checkbox id="10" slot="start"></ion-checkbox>
                       </ion-item>
                       <ion-item lines="none" padding-horizontal>
-                        <ion-label>Desconhecido</ion-label>
-                        <ion-checkbox slot="start"></ion-checkbox>
+                        <ion-label style="font-size: 15px !important;">Desconhecido</ion-label>
+                        <ion-checkbox id="11" slot="start"></ion-checkbox>
                       </ion-item>
                     </ion-list>
                   </div>
@@ -75,32 +76,61 @@
         <ion-card>
           <ion-card-content>
                   <ion-list>
+                    <ion-item  lines="none">
+                      <ion-text color="verdemud4" style="font-size: 15px !important;" text-wrap>Quais sintomas foram predominantes na crise?</ion-text>
+                    </ion-item>
                     <ion-item lines="none">
-                        <ion-label id="padding-horizontal" position="stacked" text-wrap>Quais sintomas foram predominantes na crise?</ion-label>
-                        <br>
+                      <ion-label text-wrap style="font-size: 15px !important; padding-right: 0px !important;">Dificuldade para Respirar</ion-label>
+                      <ion-checkbox id="12" slot="start" value="80" style="padding-left: 0px !important;"></ion-checkbox>
                     </ion-item>
-                    <ion-item lines="none" padding-horizontal>
-                      <ion-label>Amigo</ion-label>
-                      <ion-checkbox slot="start"></ion-checkbox>
+                    <ion-item lines="none">
+                      <ion-label text-wrap style="font-size: 15px !important;">Ritmo Cardíacao Acelerado / Taquicardia</ion-label>
+                      <ion-checkbox id="13" slot="start" value="80"></ion-checkbox>
                     </ion-item>
-                    <div id="mostram">
-                      <ion-fab padding-horizontal horizontal="end">
-                      <ion-fab-button  size="small" (click)="addoutras()" color="verdemud4">
-                          <ion-icon name="add"></ion-icon>
-                      </ion-fab-button>
-                      </ion-fab>
-                      <hr><hr><hr><hr><hr><hr>
-                    </div>  
-                    <div id="outras" style="display: none;">
-                        <ion-item lines="none" padding-horizontal>
-                          <ion-label>Familiar</ion-label>
-                          <ion-checkbox slot="start"></ion-checkbox>
-                        </ion-item>
-                        <ion-item lines="none" padding-horizontal>
-                          <ion-label>Desconhecido</ion-label>
-                          <ion-checkbox slot="start"></ion-checkbox>
-                        </ion-item>
-                    </div>
+                    <ion-item lines="none" >
+                      <ion-label text-wrap style="font-size: 15px !important;">Sensações de Asfixia</ion-label>
+                      <ion-checkbox id="14" slot="start" value="80"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none" >
+                      <ion-label text-wrap style="font-size: 15px !important;">Sudorese</ion-label>
+                      <ion-checkbox id="15" slot="start" value="80"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none" >
+                      <ion-label text-wrap style="font-size: 15px !important;">Tremores/abalos</ion-label>
+                      <ion-checkbox id="16" slot="start" value="80"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none" >
+                      <ion-label text-wrap style="font-size: 15px !important;">Naúsea/indisposição abdominal</ion-label>
+                      <ion-checkbox id="17" slot="start" value="80"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none" >
+                      <ion-label text-wrap style="font-size: 15px !important;">Dor/desconforto toráxico</ion-label>
+                      <ion-checkbox id="18" slot="start" value="80"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none">
+                      <ion-label text-wrap style="font-size: 15px !important;">Ondas de calor/frio</ion-label>
+                      <ion-checkbox id="19" slot="start" value="80"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none" >
+                      <ion-label text-wrap style="font-size: 15px !important;">Anestesia/formigamento</ion-label>
+                      <ion-checkbox id="20" slot="start" value="80"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none" >
+                      <ion-label text-wrap style="font-size: 15px !important;">Sensações de irrealidade</ion-label>
+                      <ion-checkbox id="21" slot="start" value="80"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none" >
+                      <ion-label text-wrap style="font-size: 15px !important;">Instabilidade/tontura/desmaio</ion-label>
+                      <ion-checkbox id="22" slot="start" value="80"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none" >
+                      <ion-label text-wrap style="font-size: 15px !important;">Medo de morrer</ion-label>
+                      <ion-checkbox id="23" slot="start" value="80"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none" >
+                      <ion-label text-wrap style="font-size: 15px !important;">Medo de perder o controle/enlouquecer</ion-label>
+                      <ion-checkbox id="24" slot="start" value="80"></ion-checkbox>
+                    </ion-item>
                   </ion-list>
           </ion-card-content>
         </ion-card>
@@ -114,16 +144,16 @@
                 <ion-item padding-horizontal>
                     <ion-label class="label" position="stacked" text-wrap>Qual situação gerou a crise?</ion-label>
                     <ion-select placeholder="Selecionar situação" cancelText="Cancelar" okText="Selecionado">
-                        <ion-select-option class="option" value="Situação 1">Situação 1</ion-select-option>
-                        <ion-select-option class="option" value="Situação 2">Situação 2</ion-select-option>
-                        <ion-select-option class="option" value="Situação 3">Situação 3</ion-select-option>
+                        <ion-select-option id="25" class="option" value="Situação 1">Situação 1</ion-select-option>
+                        <ion-select-option id="26" class="option" value="Situação 2">Situação 2</ion-select-option>
+                        <ion-select-option id="27" class="option" value="Situação 3">Situação 3</ion-select-option>
                     </ion-select>
                 </ion-item>
                 </div>
                 <div id="addsitu" style="display: none;">
                     <ion-item padding-horizontal>
                         <ion-label class="label" position="stacked" text-wrap>Adicionar nova situação?</ion-label>
-                        <ion-input type="text" name="situ" id="situ" placeholder="Qual foi a situação?"></ion-input>
+                        <ion-input type="text" name="situ" id="28" placeholder="Qual foi a situação?"></ion-input>
                     </ion-item>
                 </div>
                 <div id="fab">
@@ -161,7 +191,7 @@
     </div>
     <div id="concluir" style="display: none;">
       <ion-button id="btnVoltar" (click)="antSlide()" fill="outline" shape="round" color="verdemud4" slot="start">Voltar</ion-button>
-      <ion-button id="btnConcluir" fill="outline" shape="round" color="verdemud4" slot="end">Concluir</ion-button>
+      <ion-button id="btnConcluir" (click)="envRel()" fill="outline" shape="round" color="verdemud4" slot="end">Concluir</ion-button>
     </div>
 </ion-footer>
     

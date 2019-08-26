@@ -27,6 +27,7 @@ export class PerfilUserPage {
   cpf = this.dadosService.getCpf();
   celular = this.dadosService.getCelular();
   dtnasc = this.dadosService.getDataNasc();
+  private desativado: boolean=true;
   aa()
   {
     setTimeout(() => {
@@ -42,7 +43,6 @@ export class PerfilUserPage {
   pagsessao()
   {
       this.nav.navigateForward('sessoes');
-      
   }
 
   async editarSintomas()
@@ -301,6 +301,9 @@ export class PerfilUserPage {
     await alert.present();
   }
 
-
+  ativa()
+  {
+    this.desativado = false;
+  }
 }
 

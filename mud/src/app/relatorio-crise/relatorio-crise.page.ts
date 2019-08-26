@@ -19,6 +19,8 @@ export class RelatorioCrisePage implements OnInit {
 
   ngOnInit() {
     this.IonSlides.lockSwipes(true);
+    document.getElementById("lblTempo").innerHTML = '- de 10 mins';
+    document.getElementById("lblGrau").innerHTML = 'Nenhuma';
   }
 
   antSlide()
@@ -151,6 +153,15 @@ export class RelatorioCrisePage implements OnInit {
       document.getElementById("acomp").style.display='none';
       this.contar = 0;
     }
+  }
+
+  envRel()
+  {
+    let carboidratos = (<HTMLInputElement>document.getElementById("carb")).value;
+    let proteinas = (<HTMLInputElement>document.getElementById("prot")).value;
+    let lacticinios = (<HTMLInputElement>document.getElementById("lac")).value;
+    let verdfrut = (<HTMLInputElement>document.getElementById("verfrut")).value;
+    let agua = (<HTMLInputElement>document.getElementById("agua")).value;
   }
 
 }
