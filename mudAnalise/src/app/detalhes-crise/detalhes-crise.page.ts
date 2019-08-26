@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detalhes-crise',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetalhesCrisePage implements OnInit {
 
-  constructor() { }
+ 
+  criseId
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.criseId = this.activatedRoute.snapshot.paramMap.get('criseId');
   }
 
+  public ionViewDidEnter() {
+    this.criseId = this.activatedRoute.snapshot.paramMap.get('criseId');
+
+  }
 }
