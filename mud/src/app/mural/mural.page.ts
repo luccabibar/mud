@@ -3,6 +3,8 @@ import { BancoService } from './../banco.service';
 import { DadosService } from '../dados.service';
 import { NavController, IonSlides, AlertController, IonInput } from '@ionic/angular';
 import { TmplAstBoundAttribute } from '@angular/compiler';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -23,7 +25,7 @@ export class MuralPage implements OnInit {
   ];
 
 
-  constructor(private dadosService: DadosService, private BancoService: BancoService,private AlertController: AlertController)
+  constructor(private navCtrl: NavController,private dadosService: DadosService, private BancoService: BancoService,private AlertController: AlertController)
    { }
 
 
@@ -39,6 +41,11 @@ export class MuralPage implements OnInit {
       console.log('Async operation has ended');
       event.target.complete();
     }, 2000);
+  }
+
+  Info()
+  {
+    this.navCtrl.navigateForward('tab3');
   }
 
   public addMural()
