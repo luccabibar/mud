@@ -36,7 +36,17 @@ export class FichaPacientePage implements OnInit {
       "WHERE d.usuario_id = " + id + " " +
       "GROUP BY d.primeira_crise, d.situacao_sintoma, d.intolerancia, s.nome";
 
-    
+    this.db.selectGenerico(sql)
+    .then((response)=>{
+      console.log(response);
+    })
+    .catch((ex) => {
+      if (ex.error.text == "sucesso") {
+        console.log(ex);      
+      } else {
+        console.log("err", ex);
+      }
+    });
   }
 
   constructor(

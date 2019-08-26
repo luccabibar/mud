@@ -1,0 +1,18 @@
+$tipos: (
+  // MUD
+  leve: #00ff80,
+  moderado:#ffff00,
+  forte: #ff0000,
+  extremo: #000000
+  );
+
+
+
+
+@each $track,
+$value in map-remove($tipos) {
+  ion-item[track='#{$track}'] ion-label {
+    border-left: 10px solid $value;
+    padding-left: 5px;
+  }
+}
