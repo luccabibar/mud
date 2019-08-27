@@ -157,11 +157,37 @@ export class RelatorioCrisePage implements OnInit {
 
   envRel()
   {
-    let carboidratos = (<HTMLInputElement>document.getElementById("carb")).value;
-    let proteinas = (<HTMLInputElement>document.getElementById("prot")).value;
-    let lacticinios = (<HTMLInputElement>document.getElementById("lac")).value;
-    let verdfrut = (<HTMLInputElement>document.getElementById("verfrut")).value;
-    let agua = (<HTMLInputElement>document.getElementById("agua")).value;
+
+    let casa = (<HTMLInputElement>document.getElementById("0")).value;
+    let ambpub = (<HTMLInputElement>document.getElementById("1")).value;
+    let escola = (<HTMLInputElement>document.getElementById("2")).value;
+    let trabalho = (<HTMLInputElement>document.getElementById("3")).value;
+    let transito = (<HTMLInputElement>document.getElementById("4")).value;
+    let data_crise = (<HTMLInputElement>document.getElementById("5")).value;
+    let duracao_crise = (<HTMLInputElement>document.getElementById("6")).value;
+    let acompanhadoSim = (<HTMLInputElement>document.getElementById("7")).value;
+    let acompanhadoNao = (<HTMLInputElement>document.getElementById("9")).value;
+    let acomp_amigo = (<HTMLInputElement>document.getElementById("10")).value;
+    let acomp_familia = (<HTMLInputElement>document.getElementById("11")).value;
+    let acomp_desc = (<HTMLInputElement>document.getElementById("12")).value;
+    let sint_dif_resp = (<HTMLInputElement>document.getElementById("13")).value;
+    let sint_rit_card_acelerado = (<HTMLInputElement>document.getElementById("14")).value;
+    let sint_sens_asfixia = (<HTMLInputElement>document.getElementById("15")).value;
+    let sint_sudorese = (<HTMLInputElement>document.getElementById("16")).value;
+    let sint_trem_abalos = (<HTMLInputElement>document.getElementById("17")).value;
+    let sint_nausea_ind = (<HTMLInputElement>document.getElementById("18")).value;
+    let sint_dor = (<HTMLInputElement>document.getElementById("19")).value;
+    let sint_ond_calor = (<HTMLInputElement>document.getElementById("20")).value;
+    let sint_anestesia = (<HTMLInputElement>document.getElementById("21")).value;
+    let sint_sens_irrealidade = (<HTMLInputElement>document.getElementById("22")).value;
+    let sint_instabilidade = (<HTMLInputElement>document.getElementById("23")).value;
+    let sint_medo_morrer = (<HTMLInputElement>document.getElementById("24")).value;
+    let sint_medo_perder_controle = (<HTMLInputElement>document.getElementById("25")).value;
+    let situacao1 = (<HTMLInputElement>document.getElementById("26")).value;
+    let situacao2 = (<HTMLInputElement>document.getElementById("27")).value;
+    let situacao3 = (<HTMLInputElement>document.getElementById("28")).value;
+    let preocupacao = (<HTMLInputElement>document.getElementById("29")).value;
+
   }
 
 }
