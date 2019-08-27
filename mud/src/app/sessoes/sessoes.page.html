@@ -36,14 +36,37 @@
     </div>
 
     <ng-template #newSessao>
-      <!--iniciar nova sessao-->
-      <div padding>
-        <ion-button (click)="onClick()" style="font-size: 105%" expand="block">
-          <ion-icon slot="start" name="camera"></ion-icon>
-          Iniciar nova sessao
-        </ion-button>
-      </div>
-      <!-- TODO: adicionar texto explicando como funciona sesssao pipipipopopo -->
+      <ion-button (click)="startSessao()">Iniciar nova sessao</ion-button>
     </ng-template>
-    
+
+    <ion-button (click)="goBack()"> voltar </ion-button>-->
+    <div *ngIf="hasSessao; else newSessao">
+    <ion-card>
+      <img id="img" src="../../assets/perfilmud.png" />
+    <ion-card-header>
+      <ion-card-title style="font-size: 1.5rem;"><ion-input readonly value="{{profName}}" type="text" name="nome" id="6"></ion-input></ion-card-title>
+      <ion-card-subtitle style="margin-top: -1rem; margin-bottom: -2rem;"><ion-input readonly value="{{profEmail}}" type="email" name="email" id="7"></ion-input></ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="calendar"></ion-icon> CRP </ion-label>
+          <!--<ion-input value="{{dtnasc}}" type="date" name="nome" id="2" placeholder="Informe sua data de Nascimento"></ion-input>-->
+          <ion-input readonly backdropDismiss type="text" name="profCRP" value="{{profCRP}}" id="3" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="label" position="stacked"><ion-icon name="call"></ion-icon> Celular</ion-label>
+          <ion-input readonly value="{{profCelular}}" type="text" name="nome" id="4"></ion-input>
+        </ion-item>
+        <ion-button (click)="removeSessao()" color="danger" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;">Encerrar Sessão</ion-button>
+        
+        <ion-button (click)="goBack()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Voltar para o Perfil de usuário</ion-button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  </div>
+  <ng-template #newSessao>
+    <ion-button (click)="startSessao()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;">Iniciar nova sessão</ion-button>
+    <ion-button (click)="goBack()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Voltar para o Perfil de usuário</ion-button>
+  </ng-template>
 </ion-content>

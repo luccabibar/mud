@@ -16,7 +16,7 @@ export class AnimacaoPage implements OnInit {
 
   ngOnInit() {
     this.animacao();
-    this.mandaAlerta();
+    //this.mandaAlerta();
   }
 
   ngOnDestroy()

@@ -1,46 +1,44 @@
 <ion-content color="branco">
-  <ion-card color="branco">
-    <ion-card-content>
-      <img src="assets/logoMudAnalise.png" alt="">
-    </ion-card-content>
-  </ion-card>
 
-  <ion-card color="branco">
-    <ion-card-content>
+  <ion-img src="assets/logoMudAnalise.png" id="logoLogin"></ion-img>
+
+
       <form [formGroup]="formLogin">
-        <ion-item>
+        <ion-item id="email" padding-horizontal>
           <ion-label position="stacked">E-mail</ion-label>
-          <ion-input formControlName="email" type="email" placeholder="..."></ion-input>
-          <ng-container *ngFor="let erro of mensagens_validacao.email">
+          <ion-input formControlName="email" type="email" placeholder="Insira seu email"></ion-input>
+          <!--<ng-container *ngFor="let erro of mensagens_validacao.email">
             <span
               *ngIf="formLogin.get('email').hasError(erro.tipo) && (formLogin.get('email').dirty || formLogin.get('email').touched)"
               class="msg-erro">
               {{erro.mensagem}}
             </span>
-          </ng-container>
+          </ng-container>-->
         </ion-item>
 
-        <ion-item>
+        <ion-item id="senha" padding-horizontal>
           <ion-label position="stacked">Senha</ion-label>
-          <ion-input formControlName="senha" type="password" placeholder="..."></ion-input>
-          <ng-container *ngFor="let erro of mensagens_validacao.senha">
+          <ion-input formControlName="senha" type="password" placeholder="Insira sua senha"></ion-input>
+          <!--<ng-container *ngFor="let erro of mensagens_validacao.senha">
             <span
               *ngIf="formLogin.get('senha').hasError(erro.tipo) && (formLogin.get('senha').dirty || formLogin.get('senha').touched)"
               class="msg-erro">
               {{erro.mensagem}}
             </span>
-          </ng-container>
+          </ng-container>-->
         </ion-item>
       </form>
-      <br>
-      <ion-button expand="block" color="escuro" (click)="login()">Entrar</ion-button>
-      <ion-button expand="block" color="medio" fill="outline" routerLink="/cadastro">Registrar</ion-button>
-      <ion-button style="text-transform: none" fill="clear" routerLink="/esqueci">Esqueci a senha...</ion-button>
 
-    </ion-card-content>
-  </ion-card>
+      <a routerLink="/esqueci" id="esqSenha">Esqueci a senha</a>
 
-  <!-- <ion-card color="branco">
+      <ion-button padding-horizontal id="btnEntrar" fill="outline" shape="round" color="escuro" expand="block" (click)="login()">Entrar</ion-button>
+
+      <a routerLink="/cadastro" id="hrefCadast" padding-horizontal >Não possui uma conta? <b> Cadastre-se</b></a>
+  <!--     <ion-button style="text-transform: none" fill="clear" routerLink="/esqueci">Esqueci a senha...</ion-button>
+          <ion-button expand="block" color="medio" fill="outline" routerLink="/cadastro">Registrar</ion-button>
+
+
+  <ion-card color="branco">
     <ion-card-content>
       <ion-item>
         <ion-thumbnail slot="start">

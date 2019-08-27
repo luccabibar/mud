@@ -28,7 +28,7 @@
   --ion-color-tertiary-tint: #7e57ff;
 
   /** success **/
-  --ion-color-success: #10dc60;
+  --ion-color-success: #4A74D9;
   --ion-color-success-rgb: 16, 220, 96;
   --ion-color-success-contrast: #ffffff;
   --ion-color-success-contrast-rgb: 255, 255, 255;
@@ -121,3 +121,43 @@
   --ion-color-shade: #000000;
   --ion-color-tint: #1a1a1a;
 }
+
+@font-face {
+  font-family: 'Hero-Regular';
+  src: url('../assets/fonts/Hero-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hero-Bold';
+  src: url('../assets/fonts/Hero-Bold.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hero-Light';
+  src: url('../assets/fonts/Hero-Light.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'Hero-Bold';
+  font-style: normal;
+}
+
+ion-label{
+  font-family: 'Hero-Bold' !important;
+  font-size: 1.2em !important;
+  }
+
+ion-input{
+  font-family: 'Hero-Regular' !important;
+}
+
+ion-button{
+  --border-width: 0.13em !important;
+}
+

@@ -3,7 +3,7 @@ import { ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import {  Platform, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+ 
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -15,7 +15,7 @@ export class TimelineComponent implements OnInit {
   constructor(private toastCtrl:ToastController, public modalController: ModalController, public router:Router ) { }
 
   ngOnInit() {}
-
+ 
   async buyItem(timeline){
     let toast = await this.toastCtrl.create({
       message: "Added to the cart: ${timeline.name}"

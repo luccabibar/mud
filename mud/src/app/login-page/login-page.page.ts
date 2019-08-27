@@ -70,13 +70,13 @@ export class LoginPagePage {
   {
     let email = (<HTMLInputElement>document.getElementById("1")).value;
     let senha = (<HTMLInputElement>document.getElementById("2")).value;
-    this.BancoService.selectGenerico("SELECT * FROM usuario WHERE email='"+email+"';")
+    this.BancoService.selectGenerico("SELECT * FROM usuario WHERE email='"+email+"' AND profissional=false;")
     .then(async(response)=>{
-      if(response[0].senha == senha)
+
+      if(response[0].senha == senha && response[0].profissional == 'f')
       {
           const alert = await this.alertController.create({
           header: 'Confirmação',
-          subHeader: 'Sucesso!',
           message: JSON.stringify(response),
           buttons: [{
             text: 'OK',
@@ -102,14 +102,11 @@ export class LoginPagePage {
         
         return;
       } 
-
       else if(response[0].senha != senha)
       {
-
           const alert = await this.alertController.create({
-          header: 'Confirmação',
-          subHeader: 'Erro!',
-          message: 'Senha incorreta!',
+          header: 'Senha incorreta',
+          message: 'Digite a senha correta',
           buttons:[
             {
               text: 'OK',
@@ -124,9 +121,8 @@ export class LoginPagePage {
     .catch(async(response)=>{
 
       const alert = await this.alertController.create({
-        header: 'Confirmação',
-        subHeader: 'Erro!',
-        message: response,
+        header: 'Email incorreto',
+        message: 'Essa conta não existe!',
         buttons:  [
           {
             text: 'OK',

@@ -17,7 +17,7 @@ export class Tab2Page {
   public semanas;
   public user_sessao;
   public existe = 1;
-
+ 
 
   information: any[] = [];
 
@@ -29,7 +29,7 @@ export class Tab2Page {
     private bd: BancoService,
     private alertController: AlertController,
     private http: HttpClient
-   // private load: LoadingController
+    // private load: LoadingController
   ) {
     this.user_sessao = this.ds.getDados("user_sessao");
     this.carregaSemanas();
@@ -51,6 +51,7 @@ export class Tab2Page {
       this.information = this.geraJSON(this.semanas);
       console.log("TIME: ", this.information);
       this.information[0].open = true;
+      this.existe = 0;
     }).catch(async (resposta) => {
       console.log("ERR: ", resposta)
       const alert = await this.alertController.create({
@@ -73,7 +74,7 @@ export class Tab2Page {
     for (let sem of semanas) {
       temp.push(
         {
-          "name": moment(sem.data_inicial).format('DD/MM') + " à " + moment(sem.data_final).format('DD/MM/YYYY') + "ID:" + sem.id_semana,
+          "name": moment(sem.data_inicial).format('DD/MM') + " à " + moment(sem.data_final).format('DD/MM/YYYY'),
           "children": [
             {
               "name": "Sono",
@@ -120,7 +121,7 @@ export class Tab2Page {
     this.information[index].children[childIndex].open = !this.information[index].children[childIndex].open;
   }
   // LOADING STUFF
-  
+
 
 
 }
