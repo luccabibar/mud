@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { CadastroUserPage } from './cadastro-user.page';
 
+import { BrMaskerModule } from 'br-mask';
+
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +21,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes),
+    BrMaskerModule
   ],
   declarations: [CadastroUserPage]
 })

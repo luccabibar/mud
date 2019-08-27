@@ -9,29 +9,26 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  
-<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-  <ion-refresher-content
-    pullingIcon="arrow-dropdown"
-    pullingText="Pull to refresh"
-    refreshingSpinner="circles"
-    refreshingText="Refreshing...">
-  </ion-refresher-content>
-</ion-refresher>  
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <ion-item lines="none" color="primary" id="ito">
-  <div id="divo1" style="display: none">
+    <div id="divo1" style="display: none">
       <ion-text> Notas </ion-text>
-      <ion-icon slot="end" icon="add" id="icon1" (click)="novanota()"></ion-icon>
-  </div>
-  <div id="divo2" style="display: none">
+        <ion-icon slot="end" icon="add" id="icon1" (click)="novanota()"></ion-icon>
+    </div>
+    <div id="divo2" style="display: none">
       <ion-text> Nova mensagem </ion-text>
       <ion-icon slot="end" id="icon2" icon="arrow-round-back" (click)="voltanovanota()"></ion-icon>
-  </div>
-  </ion-item> 
-    
-<ion-slides>
-  <ion-slide id="slido1">
+    </div>
+  </ion-item>
+
+  <ion-slides>
+    <ion-slide id="slido1">
 
       <!---
           <ion-list lines="none">
@@ -59,44 +56,44 @@
             </ion-list>-->
 
 
-  <ion-list id="poda" lines="none">
-    
-
-    <ion-item-sliding *ngFor="let mural of murais" id="11">
-        <ion-item tappable routerLink="/tabs">
-      <ion-card id="cardoo" name="ion-card" expand="full">
-        <ion-card-header>
-            <ion-card-title>{{mural.titulo}}</ion-card-title>
-            <ion-text id="3">{{mural.created_at}}</ion-text>
-        </ion-card-header>
-        <ion-card-content>{{mural.texto}}</ion-card-content>
-      </ion-card>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="alertaDeletar(mural)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
- </ion-slide>
+      <ion-list id="poda" lines="none">
 
 
-  <ion-slide id="slido2">
-    <!-- CARDS INSERIR-->
-    <ion-card id="cardo2">
+        <ion-item-sliding *ngFor="let mural of murais" id="11">
+          <ion-item tappable routerLink="/tabs">
+            <ion-card id="cardoo" name="ion-card" expand="full">
+              <ion-card-header>
+                <ion-card-title>{{mural.titulo}}</ion-card-title>
+                <ion-text id="3">{{mural.created_at}}</ion-text>
+              </ion-card-header>
+              <ion-card-content>{{mural.texto}}</ion-card-content>
+            </ion-card>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option color="danger" (click)="alertaDeletar(mural)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-slide>
+
+
+    <ion-slide id="slido2">
+      <!-- CARDS INSERIR-->
+      <ion-card id="cardo2">
         <ion-item>
           <ion-label position="stacked">Título <ion-text color="danger"></ion-text>
           </ion-label>
           <ion-input required type="text" maxLength="44" id="1" name="inserirtitulo"></ion-input>
           <ion-label position="stacked" text-wrap>Corpo da mensagem <ion-text color="danger"></ion-text>
-          <ion-input disabled></ion-input>
+            <ion-input disabled></ion-input>
           </ion-label>
         </ion-item>
         <ion-textarea id="2" name="inserirtxt" maxLength="120"></ion-textarea>
         <ion-button (click)="inserirMural()" size="small" expand="full">Adicionar</ion-button>
       </ion-card>
-  </ion-slide>
-</ion-slides>
-      
+    </ion-slide>
+  </ion-slides>
+
 </ion-content>

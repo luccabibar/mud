@@ -74,7 +74,7 @@ export class Tab2Page {
     for (let sem of semanas) {
       temp.push(
         {
-          "name": moment(sem.data_inicial).format('DD/MM') + " à " + moment(sem.data_final).format('DD/MM/YYYY'),
+          "name": moment(sem.data_inicial).format('DD/MM/YYYY') + " à " + moment(sem.data_final).format('DD/MM/YYYY'),
           "children": [
             {
               "name": "Sono",
