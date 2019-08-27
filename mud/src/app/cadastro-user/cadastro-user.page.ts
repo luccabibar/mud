@@ -54,7 +54,7 @@ export class CadastroUserPage implements OnInit {
       nome: ['' , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       datanasc : ['', Validators.compose([Validators.required])],
-      celular : ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CelularValidator.checkCelular])],
+      celular : ['', Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])],
       cpf: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf])],
       senha: ['', Validators.required],
       confirmasenha : ['', Validators.required]}, 

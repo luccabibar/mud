@@ -30,6 +30,7 @@
     "ajv": "^6.10.0",
     "barcode-scanner": "0.0.2",
     "br-mask": "0.0.6",
+    "brmasker4": "^1.0.3",
     "cordova-android": "8.0.0",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "core-js": "^2.5.4",
