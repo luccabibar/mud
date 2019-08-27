@@ -5,33 +5,13 @@
     </ion-toolbar>
   </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+    <!--
     <div *ngIf="hasSessao; else newSessao">
-      <div padding>
-        <h3><strong>Sessão ativa:</strong></h3>
-      </div>
-      <!--gerenciar sessao existente-->
-      <div color="verdemud3" class="sessao-wrap">
-        <ion-item-sliding class="sessao-slider">
-          <ion-item class="slider" color="aqua">
-            <ion-avatar slot="start">
-              <img src="assets/perfil_generico.png">
-            </ion-avatar>
-            <div>
-              <ion-label><strong>dr(a). {{profName}}</strong></ion-label>
-              <ion-label>
-                <small>criada em</small> {{sessCreated}}
-              </ion-label>
-            </div>
-          </ion-item>
-          <!-- slide pra direita -->
-          <ion-item-options side="end">
-            <ion-item-option color="danger" (click)="removeSessao()">
-              <ion-icon slot="icon-only" name="trash"></ion-icon>
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
+      <div id="sessao">
+        <h1>dr(a). {{profName}}</h1>
+        <p>criada em {{sessCreated}}</p>
+        <ion-button (click)="removeSessao()">terminar esta sessao</ion-button>
       </div>
     </div>
 
