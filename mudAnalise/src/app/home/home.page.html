@@ -39,6 +39,15 @@
     <!--Lista de Pacientes-->
   </ion-card>
 
+  <ion-refresher  (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher> 
+    
   <ion-card>
     <ion-list>
       <div *ngIf="noSess == true" padding style="text-align: center;">
