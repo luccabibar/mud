@@ -181,6 +181,10 @@ export class BancoService {
 
   relatorio_crise()
   {
-    
+    var data={ 
+      
+    };
+    let header=new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL+'relatorioSemanal', data,{headers: header}).toPromise(); 
   }
 }

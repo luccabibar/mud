@@ -1,6 +1,9 @@
 
 import { NavController, IonSlides, AlertController, IonInput } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { DadosService } from '../dados.service';
+import { BancoService } from '../banco.service';
+import { alertController } from '@ionic/core';
 
 @Component({
   selector: 'app-relatorio-crise',
@@ -15,7 +18,7 @@ export class RelatorioCrisePage implements OnInit {
   public contar = 0;
   public conta3 = 0;
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public alertController: AlertController,public bancoService: BancoService,public dadosService: DadosService,public navCtrl: NavController) { }
 
   ngOnInit() {
     this.IonSlides.lockSwipes(true);
@@ -300,6 +303,38 @@ export class RelatorioCrisePage implements OnInit {
     let situacao3 = (<HTMLInputElement>document.getElementById("28")).value;*/
     let preocupacao = (<HTMLInputElement>document.getElementById("29")).value;
 
+    this.dadosService.setCrise_hr_fim = new Date().getTime;
+
+    this.bancoService.relatorio_crise()
+    .then(async(response)=>{
+        const alert = await this.alertController.create({
+          header: 'Relátorio enviado',
+          subHeader: 'Novo relátorio enviado',
+          message: JSON.stringify(response[0].id_usuario),
+          buttons: [
+            {
+              text: "OK",
+              role: "ok",
+              handler: data => {
+                this.navCtrl.navigateForward('/tabs/tab2');
+                // this.router.navigateByUrl('/tabs/tabs2');
+              }
+            },
+        ]
+        });
+         await alert.present();
+        
+      }
+    )
+    .catch(async(response)=>{
+
+      const alert = await this.alertController.create({
+        header: 'Erro',
+        message: JSON.stringify(response),
+        buttons: ['OK']
+      });
+      await alert.present()
+    })
 
 
   }

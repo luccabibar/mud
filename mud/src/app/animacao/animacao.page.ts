@@ -1,6 +1,7 @@
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { DadosService } from '../dados.service';
 
 @Component({
   selector: 'app-animacao',
@@ -9,13 +10,14 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class AnimacaoPage implements OnInit {
 
-  constructor(private AlertController: AlertController,  private router: Router) { }
+  constructor(private dadosService: DadosService,private AlertController: AlertController,  private router: Router) { }
   
   public counter = 0;
   public timer;
 
   ngOnInit() {
     this.animacao();
+    this.dadosService.setCrise_hr_inicio = new Date().getTime;
     //this.mandaAlerta();
   }
 

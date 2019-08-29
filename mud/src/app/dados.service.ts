@@ -34,6 +34,26 @@ export class DadosService {
   data_relatorioS_I = null;
   data_relatorioS_F = null;
 
+  crise_hr_inicio = null;
+  crise_hr_fim = null;
+
+  getCrise_hr_inicio()
+  {
+    return this.crise_hr_inicio;
+  }
+  setCrise_hr_fim(x: Date)
+  {
+    this.crise_hr_fim = x;
+  }
+  getCrise_hr_fim()
+  {
+    return this.crise_hr_fim;
+  }
+  setCrise_hr_inicio(x: Date)
+  {
+    this.crise_hr_inicio = x;
+  }
+
   getData_relatorioS_I()
   {
     return this.data_relatorioS_I;
