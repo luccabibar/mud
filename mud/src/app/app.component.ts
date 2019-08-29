@@ -20,6 +20,11 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      let funcaoRetorno = (data) => { console.log('Notificações: ' + JSON.stringify(data));};
+      window["plugins"].OneSignal.startInit("0fb9baa5-862b-4488-a4f6-8abcb71a1510",
+          "465038185208")
+          .handleNotificationOpened(funcaoRetorno)
+          .endInit();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.ScreenOrientation.lock(this.ScreenOrientation.ORIENTATIONS.PORTRAIT);
