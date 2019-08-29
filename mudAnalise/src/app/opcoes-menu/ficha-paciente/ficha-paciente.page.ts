@@ -15,7 +15,8 @@ export class FichaPacientePage implements OnInit {
   public paciente;
   public profissional;
 
-  ionViewDidEnter() {
+  ionViewDidEnter() 
+  {
     this.profissional = this.ds.getDados("user");
     if (!this.profissional) {
       this.ds.removeDados(true, '');
@@ -28,9 +29,9 @@ export class FichaPacientePage implements OnInit {
    * 
    * @param id o id a procurar
    */
-  getDadoInicial(id){
-    
-    //eu JURO que nao copiei esse sql do stackoverflow (nao integralmente, mas nao vem ao caso)
+  getDadoInicial(id)
+  {
+    //eu JURO que nao copiei esse sql do stackoverflow (nao integralmente)
     let sql = "SELECT d.primeira_crise, d.situacao_sintoma, d.intolerancia, array_agg(s.nome) " +
       "FROM dado_inicial AS d " +
       "JOIN sintoma AS s " +
@@ -39,17 +40,17 @@ export class FichaPacientePage implements OnInit {
       "GROUP BY d.primeira_crise, d.situacao_sintoma, d.intolerancia, s.nome";
 
     this.db.selectGenerico(sql)
-    .then((response: Array<Object>)=>{
+    .then((response: Array<any>)=>{
+      //concatena os n registros em um so
       let sintomas:Array<String> = [];
       response.forEach(row => {
         let sint: String = row.array_agg;
-        sint = sint.slice(2, sint.length - 2);
+        sint = sint.slice(2, sint.length - 2); //tira uns chars indesejados da string
         sintomas.push(sint);
       });
       
       this.dados_ini = response[0];
       this.dados_ini.array_agg = sintomas;
-      console.log(this.dados_ini);
     })
     .catch((ex) => {
       console.log("err", ex);
@@ -66,6 +67,9 @@ export class FichaPacientePage implements OnInit {
   ) {
     this.paciente = this.ds.getDados("user_sessao");
     this.getDadoInicial(this.paciente.id_usuario);
+    //let idade = ;
+    //this.paciente.idade = ;
+    console.log(this.paciente);
   }
 
   ngOnInit() {

@@ -97,7 +97,7 @@
                     </ion-item>
                     <ion-item padding-horizontal>
                             <ion-label class="label" position="stacked">Número do Telefone</ion-label>
-                            <ion-input type="number" name="num_contato1" id="7" formControlName="num_contato1" [class.invalid]="!slideTwoForm.controls.num_contato1.valid && (slideTwoForm.controls.num_contato1.dirty || submitAttempt2)" placeholder="Insira apenas os números (incluindo o DDD)"></ion-input>
+                            <ion-input max="15" [brmasker]="{form: slideTwoForm.get('num_contato1'), phone: true}" type="tel" name="num_contato1" id="7" formControlName="num_contato1" [class.invalid]="!slideTwoForm.controls.num_contato1.valid && (slideTwoForm.controls.num_contato1.dirty || submitAttempt2)" placeholder="Insira apenas os números (incluindo o DDD)"></ion-input>
                     </ion-item>
                     <ion-item padding-horizontal *ngIf="!slideTwoForm.controls.num_contato1.valid  && (slideTwoForm.controls.num_contato1.dirty || submitAttempt2)">
                         <p>Insira um número válido.</p>
@@ -112,7 +112,7 @@
                     </ion-item>
                     <ion-item padding-horizontal>
                         <ion-label class="label" position="stacked">Número do Telefone</ion-label>
-                        <ion-input type="number" name="num_contato2" id="9" formControlName="num_contato2" placeholder="Insira apenas os números (incluindo o DDD)"></ion-input>
+                        <ion-input max="15" type="tel" [brmasker]="{form: slideTwoForm.get('num_contato2'), phone: true}" name="num_contato2" id="9" formControlName="num_contato2" placeholder="Insira apenas os números (incluindo o DDD)"></ion-input>
                     </ion-item>
                     </div>
                     <div id="fab">
@@ -130,9 +130,6 @@
         <ion-slide>
                 <ion-content>
                 <ion-list lines="none">
-
-
-
 
                         <form [formGroup]="slideThreeForm">
                        
@@ -162,18 +159,18 @@
                             <ion-item padding-horizontal>
                                     <ion-select ok-text="Selecionar" cancel-text="Cancelar" multiple="true" id="12" text-wrap>
                                         <ion-select-option text-wrap value="1">Dificuldade para Respirar</ion-select-option>
-                                        <ion-select-option value="2">Ritmo Cardíacao Acelerado / Taquicardia</ion-select-option>
-                                        <ion-select-option value="3">Sensações de Asfixia</ion-select-option>
-                                        <ion-select-option value="4">Sudorese</ion-select-option>
-                                        <ion-select-option value="5">Tremores/abalos</ion-select-option>
-                                        <ion-select-option value="6">Naúsea/indisposição abdominal</ion-select-option>
-                                        <ion-select-option value="7">Dor/desconforto toráxico</ion-select-option>
-                                        <ion-select-option value="8">Ondas de calor/frio</ion-select-option>
-                                        <ion-select-option value="9">Anestesia/formigamento</ion-select-option>
-                                        <ion-select-option value="10">Sensações de irrealidade</ion-select-option>
-                                        <ion-select-option value="11">Instabilidade/tontura/desmaio</ion-select-option>
-                                        <ion-select-option value="12">Medo de morrer</ion-select-option>
-                                        <ion-select-option value="13">Medo de perder o controle/enlouquecer</ion-select-option>
+                                        <ion-select-option text-wrap value="2">Ritmo Cardíacao Acelerado / Taquicardia</ion-select-option>
+                                        <ion-select-option text-wrap value="3">Sensações de Asfixia</ion-select-option>
+                                        <ion-select-option text-wrap value="4">Sudorese</ion-select-option>
+                                        <ion-select-option text-wrap value="5">Tremores/abalos</ion-select-option>
+                                        <ion-select-option text-wrap value="6">Naúsea/indisposição abdominal</ion-select-option>
+                                        <ion-select-option text-wrap value="7">Dor/desconforto toráxico</ion-select-option>
+                                        <ion-select-option text-wrap value="8">Ondas de calor/frio</ion-select-option>
+                                        <ion-select-option text-wrap value="9">Anestesia/formigamento</ion-select-option>
+                                        <ion-select-option text-wrap value="10">Sensações de irrealidade</ion-select-option>
+                                        <ion-select-option text-wrap value="11">Instabilidade/tontura/desmaio</ion-select-option>
+                                        <ion-select-option text-wrap value="12">Medo de morrer</ion-select-option>
+                                        <ion-select-option text-wrap value="13">Medo de perder o controle/enlouquecer</ion-select-option>
                                     </ion-select>
                             </ion-item>
 

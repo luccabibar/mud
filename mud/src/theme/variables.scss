@@ -199,3 +199,13 @@ ion-input{
 ion-button{
   --border-width: 0.13em !important;
 }
+
+.alert-tappable.alert-radio {
+  height: auto !important;
+  contain: content !important;
+}
+
+.alert-checkbox-label.sc-ion-alert-md,
+.alert-checkbox-label.sc-ion-alert-ios {
+  white-space: normal !important;
+}

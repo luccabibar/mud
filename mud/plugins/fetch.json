@@ -2,7 +2,7 @@
   "cordova-plugin-whitelist": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-whitelist@^1.3.3"
+      "id": "cordova-plugin-whitelist@^1.3.4"
     },
     "is_top_level": true,
     "variables": {}
@@ -55,7 +55,9 @@
       "id": "phonegap-plugin-barcodescanner@^8.1.0"
     },
     "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+"
+    }
   },
   "cordova-plugin-screen-orientation": {
     "source": {
@@ -71,6 +73,14 @@
       "id": "es6-promise-plugin@^4.1.0"
     },
     "is_top_level": false,
+    "variables": {}
+  },
+  "onesignal-cordova-plugin": {
+    "source": {
+      "type": "registry",
+      "id": "onesignal-cordova-plugin"
+    },
+    "is_top_level": true,
     "variables": {}
   }
 }
