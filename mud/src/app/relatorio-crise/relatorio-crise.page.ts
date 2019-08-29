@@ -157,21 +157,121 @@ export class RelatorioCrisePage implements OnInit {
 
   envRel()
   {
-
+    let local_crise = 0;
     let casa = (<HTMLInputElement>document.getElementById("0")).value;
     let ambpub = (<HTMLInputElement>document.getElementById("1")).value;
     let escola = (<HTMLInputElement>document.getElementById("2")).value;
     let trabalho = (<HTMLInputElement>document.getElementById("3")).value;
     let transito = (<HTMLInputElement>document.getElementById("4")).value;
+    if(ambpub)
+    {
+      local_crise = 1;
+    }
+    else if(escola)
+    {
+      local_crise = 2;
+    }
+    else if(trabalho)
+    {
+      local_crise = 3;
+    }
+    else if(transito){
+      local_crise = 4;
+    }
+    
     let data_crise = (<HTMLInputElement>document.getElementById("5")).value;
+
     let duracao_crise = (<HTMLInputElement>document.getElementById("6")).value;
-    let acompanhadoSim = (<HTMLInputElement>document.getElementById("7")).value;
-    let acompanhadoNao = (<HTMLInputElement>document.getElementById("9")).value;
-    let acomp_amigo = (<HTMLInputElement>document.getElementById("10")).value;
+
+    let acompanhado = true;
+    if((<HTMLInputElement>document.getElementById("9")).value)
+    {
+      acompanhado = false;
+    }
+    //let acompanhadoNao = (<HTMLInputElement>document.getElementById("9")).value;
+
+    let pessoa_acompanhamento = 0;
+    // 0 = amigo let acomp_amigo = (<HTMLInputElement>document.getElementById("10")).value
     let acomp_familia = (<HTMLInputElement>document.getElementById("11")).value;
     let acomp_desc = (<HTMLInputElement>document.getElementById("12")).value;
-    let sint_dif_resp = (<HTMLInputElement>document.getElementById("13")).value;
-    let sint_rit_card_acelerado = (<HTMLInputElement>document.getElementById("14")).value;
+    if(acomp_familia)
+    {
+      pessoa_acompanhamento = 1;
+    } else if(acomp_desc)
+    {
+      pessoa_acompanhamento = 2;
+    }
+
+    let selecionados = 1;
+    let sintomas: any[];
+    if((<HTMLInputElement>document.getElementById("13")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("14")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("15")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("16")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("17")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("18")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("19")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("20")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("21")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("22")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("23")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("24")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+    if((<HTMLInputElement>document.getElementById("25")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
+
+
+    /*let sint_rit_card_acelerado = (<HTMLInputElement>document.getElementById("14")).value;
     let sint_sens_asfixia = (<HTMLInputElement>document.getElementById("15")).value;
     let sint_sudorese = (<HTMLInputElement>document.getElementById("16")).value;
     let sint_trem_abalos = (<HTMLInputElement>document.getElementById("17")).value;
@@ -182,12 +282,31 @@ export class RelatorioCrisePage implements OnInit {
     let sint_sens_irrealidade = (<HTMLInputElement>document.getElementById("22")).value;
     let sint_instabilidade = (<HTMLInputElement>document.getElementById("23")).value;
     let sint_medo_morrer = (<HTMLInputElement>document.getElementById("24")).value;
-    let sint_medo_perder_controle = (<HTMLInputElement>document.getElementById("25")).value;
-    let situacao1 = (<HTMLInputElement>document.getElementById("26")).value;
-    let situacao2 = (<HTMLInputElement>document.getElementById("27")).value;
-    let situacao3 = (<HTMLInputElement>document.getElementById("28")).value;
+    let sint_medo_perder_controle = (<HTMLInputElement>document.getElementById("25")).value;*/
+    let situacoes = "";
+    if((<HTMLInputElement>document.getElementById("26")).value!="")
+    {
+      situacoes+=(<HTMLInputElement>document.getElementById("26")).value;
+    }
+    if((<HTMLInputElement>document.getElementById("27")).value!="")
+    {
+      situacoes+=", "+(<HTMLInputElement>document.getElementById("26")).value;
+    }
+    if((<HTMLInputElement>document.getElementById("28")).value!="")
+    {
+      situacoes+=", "+(<HTMLInputElement>document.getElementById("26")).value;
+    }
+    /*let situacao2 = (<HTMLInputElement>document.getElementById("27")).value;
+    let situacao3 = (<HTMLInputElement>document.getElementById("28")).value;*/
     let preocupacao = (<HTMLInputElement>document.getElementById("29")).value;
 
+
+
+  }
+
+  voltar()
+  {
+    this.navCtrl.navigateBack('tabs/tab2');
   }
 
 }
