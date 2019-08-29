@@ -14,23 +14,23 @@ import { NavigationExtras } from '@angular/router';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+
   public user_sessao;
   public profissional;
-  // public crises;
+  public crises;
   public existe = 1;
 
-  public information;
-  //public information: any[] = [];
+  information;
 
 
-  public crises = [
-    { data: "25/08/2019", tipo: "leve" },
-    { data: "29/08/2019", tipo: "moderado" },
-    { data: "19/07/2019", tipo: "forte" },
-    { data: "06/09/2019", tipo: "extremo" },
+  // public crises = [
+  //   { data: "25/08/2019", tipo: "leve" },
+  //   { data: "29/08/2019", tipo: "moderado" },
+  //   { data: "19/07/2019", tipo: "forte" },
+  //   { data: "06/09/2019", tipo: "extremo" },
 
 
-  ]
+  // ]
 
 
   constructor(
@@ -43,7 +43,7 @@ export class Tab1Page {
   ) {
     this.user_sessao = this.ds.getDados("user_sessao");
     this.profissional = this.ds.getDados("user");
-    // this.carregarCrises();
+    this.carregarCrises();
   }
 
   // PARAMS
@@ -84,8 +84,15 @@ export class Tab1Page {
 
   }
 
+public mudaIntensidade(intensidade){
+  if(intensidade=="2"){
+    intensidade="moderado"
+  }else if(intensidade=="5"){
+    intensidade="extremo"
+  }
 
-
+  return intensidade;
+}
 
   //#region aqui vou puxar as crises do banco
   private geraJSON(crises) {
@@ -93,43 +100,51 @@ export class Tab1Page {
     for (let cri of crises) {
       temp.push(
         {
-          "data": moment(cri.hora_inicio).format('DD/MM'),
-          "children": [
-            {
-              "name": "Sono",
-              "CriseId": cri.id_crise,
-            },
-
-          ]
+          "criseId": cri.id_crise,
+          "name": moment(cri.created_at).format('DD/MM/YYYY'),
+          "intensidade": this.mudaIntensidade(cri.intensidade),
+          "duracao":  moment(cri.duracao).format('LT')
         }
       );
     }
+    console.log("INFO: ", temp);
+    return temp;
   }
 
-  // carregarCrises() {
-  //   this.bd.selectGenerico("SELECT * FROM crise WHERE usuario_id='" + this.user_sessao.id_usuario + "';").then(async (resposta) => {
-  //     console.log(resposta);
-  //     this.crises = resposta;
-  //     this.information = this.geraJSON(this.crises);
-  //     console.log("crises: ", this.information);
-  //     this.information[0].open = true;
-  //     this.existe = 0;
-  //   }).catch(async (resposta) => {
-  //     console.log("ERR: ", resposta)
-  //     const alert = await this.alertController.create({
-  //       header: 'ERRO!!',
-  //       subHeader: 'Dados inválidos!',
-  //       message: 'Erro ao buscar crises! Verifique se há conexão com a internet',
-  //       buttons: ['OK']
-  //     });
-  //     await alert.present();
-  //     this.existe = 0;
+  carregarCrises() {
+    this.bd.selectGenerico("SELECT * FROM crise WHERE usuario_id='" + this.user_sessao.id_usuario + "';").then(async (resposta) => {
+      console.log(resposta);
+      this.crises = resposta;
+      this.information = this.geraJSON(this.crises);
+      console.log("crises: ", this.information);
+      this.information[0].open = true;
+      this.existe = 0;
+    }).catch(async (resposta) => {
+      console.log("ERR: ", resposta)
+      const alert = await this.alertController.create({
+        header: 'ERRO!!',
+        subHeader: 'Dados inválidos!',
+        message: 'Erro ao buscar crises! Verifique se há conexão com a internet',
+        buttons: ['OK']
+      });
+      await alert.present();
+      this.existe = 0;
 
-  //   }).catch(async (resposta) => {
-  //     console.log(resposta);
-  //     this.existe = 2;
-  //   })
-  // }
+    }).catch(async (resposta) => {
+      console.log(resposta);
+      this.existe = 2;
+    })
+  }
+
+
+  doRefresh(event) {
+    this.carregarCrises();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
 
 }
 //#endregion

@@ -62,9 +62,9 @@ export class CadastroUserPage implements OnInit {
       );
       this.slideTwoForm = formBuilder.group({
         nome_contato1: ['' , Validators.compose([Validators.required, Validators.pattern('[ A-Za-zÀ-ú ]*')])],
-        num_contato1: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CelularValidator.checkCelular])],
+        num_contato1: ['', Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])],
         nome_contato2: ['' , Validators.compose([Validators.pattern('[ A-Za-zÀ-ú ]*')])],
-        num_contato2: ['', Validators.compose([Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+')])]
+        num_contato2: ['', Validators.compose([Validators.minLength(15), Validators.maxLength(15)])]
       });
       this.slideThreeForm = formBuilder.group({
         data_primeira_crise : ['', Validators.compose([Validators.required])],
@@ -308,24 +308,15 @@ export class CadastroUserPage implements OnInit {
 
     this.BD.cadUsu1(nome,cpf,email,celular,senha,dt_nasc)
     .then(async(response)=>{
-        const alert = await this.AlertController.create({
-          header: 'Confirmação',
-          subHeader: 'Sucesso!',
-          message: JSON.stringify(response[0].id_usuario),
-          buttons: ['OK']
-        });
-        
         this.dadosService.setId(Number(response[0].id_usuario));
-
-        await alert.present();
       }
     )
     .catch(async(response)=>{
 
       const alert = await this.AlertController.create({
-        header: 'Confirmação',
-        subHeader: 'Erro!',
-        message: JSON.stringify(response),
+        header: 'Erro!',
+        subHeader: 'Por favor tente novamente',
+        //message: JSON.stringify(response),
         buttons: ['OK']
       });
   
@@ -343,7 +334,7 @@ export class CadastroUserPage implements OnInit {
     let cont2_tell = (<HTMLInputElement>document.getElementById("9")).value;
 
     this.BD.cadUsu2(this.dadosService.getId().toString(),cont1_nome,cont1_tell,cont2_nome,cont2_tell)
-    .then(async(response)=>{
+    /*.then(async(response)=>{
         const alert = await this.AlertController.create({
           header: 'Confirmação',
           subHeader: 'Sucesso!',
@@ -353,13 +344,13 @@ export class CadastroUserPage implements OnInit {
         
         await alert.present();
       }
-    )
+    )*/
     .catch(async(response)=>{
 
       const alert = await this.AlertController.create({
-        header: 'Confirmação',
-        subHeader: 'Erro!',
-        message: JSON.stringify(response),
+        header: 'Erro!',
+        subHeader: 'Por favor tente novamente.',
+        //message: JSON.stringify(response),
         buttons: ['OK']
       });
   
@@ -397,9 +388,9 @@ export class CadastroUserPage implements OnInit {
     .catch(async(response)=>{
 
       const alert = await this.AlertController.create({
-        header: 'Confirmação',
-        subHeader: 'Erro!',
-        message: JSON.stringify(response),
+        header: 'Erro!',
+        subHeader: 'Por favor, tente novamente',
+        //message: JSON.stringify(response),
         buttons: ['OK']
       });
   
@@ -410,4 +401,5 @@ export class CadastroUserPage implements OnInit {
 ngOnInit() {
   this.IonSlides.lockSwipes(true);
 }
+
 }
