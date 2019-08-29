@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FichaPacientePage implements OnInit {
 
+  public dados_ini;
   public paciente;
   public profissional;
 
@@ -28,25 +29,33 @@ export class FichaPacientePage implements OnInit {
    * @param id o id a procurar
    */
   getDadoInicial(id){
+    
     //eu JURO que nao copiei esse sql do stackoverflow (nao integralmente, mas nao vem ao caso)
-    let sql = "SELECT d.primeira_crise, d.situacao_sintoma, d.intolerancia, array_agg(s.nome)" +
-      "JOIN sintoma s " +
-      "FROM dado_inicial d " +
-      "ON s.id_sintoma = ANY(d.sintoma_id)" +
+    let sql = "SELECT d.primeira_crise, d.situacao_sintoma, d.intolerancia, array_agg(s.nome) " +
+      "FROM dado_inicial AS d " +
+      "JOIN sintoma AS s " +
+      "ON s.id_sintoma = ANY(d.sintoma_id) " +
       "WHERE d.usuario_id = " + id + " " +
       "GROUP BY d.primeira_crise, d.situacao_sintoma, d.intolerancia, s.nome";
 
     this.db.selectGenerico(sql)
-    .then((response)=>{
-      console.log(response);
+    .then((response: Array<Object>)=>{
+      let sintomas:Array<String> = [];
+      response.forEach(row => {
+        let sint: String = row.array_agg;
+        sint = sint.slice(2, sint.length - 2);
+        sintomas.push(sint);
+      });
+      
+      this.dados_ini = response[0];
+      this.dados_ini.array_agg = sintomas;
+      console.log(this.dados_ini);
     })
     .catch((ex) => {
-      if (ex.error.text == "sucesso") {
-        console.log(ex);      
-      } else {
-        console.log("err", ex);
-      }
+      console.log("err", ex);
+      return;
     });
+
   }
 
   constructor(

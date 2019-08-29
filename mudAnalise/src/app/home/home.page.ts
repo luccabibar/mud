@@ -41,6 +41,16 @@ export class HomePage implements OnInit {
     }
   }
 
+  doRefresh(event) {
+    this.carregaSessoes();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
+
   public async carregaSessoes() {
     this.bd.selectGenerico("SELECT * FROM sessao INNER JOIN usuario ON sessao.usuario_id=usuario.id_usuario WHERE profissional_id='" + this.profissional.id_usuario + "' AND status = 1;").then(async (resposta) => {
       console.log(resposta);
@@ -107,6 +117,8 @@ export class HomePage implements OnInit {
 
     });
     await alert.present();
+    this.carregaSessoes();
+
   }
 
   async alertaDeletar(idSessao) {
@@ -136,7 +148,7 @@ export class HomePage implements OnInit {
 
 
   public apagarSessao(idSessao) {
-    let sql = "UPDATE sessao SET  status = 0, deleted_at=NOW() WHERE id_sessao="+idSessao+";";
+    let sql = "UPDATE sessao SET  status = 0, deleted_at=NOW() WHERE id_sessao=" + idSessao + ";";
     this.bd.updateGenerico(sql).then(async resposta => {
       console.log(resposta);
     });

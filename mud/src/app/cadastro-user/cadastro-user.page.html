@@ -42,7 +42,7 @@
        
              <ion-item padding-horizontal>
                <ion-label class="label" position="stacked">Celular</ion-label>
-               <ion-input #celulari [(ngModel)]="celulare" name="celular" id="3" formControlName="celular" type="number" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt1)" placeholder="Insira apenas os números (incluindo o DDD)."></ion-input>
+               <ion-input #celulari [brmasker]="{form: slideOneForm.get('celular'), phone: true}" [(ngModel)]="celulare" name="celular" id="3" formControlName="celular" type="tel" [class.invalid]="!slideOneForm.controls.celular.valid && (slideOneForm.controls.celular.dirty || submitAttempt1)" placeholder="Insira apenas os números (incluindo o DDD)." max="15"></ion-input>
             </ion-item>
        
             <ion-item  padding-horizontal *ngIf="!slideOneForm.controls.celular.valid  && (slideOneForm.controls.celular.dirty || submitAttempt1)">
