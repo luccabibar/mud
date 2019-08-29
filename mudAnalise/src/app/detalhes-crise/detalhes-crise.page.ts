@@ -14,7 +14,7 @@ export class DetalhesCrisePage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe(params => {
       this.criseId = params["criseId"];
-      this.tipo = params["tipo"];
+      this.tipo = params["intensidade"];
 
     });
     console.log("OLAAA",this.criseId)

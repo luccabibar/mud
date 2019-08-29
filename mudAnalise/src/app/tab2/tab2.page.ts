@@ -42,7 +42,7 @@ export class Tab2Page {
     } else {
       this.carregaSemanas();
     }
-  }
+  } 
 
   public async carregaSemanas() {
     this.bd.selectGenerico("SELECT * FROM semana WHERE usuario_id='" + this.user_sessao.id_usuario + "';").then(async (resposta) => {
