@@ -12,25 +12,51 @@
 <ion-content>
   <ion-card>  
     <ion-card-header>
-        <h2 color="black">{{ paciente.nome }} <!--, {{ paciente.idade}} --></h2>
+      <ion-card-title>
+        {{ paciente.nome }} <!--, {{ paciente.idade}} -->
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content class="dados-paciente">
       <img src="../../../assets/perfil_generico2.png" alt="" class="img-perfil">
       <div>
-        <p>Nascido(a) em: {{ paciente.dt_nasc }} </p>
-        <p>Email: {{ paciente.email }} </p>
-        <p>Celular: {{ paciente.celular }}</p>
-        <p>Sexo: {{ paciente.sexo }} </p>
+        <p>Nascido(a) em:<br> <span class="minor-text">{{ paciente.dt_nasc }}</span> </p>
+        <p>Email:<br> <span class="minor-text">{{ paciente.email }}</span> </p>
+        <p>Celular:<br> <span class="minor-text">{{ paciente.celular }}</span> </p>
       </div>
     </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Dados sobre a primeira crise
+      </ion-card-title>
+    </ion-card-header>
     <ion-card-content>
-      <ion-item *ngIf="dados_ini">
-        <p> {{ dados_ini.primeira_crise }} </p>
-        <p> {{ dados_ini.situacao_sintoma }} </p>
-        <p> {{ dados_ini.intolerancia }} </p>
+      <div *ngIf="dados_ini; else nodata">
+        <div class="dados-label-box">
+          <p class="dados-label">data: </p>
+          <p class="minor-text"> {{ dados_ini.primeira_crise }} </p>
+        </div>
+        <div class="dados-label-box">
+          <p class="dados-label">Intolerâncias:</p>
+          <p class="minor-text"> {{ dados_ini.intolerancia }} </p>
+        </div>
+        <div class="dados-label-box">
+          <p class="dados-label">Situação dos sintomas:</p>
+          <p class="minor-text"> {{ dados_ini.situacao_sintoma }} </p>
+        </div>
         <!-- array de sintomas -->
-        <p *ngFor="let sintoma of dados_ini.array_agg"> {{ sintoma }} </p>
-      </ion-item>
+        <div class="dados-label-box">
+          <p class="dados-label">Sintomas:</p>
+          <div class="sintomas-box">
+            <span class="minor-text" *ngFor="let sintoma of dados_ini.array_agg"> <b>-</b>&nbsp;{{ sintoma }}</span>
+          </div>
+        </div>  
+      </div>
+      <ng-template #nodata>
+        <ion-item class="minor-text">Dados não encontrados</ion-item>
+      </ng-template>
     </ion-card-content>
   </ion-card>
 </ion-content>

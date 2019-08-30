@@ -112,7 +112,8 @@ public mudaIntensidade(intensidade){
   }
 
   carregarCrises() {
-    this.bd.selectGenerico("SELECT * FROM crise WHERE usuario_id='" + this.user_sessao.id_usuario + "';").then(async (resposta) => {
+    this.bd.selectGenerico("SELECT * FROM crise WHERE usuario_id=" + this.user_sessao.id_usuario + ";")
+    .then(async (resposta) => {
       console.log(resposta);
       this.crises = resposta;
       this.information = this.geraJSON(this.crises);
@@ -120,7 +121,9 @@ public mudaIntensidade(intensidade){
       this.information[0].open = true;
       this.existe = 0;
     }).catch(async (resposta) => {
+      
       console.log("ERR: ", resposta)
+
       const alert = await this.alertController.create({
         header: 'ERRO!!',
         subHeader: 'Dados inválidos!',
