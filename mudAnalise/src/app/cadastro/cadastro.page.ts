@@ -147,7 +147,7 @@ export class CadastroPage implements OnInit {
       this.formCadastro.reset()
     }).catch(async resposta => {
       const alert = await this.alertController.create({
-        message: 'ERRO NO CADASTROOOOO!',
+        message: 'Erro!',
         buttons: ['OK']
       });
       console.log("Erro: ", resposta)

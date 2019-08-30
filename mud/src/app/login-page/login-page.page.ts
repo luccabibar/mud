@@ -75,19 +75,19 @@ export class LoginPagePage {
 
       if(response[0].senha == senha && response[0].profissional == 'f')
       {
-          const alert = await this.alertController.create({
-          header: 'Confirmação',
-          message: JSON.stringify(response),
-          buttons: [{
-            text: 'OK',
-          handler: () => { 
+          //const alert = await this.alertController.create({
+          //header: 'Confirmação',
+          //message: JSON.stringify(response),
+          //buttons: [{
+          //  text: 'OK',
+          //handler: () => { 
             this.emai = "";
             this.senh = "";
-            this.router.navigateByUrl('/tabs/tab2'); }
-          }]
-        });
+            this.router.navigateByUrl('/tabs/tab2'); //}
+          //}]
+        //});
 
-        await alert.present();
+        //await alert.present();
 
         // Deu certo, então salva os dados do Usuário Logado dentro do DadosService
         this.dadosService.setId(Number(response[0].id_usuario));
@@ -106,7 +106,7 @@ export class LoginPagePage {
       {
           const alert = await this.alertController.create({
           header: 'Senha incorreta',
-          message: 'Digite a senha correta',
+          message: 'Digite a senha correta.',
           buttons:[
             {
               text: 'OK',

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="verdemud4">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      Preencha o campo abaixo para receber sua senha esquecida no e-mail vinculado à sua conta.
+    </ion-card-header>
+    <form [formGroup]="formEsqueci">
+      <ion-item padding-horizontal>
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input formControlName="email" type="email" placeholder="Adicionar e-mail"></ion-input>
+          <!--<ng-container *ngFor="let erro of mensagens_validacao.email">  
+          <span
+            *ngIf="formEsqueci.get('email').hasError(erro.tipo) && (formEsqueci.get('email').dirty || formEsqueci.get('email').touched)"
+            class="msg-erro">
+            {{erro.mensagem}}
+          </span>
+        </ng-container>-->
+      </ion-item>
+      <hr><hr>
+    </form>
+    <ion-button padding-horizontal fill="outline" shape="round"  expand="block" color="verdemud4" (click)="sendEmail()" [disabled]="disableButton">
+      <ion-label>Enviar E-mail</ion-label>
+    </ion-button>
+  </ion-card>
+</ion-content>

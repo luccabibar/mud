@@ -187,4 +187,13 @@ export class BancoService {
     let header=new HttpHeaders({'Content-type':'application/json'});
     return this.http.post(this.API_URL+'relatorioSemanal', data,{headers: header}).toPromise(); 
   }
+
+  esqueciSenha(sql: string) {
+    var data = {
+      sql: sql,
+    };
+
+    let header = new HttpHeaders({ 'Content-type': 'application/json' });
+    return this.http.post(this.API_URL + 'recuperarSenha', data, { headers: header }).toPromise();
+  }
 }

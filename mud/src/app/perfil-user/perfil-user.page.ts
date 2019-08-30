@@ -1,8 +1,9 @@
 
+import { CpfValidator } from '../validators/cpf';
 import { NavController, IonInput, AlertController } from '@ionic/angular';
 import { Component, ViewChild, Input} from '@angular/core';
 import { DadosService } from '../dados.service';
-
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 
@@ -16,9 +17,7 @@ import { BancoService } from '../banco.service';
 })
 export class PerfilUserPage {
 
-  constructor(public bancoService: BancoService, public nav : NavController,public dadosService: DadosService,public alertController: AlertController, public router: Router){
-
-  }
+  public perfil: FormGroup;
 
   @ViewChild('deus')  ino: IonInput;
 
@@ -28,6 +27,17 @@ export class PerfilUserPage {
   celular = this.dadosService.getCelular();
   dtnasc = this.dadosService.getDataNasc();
   private desativado: boolean=true;
+
+  constructor(public bancoService: BancoService, public nav : NavController,public dadosService: DadosService,public alertController: AlertController, public router: Router, public formBuilder: FormBuilder){
+    this.perfil = formBuilder.group({
+      nome: [ this.nome , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
+      email: [this.email, Validators.compose([Validators.required, Validators.email])],
+      datanasc : [this.dtnasc, Validators.compose([Validators.required])],
+      celular : [this.celular, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])],
+      cpf: [this.cpf, Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf])]
+    });
+  }
+
   aa()
   {
     setTimeout(() => {
@@ -292,7 +302,8 @@ export class PerfilUserPage {
         text: 'Sair',
         handler: data => {
           this.dadosService.limpaDados();
-          this.nav.navigateForward('login-page');
+          //this.nav.navigateForward('login-page');
+          window.location.replace("/login-page");
         }
       }
     ]
@@ -303,7 +314,14 @@ export class PerfilUserPage {
 
   ativa()
   {
-    this.desativado = false;
+    if(this.perfil.valid)
+    {
+      this.desativado = false;
+    }
+    else
+    {
+      this.desativado = true;
+    }
   }
 }
 
