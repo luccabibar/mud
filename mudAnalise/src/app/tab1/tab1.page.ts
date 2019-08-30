@@ -84,15 +84,20 @@ export class Tab1Page {
 
   }
 
-public mudaIntensidade(intensidade){
-  if(intensidade=="2"){
-    intensidade="moderado"
-  }else if(intensidade=="5"){
-    intensidade="extremo"
-  }
+  public mudaIntensidade(intensidade) {
+    if (intensidade == "1") {
+      intensidade = "leve"
+    } else if (intensidade == "2") {
+      intensidade = "moderado"
+    } else if (intensidade == "3") {
+      intensidade = "forte"
+    }
+    else if (intensidade == "4") {
+      intensidade = "extremo"
+    }
 
-  return intensidade;
-}
+    return intensidade;
+  }
 
   //#region aqui vou puxar as crises do banco
   private geraJSON(crises) {
@@ -103,12 +108,24 @@ public mudaIntensidade(intensidade){
           "criseId": cri.id_crise,
           "name": moment(cri.created_at).format('DD/MM/YYYY'),
           "intensidade": this.mudaIntensidade(cri.intensidade),
-          "duracao":  moment(cri.duracao).format('LT')
+          "duracao": this.duracao(cri.hora_inicio, cri.hora_fim)
+
         }
       );
     }
     console.log("INFO: ", temp);
     return temp;
+  }
+
+  public duracao(hora_inicio, hora_fim) {
+    var start = moment(hora_inicio, "HH:mm");
+    var end = moment(hora_fim, "HH:mm");
+    var minutes = end.diff(start, 'minutes');
+
+    if (minutes < 0 || minutes == null || minutes == NaN) {
+      minutes = 0;
+    }
+    return minutes;
   }
 
   carregarCrises() {
@@ -149,6 +166,10 @@ public mudaIntensidade(intensidade){
     }, 2000);
   }
 
+  public atualizaCrises() {
+    this.carregarCrises();
+
+  }
 }
 //#endregion
 
