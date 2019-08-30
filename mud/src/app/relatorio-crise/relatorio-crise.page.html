@@ -33,7 +33,7 @@
                     <ion-text style="font-size: 15px !important;" color="verdemud4" text-wrap>Quanto tempo durou a crise?</ion-text>
                 </ion-item>
                 <ion-item padding-horizontal lines="none">
-                    <ion-range (ionFocus)="mudaLabel()" (keyup)="mudaLabel()" (ionChange)="mudaLabel()" id="6" min="0" max="1000" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
+                    <ion-range (ionFocus)="mudaLabel()" (keyup)="mudaLabel()" (ionChange)="mudaLabel()" id="tempo" min="0" max="1000" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
                 </ion-item>
                 <ion-label class="label" id="lblTempo" position="fixed"></ion-label>
             </ion-card-content>
@@ -178,9 +178,9 @@
                     <hr><hr><hr><hr><hr>
                 </div>  
                 <ion-item padding-horizontal lines="none">
-                   <ion-label class="label" position="stacked" text-wrap>Preocupação com a possibilidade de outra crise:</ion-label>
+                   <ion-label class="label" position="stacked" text-wrap>Intensidade da crise:</ion-label>
                    <ion-input disabled></ion-input>
-                   <ion-range (ionFocus)="mudaLabel2()" (keyup)="mudaLabel2()" (ionChange)="mudaLabel2()" id="preocupa" min="0" max="8" step="2" snaps="true" ticks="false" color="verdemud4" ></ion-range>
+                   <ion-range (ionFocus)="mudaLabel2()" (keyup)="mudaLabel2()" (ionChange)="mudaLabel2()" id="preocupa" min="0" max="6" step="2" snaps="true" ticks="false" color="verdemud4" ></ion-range>
                 </ion-item>
                 <ion-label class="label" id="lblGrau" position="fixed"></ion-label>
             </ion-card-content>

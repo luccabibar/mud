@@ -23,7 +23,7 @@ export class RelatorioCrisePage implements OnInit {
   ngOnInit() {
     this.IonSlides.lockSwipes(true);
     document.getElementById("lblTempo").innerHTML = '- de 10 mins';
-    document.getElementById("lblGrau").innerHTML = 'Nenhuma';
+    document.getElementById("lblGrau").innerHTML = 'Leve';
   }
 
   antSlide()
@@ -101,21 +101,17 @@ export class RelatorioCrisePage implements OnInit {
     let grau = (<HTMLInputElement>document.getElementById("preocupa")).value;
     if(grau == "0")
     {
-      document.getElementById("lblGrau").innerHTML = 'Nenhuma';
+      document.getElementById("lblGrau").innerHTML = 'Leve';
     }
     else if(grau == "2")
     {
-      document.getElementById("lblGrau").innerHTML = 'Leve';
+      document.getElementById("lblGrau").innerHTML = 'Moderada';
     }
     else if(grau == "4")
     {
-      document.getElementById("lblGrau").innerHTML = 'Moderada';
-    }
-    else if(grau == "6")
-    {
       document.getElementById("lblGrau").innerHTML = 'Forte';
     }
-    else if(grau == "8")
+    else if(grau == "6")
     {
       document.getElementById("lblGrau").innerHTML = 'Extrema';
     }
@@ -184,10 +180,10 @@ export class RelatorioCrisePage implements OnInit {
     
     let data_crise = (<HTMLInputElement>document.getElementById("5")).value;
 
-    let duracao_crise = (<HTMLInputElement>document.getElementById("6")).value;
+    let duracao_crise = (<HTMLInputElement>document.getElementById("tempo")).value;
 
     let acompanhado = true;
-    if((<HTMLInputElement>document.getElementById("9")).value)
+    if((<HTMLInputElement>document.getElementById("8")).value)
     {
       acompanhado = false;
     }
@@ -195,8 +191,8 @@ export class RelatorioCrisePage implements OnInit {
 
     let pessoa_acompanhamento = 0;
     // 0 = amigo let acomp_amigo = (<HTMLInputElement>document.getElementById("10")).value
-    let acomp_familia = (<HTMLInputElement>document.getElementById("11")).value;
-    let acomp_desc = (<HTMLInputElement>document.getElementById("12")).value;
+    let acomp_familia = (<HTMLInputElement>document.getElementById("10")).value;
+    let acomp_desc = (<HTMLInputElement>document.getElementById("11")).value;
     if(acomp_familia)
     {
       pessoa_acompanhamento = 1;
@@ -207,6 +203,11 @@ export class RelatorioCrisePage implements OnInit {
 
     let selecionados = 1;
     let sintomas: any[];
+    if((<HTMLInputElement>document.getElementById("12")).value)
+    {
+      sintomas[selecionados-1] = selecionados;
+      selecionados++; 
+    }
     if((<HTMLInputElement>document.getElementById("13")).value)
     {
       sintomas[selecionados-1] = selecionados;
@@ -267,11 +268,6 @@ export class RelatorioCrisePage implements OnInit {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("25")).value)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
 
 
     /*let sint_rit_card_acelerado = (<HTMLInputElement>document.getElementById("14")).value;
@@ -287,25 +283,25 @@ export class RelatorioCrisePage implements OnInit {
     let sint_medo_morrer = (<HTMLInputElement>document.getElementById("24")).value;
     let sint_medo_perder_controle = (<HTMLInputElement>document.getElementById("25")).value;*/
     let situacoes = "";
+    if((<HTMLInputElement>document.getElementById("25")).value!="")
+    {
+      situacoes+=(<HTMLInputElement>document.getElementById("25")).value;
+    }
     if((<HTMLInputElement>document.getElementById("26")).value!="")
     {
-      situacoes+=(<HTMLInputElement>document.getElementById("26")).value;
+      situacoes+=", "+(<HTMLInputElement>document.getElementById("26")).value;
     }
     if((<HTMLInputElement>document.getElementById("27")).value!="")
     {
-      situacoes+=", "+(<HTMLInputElement>document.getElementById("26")).value;
-    }
-    if((<HTMLInputElement>document.getElementById("28")).value!="")
-    {
-      situacoes+=", "+(<HTMLInputElement>document.getElementById("26")).value;
+      situacoes+=", "+(<HTMLInputElement>document.getElementById("27")).value;
     }
     /*let situacao2 = (<HTMLInputElement>document.getElementById("27")).value;
     let situacao3 = (<HTMLInputElement>document.getElementById("28")).value;*/
-    let preocupacao = (<HTMLInputElement>document.getElementById("29")).value;
+    let intensidade = (<HTMLInputElement>document.getElementById("preocupa")).value;
 
     this.dadosService.setCrise_hr_fim = new Date().getTime;
 
-    this.bancoService.relatorio_crise()
+    this.bancoService.relatorio_crise(this.dadosService.getId().toString(),local_crise.toString(),this.dadosService.getCrise_hr_inicio().toString(),situacoes,this.dadosService.getCrise_hr_fim().toString(),intensidade,situacoes,pessoa_acompanhamento)
     .then(async(response)=>{
         const alert = await this.alertController.create({
           header: 'Relátorio enviado',
