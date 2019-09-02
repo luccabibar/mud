@@ -34,14 +34,14 @@ export class DadosService {
   data_relatorioS_I = null;
   data_relatorioS_F = null;
 
-  crise_hr_inicio = null;
-  crise_hr_fim = null;
+  crise_hr_inicio = "";
+  crise_hr_fim = "";
 
   getCrise_hr_inicio()
   {
     return this.crise_hr_inicio;
   }
-  setCrise_hr_fim(x: Date)
+  setCrise_hr_fim(x: string)
   {
     this.crise_hr_fim = x;
   }
@@ -49,7 +49,7 @@ export class DadosService {
   {
     return this.crise_hr_fim;
   }
-  setCrise_hr_inicio(x: Date)
+  setCrise_hr_inicio(x: string)
   {
     this.crise_hr_inicio = x;
   }

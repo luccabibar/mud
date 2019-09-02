@@ -156,27 +156,9 @@ export class RelatorioCrisePage implements OnInit {
 
   envRel()
   {
-    let local_crise = 0;
-    let casa = (<HTMLInputElement>document.getElementById("0")).value;
-    let ambpub = (<HTMLInputElement>document.getElementById("1")).value;
-    let escola = (<HTMLInputElement>document.getElementById("2")).value;
-    let trabalho = (<HTMLInputElement>document.getElementById("3")).value;
-    let transito = (<HTMLInputElement>document.getElementById("4")).value;
-    if(ambpub)
-    {
-      local_crise = 1;
-    }
-    else if(escola)
-    {
-      local_crise = 2;
-    }
-    else if(trabalho)
-    {
-      local_crise = 3;
-    }
-    else if(transito){
-      local_crise = 4;
-    }
+    let local_crise = " ";
+    local_crise = (<HTMLInputElement>document.getElementById("4")).value;
+    
     
     let data_crise = (<HTMLInputElement>document.getElementById("5")).value;
 
@@ -201,73 +183,75 @@ export class RelatorioCrisePage implements OnInit {
       pessoa_acompanhamento = 2;
     }
 
-    let selecionados = 1;
+    /*let selecionados = 1;
     let sintomas: any[];
-    if((<HTMLInputElement>document.getElementById("12")).value)
+    if((<HTMLInputElement>document.getElementById("12")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("13")).value)
+    if((<HTMLInputElement>document.getElementById("13")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("14")).value)
+    if((<HTMLInputElement>document.getElementById("14")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("15")).value)
+    if((<HTMLInputElement>document.getElementById("15")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("16")).value)
+    if((<HTMLInputElement>document.getElementById("16")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("17")).value)
+    if((<HTMLInputElement>document.getElementById("17")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("18")).value)
+    if((<HTMLInputElement>document.getElementById("18")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("19")).value)
+    if((<HTMLInputElement>document.getElementById("19")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("20")).value)
+    if((<HTMLInputElement>document.getElementById("20")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("21")).value)
+    if((<HTMLInputElement>document.getElementById("21")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("22")).value)
+    if((<HTMLInputElement>document.getElementById("22")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("23")).value)
+    if((<HTMLInputElement>document.getElementById("23")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
     }
-    if((<HTMLInputElement>document.getElementById("24")).value)
+    if((<HTMLInputElement>document.getElementById("24")).checked)
     {
       sintomas[selecionados-1] = selecionados;
       selecionados++; 
-    }
+    }*/
+
+    let sintomas_crise = (<HTMLInputElement>document.getElementById("12")).value;
 
 
     /*let sint_rit_card_acelerado = (<HTMLInputElement>document.getElementById("14")).value;
@@ -282,8 +266,8 @@ export class RelatorioCrisePage implements OnInit {
     let sint_instabilidade = (<HTMLInputElement>document.getElementById("23")).value;
     let sint_medo_morrer = (<HTMLInputElement>document.getElementById("24")).value;
     let sint_medo_perder_controle = (<HTMLInputElement>document.getElementById("25")).value;*/
-    let situacoes = "";
-    if((<HTMLInputElement>document.getElementById("25")).value!="")
+    let situacoes = (<HTMLInputElement>document.getElementById("25")).value;
+    /*if((<HTMLInputElement>document.getElementById("25")).value!="")
     {
       situacoes+=(<HTMLInputElement>document.getElementById("25")).value;
     }
@@ -294,14 +278,19 @@ export class RelatorioCrisePage implements OnInit {
     if((<HTMLInputElement>document.getElementById("27")).value!="")
     {
       situacoes+=", "+(<HTMLInputElement>document.getElementById("27")).value;
-    }
+    }*/
     /*let situacao2 = (<HTMLInputElement>document.getElementById("27")).value;
     let situacao3 = (<HTMLInputElement>document.getElementById("28")).value;*/
     let intensidade = (<HTMLInputElement>document.getElementById("preocupa")).value;
 
-    this.dadosService.setCrise_hr_fim = new Date().getTime;
+    let horas="";
+    let hora = new Date().getHours();
+    let minuto = new Date().getMinutes();
+    let segundo = new Date().getSeconds();
+    horas=hora+":"+minuto+":"+segundo;
+    this.dadosService.setCrise_hr_fim(horas);
 
-    this.bancoService.relatorio_crise(this.dadosService.getId().toString(),local_crise.toString(),this.dadosService.getCrise_hr_inicio().toString(),situacoes,this.dadosService.getCrise_hr_fim().toString(),intensidade,situacoes,pessoa_acompanhamento)
+    this.bancoService.relatorio_crise(this.dadosService.getId().toString(),local_crise,sintomas_crise,this.dadosService.getCrise_hr_inicio().toString(),this.dadosService.getCrise_hr_fim().toString(),intensidade,situacoes,pessoa_acompanhamento)
     .then(async(response)=>{
         const alert = await this.alertController.create({
           header: 'Relátorio enviado',
