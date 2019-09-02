@@ -42,7 +42,7 @@ export class FichaPacientePage implements OnInit {
     this.db.selectGenerico(sql)
     .then((response: Array<any>)=>{
       //concatena os n registros em um so
-      let sintomas:Array<String> = [];
+      let sintomas:Array<String> = [];  
       response.forEach(row => {
         let sint: String = row.array_agg;
         sint = sint.slice(2, sint.length - 2); //tira uns chars indesejados da string
@@ -51,6 +51,10 @@ export class FichaPacientePage implements OnInit {
       
       this.dados_ini = response[0];
       this.dados_ini.array_agg = sintomas;
+
+      //arruma data
+      let aniver = (this.dados_ini.primeira_crise).split('-');
+      this.dados_ini.primeira_crise = aniver[2] + "/" + aniver[1] + "/" + aniver[0];
     })
     .catch((ex) => {
       console.log("err", ex);
@@ -66,6 +70,10 @@ export class FichaPacientePage implements OnInit {
     private alertController: AlertController
   ) {
     this.paciente = this.ds.getDados("user_sessao");
+    //arruma campo de aniver
+    let aniver = (this.paciente.dt_nasc).split('-');
+    this.paciente.dt_nasc = aniver[2] + "/" + aniver[1] + "/" + aniver[0];
+
     this.getDadoInicial(this.paciente.id_usuario);
     //let idade = ;
     //this.paciente.idade = ;

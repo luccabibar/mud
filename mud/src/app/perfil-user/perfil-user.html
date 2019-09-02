@@ -21,31 +21,35 @@
         </ion-fab-list>
       </ion-fab>-->
   <ion-card>
+      <form [formGroup]="perfil">
       <img id="img" src="../../assets/perfilmud.png" />
     <ion-card-header>
-      <ion-card-title (ionChange)="ativa()" style="font-size: 1.5rem;"><ion-input value="{{nome}}" type="text" name="nome" id="6"></ion-input></ion-card-title>
-      <ion-card-subtitle (ionChange)="ativa()" style="margin-top: -1rem; margin-bottom: -2rem;"><ion-input value="{{email}}" type="email" name="email" id="7"></ion-input></ion-card-subtitle>
+      <ion-card-title (ionChange)="ativa()" style="font-size: 1.5rem;"><ion-input formControlName="nome" value="{{nome}}" type="text" name="nome" id="6"></ion-input></ion-card-title>
+      <ion-card-subtitle (ionChange)="ativa()"  style="margin-top: -1rem; margin-bottom: -2rem;"><ion-input formControlName="email" value="{{email}}" type="email" name="email" id="7"></ion-input></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
+        
         <ion-item>
           <ion-label class="label" position="stacked"><ion-icon name="calendar"></ion-icon> Data da Nascimento </ion-label>
           <!--<ion-input value="{{dtnasc}}" type="date" name="nome" id="2" placeholder="Informe sua data de Nascimento"></ion-input>-->
-          <ion-datetime (ionChange)="ativa()" backdropDismiss name="datanasc" value="{{dtnasc}}" id="3" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
+          <ion-datetime (ionChange)="ativa()" formControlName="datanasc" backdropDismiss name="datanasc" value="{{dtnasc}}" id="3" display-format="D MMM, YYYY" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label class="label" position="stacked"><ion-icon name="call"></ion-icon> Celular</ion-label>
-          <ion-input (ionChange)="ativa()" value="{{celular}}" type="text" name="nome" id="4" placeholder="Informe seu número de celular"></ion-input>
+          <ion-input (ionChange)="ativa()" [brmasker]="{form: perfil.get('celular'), phone: true}" formControlName="celular" value="{{celular}}" type="tel" name="nome" id="4" placeholder="Informe seu número de celular"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> CPF</ion-label>
-          <ion-input value="{{cpf}}" (ionChange)="ativa()" type="text" name="nome" id="5" placeholder="Informe seu CPF"></ion-input>
+          <ion-input value="{{cpf}}" (ionChange)="ativa()" formControlName="cpf" type="text" name="nome" id="5" placeholder="Informe seu CPF"></ion-input>
         </ion-item>
         <ion-button (click)="salvarPerfil()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;" disabled="{{desativado}}">Salvar Perfil</ion-button>
         
         <ion-button (click)="editarSintomas()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Editar Sintomas</ion-button>
+      
       </ion-list>
     </ion-card-content>
+  </form>
   </ion-card>
 
   <ion-button (click)="alterarSenha()" expand="block" shape="round" fill="outline" style="margin-bottom: 2em; margin-top: 1em;" color="danger">Alterar Senha</ion-button>

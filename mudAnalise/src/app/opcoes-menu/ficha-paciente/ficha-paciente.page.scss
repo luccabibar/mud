@@ -10,3 +10,28 @@
     color: black;
     font-size: 4vh;
 }
+
+h1, h2, p {
+    color: black;
+}
+
+.minor-text {
+    color: #555;
+}
+
+.dados-label-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.dados-label {
+    /*font-size: 2.5vh;*/
+    width: 35vw;
+    min-width: 35vw;
+    max-width: 35vw;
+}
+
+.sintomas-box {
+    display: flex;
+    flex-direction: column;
+}

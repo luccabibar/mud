@@ -1,10 +1,13 @@
 <ion-header>
-  <ion-toolbar color="branco">
-    <ion-title>Esqueci a senha ...</ion-title>
+  <ion-toolbar color="escuro">
+    <!--<ion-title>Esqueci a senha</ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/login">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
+    </ion-buttons>-->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -12,23 +15,23 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      Preencha o campo abaixo para receber sua senha esquecida no e-mail vinculado a sua conta profissional
+      Preencha o campo abaixo para receber sua senha esquecida no e-mail vinculado à sua conta profissional.
     </ion-card-header>
     <form [formGroup]="formEsqueci">
-      <ion-item>
+      <ion-item padding-horizontal>
         <ion-label position="stacked">E-mail</ion-label>
-        <ion-input formControlName="email" type="email" placeholder="..."></ion-input>
-          <ng-container *ngFor="let erro of mensagens_validacao.email">  
+        <ion-input formControlName="email" type="email" placeholder="Adicionar e-mail"></ion-input>
+          <!--<ng-container *ngFor="let erro of mensagens_validacao.email">  
           <span
             *ngIf="formEsqueci.get('email').hasError(erro.tipo) && (formEsqueci.get('email').dirty || formEsqueci.get('email').touched)"
             class="msg-erro">
             {{erro.mensagem}}
           </span>
-        </ng-container>
+        </ng-container>-->
       </ion-item>
+      <hr><hr>
     </form>
-    <ion-button expand="block" color="escuro" (click)="sendEmail()" [disabled]="disableButton">
-        <ion-icon name="send"></ion-icon>
+    <ion-button padding-horizontal fill="outline" shape="round"  expand="block" color="escuro" (click)="sendEmail()" [disabled]="disableButton">
       <ion-label>Enviar E-mail</ion-label>
     </ion-button>
   </ion-card>

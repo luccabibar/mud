@@ -36,10 +36,6 @@
     </ion-item>
   </ion-card>
   <ion-list lines="none">
-    <!-- <ion-list-header> 
-      <ion-label>Recursos</ion-label>
-    </ion-list-header> -->
-
     <ion-card>
       <ion-item tappable routerLink="/grafico-crise">
         <ion-icon slot="start" color="big" name="pulse"></ion-icon>
@@ -53,34 +49,35 @@
     </ion-card>
     <!--REFRESH!-->
 
-    <ion-card>
+    <ion-card *ngIf="information">
       <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
           refreshingText="Refreshing...">
         </ion-refresher-content>
       </ion-refresher> -->
-      <ion-card-header>
-        <ion-item lines="full">
+      <ion-card-header (click)="atualizaCrises()">
+        <ion-item lines="full" >
           <ion-icon slot="start" color="big" name="calendar"></ion-icon>
           <ion-label>Histórico de Crises</ion-label>
         </ion-item>
       </ion-card-header>
-      <div *ngIf="information">
-        <ion-item tappable routerLink="/detalhes-crise" *ngFor="let item of information; let i = index;"
-          [attr.track]="item.intensidade | lowercase" lines="full">
-          <ion-label>
-            <div>
-              <h2>{{item.name}} - <strong>{{item.intensidade}}</strong></h2>
-              <p>Durou {{item.duracao}} minutos</p>
-            </div>
-          </ion-label>
-          <ion-buttons slot="end">
-            <ion-button routerLink="/detalhes-crise" (click)='onClick(item.criseId,item.intensidade)'>
-              <ion-icon slot="icon-only" name="arrow-dropright"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-item>
-
+      <div *ngFor="let item of information; let i = index;">
+        <div>
+          <ion-item tappable routerLink="/detalhes-crise" lines="full" *ngIf="item.duracao>0"
+            [attr.track]="item.intensidade | lowercase">
+            <ion-label>
+              <div>
+                <h2>{{item.name}} - <strong>{{item.intensidade}}</strong></h2>
+                <p>Durou {{item.duracao}} minutos</p>
+              </div>
+            </ion-label>
+            <ion-buttons slot="end">
+              <ion-button routerLink="/detalhes-crise" (click)='onClick(item.criseId,item.intensidade)'>
+                <ion-icon slot="icon-only" name="arrow-dropright"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+        </div>
 
       </div>
 
@@ -99,7 +96,14 @@
         </ion-buttons>
       </ion-item> -->
     </ion-card>
-
+    <div *ngIf="existe===1">
+      <ion-card>
+        <ion-card-content>
+          <strong>Carregando dados:</strong>
+          <ion-spinner name="crescent" slot="end"> </ion-spinner>
+        </ion-card-content>
+      </ion-card>
+    </div>
 
   </ion-list>
 </ion-content>

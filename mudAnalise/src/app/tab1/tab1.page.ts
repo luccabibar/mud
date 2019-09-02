@@ -84,15 +84,20 @@ export class Tab1Page {
 
   }
 
-public mudaIntensidade(intensidade){
-  if(intensidade=="2"){
-    intensidade="moderado"
-  }else if(intensidade=="5"){
-    intensidade="extremo"
-  }
+  public mudaIntensidade(intensidade) {
+    if (intensidade == "1") {
+      intensidade = "leve"
+    } else if (intensidade == "2") {
+      intensidade = "moderado"
+    } else if (intensidade == "3") {
+      intensidade = "forte"
+    }
+    else if (intensidade == "4") {
+      intensidade = "extremo"
+    }
 
-  return intensidade;
-}
+    return intensidade;
+  }
 
   //#region aqui vou puxar as crises do banco
   private geraJSON(crises) {
@@ -103,7 +108,8 @@ public mudaIntensidade(intensidade){
           "criseId": cri.id_crise,
           "name": moment(cri.created_at).format('DD/MM/YYYY'),
           "intensidade": this.mudaIntensidade(cri.intensidade),
-          "duracao":  moment(cri.duracao).format('LT')
+          "duracao": this.duracao(cri.hora_inicio, cri.hora_fim)
+
         }
       );
     }
@@ -111,8 +117,20 @@ public mudaIntensidade(intensidade){
     return temp;
   }
 
+  public duracao(hora_inicio, hora_fim) {
+    var start = moment(hora_inicio, "HH:mm");
+    var end = moment(hora_fim, "HH:mm");
+    var minutes = end.diff(start, 'minutes');
+
+    if (minutes < 0 || minutes == null || minutes == NaN) {
+      minutes = 0;
+    }
+    return minutes;
+  }
+
   carregarCrises() {
-    this.bd.selectGenerico("SELECT * FROM crise WHERE usuario_id='" + this.user_sessao.id_usuario + "';").then(async (resposta) => {
+    this.bd.selectGenerico("SELECT * FROM crise WHERE usuario_id=" + this.user_sessao.id_usuario + ";")
+    .then(async (resposta) => {
       console.log(resposta);
       this.crises = resposta;
       this.information = this.geraJSON(this.crises);
@@ -120,7 +138,9 @@ public mudaIntensidade(intensidade){
       this.information[0].open = true;
       this.existe = 0;
     }).catch(async (resposta) => {
+      
       console.log("ERR: ", resposta)
+
       const alert = await this.alertController.create({
         header: 'ERRO!!',
         subHeader: 'Dados inválidos!',
@@ -146,6 +166,10 @@ public mudaIntensidade(intensidade){
     }, 2000);
   }
 
+  public atualizaCrises() {
+    this.carregarCrises();
+
+  }
 }
 //#endregion
 
