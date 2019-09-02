@@ -3,7 +3,7 @@ import { IUsuario } from './../interfaces/IUsuario';
 import { BancoService } from './../servicos/banco.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { DadosService } from '../servicos/dados.service';
-import { NavController, IonSlides, AlertController, IonInput } from '@ionic/angular';
+import { NavController, IonSlides, AlertController, IonInput, LoadingController } from '@ionic/angular';
 import { from } from 'rxjs';
 import { async } from 'q';
 import { setFirstTemplatePass } from '@angular/core/src/render3/state';
@@ -49,6 +49,7 @@ export class Tab3Page {
     private BancoService: BancoService,
     private AlertController: AlertController,
     private router: Router,
+    private loadingCtrl: LoadingController
   ) {
     this.profissional = dadosService.getDados("user");
     this.user_sessao = this.dadosService.getDados("user_sessao");
@@ -67,23 +68,24 @@ export class Tab3Page {
   public deleteMural(mural)
   {
     
-  this.BancoService.deletarMural(this.user_sessao.id_usuario, this.profissional.id_usuario, mural.id_mural).then(async (response) => {
-    const alert = await this.AlertController.create({
+  this.BancoService.deletarMural(this.user_sessao.id_usuario, this.profissional.id_usuario, mural.id_mural)
+  .then(async (response) => {
+    /*const alert = await this.AlertController.create({
       header: 'deletou',
       subHeader: 'Deletado!',
       message: JSON.stringify(response),
       buttons: ['OK']
-    });
+    });*/
     let index = this.findContatoIndex(mural.id_mural);
     this.murais.splice(index, 1);
-    await alert.present();
+    //await alert.present();
   }
   )
     .catch(async (response) => {
 
       const alert = await this.AlertController.create({
-        header: 'deu ruim',
-        subHeader: 'Erro ao deletar!',
+        header: 'ERRO!',
+        subHeader: 'Erro ao deletar nota!',
         message: JSON.stringify(response),
         buttons: ['OK']
       });
@@ -102,11 +104,12 @@ export class Tab3Page {
     let id=this.dadosService.getId();
     this.BancoService.selecionarMuralProf(this.user_sessao.id_usuario,this.profissional.id_usuario)
     .then(async(response)=>{
-      const alert = await this.AlertController.create({
-        header: 'Confirmação',
-        subHeader: 'Sucesso!',
-        message: JSON.stringify(response[0].id_usuario),
-        buttons: ['OK']
+      //const alert = await this.AlertController.create({
+      //  header: 'Abrindo mural',
+      //  subHeader: 'Aguarde o carregamento...'
+      //});
+      let loading = await this.loadingCtrl.create({
+        //message: 'Processando...'
       });
       let a=0;
       let n=0;
@@ -136,38 +139,32 @@ export class Tab3Page {
       do{  
           switch(j){
           case 0:
-            corzita = "#FFCCBC";
+            corzita = "rgba(74,116,217, 1)";//"#FFCCBC"; 'rgba(255, 255, 255,'+opacidade+')'
             break;
           case 1:
-              corzita = "#FFF9C4";
+              corzita = "rgba(69,170,242, 1)";//"#DCEDC8";
             break;
           case 2:
-              corzita = "#DCEDC8";
-            break;
-          case 3:
-              corzita = "#B3E5FC";
+              corzita = "rgba(46,85,176, 1)"//"#B3E5FC";
             j = -1;
             break;
           }
           
-        //await alert.present();
-        this.delay(1000).then(any=>{
-          document.getElementsByName("ion-card")[y].style.backgroundColor = corzita;
-          
-        });
+        await loading.present();
+        document.getElementsByName("ion-card-header")[y].style.backgroundColor = corzita;
         j++;
         y++;
         
       }while(this.murais[y]!= null)
-      
+      loading.dismiss();
     }
   )
   .catch(async(response)=>{
 
     const alert = await this.AlertController.create({
-      header: 'xiiiii',
-      subHeader: 'Erro!',
-      message: JSON.stringify(response),
+      header: 'Erro!',
+      subHeader: 'Erro na conexão',
+      //message: JSON.stringify(response),
       buttons: ['OK']
     });
 
@@ -192,8 +189,8 @@ export class Tab3Page {
 
 public async alertaDeletar(mural){
   const alert = await this.AlertController.create({
-    header: 'Apagar Resgistro',
-    message: 'realmente quer deletar mural?',
+    header: 'Apagar nota',
+    message: 'Tem certeza que deseja deletar essa nota?',
     buttons: [
       {
         text: 'Não',

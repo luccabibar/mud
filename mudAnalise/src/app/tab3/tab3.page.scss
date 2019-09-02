@@ -23,6 +23,7 @@
 #cardoo
 {
     width: 100%;
+    opacity: 10%;
 }
 
 #cardo2
@@ -66,4 +67,8 @@
     //left: 50%;
     //margin-right: -50%;
     //transform: translateX(-50%) 
+}
+
+ion-card-title{
+    font-size: 1.2em !important;
 }

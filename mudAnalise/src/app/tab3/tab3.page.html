@@ -68,10 +68,10 @@
         <ion-item-sliding *ngFor="let mural of murais" id="11">
           <ion-item tappable routerLink="/tabs">
             <ion-card id="cardoo" name="ion-card" expand="full">
-              <ion-card-header>
+              <ion-card-header name="ion-card-header">
                 <ion-card-title>{{mural.titulo}}</ion-card-title>
-                <ion-text id="3">{{mural.created_at}}</ion-text>
               </ion-card-header>
+              <ion-text id="3">{{mural.created_at}}</ion-text>
               <ion-card-content>{{mural.texto}}</ion-card-content>
             </ion-card>
           </ion-item>
@@ -97,7 +97,8 @@
           </ion-label>
         </ion-item>
         <ion-textarea id="2" name="inserirtxt" maxLength="120"></ion-textarea>
-        <ion-button (click)="inserirMural()" size="small" expand="full">Adicionar</ion-button>
+        
+        <ion-button (click)="inserirMural()" color="medio" expand="full">Adicionar</ion-button>
       </ion-card>
     </ion-slide>
   </ion-slides>
