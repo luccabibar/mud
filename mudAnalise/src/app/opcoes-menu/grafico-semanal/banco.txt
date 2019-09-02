@@ -1,0 +1,25 @@
+tabelas relevantes  
+
+> semana - tabela "mae"
+
+> alimentacao
+    - carbs
+    - prots
+    - lactc
+    - verd
+    - agua
+
+    + 1 grafico pra cada tipo
+
+> atividade
+    = realizou
+        - tempo
+        - intensidade
+    
+    + 1 grafico pra cada atividade
+
+> bem estar
+    = realizou
+        - vezes
+
+    + comentarios

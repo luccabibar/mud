@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { BancoService } from '../../servicos/banco.service';
+import { DadosService } from '../../servicos/dados.service';
+
 @Component({
   selector: 'app-grafico-semanal',
   templateUrl: './grafico-semanal.page.html',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GraficoSemanalPage implements OnInit {
 
-  constructor() { }
+  constructor(private db: BancoService, private data: DadosService) { }
 
   ngOnInit() {
   }
