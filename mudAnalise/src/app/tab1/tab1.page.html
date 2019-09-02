@@ -20,16 +20,18 @@
         <img src="assets/perfil_generico.png">
       </ion-avatar> -->
       <div slot="start">
+        <ion-avatar slot="start" routerLink="/ficha-paciente" class="botao">
+          <img src="assets/perfil_psi.png">
+        </ion-avatar>
+      </div>
+      <div >
         <ion-label><strong>{{user_sessao.nome}}</strong></ion-label>
         <ion-label><small>CPF: </small>{{user_sessao.cpf}}</ion-label>
       </div>
-      <div slot="end" class="divao">
+      <div class="divao">
         <ion-buttons slot="end">
           <ion-button (click)="callNow()" class="botao">
             <ion-icon slot="icon-only" name="call"></ion-icon>
-          </ion-button>
-          <ion-button routerLink="/ficha-paciente" class="botao">
-            <ion-icon slot="icon-only" name="person"></ion-icon>
           </ion-button>
         </ion-buttons>
       </div>
@@ -56,15 +58,15 @@
         </ion-refresher-content>
       </ion-refresher> -->
       <ion-card-header (click)="atualizaCrises()">
-        <ion-item lines="full" >
+        <ion-item lines="full">
           <ion-icon slot="start" color="big" name="calendar"></ion-icon>
           <ion-label>Histórico de Crises</ion-label>
         </ion-item>
       </ion-card-header>
       <div *ngFor="let item of information; let i = index;">
         <div>
-          <ion-item tappable routerLink="/detalhes-crise" lines="full" *ngIf="item.duracao>0"
-            [attr.track]="item.intensidade | lowercase">
+          <ion-item tappable [routerLink]="'/detalhes-crise/'+item.criseId+'-'+item.intensidade" lines="full"
+            *ngIf="item.duracao>0" [attr.track]="item.intensidade | lowercase">
             <ion-label>
               <div>
                 <h2>{{item.name}} - <strong>{{item.intensidade}}</strong></h2>
@@ -72,13 +74,12 @@
               </div>
             </ion-label>
             <ion-buttons slot="end">
-              <ion-button routerLink="/detalhes-crise" (click)='onClick(item.criseId,item.intensidade)'>
+              <ion-button routerLink="/detalhes-crise">
                 <ion-icon slot="icon-only" name="arrow-dropright"></ion-icon>
               </ion-button>
             </ion-buttons>
           </ion-item>
         </div>
-
       </div>
 
       <!-- <ion-item tappable routerLink="/detalhes-crise" *ngFor="let c of crises" [attr.track]="c.tipo | lowercase"
@@ -95,6 +96,9 @@
           </ion-button>
         </ion-buttons>
       </ion-item> -->
+      <div *ngIf="existe===2" text-center>
+        <strong>Sem dados para serem exibidos</strong>
+      </div>
     </ion-card>
     <div *ngIf="existe===1">
       <ion-card>

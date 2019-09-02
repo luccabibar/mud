@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'esqueci', loadChildren: './esqueci/esqueci.module#EsqueciPageModule' },
   { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule' },
   { path: 'alterar-senha', loadChildren: './alterar-senha/alterar-senha.module#AlterarSenhaPageModule' },
-  { path: 'detalhes-crise', loadChildren: './detalhes-crise/detalhes-crise.module#DetalhesCrisePageModule' }
+  // { path: 'detalhes-crise/:id', loadChildren: './detalhes-crise/detalhes-crise.module#DetalhesCrisePageModule' }
+  { path: 'detalhes-crise/:info', loadChildren: './detalhes-crise/detalhes-crise.module#DetalhesCrisePageModule' },
 
 
 ];
@@ -26,4 +27,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

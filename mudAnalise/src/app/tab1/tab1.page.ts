@@ -43,7 +43,6 @@ export class Tab1Page {
   ) {
     this.user_sessao = this.ds.getDados("user_sessao");
     this.profissional = this.ds.getDados("user");
-    this.carregarCrises();
   }
 
   // PARAMS
@@ -57,12 +56,18 @@ export class Tab1Page {
   };
 
 
-
-  ionViewDidEnter() {
+  ionViewWillEnter() {
+    this.user_sessao = this.ds.getDados("user_sessao");
     this.profissional = this.ds.getDados("user");
-    if (!this.profissional) {
+
+    if (!this.user_sessao) {
+     console.log('asdasdas');
       this.ds.removeDados(true, '');
       this.router.navigateByUrl("/login");
+
+    } else {
+      this.carregarCrises();
+      
     }
   }
 
@@ -130,30 +135,32 @@ export class Tab1Page {
 
   carregarCrises() {
     this.bd.selectGenerico("SELECT * FROM crise WHERE usuario_id=" + this.user_sessao.id_usuario + ";")
-    .then(async (resposta) => {
-      console.log(resposta);
-      this.crises = resposta;
-      this.information = this.geraJSON(this.crises);
-      console.log("crises: ", this.information);
-      this.information[0].open = true;
-      this.existe = 0;
-    }).catch(async (resposta) => {
-      
-      console.log("ERR: ", resposta)
+      .then(async (resposta) => {
+        console.log(resposta);
+        this.crises = resposta;
+        this.information = this.geraJSON(this.crises);
+        console.log("crises: ", this.information);
+        if (this.information.length > 0) {
+          this.information[0].open = true;
+          this.existe = 0;
+        } else {
+          this.existe = 2;
+        }
 
-      const alert = await this.alertController.create({
-        header: 'ERRO!!',
-        subHeader: 'Dados inválidos!',
-        message: 'Erro ao buscar crises! Verifique se há conexão com a internet',
-        buttons: ['OK']
-      });
-      await alert.present();
-      this.existe = 0;
+      }).catch(async (resposta) => {
 
-    }).catch(async (resposta) => {
-      console.log(resposta);
-      this.existe = 2;
-    })
+        console.log("ERR: ", resposta)
+
+        const alert = await this.alertController.create({
+          header: 'ERRO!!',
+          subHeader: 'Dados inválidos!',
+          message: 'Erro ao buscar crises! Verifique se há conexão com a internet',
+          buttons: ['OK']
+        });
+        await alert.present();
+        this.existe = 0;
+
+      })
   }
 
 
