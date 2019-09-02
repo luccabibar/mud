@@ -26,15 +26,29 @@ export class Tab2Page {
 
   async relatsem()
   {
-    var libera = null;
+    // Data do dia em que a pessoa quer preencher
     var dataHj =  new Date();
     var anoHj = dataHj.getFullYear();
     var diaHj = dataHj.getDate();
-    var mesHj = dataHj.getMonth();
+    var mesHj = dataHj.getMonth() + 1;
     var nam = anoHj + "-" + mesHj + "-" + diaHj;
-    libera = this.liberaRelat(dataHj, diaHj, mesHj);
+    
+    // Verifica se o mês e o dia são menores que 10
+    if(mesHj < 10)
+    {
+       nam = nam.substr(0,5) + 0 + nam.substr(5,4);
+    }
+    if(diaHj < 10)
+    {
+      nam = nam.substr(0,8) + 0 + nam.substr(8,2);
+    }
 
-    //if(mesHj < 10)
+    // Verifica se faz no mínimo 7 dias que a pessoa preencheu o último relatório
+    var libera = this.liberaRelat(diaHj, mesHj, anoHj);
+    
+    
+    
+    // Informa se a pessoa pode ou não preencher o relatório
     const alert = await this.alertController.create({
     header: "Relatório Semanal",
     subHeader: "Confirmar Data",
@@ -50,7 +64,7 @@ export class Tab2Page {
       },
       {
         text: 'Confirmar',
-        handler: data => {
+        handler: data => {//Converter essas datas pra date type 
           this.dadosService.setData_relatorioS_I = data.libera;
           this.dadosService.setData_relatorioS_F = data.dataHj;
           this.nav.navigateForward('relatorio-semanal');
@@ -62,26 +76,48 @@ export class Tab2Page {
     await alert.present();
   }
 
-  liberaRelat(alldato, dato, meso)
+
+  liberaRelat(dato, meso, anoagr)
   {
-    var pega = new Date();
-    var anoagr = pega.getFullYear();
-    var dayDif = 0;
-    var dataUlt= "";
-    var diUlt = 0;
-    var meUlt = 0;
-    var difMes = 0;
-    var anoUlt = 0;
-    var voltad;
-    var voltaa;
+    var dayDif = 0; // Verifica diferença bruta dos dias
+    var difMes = 0; // Verifica diferença bruta dos meses
+    var dataUlt= ""; // Data completa do último preenchimento
+    var diUlt = 0; // dia ----
+    var meUlt = 0; // mes ---
+    var anoUlt = 0; // ano ---
+    var voltad; // usada pra retornar
+    var voltaa; // Variável retornada
     this.BancoService.selectGenerico("SELECT * FROM semana WHERE usuario_id ='"+this.dadosService.getId()+"'ORDER BY created_at DESC LIMIT 1;")
-    .then(async(Response)=>{
+    .then(async(Response)=>{// Se achar esse ID no banco de relatorios semanais
       dataUlt = Response[0]['data_final'];
-      diUlt= parseInt(dataUlt.substr(8,2));
-      meUlt = parseInt(dataUlt.substr(5,2));
+      dataUlt = dataUlt.substr(0, 10);
+      diUlt= 1;
+      /*parseInt(dataUlt.substr(8,2))*/
+      meUlt = 9;
+      /*parseInt(dataUlt.substr(5,2))*/
       difMes = meso - meUlt;
-      anoUlt = parseInt(dataUlt.substr(0,4));
+      anoUlt = 2019;
+      /*parseInt(dataUlt.substr(0,4))*/
       dayDif = dato - diUlt;
+
+      const alert = await this.alertController.create({
+        header: "AAAAAAAA",
+        subHeader: "AAAAAAAAAA",
+        message: "OLHA:" + dataUlt + " " + diUlt + " " + meUlt + " " + anoUlt + "///" + dato + " " + meso + " "  + anoagr + " " + difMes + " " + dayDif,
+    
+        buttons: [
+          { 
+            text: 'Cancelar',
+            role: 'cancelar',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+        ]
+      });
+        
+      await alert.present();
+      
       if(difMes == 0 && anoUlt == anoagr)
       {
         if(dayDif >= 7)
@@ -92,7 +128,25 @@ export class Tab2Page {
         }
         else
         {
-          // aaaaaaaaaaa
+          const alert = await this.alertController.create({
+            header: "passo",
+            subHeader: "passo",
+            message: "PASSOOO",
+        
+            buttons: [
+              { 
+                text: 'Cancelar',
+                role: 'cancelar',
+                handler: data => {
+                  console.log('Cancel clicked');
+                }
+              },
+            ]
+          });
+          await alert.present();
+          voltad = dato - 7;
+          voltaa = anoagr + "-" + meso + "-" + voltad;
+          return voltaa;
         }
       }
       else if(difMes == 1 && anoUlt == anoagr)
