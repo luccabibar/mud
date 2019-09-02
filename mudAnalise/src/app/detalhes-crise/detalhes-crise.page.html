@@ -10,31 +10,28 @@
 </ion-header>
 
 <ion-content>
-  <ion-item [attr.track]="'moderado' | lowercase" *ngIf="existe===1">
-    <ion-card>
-      <ion-card-header>
-        <strong>Crise do dia {{crises.created_at}} - Detalhes</strong>
-      </ion-card-header>
-      <ion-card-content>
-       OIE{{crises.intensidade}}
-      </ion-card-content>
-    </ion-card>
-  </ion-item>
-  <ion-card *ngIf="existe===2">
+  <ion-card >
+      <ion-item [attr.track]=" moderado | lowercase" lines="none">
+        weyhey
+
+      </ion-item>
     <ion-card-header>
-      <strong> ERRO!</strong>
+      <strong>Crise do dia {{ this.tipo}}- Detalhes</strong>
     </ion-card-header>
     <ion-card-content>
-      Detalhes da Crise não disponíveis! O registro se encontra vazio ou foi corrompido.
+      <div *ngIf="existe===1">
+        <strong>Carregando dados:</strong>
+        <ion-spinner name="crescent" slot="end"> </ion-spinner>
+      </div>
+      <div *ngIf="existe===2">
+        Detalhes da Crise não disponíveis! O registro se encontra vazio ou foi corrompido.
+      </div>
+      <div *ngIf="existe===0">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis cum commodi qui aspernatur, inventore
+        obcaecati eos, ipsam beatae sit, provident exercitationem asperiores fuga. Eveniet hic placeat aperiam neque
+        voluptatum repellendus.
+      </div>
     </ion-card-content>
   </ion-card>
 
-  <div *ngIf="existe===1">
-    <ion-card>
-      <ion-card-content>
-        <strong>Carregando dados:</strong>
-        <ion-spinner name="crescent" slot="end"> </ion-spinner>
-      </ion-card-content>
-    </ion-card>
-  </div>
 </ion-content>
