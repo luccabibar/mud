@@ -16,16 +16,22 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-item lines="none" color="primary" id="ito">
+  
+
     <div id="divo1" style="display: none">
-      <ion-text> Notas </ion-text>
-        <ion-icon slot="end" icon="add" id="icon1" (click)="novanota()"></ion-icon>
+      <ion-button padding-horizontal id="btnAdd" fill="outline" shape="round" color="escuro" expand="block" (click)="novanota()">Adicionar nova nota</ion-button>
+      <!--<ion-text> Notas </ion-text>
+      <ion-icon slot="end" icon="add" id="icon1" (click)="novanota()"></ion-icon>-->
     </div>
-    <div id="divo2" style="display: none">
-      <ion-text> Nova mensagem </ion-text>
-      <ion-icon slot="end" id="icon2" icon="arrow-round-back" (click)="voltanovanota()"></ion-icon>
-    </div>
-  </ion-item>
+
+
+ 
+      <div id="divo2" style="display: none">
+          <ion-button padding-horizontal id="btnAdd" fill="outline" shape="round" color="escuro" expand="block" (click)="voltanovanota()">Cancelar</ion-button>
+          <!--<ion-text> Nova mensagem </ion-text>
+          <ion-icon slot="end" id="icon2" icon="arrow-round-back" (click)="voltanovanota()"></ion-icon>-->
+      </div>
+
 
   <ion-slides>
     <ion-slide id="slido1">

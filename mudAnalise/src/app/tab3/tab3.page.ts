@@ -94,12 +94,14 @@ export class Tab3Page {
 
   public addMural()
   {
+    
     document.getElementById("divo1").style.display='unset';
     document.getElementById("divo2").style.display='none';
 
     let dato = "";
     let id=this.dadosService.getId();
-    this.BancoService.selecionarMuralProf(this.user_sessao.id_usuario,this.profissional.id_usuario).then(async(response)=>{
+    this.BancoService.selecionarMuralProf(this.user_sessao.id_usuario,this.profissional.id_usuario)
+    .then(async(response)=>{
       const alert = await this.AlertController.create({
         header: 'Confirmação',
         subHeader: 'Sucesso!',
@@ -148,11 +150,16 @@ export class Tab3Page {
             break;
           }
           
-        await alert.present();
-        document.getElementsByName("ion-card")[y].style.backgroundColor = corzita;
+        //await alert.present();
+        this.delay(1000).then(any=>{
+          document.getElementsByName("ion-card")[y].style.backgroundColor = corzita;
+          
+        });
         j++;
         y++;
+        
       }while(this.murais[y]!= null)
+      
     }
   )
   .catch(async(response)=>{
@@ -168,6 +175,10 @@ export class Tab3Page {
   })
 
  }
+
+ async delay(ms: number) {
+  await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+}
 
 
  findContatoIndex(id) {

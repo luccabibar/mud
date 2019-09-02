@@ -18,10 +18,13 @@ export class AnimacaoPage implements OnInit {
   ngOnInit() {
     this.animacao();
     let horas="";
+    let dia = new Date().getDay();
+    let mes = new Date().getMonth();
+    let ano = new Date().getFullYear();
     let hora = new Date().getHours();
     let minuto = new Date().getMinutes();
     let segundo = new Date().getSeconds();
-    horas=hora+":"+minuto+":"+segundo;
+    horas=ano+"-"+mes+"-"+dia+" "+hora+":"+minuto+":"+segundo;
     this.dadosService.setCrise_hr_inicio(horas);
     console.log(this.dadosService.getCrise_hr_inicio());
     
