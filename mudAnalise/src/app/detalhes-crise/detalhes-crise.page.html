@@ -10,20 +10,31 @@
 </ion-header>
 
 <ion-content>
-  <ion-item [attr.track]="'this.tipo' | lowercase">
+  <ion-item [attr.track]="'moderado' | lowercase" *ngIf="existe===1">
     <ion-card>
       <ion-card-header>
-
-        <!-- <strong>24/08/2019 - Detalhes - {{criseId}}</strong> -->
-        <strong>24/08/2019 - Detalhes</strong>
-
+        <strong>Crise do dia {{crises.created_at}} - Detalhes</strong>
       </ion-card-header>
       <ion-card-content>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias sint tempora provident voluptatibus, ea,
-        delectus
-        quae repellat eos, quasi corporis aspernatur illum maxime repellendus rem praesentium earum sunt? Iusto, autem.
+       OIE{{crises.intensidade}}
       </ion-card-content>
     </ion-card>
   </ion-item>
+  <ion-card *ngIf="existe===2">
+    <ion-card-header>
+      <strong> ERRO!</strong>
+    </ion-card-header>
+    <ion-card-content>
+      Detalhes da Crise não disponíveis! O registro se encontra vazio ou foi corrompido.
+    </ion-card-content>
+  </ion-card>
 
+  <div *ngIf="existe===1">
+    <ion-card>
+      <ion-card-content>
+        <strong>Carregando dados:</strong>
+        <ion-spinner name="crescent" slot="end"> </ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
