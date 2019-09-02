@@ -35,8 +35,10 @@
       </div>
     </ion-item>
   </ion-card>
+
   <ion-list lines="none">
     <ion-card>
+
       <ion-item tappable routerLink="/grafico-crise">
         <ion-icon slot="start" color="big" name="pulse"></ion-icon>
         <ion-label>Gráfico de crise</ion-label>
@@ -46,7 +48,18 @@
           </ion-button>
         </ion-buttons>
       </ion-item>
+      
+      <ion-item tappable routerLink="/grafico-semanal">
+        <ion-icon slot="start" color="big" name="pulse"></ion-icon>
+        <ion-label>Gráfico de relatórios</ion-label>
+        <ion-buttons slot="end">
+          <ion-button routerLink="/grafico-crise">
+            <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
     </ion-card>
+
     <!--REFRESH!-->
 
     <ion-card *ngIf="information">
