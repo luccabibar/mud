@@ -116,7 +116,7 @@ export class Tab1Page {
           "duracao": this.duracao(cri.hora_inicio, cri.hora_fim)
 
         }
-      );
+      ); 
     }
     console.log("INFO: ", temp);
     return temp;
