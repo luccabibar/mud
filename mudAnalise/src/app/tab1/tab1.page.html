@@ -96,7 +96,7 @@
         </ion-buttons>
       </ion-item> -->
     </ion-card>
-    <div *ngIf="existe===1">
+    <div *ngIf="existe===1; else noData">
       <ion-card>
         <ion-card-content>
           <strong>Carregando dados:</strong>
@@ -104,6 +104,9 @@
         </ion-card-content>
       </ion-card>
     </div>
+    <ng-template #noData>
+      <div style="text-align: center"> nenhuma crise relatada  </div>
+    </ng-template>
 
   </ion-list>
 </ion-content>

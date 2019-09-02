@@ -135,8 +135,14 @@ export class Tab1Page {
       this.crises = resposta;
       this.information = this.geraJSON(this.crises);
       console.log("crises: ", this.information);
-      this.information[0].open = true;
-      this.existe = 0;
+      if(this.information.length == 0){
+        this.information = false;
+        this.existe = 0;
+      }
+      else{
+        this.information[0].open = true;
+        this.existe = 1;
+      }
     }).catch(async (resposta) => {
       
       console.log("ERR: ", resposta)
