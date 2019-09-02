@@ -5,7 +5,9 @@ $tipos: (
   forte: #ff0000,
   extremo: #000000
   );
-
+#cardao{
+  padding-left: 0%;
+}
 
 
 
@@ -13,6 +15,6 @@ $tipos: (
 $value in map-remove($tipos) {
   ion-item[track='#{$track}'] ion-label {
     border-left: 10px solid $value;
-    padding-left: 5px;
+   
   }
 }
