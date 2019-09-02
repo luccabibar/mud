@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'animacao', loadChildren: './animacao/animacao.module#AnimacaoPageModule' },
   { path: 'sessoes', loadChildren: './sessoes/sessoes.module#SessoesPageModule' },
   { path: 'tab3', loadChildren: './tab3/tab3.module#Tab3PageModule' },  { path: 'esqueci', loadChildren: './esqueci/esqueci.module#EsqueciPageModule' },
+  { path: 'ligar', loadChildren: './ligar/ligar.module#LigarPageModule' },
 
 
   
