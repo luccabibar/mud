@@ -179,9 +179,9 @@ export class BancoService {
   return this.http.post(this.API_URL+'relatorioSemanal', data,{headers: header}).toPromise();
   }
 
-  relatorio_crise(usuario_id: string,local: string,sint_inicial: string,hora_inicio: string,hora_fim: string,intensidade: string, situacao: string,acompanhamento: number)
+  relatorio_crise(usuario_id: string,local: string,sint_inicial: string,hora_inicio: string,hora_fim: string,intensidade: string, situacao: string,acompanhamento: string)
   {
-    var data={ 
+    var data={
       usuario_id: usuario_id,
       local: local,
       sint_inicial: sint_inicial,

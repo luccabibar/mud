@@ -171,17 +171,23 @@ export class RelatorioCrisePage implements OnInit {
     }
     //let acompanhadoNao = (<HTMLInputElement>document.getElementById("9")).value;
 
-    let pessoa_acompanhamento = 0;
+    let pessoa_acompanhamento = "null";
+    let acomp_amigo = (<HTMLInputElement>document.getElementById("9")).value;
+    if(acomp_amigo)
+    {
+      pessoa_acompanhamento = "0";
+    }
     // 0 = amigo let acomp_amigo = (<HTMLInputElement>document.getElementById("10")).value
     let acomp_familia = (<HTMLInputElement>document.getElementById("10")).value;
     let acomp_desc = (<HTMLInputElement>document.getElementById("11")).value;
     if(acomp_familia)
     {
-      pessoa_acompanhamento = 1;
+      pessoa_acompanhamento = "1";
     } else if(acomp_desc)
     {
-      pessoa_acompanhamento = 2;
+      pessoa_acompanhamento = "2";
     }
+
 
     /*let selecionados = 1;
     let sintomas: any[];
@@ -284,10 +290,13 @@ export class RelatorioCrisePage implements OnInit {
     let intensidade = (<HTMLInputElement>document.getElementById("preocupa")).value;
 
     let horas="";
+    let dia = new Date().getDay();
+    let mes = new Date().getMonth();
+    let ano = new Date().getFullYear();
     let hora = new Date().getHours();
     let minuto = new Date().getMinutes();
     let segundo = new Date().getSeconds();
-    horas=hora+":"+minuto+":"+segundo;
+    horas=ano+"-"+mes+"-"+dia+" "+hora+":"+minuto+":"+segundo;
     this.dadosService.setCrise_hr_fim(horas);
 
     this.bancoService.relatorio_crise(this.dadosService.getId().toString(),local_crise,sintomas_crise,this.dadosService.getCrise_hr_inicio().toString(),this.dadosService.getCrise_hr_fim().toString(),intensidade,situacoes,pessoa_acompanhamento)
