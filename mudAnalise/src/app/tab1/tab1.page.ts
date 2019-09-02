@@ -135,17 +135,22 @@ export class Tab1Page {
 
   carregarCrises() {
     this.bd.selectGenerico("SELECT * FROM crise WHERE usuario_id=" + this.user_sessao.id_usuario + ";")
-      .then(async (resposta) => {
-        console.log(resposta);
-        this.crises = resposta;
-        this.information = this.geraJSON(this.crises);
-        console.log("crises: ", this.information);
-        if (this.information.length > 0) {
-          this.information[0].open = true;
-          this.existe = 0;
-        } else {
-          this.existe = 2;
-        }
+    .then(async (resposta) => {
+      console.log(resposta);
+      this.crises = resposta;
+      this.information = this.geraJSON(this.crises);
+      console.log("crises: ", this.information);
+      if(this.information.length == 0){
+        this.information = false;
+        this.existe = 0;
+      }
+      else{
+        this.information[0].open = true;
+        this.existe = 1;
+      }
+    }).catch(async (resposta) => {
+      
+      console.log("ERR: ", resposta)
 
       }).catch(async (resposta) => {
 
