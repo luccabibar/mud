@@ -116,7 +116,7 @@ export class Tab1Page {
           "duracao": this.duracao(cri.hora_inicio, cri.hora_fim)
 
         }
-      );
+      ); 
     }
     console.log("INFO: ", temp);
     return temp;
@@ -146,7 +146,7 @@ export class Tab1Page {
       }
       else{
         this.information[0].open = true;
-        this.existe = 1;
+        this.existe = 2;
       }
     }).catch(async (resposta) => {
       
@@ -176,7 +176,7 @@ export class Tab1Page {
       console.log('Async operation has ended');
       event.target.complete();
     }, 2000);
-  }
+  } 
 
   public atualizaCrises() {
     this.carregarCrises();

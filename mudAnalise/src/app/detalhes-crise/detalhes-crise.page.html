@@ -10,31 +10,28 @@
 </ion-header>
 
 <ion-content>
-  <ion-item [attr.track]="'moderado' | lowercase" *ngIf="existe===1">
-    <ion-card>
-      <ion-card-header>
-        <strong>Crise do dia {{crises.created_at}} - Detalhes</strong>
-      </ion-card-header>
-      <ion-card-content>
-       OIE{{crises.intensidade}}
-      </ion-card-content>
-    </ion-card>
-  </ion-item>
-  <ion-card *ngIf="existe===2">
-    <ion-card-header>
-      <strong> ERRO!</strong>
-    </ion-card-header>
-    <ion-card-content>
-      Detalhes da Crise não disponíveis! O registro se encontra vazio ou foi corrompido.
-    </ion-card-content>
+  <ion-card id="cardao">
+    <ion-item [attr.track]=" this.tipo | lowercase" lines="none">
+      <ion-label>
+        <ion-card-header>
+          <!-- <strong> {{ crises.created_at}}</strong> -->
+          <strong> this.tipo </strong>
+        </ion-card-header>
+        <ion-card-content>
+          <div *ngIf="existe===1">
+            <strong>Carregando dados:</strong>
+            <ion-spinner name="crescent" slot="end"> </ion-spinner>
+          </div>
+          <div *ngIf="existe===2">
+            Detalhes da Crise não disponíveis! O registro se encontra vazio ou foi corrompido.
+          </div>
+          <div *ngIf="existe===0">
+            ta vindo os dados mas so isso msm
+          </div>
+        </ion-card-content>
+      </ion-label>
+    </ion-item>
+
   </ion-card>
 
-  <div *ngIf="existe===1">
-    <ion-card>
-      <ion-card-content>
-        <strong>Carregando dados:</strong>
-        <ion-spinner name="crescent" slot="end"> </ion-spinner>
-      </ion-card-content>
-    </ion-card>
-  </div>
 </ion-content>

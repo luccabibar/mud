@@ -4,6 +4,7 @@ import { NavController, AlertController, IonInput} from '@ionic/angular';
 import { DadosService } from '../dados.service';
 import { BancoService } from './../banco.service';
 import { identifierModuleUrl, ReturnStatement } from '@angular/compiler';
+import { parseSelectorToR3Selector } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-tab2',
@@ -15,8 +16,8 @@ export class Tab2Page {
   
   constructor(private nav: NavController, public alertController: AlertController,   private router: Router, private dadosService: DadosService, private BancoService: BancoService) {}
 
-  dataInicio = "TesteInicio";
-  dataFinal = "TestFinal";
+  dataInicio = "INICIO";
+  dataFinal = "FINAL";
 
   relatcrise()
   {
@@ -24,78 +25,76 @@ export class Tab2Page {
   }
 
   async relatsem()
-  {/*
-    var libera = null;
+  {
+    // Data do dia em que a pessoa quer preencher
     var dataHj =  new Date();
-
+    var anoHj = dataHj.getFullYear();
+    var diaHj = dataHj.getDate();
+    var mesHj = dataHj.getMonth() + 1;
+    var nam = anoHj + "-" + mesHj + "-" + diaHj;
     
-    var diaHj = dataHj.getDay();
-    var mesHj = dataHj.getMonth();
-    libera = this.liberaRelat(dataHj, diaHj, mesHj);
-*/
+    // Verifica se o mês e o dia são menores que 10
+    if(mesHj < 10)
+    {
+       nam = nam.substr(0,5) + 0 + nam.substr(5,4);
+    }
+    if(diaHj < 10)
+    {
+      nam = nam.substr(0,8) + 0 + nam.substr(8,2);
+    }
 
-    const alert = await this.alertController.create({
-    header: "Relatório Semanal",
-    subHeader: "Confirmar Data",
-    message: "A data do último relatório enviado foi de:<br><br><b>"+this.dataInicio+"</b><br><br>até:<br><br><b>"+this.dataFinal+"</b><br>",
-
-    buttons: [
-      {
-        text: 'Cancelar',
-        role: 'cancelar',
-        handler: data => {
-          console.log('Cancel clicked');
-        }
-      },
-      {
-        text: 'Confirmar',
-        handler: data => {
-          this.dadosService.setData_relatorioS_I = data.dataInicio;
-          this.dadosService.setData_relatorioS_F = data.dataFim;
-          this.nav.navigateForward('relatorio-semanal');
-        }
-      }
-    ]
-  });
+    // Verifica se faz no mínimo 7 dias que a pessoa preencheu o último relatório
+    this.liberaRelat(nam, diaHj, mesHj, anoHj);
     
-    await alert.present();
   }
 
-  liberaRelat(alldato, dato, meso)
+
+  liberaRelat(alldato, dato, meso, anoagr)
   {
-    var dayDif = 0;
-    var dataUlt= "";
-    var diUlt = 0;
-    var meUlt = 0;
-    var difMes = 0;
-    var anoUlt = 0;
-    this.BancoService.selectGenerico("SELECT * FROM semana WHERE usuario_id ='"+this.dadosService. getId()+"'ORDER BY created_at DESC LIMIT 1;")
-    .then(async(Response)=>{
+    var dayDif = 0; // Verifica diferença bruta dos dias
+    var difMes = 0; // Verifica diferença bruta dos meses
+    var dataUlt= ""; // Data completa do último preenchimento
+    var diUlt = 0; // dia ----
+    var meUlt = 0; // mes ---
+    var anoUlt = 0; // ano ---
+    var voltad; // usada pra retornar
+    var voltaa; // Variável retornada
+    this.BancoService.selectGenerico("SELECT * FROM semana WHERE usuario_id ='"+this.dadosService.getId()+"'ORDER BY created_at DESC LIMIT 1;")
+    .then(async(Response)=>{// Se achar esse ID no banco de relatorios semanais
       dataUlt = Response[0]['data_final'];
-      diUlt= parseInt(dataUlt.substr(8,2));
-      meUlt = parseInt(dataUlt.substr(5,2));
+      dataUlt = dataUlt.substr(0, 10);
+      diUlt= 1;
+      /*parseInt(dataUlt.substr(8,2))*/
+      meUlt = 9;
+      /*parseInt(dataUlt.substr(5,2))*/
       difMes = meso - meUlt;
-      anoUlt = parseInt(dataUlt.substr(0,4));
+      anoUlt = 2019;
+      /*parseInt(dataUlt.substr(0,4))*/
       dayDif = dato - diUlt;
-      if(difMes == 0)
+      
+      if(difMes == 0 && anoUlt == anoagr)
       {
-        if(dayDif >= 7)
+        if(dayDif <= 7)
         {
-          return true;
+          voltad = dato + 7;
+          voltaa = anoagr + "-" + meso + "-" + voltad;
+          this.deubom(meso, dato, voltaa, alldato)
         }
         else
         {
-          // aaaaaaaaaaa
+          this.deuruim();
         }
       }
-      else if(difMes == 1)
+      else if(difMes == 1 && anoUlt == anoagr)
       {
         if(meUlt == 1|| meUlt == 3 || meUlt == 5 || meUlt == 7 || meUlt == 8 || meUlt == 10 || meUlt == 12)
         {
           dayDif = (31 - diUlt) + dato;
           if(dayDif >= 7)
           {
-            return true;
+            voltad = 31 - (7 - dato);
+            voltaa = anoagr + "-" + meso-- + voltad;
+            return voltaa;
           } 
           else
           {
@@ -109,7 +108,9 @@ export class Tab2Page {
             dayDif = (29 - diUlt) + dato;
             if(dayDif >= 7)
             {
-              return true;
+              voltad = 29 - (7 - dato);
+              voltaa = anoagr + "-" + meso-- +"-" + voltaa;
+              return voltaa;
             }
             else
             {
@@ -121,7 +122,9 @@ export class Tab2Page {
             dayDif = (28 - diUlt) + dato;
             if(dayDif >= 7)
             {
-              return true;
+              voltad = 28 - (7 - dato);
+              voltaa = anoagr + "-" + meso-- +"-" + voltaa;
+              return voltaa;
             }
             else 
             {
@@ -134,7 +137,9 @@ export class Tab2Page {
           dayDif = (30 - diUlt) + dato;
           if(dayDif >= 7)
           {
-            return true;
+            voltad = 30 - (7 - dato);
+            voltaa = anoagr + "-" + meso +"-" + voltaa;
+            return voltaa;
           }
           else
           {
@@ -144,10 +149,53 @@ export class Tab2Page {
       }
       else
       {
-        return true;
+        if(dato > 7)
+        {
+          voltad = dato - 7;
+          voltaa = anoagr + "-" + meso + "-" + voltad;
+          return voltaa;
+        }
+        else 
+        {
+          if(meso == 5 || meso == 7 || meso == 10 || meso == 12)
+          {
+            voltad = 30 - (7 - dato);
+            voltaa = anoagr + "-" + meso-- + "-" + voltad;
+            return voltaa;
+          }
+          else if(meso == 3)
+          {
+              if ((anoagr % 4 == 0) && ((anoagr % 100 != 0) || (anoagr % 400 == 0)))
+              {
+                  voltad = 29 - (7 - dato);
+                  voltaa = anoagr + "-" + meso-- + "-" + voltad;
+                  return voltaa;
+              }
+              else
+              {
+                  voltad = 28 - (7 - dato);
+                  voltaa = anoagr + "-" + meso-- + "-" + voltad;
+                  return voltaa;
+              }
+          }
+          else
+          { 
+              voltad = 31 - (7 - dato);
+              if(meso == 1)
+              {
+                  voltaa = anoagr-- + "-" + 12 + "-" + voltad;
+                  return voltaa;
+              }
+              else
+              {
+                  voltaa = anoagr + "-" + meso-- + "-" + voltad;
+                  return voltaa;
+              }
+          }
       }
 
-    })
+    }
+  })
     .catch(async(response)=>{
 
       const alert = await this.alertController.create({
@@ -165,9 +213,57 @@ export class Tab2Page {
     
   }
 
+  async deuruim()
+  {
+    const alert = await this.alertController.create({
+      header: "Preenchimento indisponível",
+      message: "Você precisa esperar que se passe outra semana para preencher o relatório",
 
+      buttons: ['OK']
+    });
+  
+    await alert.present();
+  }
 
+  async deubom(mesoo, datoo, volta, alldatoo)
+  {
+    // Verifica se o mês e o dia são menores que 10
+    if(mesoo < 10)
+    {
+       volta = volta.substr(0,5) + 0 + volta.substr(5,4);
+    }
+    if(datoo < 10)
+    {
+      volta = volta.substr(0,8) + 0 + volta.substr(8,2);
+    }
 
+    //CONVERTER PARA TIPO DATA
+    const alert = await this.alertController.create({
+      header: "Relatório Semanal",
+       subHeader: "Confirmar Data",
+       message: volta + " " + alldatoo,
+
+        buttons: [
+        {
+        text: 'Cancelar',
+        role: 'cancelar',
+        handler: data => {
+        console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Confirmar',
+        handler: data => {//Converter essas datas pra date type 
+            //this.dadosService.setData_relatorioS_I = data.dataHj;
+            this.dadosService.setData_relatorioS_F = data.alldato;
+            this.nav.navigateForward('relatorio-semanal');
+                          }
+          }
+          ]
+        });
+  
+      await alert.present();
+  }
 
 }
 

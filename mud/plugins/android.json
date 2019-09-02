@@ -35,6 +35,9 @@
     },
     "cordova-plugin-ionic-keyboard": {
       "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-firebase": {
+      "PACKAGE_NAME": "com.mud.notifications"
     }
   },
   "dependent_plugins": {
