@@ -370,13 +370,14 @@ export class CadastroUserPage implements OnInit {
     .then(async(response)=>{
         const alert = await this.AlertController.create({
           header: 'Confirmação',
-          subHeader: 'Sucesso!',
-          message: JSON.stringify(response),
+          subHeader: 'Cadastro efetivado com sucesso!',
+          //message: JSON.stringify(response),
           buttons: [
             {
               text: 'Ok',
               handler: data => {
-                this.navCtrl.navigateForward('login-page');
+                //this.navCtrl.navigateForward('login-page');
+                window.location.replace("/login-page");
               }
             }
           ]

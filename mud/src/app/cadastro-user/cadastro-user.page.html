@@ -174,8 +174,8 @@
                                     </ion-select>
                             </ion-item>
 
-                            <ion-item padding-horizontal *ngIf="!slideThreeForm.controls.cbox.valid  && (slideThreeForm.controls.cbox.dirty || submitAttempt3)">
-                                <p>Insira um número válido.</p>
+                            <ion-item padding-horizontal *ngIf="!slideThreeForm.controls.cbox.valid  && (slideThreeForm.controls.cbox.dirty)">
+                                <p>Selecione pelo menos um sintoma.</p>
                             </ion-item>
                             
                             <!--<ion-item style="height: 12rem;">
@@ -184,12 +184,12 @@
                             </ion-item>-->
 
                             <ion-item padding-horizontal>
-                             <ion-label class="label" position="stacked" text-wrap>Qual a principail situação que desencadeia as crises?</ion-label>
+                             <ion-label class="label" position="stacked" text-wrap>Qual a principal situação que desencadeia as crises?</ion-label>
                              <hr>
                              <ion-input type="text" formControlname="situ1" name="situ1" id="13" placeholder="Situação 1" [class.invalid]="!slideThreeForm.controls.situ1.valid && (slideThreeForm.controls.situ1.dirty || submitAttempt3)"></ion-input>
                             </ion-item>
 
-                            <ion-item padding-horizontal *ngIf="!slideThreeForm.controls.situ1.valid  && (slideThreeForm.controls.situ1.dirty || submitAttempt3)">
+                            <ion-item padding-horizontal *ngIf="!slideThreeForm.controls.situ1.valid  && (slideThreeForm.controls.situ1.dirty)">
                                 <p>Insira no mínimo uma situação.</p>
                             </ion-item>
 

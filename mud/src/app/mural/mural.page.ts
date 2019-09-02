@@ -56,7 +56,7 @@ export class MuralPage implements OnInit {
       const alert = await this.AlertController.create({
         header: 'Confirmação',
         subHeader: 'Sucesso!',
-        message: JSON.stringify(response),
+        //message: JSON.stringify(response),
         buttons: ['OK']
       });
 
@@ -112,9 +112,9 @@ export class MuralPage implements OnInit {
   ).catch(async(response)=>{
 
     const alert = await this.AlertController.create({
-      header: 'ERRO ERRO',
-      subHeader: 'aaaaaa' + dato,
-      message: JSON.stringify(response),
+      header: 'Mural Vazio',
+      //subHeader: 'aaaaaa' + dato,
+      message: "Você ainda não está conectado a um profissional.",
       buttons: ['OK']
     });
 
