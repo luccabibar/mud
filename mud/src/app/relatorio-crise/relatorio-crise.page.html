@@ -17,12 +17,12 @@
             <ion-card-content>
                 <ion-item padding-horizontal>
                     <ion-label class="label" position="stacked" text-wrap>Onde ocorreu a crise?</ion-label>
-                    <ion-select placeholder="Selecionar situação" cancelText="Cancelar" okText="Selecionado">
-                        <ion-select-option id="0" class="option" value="Casa">Casa</ion-select-option>
-                        <ion-select-option id="1" class="option" value="Ambiente publico">Ambiente público</ion-select-option>
-                        <ion-select-option id="2" class="option" value="Escola">Escola</ion-select-option>
-                        <ion-select-option id="3" class="option" value="Trabalho">Trabalho</ion-select-option>
-                        <ion-select-option id="4" class="option" value="Transito">Trânsito</ion-select-option>
+                    <ion-select id="4" placeholder="Selecionar situação" cancelText="Cancelar" okText="Selecionado">
+                        <ion-select-option class="option" value="Casa">Casa</ion-select-option>
+                        <ion-select-option class="option" value="Ambiente publico">Ambiente público</ion-select-option>
+                        <ion-select-option class="option" value="Escola">Escola</ion-select-option>
+                        <ion-select-option class="option" value="Trabalho">Trabalho</ion-select-option>
+                        <ion-select-option class="option" value="Transito">Trânsito</ion-select-option>
                     </ion-select>
                 </ion-item>
                 <ion-item padding-horizontal>
@@ -86,61 +86,26 @@
         <ion-card>
           <ion-card-content>
                   <ion-list>
-                    <ion-item  lines="none">
+                    <ion-item padding-horizontal  lines="none">
                       <ion-text color="verdemud4" style="font-size: 15px !important;" text-wrap>Quais sintomas foram predominantes na crise?</ion-text>
                     </ion-item>
-                    <ion-item lines="none">
-                      <ion-label text-wrap style="font-size: 15px !important; padding-right: 0px !important;">Dificuldade para Respirar</ion-label>
-                      <ion-checkbox id="12" slot="start" value="80" style="padding-left: 0px !important;"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none">
-                      <ion-label text-wrap style="font-size: 15px !important;">Ritmo Cardíacao Acelerado / Taquicardia</ion-label>
-                      <ion-checkbox id="13" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Sensações de Asfixia</ion-label>
-                      <ion-checkbox id="14" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Sudorese</ion-label>
-                      <ion-checkbox id="15" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Tremores/abalos</ion-label>
-                      <ion-checkbox id="16" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Naúsea/indisposição abdominal</ion-label>
-                      <ion-checkbox id="17" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Dor/desconforto toráxico</ion-label>
-                      <ion-checkbox id="18" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none">
-                      <ion-label text-wrap style="font-size: 15px !important;">Ondas de calor/frio</ion-label>
-                      <ion-checkbox id="19" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Anestesia/formigamento</ion-label>
-                      <ion-checkbox id="20" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Sensações de irrealidade</ion-label>
-                      <ion-checkbox id="21" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Instabilidade/tontura/desmaio</ion-label>
-                      <ion-checkbox id="22" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Medo de morrer</ion-label>
-                      <ion-checkbox id="23" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
-                    <ion-item lines="none" >
-                      <ion-label text-wrap style="font-size: 15px !important;">Medo de perder o controle/enlouquecer</ion-label>
-                      <ion-checkbox id="24" slot="start" value="80"></ion-checkbox>
-                    </ion-item>
+                    <ion-item padding-horizontal>
+                      <ion-select ok-text="Selecionar" cancel-text="Cancelar" multiple="true" id="12" text-wrap>
+                          <ion-select-option text-wrap value="1">Dificuldade para Respirar</ion-select-option>
+                          <ion-select-option text-wrap value="2">Ritmo Cardíacao Acelerado / Taquicardia</ion-select-option>
+                          <ion-select-option text-wrap value="3">Sensações de Asfixia</ion-select-option>
+                          <ion-select-option text-wrap value="4">Sudorese</ion-select-option>
+                          <ion-select-option text-wrap value="5">Tremores/abalos</ion-select-option>
+                          <ion-select-option text-wrap value="6">Naúsea/indisposição abdominal</ion-select-option>
+                          <ion-select-option text-wrap value="7">Dor/desconforto toráxico</ion-select-option>
+                          <ion-select-option text-wrap value="8">Ondas de calor/frio</ion-select-option>
+                          <ion-select-option text-wrap value="9">Anestesia/formigamento</ion-select-option>
+                          <ion-select-option text-wrap value="10">Sensações de irrealidade</ion-select-option>
+                          <ion-select-option text-wrap value="11">Instabilidade/tontura/desmaio</ion-select-option>
+                          <ion-select-option text-wrap value="12">Medo de morrer</ion-select-option>
+                          <ion-select-option text-wrap value="13">Medo de perder o controle/enlouquecer</ion-select-option>
+                      </ion-select>
+              </ion-item>
                   </ion-list>
           </ion-card-content>
         </ion-card>
@@ -151,12 +116,12 @@
         <ion-card>          
             <ion-card-content>
                 <div id="escolhersitu">
-                <ion-item padding-horizontal>
+                <ion-item lines="none">
                     <ion-label class="label" position="stacked" text-wrap>Qual situação gerou a crise?</ion-label>
-                    <ion-select placeholder="Selecionar situação" cancelText="Cancelar" okText="Selecionado">
-                        <ion-select-option id="25" class="option" value="Situação 1">Situação 1</ion-select-option>
-                        <ion-select-option id="26" class="option" value="Situação 2">Situação 2</ion-select-option>
-                        <ion-select-option id="27" class="option" value="Situação 3">Situação 3</ion-select-option>
+                    <ion-select id="25" placeholder="Selecionar situação" cancelText="Cancelar" okText="Selecionado">
+                        <ion-select-option class="option" value="Situação 1">Situação 1</ion-select-option>
+                        <ion-select-option class="option" value="Situação 2">Situação 2</ion-select-option>
+                        <ion-select-option class="option" value="Situação 3">Situação 3</ion-select-option>
                     </ion-select>
                 </ion-item>
                 </div>
