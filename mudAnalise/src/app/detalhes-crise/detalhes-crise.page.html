@@ -12,11 +12,14 @@
 <ion-content>
   <ion-card id="cardao">
     <ion-item [attr.track]=" this.tipo | lowercase" lines="none">
-      <ion-label>
+      <ion-label style="padding: 0%">
         <ion-card-header>
           <!-- <strong> {{ crises.created_at}}</strong> -->
-          <strong> this.tipo </strong>
+          <ion-icon name="pulse"></ion-icon> {{this.tipo }}<br>
+          <ion-icon name="stopwatch"></ion-icon> {{this.intervalo}} minutos
+          <hr>
         </ion-card-header>
+
         <ion-card-content>
           <div *ngIf="existe===1">
             <strong>Carregando dados:</strong>
@@ -26,7 +29,76 @@
             Detalhes da Crise não disponíveis! O registro se encontra vazio ou foi corrompido.
           </div>
           <div *ngIf="existe===0">
-            ta vindo os dados mas so isso msm
+            <ion-item>
+              <div>
+                <ion-icon name="map"></ion-icon> Local:
+              </div>
+              <div slot="end">
+                <strong>{{this.crises.local}}</strong>
+              </div>
+            </ion-item>
+            <ion-item>
+              <div>
+                <ion-icon name="medkit"></ion-icon> Sintomas:
+              </div>
+            </ion-item>
+            <ion-item>
+              <div slot="start">
+                <div *ngIf="existeSintoma===1">
+                  <strong>Carregando sintomas:</strong>
+                  <ion-spinner name="crescent" slot="end"> </ion-spinner>
+                </div>
+                <div *ngIf="existeSintoma===0">
+
+                </div>
+                <ion-item *ngFor="let sintoma of listaSintomas; let i = index;">
+                  <ion-icon name="arrow-dropright"></ion-icon>
+                  <strong>{{sintoma.nome}}</strong><br>
+                </ion-item>
+              </div>
+            </ion-item>
+            <ion-item>
+              <div>
+                <ion-icon name="map"></ion-icon> Situação:
+              </div>
+              <div slot="end">
+                <ion-icon name="business"></ion-icon><strong>{{this.crises.situacao}}</strong>
+              </div>
+            </ion-item>
+            <ion-item>
+              <div>
+                <ion-icon name="map"></ion-icon> Situação:
+              </div>
+              <div slot="end">
+                <ion-icon name="business"></ion-icon><strong>{{this.crises.situacao}}</strong>
+              </div>
+            </ion-item>
+            <ion-item>
+              <div>
+                <ion-icon name="people"></ion-icon> Acompanhamento:
+              </div>
+              <div slot="end">
+                <strong *ngIf="this.crises.acompanhamento===1">Familiar</strong>
+                <strong *ngIf="this.crises.acompanhamento===2">Amigo</strong>
+                <strong *ngIf="this.crises.acompanhamento===3">Desconhecido</strong>
+              </div>
+            </ion-item>
+            <ion-item>
+              <div>
+                <ion-icon name="time"></ion-icon> Hora Inicial:
+              </div>
+              <div slot="end">
+                <strong>{{this.crises.hora_inicial}}</strong>
+              </div>
+            </ion-item>
+            <ion-item>
+              <div>
+                <ion-icon name="time"></ion-icon> Hora Final:
+              </div>
+              <div slot="end">
+                <strong>{{this.crises.hora_final}}</strong>
+              </div>
+            </ion-item>
           </div>
         </ion-card-content>
       </ion-label>

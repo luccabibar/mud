@@ -35,7 +35,7 @@
     "br-mask": "0.0.6",
     "brmasker4": "^1.0.3",
     "cordova-android": "8.0.0",
-    "cordova-plugin-firebase": "2.0.5",
+    "cordova-plugin-firebase": "^2.0.5",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "core-js": "^2.5.4",
     "es6-promise-plugin": "^4.2.2",

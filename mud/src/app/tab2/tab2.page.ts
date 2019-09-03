@@ -5,6 +5,7 @@ import { DadosService } from '../dados.service';
 import { BancoService } from './../banco.service';
 import { identifierModuleUrl, ReturnStatement } from '@angular/compiler';
 import { parseSelectorToR3Selector } from '@angular/compiler/src/core';
+import { all } from 'q';
 
 @Component({
   selector: 'app-tab2',
@@ -15,7 +16,8 @@ export class Tab2Page {
   
   
   constructor(private nav: NavController, public alertController: AlertController,   private router: Router, private dadosService: DadosService, private BancoService: BancoService) {}
-
+  testa: any;
+  testa2: any;
   dataInicio = "INICIO";
   dataFinal = "FINAL";
 
@@ -72,33 +74,41 @@ export class Tab2Page {
       /*parseInt(dataUlt.substr(0,4))*/
       dayDif = dato - diUlt;
       
-      if(difMes == 0 && anoUlt == anoagr)
+
+      //Validações para ver se faz pelo menos uma semana q a pessoa preencheu
+      if(difMes == 0 && anoUlt == anoagr) //se o último a ser preenchido foi no msm ano e no msm mês
       {
-        if(dayDif <= 7)
+        if(dayDif >= 7) //faz mais de 7 dias q ele preencheu
         {
-          voltad = dato + 7;
+          voltad = dato - 7; 
           voltaa = anoagr + "-" + meso + "-" + voltad;
-          this.deubom(meso, dato, voltaa, alldato)
+          this.deubom(meso, dato, voltaa, alldato) // envia o mês atual, dia atual, data em que a semana começa a contar e o data em que a semana termina (data atual)
         }
         else
         {
-          this.deuruim();
+          this.deuruim(); //Não faz uma semana
         }
       }
-      else if(difMes == 1 && anoUlt == anoagr)
+      else if(difMes == 1 && anoUlt == anoagr) //Se o último relatório que a pessoa preencheu foi mês passado do mesmo ano
       {
-        if(meUlt == 1|| meUlt == 3 || meUlt == 5 || meUlt == 7 || meUlt == 8 || meUlt == 10 || meUlt == 12)
+        if(meUlt == 1|| meUlt == 3 || meUlt == 5 || meUlt == 7 || meUlt == 8 || meUlt == 10 || meUlt == 12) //Meses com 31 dias
         {
-          dayDif = (31 - diUlt) + dato;
-          if(dayDif >= 7)
+          dayDif = (31 - diUlt) + dato; 
+          if(dayDif == 7 && dato <= 7) //Faz mais que 7 dias que a pessoa preencheu E ainda não se passaram 7 dias do mês atual
           {
             voltad = 31 - (7 - dato);
-            voltaa = anoagr + "-" + meso-- + voltad;
-            return voltaa;
+            voltaa = anoagr + "-" + meUlt + voltad;
+            this.deubom(meUlt, dato, voltaa, alldato);
           } 
-          else
+          else if(dayDif > 7 && dato > 7)//Faz mais que 7 dias que a pessoa preencheu E se passaram mais que 7 dias do mês atual
           {
-            /////
+            voltad = dato - 7;
+            voltaa = anoagr + "-" + meso + voltad;
+            this.deubom(meso, dato, voltaa, alldato);
+          }
+          else // faz menos que 7 dias
+          {
+            this.deuruim();
           }
         }
         else if(meUlt == 2)
@@ -227,6 +237,7 @@ export class Tab2Page {
 
   async deubom(mesoo, datoo, volta, alldatoo)
   {
+    
     // Verifica se o mês e o dia são menores que 10
     if(mesoo < 10)
     {
@@ -237,11 +248,15 @@ export class Tab2Page {
       volta = volta.substr(0,8) + 0 + volta.substr(8,2);
     }
 
+    this.testa = new Date(alldatoo);
+    this.testa2 = new Date(volta);
+
+
     //CONVERTER PARA TIPO DATA
     const alert = await this.alertController.create({
       header: "Relatório Semanal",
        subHeader: "Confirmar Data",
-       message: volta + " " + alldatoo,
+       message: volta + "Data de hoje: " + alldatoo + "Teste: " + this.testa + "Teste2: " + this.testa2,
 
         buttons: [
         {
@@ -255,9 +270,12 @@ export class Tab2Page {
         text: 'Confirmar',
         handler: data => {//Converter essas datas pra date type 
             //this.dadosService.setData_relatorioS_I = data.dataHj;
-            this.dadosService.setData_relatorioS_F = data.alldato;
+            // this.dadosService.setData_relatorioS_F = data.alldato;
+            this.dadosService.setData_relatorioS_F(this.testa);
+            this.dadosService.setData_relatorioS_I(this.testa2);
+
             this.nav.navigateForward('relatorio-semanal');
-                          }
+           }
           }
           ]
         });
