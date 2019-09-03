@@ -13,7 +13,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { FcmnoticatiosService } from './fcmnoticatios.service';
 
 const firebase = {
   apiKey: "AIzaSyDns6l1bdVQVtTNmPpeFVk8LBauDCKKiuk",
@@ -35,7 +34,6 @@ const firebase = {
   providers: [
     StatusBar,
     SplashScreen,
-    FcmnoticatiosService,
     BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ScreenOrientation
