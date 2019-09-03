@@ -20,12 +20,11 @@
         <ion-item-sliding *ngFor="let mural of murais">
           <ion-item tappable routerLink="/tabs">
             <ion-card name="ion-card" id="cardos">
-              <ion-card-header>
+              <ion-card-header name="ion-card-header">
                 <ion-card-title>{{mural.titulo}}</ion-card-title>
-                <ion-label>{{mural.created_at}} </ion-label>
               </ion-card-header>
-              <ion-card-content>
-                {{mural.texto}}
+              <ion-card-content>{{mural.texto}} <br>
+                <ion-text style="float: right !important;" id="3"><h4>{{mural.created_at}}</h4></ion-text>
               </ion-card-content>
             </ion-card>         
           </ion-item>
