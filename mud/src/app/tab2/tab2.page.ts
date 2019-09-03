@@ -5,6 +5,7 @@ import { DadosService } from '../dados.service';
 import { BancoService } from './../banco.service';
 import { identifierModuleUrl, ReturnStatement } from '@angular/compiler';
 import { parseSelectorToR3Selector } from '@angular/compiler/src/core';
+import { all } from 'q';
 
 @Component({
   selector: 'app-tab2',
@@ -15,7 +16,8 @@ export class Tab2Page {
   
   
   constructor(private nav: NavController, public alertController: AlertController,   private router: Router, private dadosService: DadosService, private BancoService: BancoService) {}
-
+  testa: any;
+  testa2: any;
   dataInicio = "INICIO";
   dataFinal = "FINAL";
 
@@ -44,45 +46,18 @@ export class Tab2Page {
     }
 
     // Verifica se faz no mínimo 7 dias que a pessoa preencheu o último relatório
-    var libera = this.liberaRelat(diaHj, mesHj, anoHj);
+    this.liberaRelat(nam, diaHj, mesHj, anoHj);
     
-    
-    
-    // Informa se a pessoa pode ou não preencher o relatório
-    const alert = await this.alertController.create({
-    header: "Relatório Semanal",
-    subHeader: "Confirmar Data",
-    message: "A data do último relatório enviado foi de:<br><br><b>"+libera+"</b><br><br>até:<br><br><b>"+nam+"</b><br>",
-
-    buttons: [
-      {
-        text: 'Cancelar',
-        role: 'cancelar',
-        handler: data => {
-          console.log('Cancel clicked');
-        }
-      },
-      {
-        text: 'Confirmar',
-        handler: data => {//Converter essas datas pra date type 
-          this.dadosService.setData_relatorioS_I = data.libera;
-          this.dadosService.setData_relatorioS_F = data.dataHj;
-          this.nav.navigateForward('relatorio-semanal');
-        }
-      }
-    ]
-  });
-    
-    await alert.present();
   }
 
 
-  liberaRelat(dato, meso, anoagr)
+  liberaRelat(alldato, dato, meso, anoagr)
   {
     var dayDif = 0; // Verifica diferença bruta dos dias
     var difMes = 0; // Verifica diferença bruta dos meses
     var dataUlt= ""; // Data completa do último preenchimento
     var diUlt = 0; // dia ----
+
     var meUlt = 0; // mes ---
     var anoUlt = 0; // ano ---
     var voltad; // usada pra retornar
@@ -99,54 +74,18 @@ export class Tab2Page {
       anoUlt = 2019;
       /*parseInt(dataUlt.substr(0,4))*/
       dayDif = dato - diUlt;
-
-      const alert = await this.alertController.create({
-        header: "AAAAAAAA",
-        subHeader: "AAAAAAAAAA",
-        message: "OLHA:" + dataUlt + " " + diUlt + " " + meUlt + " " + anoUlt + "///" + dato + " " + meso + " "  + anoagr + " " + difMes + " " + dayDif,
-    
-        buttons: [
-          { 
-            text: 'Cancelar',
-            role: 'cancelar',
-            handler: data => {
-              console.log('Cancel clicked');
-            }
-          },
-        ]
-      });
-        
-      await alert.present();
       
       if(difMes == 0 && anoUlt == anoagr)
       {
-        if(dayDif >= 7)
+        if(dayDif <= 7)
         {
-          voltad = dato - 7;
+          voltad = dato + 2;
           voltaa = anoagr + "-" + meso + "-" + voltad;
-          return voltaa;
+          this.deubom(meso, dato, voltaa, alldato)
         }
         else
         {
-          const alert = await this.alertController.create({
-            header: "passo",
-            subHeader: "passo",
-            message: "PASSOOO",
-        
-            buttons: [
-              { 
-                text: 'Cancelar',
-                role: 'cancelar',
-                handler: data => {
-                  console.log('Cancel clicked');
-                }
-              },
-            ]
-          });
-          await alert.present();
-          voltad = dato - 7;
-          voltaa = anoagr + "-" + meso + "-" + voltad;
-          return voltaa;
+          this.deuruim();
         }
       }
       else if(difMes == 1 && anoUlt == anoagr)
@@ -277,9 +216,65 @@ export class Tab2Page {
     
   }
 
+  async deuruim()
+  {
+    const alert = await this.alertController.create({
+      header: "Preenchimento indisponível",
+      message: "Você precisa esperar que se passe outra semana para preencher o relatório",
+
+      buttons: ['OK']
+    });
+  
+    await alert.present();
+  }
+
+  async deubom(mesoo, datoo, volta, alldatoo)
+  {
+    
+    // Verifica se o mês e o dia são menores que 10
+    if(mesoo < 10)
+    {
+       volta = volta.substr(0,5) + 0 + volta.substr(5,4);
+    }
+    if(datoo < 10)
+    {
+      volta = volta.substr(0,8) + 0 + volta.substr(8,2);
+    }
+
+    this.testa = new Date(alldatoo);
+    this.testa2 = new Date(volta);
 
 
+    //CONVERTER PARA TIPO DATA
+    const alert = await this.alertController.create({
+      header: "Relatório Semanal",
+       subHeader: "Confirmar Data",
+       message: volta + "Data de hoje: " + alldatoo + "Teste: " + this.testa + "Teste2: " + this.testa2,
 
+        buttons: [
+        {
+        text: 'Cancelar',
+        role: 'cancelar',
+        handler: data => {
+        console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Confirmar',
+        handler: data => {//Converter essas datas pra date type 
+            //this.dadosService.setData_relatorioS_I = data.dataHj;
+            // this.dadosService.setData_relatorioS_F = data.alldato;
+            this.dadosService.setData_relatorioS_F(this.testa);
+            this.dadosService.setData_relatorioS_I(this.testa2);
+
+            this.nav.navigateForward('relatorio-semanal');
+           }
+          }
+          ]
+        });
+  
+      await alert.present();
+  }
 
 }
 

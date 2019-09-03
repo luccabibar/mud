@@ -157,7 +157,18 @@ ion-input{
   font-family: 'Hero-Regular' !important;
 }
 
+ion-textarea{
+  font-family: 'Hero-Regular' !important;
+}
+
 ion-button{
   --border-width: 0.13em !important;
 }
 
+.swiper-container-autoheight, .swiper-container-autoheight .swiper-slide {
+  height: auto;
+}
+
+ion-slide{
+  height: auto !important;
+}
