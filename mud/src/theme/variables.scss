@@ -209,3 +209,11 @@ ion-button{
 .alert-checkbox-label.sc-ion-alert-ios {
   white-space: normal !important;
 }
+
+.swiper-container-autoheight, .swiper-container-autoheight .swiper-slide {
+  height: auto;
+}
+
+ion-slide{
+  height: auto !important;
+}
