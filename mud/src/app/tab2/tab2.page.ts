@@ -57,7 +57,6 @@ export class Tab2Page {
     var difMes = 0; // Verifica diferença bruta dos meses
     var dataUlt= ""; // Data completa do último preenchimento
     var diUlt = 0; // dia ----
-
     var meUlt = 0; // mes ---
     var anoUlt = 0; // ano ---
     var voltad; // usada pra retornar
@@ -75,33 +74,41 @@ export class Tab2Page {
       /*parseInt(dataUlt.substr(0,4))*/
       dayDif = dato - diUlt;
       
-      if(difMes == 0 && anoUlt == anoagr)
+
+      //Validações para ver se faz pelo menos uma semana q a pessoa preencheu
+      if(difMes == 0 && anoUlt == anoagr) //se o último a ser preenchido foi no msm ano e no msm mês
       {
-        if(dayDif <= 7)
+        if(dayDif >= 7) //faz mais de 7 dias q ele preencheu
         {
-          voltad = dato + 2;
+          voltad = dato - 7; 
           voltaa = anoagr + "-" + meso + "-" + voltad;
-          this.deubom(meso, dato, voltaa, alldato)
+          this.deubom(meso, dato, voltaa, alldato) // envia o mês atual, dia atual, data em que a semana começa a contar e o data em que a semana termina (data atual)
         }
         else
         {
-          this.deuruim();
+          this.deuruim(); //Não faz uma semana
         }
       }
-      else if(difMes == 1 && anoUlt == anoagr)
+      else if(difMes == 1 && anoUlt == anoagr) //Se o último relatório que a pessoa preencheu foi mês passado do mesmo ano
       {
-        if(meUlt == 1|| meUlt == 3 || meUlt == 5 || meUlt == 7 || meUlt == 8 || meUlt == 10 || meUlt == 12)
+        if(meUlt == 1|| meUlt == 3 || meUlt == 5 || meUlt == 7 || meUlt == 8 || meUlt == 10 || meUlt == 12) //Meses com 31 dias
         {
-          dayDif = (31 - diUlt) + dato;
-          if(dayDif >= 7)
+          dayDif = (31 - diUlt) + dato; 
+          if(dayDif == 7 && dato <= 7) //Faz mais que 7 dias que a pessoa preencheu E ainda não se passaram 7 dias do mês atual
           {
             voltad = 31 - (7 - dato);
-            voltaa = anoagr + "-" + meso-- + voltad;
-            return voltaa;
+            voltaa = anoagr + "-" + meUlt + voltad;
+            this.deubom(meUlt, dato, voltaa, alldato);
           } 
-          else
+          else if(dayDif > 7 && dato > 7)//Faz mais que 7 dias que a pessoa preencheu E se passaram mais que 7 dias do mês atual
           {
-            /////
+            voltad = dato - 7;
+            voltaa = anoagr + "-" + meso + voltad;
+            this.deubom(meso, dato, voltaa, alldato);
+          }
+          else // faz menos que 7 dias
+          {
+            this.deuruim();
           }
         }
         else if(meUlt == 2)
