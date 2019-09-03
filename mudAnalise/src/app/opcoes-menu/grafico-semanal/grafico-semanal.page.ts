@@ -10,11 +10,25 @@ import { DadosService } from '../../servicos/dados.service';
 })
 export class GraficoSemanalPage implements OnInit {
 
+  //dados do paciente (service)
   paciente;
+  //dados do paciente (banco)
   semana;
   alimentacao;
   atividade;
   bemEstar;
+  //controle da view
+  graf;
+  semKey;
+
+  /**
+   * converte int pra float pQ O ANGULAR NAO CONSEGUE LIDAR COM TIPOS
+   * PHP RAINHA ANGULAR RAINHA 
+   */
+  changeOpt()
+  {
+    this.semKey = Number.parseInt(this.semKey);
+  }
 
   /**
    * a partir de um id de um usuario, pega todas as semanas, e para cada semana,
@@ -24,12 +38,6 @@ export class GraficoSemanalPage implements OnInit {
    */
   pegaDados(id)
   {
-    /*
-      motivos para fazer 3 querys ao invez de apenas um gandao
-        - mais organizado
-        - quase o mesmo tempo de execucao no banco
-        - api suporta retorno de multiplos requests
-    */
     let sql = "SELECT sem.data_inicial, sem.observacao, " +
       "ali.carboidratos, ali.proteinas, ali.laticinios, ali.verd_frut, ali.hidratacao, " +
       "atv.a_realizou, atv.tempo, atv.intensidade, " +
@@ -38,33 +46,46 @@ export class GraficoSemanalPage implements OnInit {
       "JOIN alimentacao AS ali ON sem.id_semana = ali.semana_id " +
       "JOIN atividade_fisica AS atv ON sem.id_semana = atv.semana_id " +
       "JOIN bem_estar AS bem ON sem.id_semana = bem.semana_id " +
-      "WHERE sem.usuario_id = " + id + "; ";
+      "WHERE sem.usuario_id = " + id + " ";
+      "ORDER BY sem.data_inicial; ";
 
     this.db.selectGenerico(sql)
     .then((resp: any) => 
     {
-      console.log(resp);
-      this.semana = {
-        "inicio": resp.data_inicial,
-        "obs": resp.observacao
-      };
-      this.alimentacao = {
-        "carbs": resp.carboidratos,              
-        "prots": resp.proteinas,              
-        "latcs": resp.laticinios,              
-        "verds": resp.verd_frut,              
-        "agua": resp.hidratacao                
-      };
-      this.atividade = {
-        "realz": resp.a_realizou,
-        "tempo": resp.tempo,
-        "ints": resp.intensidade
-      };
-      this.bemEstar = {
-        "realz": resp.b_realizou,
-        "vezes": resp.vezes,
-        "obs": resp.comentario
-      };
+      this.semana = [];
+      this.alimentacao = [];
+      this.atividade = [];
+      this.bemEstar = [];
+
+      resp.forEach(row => 
+      {
+        let dataIni = (row.data_inicial).split('-');
+        dataIni = dataIni[2] + "/" + dataIni[1] + "/" + dataIni[0];
+
+        this.semana.push({
+          "data_inicial": dataIni,
+          "observacao": row.observacao
+        });
+        this.alimentacao.push({
+          "carboidratos": row.carboidratos,              
+          "proteinas": row.proteinas,              
+          "laticinios": row.laticinios,              
+          "verd_frut": row.verd_frut,              
+          "hidratacao": row.hidratacao                
+        });
+        this.atividade.push({
+          "a_realizou": row.a_realizou,
+          "tempo": row.tempo,
+          "intensidade": row.intensidade
+        });
+        this.bemEstar.push({
+          "b_realizou": row.b_realizou,
+          "vezes": row.vezes,
+          "comentario": row.comentario
+        });
+      });
+
+      console.log(resp, this.semana, this.alimentacao, this.atividade, this.bemEstar);
     })
     .catch(ex => 
     {
@@ -75,7 +96,8 @@ export class GraficoSemanalPage implements OnInit {
   constructor(private db: BancoService, private data: DadosService) {
     this.paciente = this.data.getDados("user_sessao");
     this.pegaDados(this.paciente.id_usuario);
-   }
+    this.semKey = 0;
+  }
 
   ngOnInit() {
   }
