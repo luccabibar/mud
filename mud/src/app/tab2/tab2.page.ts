@@ -5,6 +5,7 @@ import { DadosService } from '../dados.service';
 import { BancoService } from './../banco.service';
 import { identifierModuleUrl, ReturnStatement } from '@angular/compiler';
 import { parseSelectorToR3Selector } from '@angular/compiler/src/core';
+import { all } from 'q';
 
 @Component({
   selector: 'app-tab2',
@@ -15,7 +16,8 @@ export class Tab2Page {
   
   
   constructor(private nav: NavController, public alertController: AlertController,   private router: Router, private dadosService: DadosService, private BancoService: BancoService) {}
-
+  testa: any;
+  testa2: any;
   dataInicio = "INICIO";
   dataFinal = "FINAL";
 
@@ -55,6 +57,7 @@ export class Tab2Page {
     var difMes = 0; // Verifica diferença bruta dos meses
     var dataUlt= ""; // Data completa do último preenchimento
     var diUlt = 0; // dia ----
+
     var meUlt = 0; // mes ---
     var anoUlt = 0; // ano ---
     var voltad; // usada pra retornar
@@ -76,7 +79,7 @@ export class Tab2Page {
       {
         if(dayDif <= 7)
         {
-          voltad = dato + 7;
+          voltad = dato + 2;
           voltaa = anoagr + "-" + meso + "-" + voltad;
           this.deubom(meso, dato, voltaa, alldato)
         }
@@ -227,6 +230,7 @@ export class Tab2Page {
 
   async deubom(mesoo, datoo, volta, alldatoo)
   {
+    
     // Verifica se o mês e o dia são menores que 10
     if(mesoo < 10)
     {
@@ -237,11 +241,15 @@ export class Tab2Page {
       volta = volta.substr(0,8) + 0 + volta.substr(8,2);
     }
 
+    this.testa = new Date(alldatoo);
+    this.testa2 = new Date(volta);
+
+
     //CONVERTER PARA TIPO DATA
     const alert = await this.alertController.create({
       header: "Relatório Semanal",
        subHeader: "Confirmar Data",
-       message: volta + " " + alldatoo,
+       message: volta + "Data de hoje: " + alldatoo + "Teste: " + this.testa + "Teste2: " + this.testa2,
 
         buttons: [
         {
@@ -255,9 +263,12 @@ export class Tab2Page {
         text: 'Confirmar',
         handler: data => {//Converter essas datas pra date type 
             //this.dadosService.setData_relatorioS_I = data.dataHj;
-            this.dadosService.setData_relatorioS_F = data.alldato;
+            // this.dadosService.setData_relatorioS_F = data.alldato;
+            this.dadosService.setData_relatorioS_F(this.testa);
+            this.dadosService.setData_relatorioS_I(this.testa2);
+
             this.nav.navigateForward('relatorio-semanal');
-                          }
+           }
           }
           ]
         });
