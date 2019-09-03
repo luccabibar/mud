@@ -33,7 +33,7 @@
       </div>
 
 
-  <ion-slides>
+  <ion-slides [options]="{autoHeight: true}">
     <ion-slide id="slido1">
 
       <!---
@@ -71,8 +71,9 @@
               <ion-card-header name="ion-card-header">
                 <ion-card-title>{{mural.titulo}}</ion-card-title>
               </ion-card-header>
-              <ion-text id="3">{{mural.created_at}}</ion-text>
-              <ion-card-content>{{mural.texto}}</ion-card-content>
+              <ion-card-content>{{mural.texto}} <br>
+                <ion-text style="float: right !important;" id="3"><h4>{{mural.created_at}}</h4></ion-text>
+              </ion-card-content>
             </ion-card>
           </ion-item>
           <ion-item-options side="end">
@@ -89,15 +90,14 @@
       <!-- CARDS INSERIR-->
       <ion-card id="cardo2">
         <ion-item>
-          <ion-label position="stacked">Título <ion-text color="danger"></ion-text>
-          </ion-label>
-          <ion-input required type="text" maxLength="44" id="1" name="inserirtitulo"></ion-input>
-          <ion-label position="stacked" text-wrap>Corpo da mensagem <ion-text color="danger"></ion-text>
-            <ion-input disabled></ion-input>
-          </ion-label>
+          <ion-label position="stacked">Título</ion-label>
+          <ion-input required type="text" maxLength="44" id="1" name="inserirtitulo" placeholder="Adicionar título"></ion-input>
         </ion-item>
-        <ion-textarea id="2" name="inserirtxt" maxLength="120"></ion-textarea>
-        
+        <ion-item>
+          <ion-label position="stacked" text-wrap>Corpo da mensagem </ion-label>
+          <ion-textarea id="2"  name="inserirtxt" maxLength="120" placeholder="Adicionar texto" multiline="4"></ion-textarea>
+        </ion-item>
+    
         <ion-button (click)="inserirMural()" color="medio" expand="full">Adicionar</ion-button>
       </ion-card>
     </ion-slide>

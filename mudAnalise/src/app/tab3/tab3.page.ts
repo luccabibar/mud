@@ -23,9 +23,8 @@ export class Tab3Page {
   public murais = [
   ];
 
-
-
    ngOnInit() {
+     this.IonSlides.updateAutoHeight();
      this.addMural();
      this.IonSlides.lockSwipes(true);
    }
@@ -139,13 +138,16 @@ export class Tab3Page {
       do{  
           switch(j){
           case 0:
-            corzita = "rgba(74,116,217, 1)";//"#FFCCBC"; 'rgba(255, 255, 255,'+opacidade+')'
+            corzita = "rgba(0,102,255, 1)";//"#FFCCBC"; 'rgba(255, 255, 255,'+opacidade+')'
             break;
           case 1:
+            corzita = "rgba(170,204,255, 1)";//"#DCEDC8";
+          break;
+          case 2:
               corzita = "rgba(69,170,242, 1)";//"#DCEDC8";
             break;
-          case 2:
-              corzita = "rgba(46,85,176, 1)"//"#B3E5FC";
+          case 3:
+              corzita = "rgba(74,116,217, 1)"//"#B3E5FC"; 
             j = -1;
             break;
           }
@@ -221,22 +223,22 @@ public async alertaDeletar(mural){
 
     // JP, coloquei o campo this.profissional.id_usuario para sring pq o inserir  mural pede isso
     this.BancoService.inserirMural(titulo, texto, this.user_sessao.id_usuario, this.profissional.id_usuario).then(async (response) => {
-      const alert = await this.AlertController.create({
+      /*const alert = await this.AlertController.create({
         header: 'Confirmação',
         subHeader: 'Sucesso!',
-        message: JSON.stringify(response),
+        //message: JSON.stringify(response),
         buttons: ['OK']
-      });
+      });*/
       this.addMural();
-      await alert.present();
+      //await alert.present();
     }
     )
       .catch(async (response) => {
 
         const alert = await this.AlertController.create({
-          header: 'Confirmação',
-          subHeader: 'Erro!',
-          message: JSON.stringify(response),
+          header: 'Erro!',
+          subHeader: 'Erro ao inserir nova nota.',
+          //message: JSON.stringify(response),
           buttons: ['OK']
         });
 
