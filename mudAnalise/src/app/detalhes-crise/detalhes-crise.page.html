@@ -55,7 +55,48 @@
                   <ion-icon name="arrow-dropright"></ion-icon>
                   <strong>{{sintoma.nome}}</strong><br>
                 </ion-item>
-
+              </div>
+            </ion-item>
+            <ion-item>
+              <div>
+                <ion-icon name="map"></ion-icon> Situação:
+              </div>
+              <div slot="end">
+                <ion-icon name="business"></ion-icon><strong>{{this.crises.situacao}}</strong>
+              </div>
+            </ion-item>
+            <ion-item>
+              <div>
+                <ion-icon name="map"></ion-icon> Situação:
+              </div>
+              <div slot="end">
+                <ion-icon name="business"></ion-icon><strong>{{this.crises.situacao}}</strong>
+              </div>
+            </ion-item>
+            <ion-item>
+              <div>
+                <ion-icon name="people"></ion-icon> Acompanhamento:
+              </div>
+              <div slot="end">
+                <strong *ngIf="this.crises.acompanhamento===1">Familiar</strong>
+                <strong *ngIf="this.crises.acompanhamento===2">Amigo</strong>
+                <strong *ngIf="this.crises.acompanhamento===3">Desconhecido</strong>
+              </div>
+            </ion-item>
+            <ion-item>
+              <div>
+                <ion-icon name="time"></ion-icon> Hora Inicial:
+              </div>
+              <div slot="end">
+                <strong>{{this.crises.hora_inicial}}</strong>
+              </div>
+            </ion-item>
+            <ion-item>
+              <div>
+                <ion-icon name="time"></ion-icon> Hora Final:
+              </div>
+              <div slot="end">
+                <strong>{{this.crises.hora_final}}</strong>
               </div>
             </ion-item>
           </div>
