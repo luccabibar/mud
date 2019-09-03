@@ -1,14 +1,14 @@
 .card-1{
-    --ion-item-background: 	#ffffba;
-    font-weight: 600;
+    //--ion-item-background: 	#ffffba;
+    //font-weight: 600;
     ion-icon{
         color: black;
     }
 }
 
 .card-2{
-    --ion-item-background: 	#baffc9;
-    font-weight: 600;
+    //--ion-item-background: 	#baffc9;
+    //font-weight: 600;
 
     ion-icon{
         color: black;
@@ -23,6 +23,7 @@
 #cardoo
 {
     width: 100%;
+    opacity: 10%;
 }
 
 #cardo2
@@ -44,6 +45,12 @@
     width: 160%;
 }*/
 
+#slido2
+{
+  max-height: 100% !important;
+  overflow-y: scroll !important;
+}
+
 #icon1
 {
     margin-left: 265px; 
@@ -59,11 +66,17 @@
     width: 100%;
 }
 
-#btnAdd
-{
-    //width: 80%;
-    //top: 75%;
-    //left: 50%;
-    //margin-right: -50%;
-    //transform: translateX(-50%) 
+#2{
+    border-style: inset !important;
+    border-width: 0.5px !important;
+    border-radius:3px !important;
 }
+
+ion-card-title{
+    font-size: 1.2em !important;
+}
+
+ion-card-content{
+    font-size: 1.1em !important;
+}
+

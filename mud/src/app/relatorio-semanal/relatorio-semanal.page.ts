@@ -50,6 +50,7 @@ export class RelatorioSemanalPage implements OnInit {
   ngOnInit() {
     this.IonSlides.lockSwipes(true);
     document.getElementById("lblTemp").innerHTML = '- de 30 mins';
+    alert("INICIAL: "+ this.dadosService.getData_relatorioS_I() + "FINAL: " + this.dadosService.getData_relatorioS_F());
   }
 
   antSlide()
@@ -402,5 +403,3 @@ export class RelatorioSemanalPage implements OnInit {
   }
 
 }
-
-/* Falta: Campo de observação do relatório em geral, campo de observação do tópico de lazer */
