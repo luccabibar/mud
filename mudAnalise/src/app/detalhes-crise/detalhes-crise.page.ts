@@ -21,6 +21,8 @@ export class DetalhesCrisePage implements OnInit {
   existe = 1;
   intervalo = null;
   existeSintoma=1;
+  start;
+  end;
 
   // param VARs
   criseId = null;
@@ -38,7 +40,10 @@ export class DetalhesCrisePage implements OnInit {
     console.log(this.criseId);
     console.log(this.tipo);
     try {
-      this.pegaCrise()
+      this.pegaCrise();
+      // this.start=moment(this.crises.hora_inicio, "HH:mm:ss");
+      // this.end=moment(this.crises.hora_fim, "HH:mm:ss");
+
     } catch (error) {
       console.log("error");
     }
@@ -62,9 +67,9 @@ export class DetalhesCrisePage implements OnInit {
 
 
   public duracao(hora_inicio, hora_fim) {
-    var start = moment(hora_inicio, "HH:mm");
-    var end = moment(hora_fim, "HH:mm");
-    var minutes = end.diff(start, 'minutes');
+    this.start = moment(hora_inicio, "HH:mm");
+    this.end = moment(hora_fim, "HH:mm");
+    var minutes = this.end.diff(this.start, 'minutes');
 
     if (minutes < 0 || minutes == null || minutes == NaN) {
       minutes = 0;
