@@ -103,103 +103,121 @@ export class Tab2Page {
           else if(dayDif > 7 && dato > 7)//Faz mais que 7 dias que a pessoa preencheu E se passaram mais que 7 dias do mês atual
           {
             voltad = dato - 7;
-            voltaa = anoagr + "-" + meso + voltad;
-            this.deubom(meso, dato, voltaa, alldato);
+            voltaa = anoagr + "-" + meso + "-" + voltad;
+            this.deubom(meso, voltad, voltaa, alldato);
           }
           else // faz menos que 7 dias
           {
             this.deuruim();
           }
         }
-        else if(meUlt == 2)
+        else if(meUlt == 2)// Se faz 1 mês que preencheu e o mês passado foi fevereiro
         {
-          if ((anoUlt % 4 == 0) && ((anoUlt % 100 != 0) || (anoUlt % 400 == 0)))
+          if ((anoUlt % 4 == 0) && ((anoUlt % 100 != 0) || (anoUlt % 400 == 0)))//Confere se o ano é bissexto
           {
-            dayDif = (29 - diUlt) + dato;
-            if(dayDif >= 7)
+            dayDif = (29 - diUlt) + dato; //é ano bissexto - diferença de dias
+            if(dayDif == 7 && dato <= 7) //Faz mais que 7 dias que a pessoa preencheu E ainda não se passaram 7 dias do mês atual
             {
               voltad = 29 - (7 - dato);
-              voltaa = anoagr + "-" + meso-- +"-" + voltaa;
-              return voltaa;
-            }
-            else
+              voltaa = anoagr + "-" + meUlt + "-" + voltad;
+              this.deubom(meUlt, voltad, voltaa, alldato);
+            } 
+            else if(dayDif > 7 && dato > 7)//Faz mais que 7 dias que a pessoa preencheu E se passaram mais que 7 dias do mês atual
             {
-              ///////
+              voltad = dato - 7;
+              voltaa = anoagr + "-" + meso + "-" + voltad;
+              this.deubom(meso, voltad, voltaa, alldato);
+            }
+            else // faz menos que 7 dias
+            {
+              this.deuruim();
             }
           }
           else
           {
-            dayDif = (28 - diUlt) + dato;
-            if(dayDif >= 7)
+            dayDif = (28 - diUlt) + dato; //é ano bissexto - diferença de dias
+            if(dayDif == 7 && dato <= 7) //Faz mais que 7 dias que a pessoa preencheu E ainda não se passaram 7 dias do mês atual
             {
               voltad = 28 - (7 - dato);
-              voltaa = anoagr + "-" + meso-- +"-" + voltaa;
-              return voltaa;
-            }
-            else 
+              voltaa = anoagr + "-" + meUlt + "-" + voltad;
+              this.deubom(meUlt, voltad, voltaa, alldato);
+            } 
+            else if(dayDif > 7 && dato > 7)//Faz mais que 7 dias que a pessoa preencheu E se passaram mais que 7 dias do mês atual
             {
-              ////
+              voltad = dato - 7;
+              voltaa = anoagr + "-" + meso + "-" + voltad;
+              this.deubom(meso, voltad, voltaa, alldato);
+            }
+            else // faz menos que 7 dias
+            {
+              this.deuruim();
             }
           }
         }
         else
         {
           dayDif = (30 - diUlt) + dato;
-          if(dayDif >= 7)
-          {
-            voltad = 30 - (7 - dato);
-            voltaa = anoagr + "-" + meso +"-" + voltaa;
-            return voltaa;
-          }
-          else
-          {
-            ///////
-          }
+            if(dayDif == 7 && dato <= 7) //Faz mais que 7 dias que a pessoa preencheu E ainda não se passaram 7 dias do mês atual
+            {
+              voltad = 30 - (7 - dato);
+              voltaa = anoagr + "-" + meUlt + "-" + voltad;
+              this.deubom(meUlt, voltad, voltaa, alldato);
+            } 
+            else if(dayDif > 7 && dato > 7)//Faz mais que 7 dias que a pessoa preencheu E se passaram mais que 7 dias do mês atual
+            {
+              voltad = dato - 7;
+              voltaa = anoagr + "-" + meso + "-" + voltad;
+              this.deubom(meso, voltad, voltaa, alldato);
+            }
+            else // faz menos que 7 dias
+            {
+              this.deuruim();
+            }
         }
       }
-      else
+      else // Se faz mais de dois meses que a pessoa preencheu
       {
-        if(dato > 7)
+        if(dato > 7) // Já passou do dia 7 do mês atual
         {
           voltad = dato - 7;
           voltaa = anoagr + "-" + meso + "-" + voltad;
-          return voltaa;
+          this.deubom(meso, voltad, voltaa, alldato);
         }
-        else 
+        else //Ainda não passou do dia 7 do mês atual
         {
-          if(meso == 5 || meso == 7 || meso == 10 || meso == 12)
+          if(meso == 5 || meso == 7 || meso == 10 || meso == 12) // Se o mês atual tem 31 dias (em que o mês anterior terá 30 dias)
           {
             voltad = 30 - (7 - dato);
             voltaa = anoagr + "-" + meso-- + "-" + voltad;
-            return voltaa;
+            this.deubom(meso--, voltad, voltaa, alldato);
           }
-          else if(meso == 3)
+          else if(meso == 3) // Se o mês atual é março
           {
-              if ((anoagr % 4 == 0) && ((anoagr % 100 != 0) || (anoagr % 400 == 0)))
+              if ((anoagr % 4 == 0) && ((anoagr % 100 != 0) || (anoagr % 400 == 0))) // Confere se o ano atual é bissexto
               {
-                  voltad = 29 - (7 - dato);
+                  voltad = 29 - (7 - dato); // é ano bissexto
                   voltaa = anoagr + "-" + meso-- + "-" + voltad;
-                  return voltaa;
+                  this.deubom(meso--, voltad, voltaa, alldato);
               }
-              else
+              else // não é ano bissexto
               {
                   voltad = 28 - (7 - dato);
                   voltaa = anoagr + "-" + meso-- + "-" + voltad;
-                  return voltaa;
+                  this.deubom(meso--, voltad, voltaa, alldato);
               }
           }
-          else
+          else //Se o mês atual tem 30 dias e o mês anterior tem 31 dias
           { 
               voltad = 31 - (7 - dato);
-              if(meso == 1)
+              if(meso == 1) //se estiver em janeiro 
               {
                   voltaa = anoagr-- + "-" + 12 + "-" + voltad;
-                  return voltaa;
+                  this.deubom(12, voltad, voltaa, alldato);
               }
-              else
+              else //qualquer outro mês
               {
                   voltaa = anoagr + "-" + meso-- + "-" + voltad;
-                  return voltaa;
+                  this.deubom(meso--, voltad, voltaa, alldato);
               }
           }
       }
