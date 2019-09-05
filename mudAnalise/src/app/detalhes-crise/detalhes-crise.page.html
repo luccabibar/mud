@@ -49,12 +49,12 @@
                   <ion-spinner name="crescent" slot="end"> </ion-spinner>
                 </div>
                 <div *ngIf="existeSintoma===0">
-
+                  <ion-item *ngFor="let sintoma of listaSintomas; let i = index;">
+                    <ion-icon name="arrow-dropright"></ion-icon>
+                    <strong>{{sintoma.nome}}</strong><br>
+                  </ion-item>
                 </div>
-                <ion-item *ngFor="let sintoma of listaSintomas; let i = index;">
-                  <ion-icon name="arrow-dropright"></ion-icon>
-                  <strong>{{sintoma.nome}}</strong><br>
-                </ion-item>
+
               </div>
             </ion-item>
             <ion-item>
@@ -62,15 +62,8 @@
                 <ion-icon name="map"></ion-icon> Situação:
               </div>
               <div slot="end">
-                <ion-icon name="business"></ion-icon><strong>{{this.crises.situacao}}</strong>
-              </div>
-            </ion-item>
-            <ion-item>
-              <div>
-                <ion-icon name="map"></ion-icon> Situação:
-              </div>
-              <div slot="end">
-                <ion-icon name="business"></ion-icon><strong>{{this.crises.situacao}}</strong>
+                <ion-icon name="business"></ion-icon>
+                <strong>{{this.crises.situacao}}</strong>
               </div>
             </ion-item>
             <ion-item>
@@ -78,25 +71,25 @@
                 <ion-icon name="people"></ion-icon> Acompanhamento:
               </div>
               <div slot="end">
-                <strong *ngIf="this.crises.acompanhamento===1">Familiar</strong>
-                <strong *ngIf="this.crises.acompanhamento===2">Amigo</strong>
-                <strong *ngIf="this.crises.acompanhamento===3">Desconhecido</strong>
+                <strong *ngIf="this.crises.acompanhamento==='1'">Familiar</strong>
+                <strong *ngIf="this.crises.acompanhamento==='2'">Amigo</strong>
+                <strong *ngIf="this.crises.acompanhamento==='3'">Desconhecido</strong>
+                {{this.crises.acompanhamento}}
               </div>
             </ion-item>
             <ion-item>
-              <div>
+              <div slot="start">
                 <ion-icon name="time"></ion-icon> Hora Inicial:
-              </div>
-              <div slot="end">
-                <strong>{{this.crises.hora_inicial}}</strong>
+              </div>              <div>
+                <strong>{{this.start}}</strong>
               </div>
             </ion-item>
             <ion-item>
-              <div>
+              <div slot="start">
                 <ion-icon name="time"></ion-icon> Hora Final:
               </div>
-              <div slot="end">
-                <strong>{{this.crises.hora_final}}</strong>
+              <div>
+                <strong>{{ this.end}}</strong>
               </div>
             </ion-item>
           </div>

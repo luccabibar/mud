@@ -14,14 +14,14 @@
     <ion-select-option *ngFor="let sem of semana; index as key;" value="{{key}}">{{sem.data_inicial}}</ion-select-option>
   </ion-select>
   
-  <div *ngIf="(((typeof semKey) != 'undefined') && (semKey != null))">
-    <h2>Gráicos da semana {{semana[semKey].data_inicial}}</h2>
+  <div *ngIf="semKey !== null">
+    <h2>Gráicos da semana {{semana && semana[semKey].data_inicial}}</h2>
     <ion-select placeholder="Selecione um gráfico" [(ngModel)]="grafico">
       <ion-select-option value="alim">Alimentação</ion-select-option>
       <ion-select-option value="atvd">Atividade Física</ion-select-option>
       <ion-select-option value="bemes">Bem Estar</ion-select-option>
     </ion-select>
-    <p>Observacoes: <br> {{semana[semKey].observacao}}</p>
+    <p>Observacoes: <br> {{semana && semana[semKey].observacao}}</p>
   </div>
 
 </ion-content>
