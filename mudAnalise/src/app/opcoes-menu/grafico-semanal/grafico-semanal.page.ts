@@ -23,7 +23,7 @@ export class GraficoSemanalPage implements OnInit {
 
   /**
    * converte int pra float pQ O ANGULAR NAO CONSEGUE LIDAR COM TIPOS
-   * PHP RAINHA ANGULAR RAINHA 
+   * PHP RAINHA ANGULAR NADINHA 
    */
   changeOpt()
   {
