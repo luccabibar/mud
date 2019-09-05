@@ -9,12 +9,14 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content>
   <ion-slides>
     <ion-slide>
-        <ion-content>
-      <ion-list>
+  
+      
         <ion-card>          
             <ion-card-content>
+                <ion-list>
                 <ion-item padding-horizontal>
                     <ion-label class="label" position="stacked" text-wrap>Onde ocorreu a crise?</ion-label>
                     <ion-select id="4" placeholder="Selecionar situação" cancelText="Cancelar" okText="Selecionado">
@@ -36,16 +38,18 @@
                     <ion-range (ionFocus)="mudaLabel()" (keyup)="mudaLabel()" (ionChange)="mudaLabel()" id="tempo" min="0" max="1000" step="200" snaps="true" ticks="false" color="verdemud4" ></ion-range>
                 </ion-item>
                 <ion-label class="label" id="lblTempo" position="fixed"></ion-label>
+              </ion-list>
             </ion-card-content>
           </ion-card>
-        </ion-list>
-      </ion-content>
+        
+
     </ion-slide>
     <ion-slide>
-      <ion-content>
-      <ion-list>
+  
+      
         <ion-card>          
             <ion-card-content>
+                <ion-list>
                 <ion-item padding-horizontal lines="none">
                     <ion-text color="verdemud4" style="font-size: 15px !important;" text-wrap>Você estava acompanhado?</ion-text>
                 </ion-item>
@@ -79,14 +83,14 @@
                       </ion-item>
                     </ion-list>
                   </div>
+                </ion-list>
             </ion-card-content>
         </ion-card>
-      </ion-list>
-    </ion-content>
+      
+
     </ion-slide>
     <ion-slide>
-      <ion-content>
-      <ion-list>
+
         <ion-card>
           <ion-card-content>
                   <ion-list>
@@ -114,14 +118,14 @@
                   </ion-list>
           </ion-card-content>
         </ion-card>
-      </ion-list>
-    </ion-content>
+ 
     </ion-slide>
     <ion-slide>
-      <ion-content>
-      <ion-list>
+ 
+  
         <ion-card>          
             <ion-card-content>
+                <ion-list>
                 <div id="escolhersitu">
                 <ion-item lines="none">
                     <ion-label class="label" position="stacked" text-wrap>Qual situação gerou a crise?</ion-label>
@@ -155,13 +159,14 @@
                    <ion-range (ionFocus)="mudaLabel2()" (keyup)="mudaLabel2()" (ionChange)="mudaLabel2()" id="preocupa" min="0" max="6" step="2" snaps="true" ticks="false" color="verdemud4" ></ion-range>
                 </ion-item>
                 <ion-label class="label" id="lblGrau" position="fixed"></ion-label>
+              </ion-list>
             </ion-card-content>
         </ion-card>
-      </ion-list>
-    </ion-content>
+      
+ 
     </ion-slide>
   </ion-slides>
-
+</ion-content>
 
 <ion-footer>
     <div id="botoes" style="display: none;">
