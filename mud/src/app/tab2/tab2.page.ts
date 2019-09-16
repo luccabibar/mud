@@ -309,8 +309,8 @@ export class Tab2Page {
       volta = volta.substr(0,8) + 0 + volta.substr(8,2);
     }
 
-    this.testa = new Date(alldatoo.toString());
-    this.testa2 = new Date(volta.toString());
+    this.testa = new Date(alldatoo);
+    this.testa2 = new Date(volta);
 
 
     //CONVERTER PARA TIPO DATA
