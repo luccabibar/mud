@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-select placeholder="Selecione uma semana" [(ngModel)]="semKey" (ionChange)="changeOpt();">
+  <!-- <ion-select placeholder="Selecione uma semana" [(ngModel)]="semKey" (ionChange)="changeOpt();">
     <ion-select-option *ngFor="let sem of semana; index as key;" value="{{key}}">{{sem.data_inicial}}</ion-select-option>
   </ion-select>
   
@@ -22,6 +22,6 @@
       <ion-select-option value="bemes">Bem Estar</ion-select-option>
     </ion-select>
     <p>Observacoes: <br> {{semana[semKey].observacao}}</p>
-  </div>
+  </div> -->
 
 </ion-content>
