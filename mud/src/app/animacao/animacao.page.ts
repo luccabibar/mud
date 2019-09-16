@@ -1,5 +1,5 @@
 import { AlertController } from '@ionic/angular';
-import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
+import { Component, OnInit, OnDestroy, SystemJsNgModuleLoader } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { DadosService } from '../dados.service';
 
@@ -8,12 +8,13 @@ import { DadosService } from '../dados.service';
   templateUrl: './animacao.page.html',
   styleUrls: ['./animacao.page.scss'],
 })
-export class AnimacaoPage implements OnInit {
+export class AnimacaoPage implements OnInit, OnDestroy {
 
   constructor(private dadosService: DadosService,private AlertController: AlertController,  private router: Router) { }
   
   public counter = 0;
   public timer;
+  public conta = 0;
 
   ngOnInit() {
     this.animacao();
@@ -28,7 +29,7 @@ export class AnimacaoPage implements OnInit {
     this.dadosService.setCrise_hr_inicio(horas);
     console.log(this.dadosService.getCrise_hr_inicio());
     
-    //this.mandaAlerta();
+    this.mandaAlerta();
   }
 
   ngOnDestroy()
@@ -111,6 +112,7 @@ export class AnimacaoPage implements OnInit {
           }, {
             text: 'Sim',
             handler: () => {
+              this.conta = 1;
               this.router.navigateByUrl('/relatorio-crise');
               clearInterval( this.timer );
             }
@@ -123,7 +125,9 @@ export class AnimacaoPage implements OnInit {
 
   async mandaAlerta()
   {
-    await new Promise(resolve => setTimeout(resolve, 540000));
+    await new Promise(resolve => setTimeout(resolve, 540000)); 
+    if(this.conta == 0)
+    {
       const alert = await this.AlertController.create({
         header: 'Ajuda',
         message: 'Você já está na respiração há algum tempo, deseja contatar alguém?',
@@ -136,7 +140,7 @@ export class AnimacaoPage implements OnInit {
           }, {
             text: 'Sim',
             handler: () => {
-              this.router.navigateByUrl('/relatorio-crise');
+              this.router.navigateByUrl('/ligar');
               clearInterval( this.timer );
             }
           }
@@ -144,5 +148,5 @@ export class AnimacaoPage implements OnInit {
       });
       return await alert.present();
     }
-    
+  }
 }
