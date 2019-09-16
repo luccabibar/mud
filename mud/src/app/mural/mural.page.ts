@@ -48,6 +48,10 @@ export class MuralPage implements OnInit {
     this.navCtrl.navigateForward('tab3');
   }
 
+  sobre()
+  {
+    this.navCtrl.navigateForward('sobre');
+  }
   public addMural()
   { 
     var dato ="";
