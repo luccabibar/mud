@@ -20,9 +20,11 @@ export class DetalhesCrisePage implements OnInit {
   array = null;
   existe = 1;
   intervalo = null;
-  existeSintoma=1;
+  existeSintoma = 1;
   start;
   end;
+  comeco;
+  fim;
 
   // param VARs
   criseId = null;
@@ -31,7 +33,6 @@ export class DetalhesCrisePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     public bd: BancoService,
   ) {
-
     this.info = this.activatedRoute.snapshot.params.info;
     this.array = this.info.split("-");
     this.array[2];
@@ -41,11 +42,10 @@ export class DetalhesCrisePage implements OnInit {
     console.log(this.tipo);
     try {
       this.pegaCrise();
-      // this.start=moment(this.crises.hora_inicio, "HH:mm:ss");
-      // this.end=moment(this.crises.hora_fim, "HH:mm:ss");
+
 
     } catch (error) {
-      console.log("error");
+      console.log("erro ao pegar crise e/ou erro ao processar data");
     }
 
   }
@@ -78,20 +78,20 @@ export class DetalhesCrisePage implements OnInit {
   }
 
   public organizaSintomas() {
-    let j=0;
-    for (let i = 1; i < this.crises.sintoma_inicial.length; i+=2) {
-      console.log("ID DO SINTOMA",this.crises.sintoma_inicial[i]);
+    let j = 0;
+    for (let i = 1; i < this.crises.sintoma_inicial.length; i += 2) {
+      console.log("ID DO SINTOMA", this.crises.sintoma_inicial[i]);
       this.bd.selectGenerico("SELECT nome FROM sintoma WHERE id_sintoma=" + this.crises.sintoma_inicial[i] + " ;").then(async (resposta) => {
         this.listaSintomas[j] = resposta[0];
         j++;
-        console.log("RESPOSTA -->" ,resposta[0]);
+        console.log("RESPOSTA -->", resposta[0]);
       }).catch(async (resposta) => {
-        console.log("ERRO: ",resposta);
+        console.log("ERRO: ", resposta);
         this.existeSintoma = 2;
       })
     }
-    console.log("SINTOMAS: ",this.listaSintomas);
-    this.existeSintoma=0;
+    console.log("SINTOMAS: ", this.listaSintomas);
+    this.existeSintoma = 0;
   }
 
   public async pegaCrise() {
@@ -102,6 +102,8 @@ export class DetalhesCrisePage implements OnInit {
       this.existe = 0;
       this.duracao(this.crises.hora_inicio, this.crises.hora_fim);
       this.organizaSintomas();
+      this.comeco = moment(this.crises.hora_inicio).format('LTS');
+      this.fim = moment(this.crises.hora_fim).format('LTS');
     }).catch(async (resposta) => {
       console.log(resposta);
       this.existe = 2;
