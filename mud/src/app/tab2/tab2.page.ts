@@ -226,7 +226,52 @@ export class Tab2Page {
   })
     .catch(async(response)=>{
 
-      const alert = await this.alertController.create({
+      if(dato > 7) // Já passou do dia 7 do mês atual
+        {
+          voltad = dato - 7;
+          voltaa = anoagr + "-" + meso + "-" + voltad;
+          this.deubom(meso, voltad, voltaa, alldato);
+        }
+        else //Ainda não passou do dia 7 do mês atual
+        {
+          if(meso == 5 || meso == 7 || meso == 10 || meso == 12) // Se o mês atual tem 31 dias (em que o mês anterior terá 30 dias)
+          {
+            voltad = 30 - (7 - dato);
+            voltaa = anoagr + "-" + meso-- + "-" + voltad;
+            this.deubom(meso--, voltad, voltaa, alldato);
+          }
+          else if(meso == 3) // Se o mês atual é março
+          {
+              if ((anoagr % 4 == 0) && ((anoagr % 100 != 0) || (anoagr % 400 == 0))) // Confere se o ano atual é bissexto
+              {
+                  voltad = 29 - (7 - dato); // é ano bissexto
+                  voltaa = anoagr + "-" + meso-- + "-" + voltad;
+                  this.deubom(meso--, voltad, voltaa, alldato);
+              }
+              else // não é ano bissexto
+              {
+                  voltad = 28 - (7 - dato);
+                  voltaa = anoagr + "-" + meso-- + "-" + voltad;
+                  this.deubom(meso--, voltad, voltaa, alldato);
+              }
+          }
+          else //Se o mês atual tem 30 dias e o mês anterior tem 31 dias
+          { 
+              voltad = 31 - (7 - dato);
+              if(meso == 1) //se estiver em janeiro 
+              {
+                  voltaa = anoagr-- + "-" + 12 + "-" + voltad;
+                  this.deubom(12, voltad, voltaa, alldato);
+              }
+              else //qualquer outro mês
+              {
+                  voltaa = anoagr + "-" + meso-- + "-" + voltad;
+                  this.deubom(meso--, voltad, voltaa, alldato);
+              }
+          }
+      }
+
+      /*const alert = await this.alertController.create({
         header: 'DEU ERRO',
         message: 'Não será possível inserir outro mural semanal em menos de uma semana!',
         buttons:  [
@@ -236,9 +281,8 @@ export class Tab2Page {
         ],
       });
   
-      await alert.present();
-       })
-    
+      await alert.present();*/
+    })
   }
 
   async deuruim()
@@ -255,7 +299,6 @@ export class Tab2Page {
 
   async deubom(mesoo, datoo, volta, alldatoo)
   {
-    
     // Verifica se o mês e o dia são menores que 10
     if(mesoo < 10)
     {
@@ -266,15 +309,15 @@ export class Tab2Page {
       volta = volta.substr(0,8) + 0 + volta.substr(8,2);
     }
 
-    this.testa = new Date(alldatoo);
-    this.testa2 = new Date(volta);
+    this.testa = new Date(alldatoo.toString());
+    this.testa2 = new Date(volta.toString());
 
 
     //CONVERTER PARA TIPO DATA
     const alert = await this.alertController.create({
       header: "Relatório Semanal",
        subHeader: "Confirmar Data",
-       message: volta + "Data de hoje: " + alldatoo + "Teste: " + this.testa + "Teste2: " + this.testa2,
+       message: volta + "Data de hoje: " + alldatoo + "<****>Teste: " + this.testa + "<****>Teste2: " + this.testa2,
 
         buttons: [
         {
