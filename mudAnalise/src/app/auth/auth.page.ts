@@ -51,7 +51,6 @@ export class AuthPage implements OnInit {
     let hash = id + "-" + this.gerarhash(20);
 
     let target = document.getElementById('qr-img');
-    console.log("target: ", target);
 
     //gera codigo e joga ele num elem
     let qr = new QRious({
@@ -96,7 +95,6 @@ export class AuthPage implements OnInit {
     return new Promise((resolve, reject) => {
 
          this.db.inserirSessao(hash,id).then((response)=>{
-           console.log(response);
   
            resolve(true);
   
@@ -110,33 +108,6 @@ export class AuthPage implements OnInit {
          });
   
       });
-    // return new Promise((resolve, reject) => {
-    //   let sql = "INSERT INTO public.sessao VALUES (" +
-    //     "default, " +
-    //     "'" + hash + "', " +
-    //     "NULL, " +
-    //     id + ", " +
-    //     "0, " +
-    //     "NOW(), " +
-    //     "NULL, " +
-    //     "NULL " +
-    //     ");";
-
-    //   this.db.insertGenerico(sql).then((response) => {
-    //     console.log(response);
-
-    //     resolve(true);
-
-    //   }).catch((ex) => {
-    //     if (ex.error.text == "sucesso") {
-    //       resolve(true);
-    //     } else {
-    //       resolve(false);
-    //     }
-
-    //   });
-
-   // });
   }
 
   
@@ -200,7 +171,6 @@ export class AuthPage implements OnInit {
       //espera um teco e dps procura pela sessao ate achar
       await this.sleep(2 * 1000);
       userId = await this.checkSessao(hash);
-      console.log(" passou ", this.cancel);
 
       // Passa o hash atual e recebe o novo hash
       hash = this.atualizaQR(hash);
@@ -243,7 +213,6 @@ export class AuthPage implements OnInit {
     this.timeQR += 1;
     if (this.timeQR == 15) {
       let hash = this.geraQr();
-      console.log("gerou");
       this.timeQR = 0;
       return hash;
     }
@@ -258,7 +227,6 @@ export class AuthPage implements OnInit {
     };
 
     this.cancel = true;
-    console.log(this.cancel);
 
     this.router.navigate(["/home"], navDados);
 

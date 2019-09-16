@@ -10,18 +10,26 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-select placeholder="Selecione uma semana" [(ngModel)]="semKey" (ionChange)="changeOpt();">
+  <!--seletor de semana-->
+  <!--<ion-select placeholder="Selecione uma semana" [(ngModel)]="semKey" (ionChange)="changeOpt();">
     <ion-select-option *ngFor="let sem of semana; index as key;" value="{{key}}">{{sem.data_inicial}}</ion-select-option>
-  </ion-select>
+  </ion-select>-->
   
   <div *ngIf="semKey !== null">
-    <h2>Gráicos da semana {{semana && semana[semKey].data_inicial}}</h2>
-    <ion-select placeholder="Selecione um gráfico" [(ngModel)]="grafico">
+    <!--<h2>Gráicos da semana {{semana && semana[semKey].data_inicial}}</h2>-->
+    <!--seletor de grafico-->
+    <ion-select placeholder="Selecione um gráfico" [(ngModel)]="grafSel" (ionChange)="changeGraf();">
       <ion-select-option value="alim">Alimentação</ion-select-option>
       <ion-select-option value="atvd">Atividade Física</ion-select-option>
       <ion-select-option value="bemes">Bem Estar</ion-select-option>
     </ion-select>
-    <p>Observacoes: <br> {{semana && semana[semKey].observacao}}</p>
+    <!--grafico-->
+    <canvas #grafico>
+
+    </canvas>
+    <!--observacoes-->
+    <br>
+    Observacoes:  {{semana && semana[semKey].observacao}}
   </div>
 
 </ion-content>
