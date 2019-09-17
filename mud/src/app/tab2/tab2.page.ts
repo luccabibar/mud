@@ -50,6 +50,35 @@ export class Tab2Page {
     
   }
 
+  /*async relatsem()
+  {
+    var dataUlt;
+    var dataatual = new Date();
+    var dd = String(dataatual.getDate()).padStart(2, '0');
+    var mm = String(dataatual.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = dataatual.getFullYear();
+
+    var datinha = dd + '/' + mm + '/' + yyyy;
+
+    this.BancoService.selectGenerico("SELECT * FROM semana WHERE usuario_id ='"+this.dadosService.getId()+"'ORDER BY created_at DESC LIMIT 1;")
+    .then(async(Response)=>{// Se achar esse ID no banco de relatorios semanais
+      dataUlt = new Date(Response[0]['data_final']);})
+      .catch(async(response)=>{
+        console.log('Erro');
+      })
+
+      
+      const alert = await this.alertController.create({
+        header: "Teste",
+        message: "<p>Data de hoje: "+datinha+"</p><p>Último envio em:"+dataUlt+"</p>",
+        buttons: ['OK']
+      });
+    
+      await alert.present();
+    
+
+  }*/
+
 
   liberaRelat(alldato, dato, meso, anoagr)
   {
@@ -65,13 +94,10 @@ export class Tab2Page {
     .then(async(Response)=>{// Se achar esse ID no banco de relatorios semanais
       dataUlt = Response[0]['data_final'];
       dataUlt = dataUlt.substr(0, 10);
-      diUlt= 1;
-      /*parseInt(dataUlt.substr(8,2))*/
-      meUlt = 9;
-      /*parseInt(dataUlt.substr(5,2))*/
+      diUlt= parseInt(dataUlt.substr(8,2));
+      meUlt = parseInt(dataUlt.substr(5,2));
       difMes = meso - meUlt;
-      anoUlt = 2019;
-      /*parseInt(dataUlt.substr(0,4))*/
+      anoUlt = parseInt(dataUlt.substr(0,4));
       dayDif = dato - diUlt;
       
 
@@ -299,6 +325,7 @@ export class Tab2Page {
 
   async deubom(mesoo, datoo, volta, alldatoo)
   {
+    
     // Verifica se o mês e o dia são menores que 10
     if(mesoo < 10)
     {
@@ -310,38 +337,13 @@ export class Tab2Page {
     }
 
     this.testa = new Date(alldatoo);
+    this.testa.setDate(this.testa.getDate()+1);
     this.testa2 = new Date(volta);
+    this.testa2.setDate(this.testa2.getDate()+1);
 
-
-    //CONVERTER PARA TIPO DATA
-    const alert = await this.alertController.create({
-      header: "Relatório Semanal",
-       subHeader: "Confirmar Data",
-       message: volta + "Data de hoje: " + alldatoo + "<****>Teste: " + this.testa + "<****>Teste2: " + this.testa2,
-
-        buttons: [
-        {
-        text: 'Cancelar',
-        role: 'cancelar',
-        handler: data => {
-        console.log('Cancel clicked');
-        }
-      },
-      {
-        text: 'Confirmar',
-        handler: data => {//Converter essas datas pra date type 
-            //this.dadosService.setData_relatorioS_I = data.dataHj;
-            // this.dadosService.setData_relatorioS_F = data.alldato;
-            this.dadosService.setData_relatorioS_F(this.testa);
-            this.dadosService.setData_relatorioS_I(this.testa2);
-
-            this.nav.navigateForward('relatorio-semanal');
-           }
-          }
-          ]
-        });
-  
-      await alert.present();
+    this.dadosService.setData_relatorioS_F(this.testa);
+    this.dadosService.setData_relatorioS_I(this.testa2);
+    this.nav.navigateForward('relatorio-semanal');
   }
 
 }
