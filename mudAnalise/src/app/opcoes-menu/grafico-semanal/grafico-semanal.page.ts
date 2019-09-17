@@ -58,10 +58,37 @@ export class GraficoSemanalPage implements OnInit
   changeGraf()
   {
     let dataset = [];
+
     switch(this.grafSel) {
       case "alim":
-        this.alimentacao.forEach(elem => {
-          //TODO: load dataset k
+        let i = 0;
+        let first = true;
+        //itera sobre cada semana
+        this.alimentacao.forEach(sem => 
+        {
+          //itera sobre cada indice da semana
+          for (var key in sem) { //"foreach"
+            if (sem.hasOwnProperty(key)) {
+              let value = sem[key];
+            
+              //if for a primeira vez, cria objeto de dataset
+              if(first){         
+                let color = this.randColor();
+                dataset.push({
+                  data: [value],
+                  backgroundColor: color,
+                  borderColor: color,
+                  borderWidth: 1
+                });
+              }
+              //else so add o valor no dataset correspondente
+              else{
+                dataset[i].data.push(value);
+              }
+            }
+          }
+          first = false;
+          i++;
         });
         break;
       /*case "atvd":
@@ -72,19 +99,14 @@ export class GraficoSemanalPage implements OnInit
         break;*/
     }
 
+    console.log(this.alimentacao);
+    console.log(dataset);
+
     let grafOpts = {
-
-
       type: 'bar',
       data: {
-        labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
-        datasets: [{
-          label: 'Viewers in millions',
-          data: [2.5, 3.8, 5, 6.9, 6.9, 7.5, 10, 17],
-          backgroundColor: '#d99', // array should have same number of elements as number of dataset
-          borderColor: '#d33',// array should have same number of elements as number of dataset
-          borderWidth: 1
-        }]
+        //labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
+        datasets: dataset
       },
       options: {
         scales: {
@@ -153,8 +175,6 @@ export class GraficoSemanalPage implements OnInit
           "comentario": row.comentario
         });
       });
-
-      console.log(resp, this.semana, this.alimentacao, this.atividade, this.bemEstar);
     })
     .catch(ex => 
     {
