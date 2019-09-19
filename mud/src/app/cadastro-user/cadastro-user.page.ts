@@ -399,8 +399,28 @@ export class CadastroUserPage implements OnInit {
     })
   }
     
-ngOnInit() {
+async ngOnInit() {
   this.IonSlides.lockSwipes(true);
+  //await this.sitBanco(null);
 }
+
+
+/*async RetornarListaAnos(){
+  //DEVERÁ TER UMA NOVA CONDIÇÃO NO WHERE NO SQL, NO CASO "usuario_id". Para que concatenar com o resto
+  let ReturnAnos = await this.BD.selectGenerico("SELECT * FROM situacao WHERE usuario_id ="+this.dadosService.getId()+" ORDER BY id ASC;");
+  let anos=[];
+  for(let i in ReturnAnos)
+    anos[i]=ReturnAnos[i].ano;
+  return anos;
+}
+
+h = [];
+primeiro: any;
+
+async sitBanco($event = null) {
+  this.h = await this.RetornarListaAnos();
+  this.primeiro = this.h[0];
+  console.log(this.h);
+}*/
 
 }

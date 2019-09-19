@@ -129,10 +129,16 @@
                 <div id="escolhersitu">
                 <ion-item lines="none">
                     <ion-label class="label" position="stacked" text-wrap>Qual situação gerou a crise?</ion-label>
-                    <ion-select id="25" placeholder="Selecionar situação" cancelText="Cancelar" okText="Selecionado">
+                    <!--ion-select id="25" placeholder="Selecionar situação" cancelText="Cancelar" okText="Selecionado">
                         <ion-select-option class="option" value="Situação 1">Situação 1</ion-select-option>
                         <ion-select-option class="option" value="Situação 2">Situação 2</ion-select-option>
                         <ion-select-option class="option" value="Situação 3">Situação 3</ion-select-option>
+                    </ion-select> -->
+                    <ion-select (ionChange)="sitBanco($event)" >
+                      <ng-container *ngFor="let situacao of h" ><!-- for dessa desgraça que busca do banco os anos -->
+                          <ion-select-option value="{{id}}" id="28">{{situacao}}</ion-select-option>
+                      </ng-container>
+                     
                     </ion-select>
                 </ion-item>
                 </div>
