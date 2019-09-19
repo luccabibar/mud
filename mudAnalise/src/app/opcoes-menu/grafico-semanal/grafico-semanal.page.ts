@@ -61,11 +61,11 @@ export class GraficoSemanalPage implements OnInit
 
     switch(this.grafSel) {
       case "alim":
-        let i = 0;
         let first = true;
         //itera sobre cada semana
-        this.alimentacao.forEach(sem => 
-        {
+        this.alimentacao.forEach((sem) => 
+        { 
+          let i = 0;
           //itera sobre cada indice da semana
           for (var key in sem) { //"foreach"
             if (sem.hasOwnProperty(key)) {
@@ -75,6 +75,7 @@ export class GraficoSemanalPage implements OnInit
               if(first){         
                 let color = this.randColor();
                 dataset.push({
+                  label: key,
                   data: [value],
                   backgroundColor: color,
                   borderColor: color,
@@ -85,10 +86,10 @@ export class GraficoSemanalPage implements OnInit
               else{
                 dataset[i].data.push(value);
               }
+              i++;
             }
           }
           first = false;
-          i++;
         });
         break;
       /*case "atvd":
@@ -99,7 +100,6 @@ export class GraficoSemanalPage implements OnInit
         break;*/
     }
 
-    console.log(this.alimentacao);
     console.log(dataset);
 
     let grafOpts = {
