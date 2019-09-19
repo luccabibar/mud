@@ -1,6 +1,5 @@
 <ion-header>
     <ion-toolbar color=verdemud3>
-        <ion-icon (click)="goBack()" class="back-arrow" slot="start" name="arrow-round-back"></ion-icon>
         <ion-title>Sessao</ion-title>
     </ion-toolbar>
   </ion-header>
@@ -40,13 +39,13 @@
         </ion-item>
         <ion-button (click)="removeSessao()" color="danger" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;">Encerrar Sessão</ion-button>
         
-        <ion-button (click)="goBack()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Voltar para o Perfil de usuário</ion-button>
+        <ion-button (click)="goBack()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Voltar</ion-button>
       </ion-list>
     </ion-card-content>
   </ion-card>
   </div>
   <ng-template #newSessao>
     <ion-button (click)="startSessao()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;">Iniciar nova sessão</ion-button>
-    <ion-button (click)="goBack()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Voltar para o Perfil de usuário</ion-button>
+    <ion-button (click)="goBack()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Voltar</ion-button>
   </ng-template>
 </ion-content>

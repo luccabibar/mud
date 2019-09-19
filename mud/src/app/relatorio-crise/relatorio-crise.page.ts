@@ -20,8 +20,9 @@ export class RelatorioCrisePage implements OnInit {
 
   constructor(public alertController: AlertController,public bancoService: BancoService,public dadosService: DadosService,public navCtrl: NavController) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.IonSlides.lockSwipes(true);
+    await this.sitBanco(null);
     document.getElementById("lblTempo").innerHTML = '- de 10 mins';
     document.getElementById("lblGrau").innerHTML = 'Leve';
   }
@@ -117,9 +118,14 @@ export class RelatorioCrisePage implements OnInit {
     }
   }
 
-  addsitu()
+  adicionou_sit = false;
+
+  async addsitu()
   {
-    this.conta++;
+    this.adicionou_sit = true;
+    document.getElementById("addsitu").style.display='unset';
+    document.getElementById("escolhersitu").style.display='none';
+    /*this.conta++;
     if(this.conta == 1)
     {
     document.getElementById("addsitu").style.display='unset';
@@ -130,7 +136,51 @@ export class RelatorioCrisePage implements OnInit {
     document.getElementById("escolhersitu").style.display='unset';
     document.getElementById("addsitu").style.display='none';
     this.conta = 0;
-    }
+    }*/
+    /*const alert = await this.alertController.create({
+      header: "Adicionar nova situação",
+      message: "Digite abaixo a situação que deseja adicionar:",
+      inputs: [
+        {
+          name: 'sit',
+          placeholder: 'Escreva a situação',
+          type: 'text'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Adicionar',
+          handler: data => {
+            this.bancoService.insertGenerico("INSERT INTO situacao(usuario_id,situacao) VALUES ('"+this.dadosService.getId()+"','"+data.sit+"');")
+            .then(async(response)=>{
+              
+            })
+              .catch(async(response)=>{
+                const alert = await this.alertController.create({
+                  header: 'Erro',
+                  message: 'Erro ao adicionar nova situação de crise. Tente novamente!',
+                  buttons:  [
+                    {
+                      text: 'OK',
+                    }
+                  ],
+                  });
+
+                  await alert.present();
+               })
+          }
+        }
+      ]
+    });
+      
+    await alert.present();*/
 
   }
 
@@ -336,6 +386,25 @@ export class RelatorioCrisePage implements OnInit {
   voltar()
   {
     this.navCtrl.navigateBack('tabs/tab2');
+  }
+
+
+  async RetornarListaAnos(){
+  //DEVERÁ TER UMA NOVA CONDIÇÃO NO WHERE NO SQL, NO CASO "usuario_id". Para que concatenar com o resto
+  let ReturnAnos = await this.bancoService.selectGenerico("SELECT * FROM situacao WHERE usuario_id ="+this.dadosService.getId()+" ORDER BY id ASC;");
+  let anos=[];
+  for(let i in ReturnAnos)
+    anos[i]=ReturnAnos[i].situacao;
+    return anos;
+  }
+
+  h = [];
+  primeiro: any;
+
+  async sitBanco($event = null) {
+    this.h = await this.RetornarListaAnos();
+    this.primeiro = this.h[0];
+    console.log(this.h);
   }
 
 }
