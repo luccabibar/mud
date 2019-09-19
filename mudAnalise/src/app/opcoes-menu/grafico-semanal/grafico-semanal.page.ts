@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { BancoService } from '../../servicos/banco.service';
 import { DadosService } from '../../servicos/dados.service';
+
+import { Chart } from "chart.js";
+import { colorSets } from '@swimlane/ngx-charts/release/utils';
 
 @Component({
   selector: 'app-grafico-semanal',
   templateUrl: './grafico-semanal.page.html',
   styleUrls: ['./grafico-semanal.page.scss'],
 })
-export class GraficoSemanalPage implements OnInit {
-
+export class GraficoSemanalPage implements OnInit 
+{
   //dados do paciente (service)
   paciente;
   //dados do paciente (banco)
@@ -18,16 +21,104 @@ export class GraficoSemanalPage implements OnInit {
   atividade;
   bemEstar;
   //controle da view
-  graf;
   semKey;
+  //grafico
+  grafObj;
+  grafSel
+  @ViewChild("grafico") grafElem;
+
+  /**
+   * gera uma cor aleatoria
+   * 
+   * @returns string comm a cor em hexdec
+   */
+  randColor(){
+    let vals = "0123456789ABCDEF"
+    let cor = "#";
+    for (let i = 0; i < 6; i++) {
+      cor += vals[Math.floor(Math.random() * 16)];
+    }
+    return cor;
+  }
 
   /**
    * converte int pra float pQ O ANGULAR NAO CONSEGUE LIDAR COM TIPOS
    * PHP RAINHA ANGULAR NADINHA 
+   * (tambem atualiza a view)
    */
   changeOpt()
   {
     this.semKey = Number.parseInt(this.semKey);
+    this.changeGraf();
+  }
+
+  /**
+   * altera o grafico com base no escolhido
+   */
+  changeGraf()
+  {
+    let dataset = [];
+
+    switch(this.grafSel) {
+      case "alim":
+        let i = 0;
+        let first = true;
+        //itera sobre cada semana
+        this.alimentacao.forEach(sem => 
+        {
+          //itera sobre cada indice da semana
+          for (var key in sem) { //"foreach"
+            if (sem.hasOwnProperty(key)) {
+              let value = sem[key];
+            
+              //if for a primeira vez, cria objeto de dataset
+              if(first){         
+                let color = this.randColor();
+                dataset.push({
+                  data: [value],
+                  backgroundColor: color,
+                  borderColor: color,
+                  borderWidth: 1
+                });
+              }
+              //else so add o valor no dataset correspondente
+              else{
+                dataset[i].data.push(value);
+              }
+            }
+          }
+          first = false;
+          i++;
+        });
+        break;
+      /*case "atvd":
+        dataset = this.atividade;
+        break;
+      case "bemes":
+        dataset = this.bemEstar;
+        break;*/
+    }
+
+    console.log(this.alimentacao);
+    console.log(dataset);
+
+    let grafOpts = {
+      type: 'bar',
+      data: {
+        //labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
+        datasets: dataset
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    }; 
+    this.grafObj = new Chart(this.grafElem.nativeElement, grafOpts);
   }
 
   /**
@@ -84,8 +175,6 @@ export class GraficoSemanalPage implements OnInit {
           "comentario": row.comentario
         });
       });
-
-      console.log(resp, this.semana, this.alimentacao, this.atividade, this.bemEstar);
     })
     .catch(ex => 
     {
@@ -93,13 +182,18 @@ export class GraficoSemanalPage implements OnInit {
     })
   }
 
-  constructor(private db: BancoService, private data: DadosService) {
+  constructor(private db: BancoService, private data: DadosService) 
+  {    
     this.paciente = this.data.getDados("user_sessao");
     this.pegaDados(this.paciente.id_usuario);
     this.semKey = 0;
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ionViewDidEnter()
+  {    
+    this.changeGraf();
   }
 
 }
