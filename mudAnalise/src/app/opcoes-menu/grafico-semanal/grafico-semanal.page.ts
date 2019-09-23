@@ -20,6 +20,7 @@ export class GraficoSemanalPage implements OnInit
   alimentacao;
   atividade;
   bemEstar;
+  sono;
   //controle da view
   semKey;
   //grafico
@@ -100,7 +101,7 @@ export class GraficoSemanalPage implements OnInit
         break;*/
     }
 
-    console.log(dataset);
+    //console.log(dataset);
 
     let grafOpts = {
       type: 'bar',
@@ -132,11 +133,13 @@ export class GraficoSemanalPage implements OnInit
     let sql = "SELECT sem.data_inicial, sem.observacao, " +
       "ali.carboidratos, ali.proteinas, ali.laticinios, ali.verd_frut, ali.hidratacao, " +
       "atv.a_realizou, atv.tempo, atv.intensidade, " +
-      "bem.b_realizou, bem.vezes, bem.comentario " +
+      "bem.b_realizou, bem.vezes, bem.comentario, " +
+      "son.hora_comeco, son.vezes_acordou, son.acordou_naturalmente " +
       "FROM semana AS sem " +
       "JOIN alimentacao AS ali ON sem.id_semana = ali.semana_id " +
       "JOIN atividade_fisica AS atv ON sem.id_semana = atv.semana_id " +
       "JOIN bem_estar AS bem ON sem.id_semana = bem.semana_id " +
+      "JOIN sono AS son ON sem.id_semana = son.semana_id " +
       "WHERE sem.usuario_id = " + id + " ";
       "ORDER BY sem.data_inicial; ";
 
@@ -147,6 +150,7 @@ export class GraficoSemanalPage implements OnInit
       this.alimentacao = [];
       this.atividade = [];
       this.bemEstar = [];
+      this.sono = [];
 
       resp.forEach(row => 
       {
@@ -174,12 +178,17 @@ export class GraficoSemanalPage implements OnInit
           "vezes": row.vezes,
           "comentario": row.comentario
         });
+        this.sono.push({
+          "comeco": row.hora_comeco,
+          "acordVezes": row.vezes_acordou,
+          "acordNat": row.acordou_naturalmente
+        });
       });
     })
     .catch(ex => 
     {
       console.log("err: ", ex);      
-    })
+    });
   }
 
   constructor(private db: BancoService, private data: DadosService) 
