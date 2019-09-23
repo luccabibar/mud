@@ -10,43 +10,47 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="formCadastro">
+  <ion-card>
+    <form [formGroup]="formCadastro">
 
-    <ion-item>
-      <ion-label position="stacked">Senha Atual</ion-label>
-      <ion-input #senhaAtual formControlName="senhaAtual" type="password" placeholder="..."></ion-input>
-      <ng-container *ngFor="let erro of mensagens_validacao.senhaAtual">
+      <ion-item>
+        <ion-label position="stacked">Senha Atual</ion-label>
+        <ion-input #senhaAtual formControlName="senhaAtual" type="password" placeholder="..."></ion-input>
+        <ng-container *ngFor="let erro of mensagens_validacao.senhaAtual">
           <span
             *ngIf="formCadastro.get('senhaAtual').hasError(erro.tipo) && (formCadastro.get('senhaAtual').dirty || formCadastro.get('senhaAtual').touched)"
             class="msg-erro">
             {{erro.mensagem}}
           </span>
         </ng-container>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Nova Senha</ion-label>
-      <ion-input formControlName="senha" type="password" placeholder="..."></ion-input>
-      <ng-container *ngFor="let erro of mensagens_validacao.senha">
-        <span
-          *ngIf="formCadastro.get('senha').hasError(erro.tipo) && (formCadastro.get('senha').dirty || formCadastro.get('senha').touched)"
-          class="msg-erro">
-          {{erro.mensagem}}
-        </span>
-      </ng-container>
-    </ion-item>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Nova Senha</ion-label>
+        <ion-input formControlName="senha" type="password" placeholder="..."></ion-input>
+        <ng-container *ngFor="let erro of mensagens_validacao.senha">
+          <span
+            *ngIf="formCadastro.get('senha').hasError(erro.tipo) && (formCadastro.get('senha').dirty || formCadastro.get('senha').touched)"
+            class="msg-erro">
+            {{erro.mensagem}}
+          </span>
+        </ng-container>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Confirmar Senha</ion-label>
-      <ion-input formControlName="confirmaSenha" type="password" placeholder="..."></ion-input>
-      <ng-container *ngFor="let erro of mensagens_validacao.confirmaSenha">
-        <span
-          *ngIf="formCadastro.get('confirmaSenha').hasError(erro.tipo) && (formCadastro.get('confirmaSenha').dirty || formCadastro.get('confirmaSenha').touched)"
-          class="msg-erro">
-          {{erro.mensagem}}
-        </span>
-      </ng-container>
-    </ion-item>
-    <br>
-    <ion-button *ngIf="formCadastro.valid" expand="full" (click)="salvar()">Salvar</ion-button>
-  </form>
+      <ion-item>
+        <ion-label position="stacked">Confirmar Senha</ion-label>
+        <ion-input formControlName="confirmaSenha" type="password" placeholder="..."></ion-input>
+        <ng-container *ngFor="let erro of mensagens_validacao.confirmaSenha">
+          <span
+            *ngIf="formCadastro.get('confirmaSenha').hasError(erro.tipo) && (formCadastro.get('confirmaSenha').dirty || formCadastro.get('confirmaSenha').touched)"
+            class="msg-erro">
+            {{erro.mensagem}}
+          </span>
+        </ng-container>
+      </ion-item>
+      <br>
+      <ion-button padding-horizontal fill="outline" shape="round"  expand="block" color="escuro" *ngIf="formCadastro.valid" expand="full" (click)="salvar()">Salvar</ion-button>
+    </form>
+  </ion-card>
+
+
 </ion-content>
