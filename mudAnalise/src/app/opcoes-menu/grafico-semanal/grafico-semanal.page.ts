@@ -64,6 +64,7 @@ export class GraficoSemanalPage implements OnInit
       case "alim":
         let first = true;
         //itera sobre cada semana
+        console.log(this.alimentacao.length);        
         this.alimentacao.forEach((sem) => 
         { 
           let i = 0;
@@ -73,13 +74,12 @@ export class GraficoSemanalPage implements OnInit
               let value = sem[key];
             
               //if for a primeira vez, cria objeto de dataset
-              if(first){         
-                let color = this.randColor();
+              if(first){     
                 dataset.push({
                   label: key,
                   data: [value],
-                  backgroundColor: color,
-                  borderColor: color,
+                  borderColor: this.randColor(),
+                  fill: false,
                   borderWidth: 1
                 });
               }
@@ -104,7 +104,7 @@ export class GraficoSemanalPage implements OnInit
     //console.log(dataset);
 
     let grafOpts = {
-      type: 'bar',
+      type: 'line',
       data: {
         //labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
         datasets: dataset
