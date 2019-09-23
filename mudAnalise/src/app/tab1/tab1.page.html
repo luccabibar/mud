@@ -24,7 +24,7 @@
           <img src="assets/perfil_psi.png">
         </ion-avatar>
       </div>
-      <div >
+      <div>
         <ion-label><strong>{{user_sessao.nome}}</strong></ion-label>
         <ion-label><small>CPF: </small>{{user_sessao.cpf}}</ion-label>
       </div>
@@ -38,22 +38,27 @@
     </ion-item>
   </ion-card>
 
-  <ion-list lines="none">
+  <ion-list>
     <ion-card>
-
+        <ion-card-header>
+          <ion-item tappable routerLink="/grafico-crise" lines="full" class="ion-align-items-center">
+            <ion-icon slot="start" color="big" name="stats"></ion-icon>
+            <ion-label>Gráficos Sobre...</ion-label>
+          </ion-item>
+        </ion-card-header>
       <ion-item tappable routerLink="/grafico-crise">
         <ion-icon slot="start" color="big" name="pulse"></ion-icon>
-        <ion-label>Gráfico de crise</ion-label>
+        <ion-label>Crises</ion-label>
         <ion-buttons slot="end">
           <ion-button routerLink="/grafico-crise">
             <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-item>
-      
+
       <ion-item tappable routerLink="/grafico-semanal">
         <ion-icon slot="start" color="big" name="calendar"></ion-icon>
-        <ion-label>Gráfico de relatórios</ion-label>
+        <ion-label>Relatórios </ion-label>
         <ion-buttons slot="end">
           <ion-button routerLink="/grafico-semanal">
             <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
@@ -71,7 +76,7 @@
         </ion-refresher-content>
       </ion-refresher> -->
       <ion-card-header (click)="atualizaCrises()">
-        <ion-item lines="full">
+        <ion-item lines="full" class="ion-align-items-center">
           <ion-icon slot="start" color="big" name="medkit"></ion-icon>
           <ion-label>Histórico de Crises</ion-label>
         </ion-item>
@@ -122,7 +127,7 @@
       </ion-card>
     </div>
     <ng-template #noData>
-      <div style="text-align: center"> nenhuma crise relatada  </div>
+      <div style="text-align: center"> nenhuma crise relatada </div>
     </ng-template>
 
   </ion-list>
