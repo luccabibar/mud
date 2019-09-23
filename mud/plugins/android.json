@@ -38,6 +38,9 @@
     },
     "cordova-plugin-firebase": {
       "PACKAGE_NAME": "com.mud.notifications"
+    },
+    "cordova-plugin-fcm": {
+      "PACKAGE_NAME": "com.mud.notifications"
     }
   },
   "dependent_plugins": {
