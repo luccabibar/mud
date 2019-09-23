@@ -6,6 +6,7 @@ import { BancoService } from '../banco.service';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { IonContent } from '@ionic/angular';
 import { Router, RouterModule } from '@angular/router';
+import { convertActionBinding } from '@angular/compiler/src/compiler_util/expression_converter';
 
 
 @Component({
@@ -305,6 +306,10 @@ export class RelatorioSemanalPage implements OnInit {
       despertou = true;
     }
     let vezes_sono = (<HTMLInputElement>document.getElementById("mostraVzs")).innerText;
+    if(despertou ==false)
+    {
+      vezes_sono="0";
+    }
     let acordou_precoce_sim = (<HTMLInputElement>document.getElementById("sono_sim2")).checked;
     let acordou_precoce = false;
     if(acordou_precoce_sim)
