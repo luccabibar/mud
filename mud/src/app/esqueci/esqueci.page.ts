@@ -71,7 +71,7 @@ export class EsqueciPage implements OnInit {
           buttons: ['OK']
         });
         await alert.present();
-        this.router.navigateByUrl("/login");
+        this.router.navigateByUrl("/login-page");
 
       }).catch(async (resposta) => {
         console.log("erro: ", resposta);
