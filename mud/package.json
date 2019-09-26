@@ -15,6 +15,7 @@
   "dependencies": {
     "@angular/common": "^7.2.2",
     "@angular/core": "^7.2.2",
+    "@angular/fire": "^5.2.1",
     "@angular/forms": "^7.2.2",
     "@angular/http": "^7.2.2",
     "@angular/platform-browser": "^7.2.2",
@@ -35,15 +36,18 @@
     "br-mask": "0.0.6",
     "brmasker4": "^1.0.3",
     "cordova-android": "8.0.0",
+    "cordova-plugin-fcm": "2.1.2",
     "cordova-plugin-firebase": "^2.0.5",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "core-js": "^2.5.4",
     "es6-promise-plugin": "^4.2.2",
-    "firebase": "^6.5.0",
+    "firebase": "^6.6.2",
+    "firesql": "^2.0.2",
     "jquery": "^3.4.1",
     "onesignal-cordova-plugin": "2.5.2",
     "phonegap-plugin-barcodescanner": "8.1.0",
-    "rxjs": "^6.5.2",
+    "rxfire": "^3.8.2",
+    "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.1",
     "zone.js": "~0.8.29"
   },
@@ -94,7 +98,8 @@
       "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-screen-orientation": {},
       "onesignal-cordova-plugin": {},
-      "cordova-plugin-firebase": {}
+      "cordova-plugin-firebase": {},
+      "cordova-plugin-fcm": {}
     },
     "platforms": [
       "android"
