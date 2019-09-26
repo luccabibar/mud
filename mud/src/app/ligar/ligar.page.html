@@ -9,8 +9,19 @@
 <ion-content>
   <ion-item lines="none">
     <div slot="start">
-      <!--<ion-label><strong>{{user_sessao.nome}}</strong></ion-label>-->
-      <ion-label><small>CPF: </small>{{user_sessao.cpf}}</ion-label>
+      <ion-avatar slot="start" class="botao">
+        <img src="assets/perfil_generico.png">
+      </ion-avatar>
+    </div>
+    <div >
+      <ion-label><strong><!--{{user_sessao.nome}}--></strong></ion-label>
+    </div>
+    <div class="divao">
+      <ion-buttons slot="end">
+        <ion-button (click)="callNow()" class="botao">
+          <ion-icon slot="icon-only" name="call"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </div>
   </ion-item>
 </ion-content>

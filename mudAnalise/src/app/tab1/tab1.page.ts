@@ -61,7 +61,7 @@ export class Tab1Page {
     this.profissional = this.ds.getDados("user");
 
     if (!this.user_sessao) {
-     console.log('asdasdas');
+     //console.log('asdasdas');
       this.ds.removeDados(true, '');
       this.router.navigateByUrl("/login");
 
@@ -150,11 +150,11 @@ export class Tab1Page {
       }
     }).catch(async (resposta) => 
     {  
-      console.log("ERR: ", resposta)
+      //console.log("ERRO: ", resposta)
     })
     .catch(async (resposta) => 
     {
-      console.log("ERR: ", resposta)
+      //console.log("ERRO: ", resposta)
 
       const alert = await this.alertController.create({
         header: 'ERRO!!',

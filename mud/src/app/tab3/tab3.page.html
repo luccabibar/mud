@@ -1,19 +1,118 @@
 <ion-header>
-    <ion-toolbar color="verdemud3">
-      <ion-icon (click)="Mural()" id="mural" name="md-arrow-back"></ion-icon>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="verdemud3">
+    <ion-icon (click)="Mural()" id="mural" name="md-arrow-back"></ion-icon>
+    <ion-img id="sobre" src="../../assets/sobre.png"></ion-img>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
   <!--<ion-button  padding-horizontal color="verdemud2" id="mural">
     <ion-img src="\assets\aaa.png" id="iconPasta"></ion-img>
     <ion-label id="rs" >Mural</ion-label>   
   </ion-button>-->
+  <ion-list>
+    <ion-item lines="full">
+      Veja aqui algumas dicas para te ajudar a lidar com a ansiedade e a Síndrome do Pânico.
+    </ion-item>
 
-  <ion-button class="btn1" id="bots" expand="block" (click)="showModal()" shape="round" fill="outline"> Ansiedade</ion-button>
-      <ion-button class="modals" id="bots" expand="block" (click)="showModal2()" shape="round" fill="outline"> Mindfulness</ion-button>
-      <ion-button class="marcola1" id="bots" (click)="presentAlert()" shape="round" fill="outline">Sindrome do pânico</ion-button>
-      <ion-button  class="marcola" id="bots" (click)="presentAlert2()" shape="round" fill="outline">Intolerância alimentar</ion-button>
-      <ion-button class="marcola" id="bots" (click)="presentAlert3()" shape="round" fill="outline">Importância da atividade física</ion-button>
-      <ion-button class="marcola" id="bots" (click)="presentAlert4()" shape="round" fill="outline">Importância da alimentação</ion-button>
+    <!-- Ansiedade Card -->
+    <ion-card>
+      <h3 class="centrao">
+        Ansiedade
+      </h3>
+      <ion-card-content>
+        <div>
+          <div slot="start">
+            <img src="assets/anxiety.png" alt="">
+          </div>
+          <div slot="end">
+            <ion-button shape="round" fill="outline" expand="full" (click)="showModal()">
+              Saber Mais...
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Mindfulness Card -->
+    <ion-card>
+      <h3 class="centrao">
+        Mindfulness
+      </h3>
+      <ion-card-content>
+        <div>
+          <div slot="start">
+            <img src="assets/mindfull.jpg" alt="">
+          </div>
+          <div slot="end">
+            <ion-button shape="round" fill="outline" expand="full" (click)="showModal2()">
+              Saber Mais...
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <!--Síndrome do Panico Card-->
+
+    <ion-card>
+      <h3 class="centrao">
+        Síndrome do Pânico
+      </h3>
+      <ion-card-content>
+        <div>
+          <div slot="start">
+            <img src="assets/panic.webp" alt="">
+          </div>
+          <div slot="end">
+            <ion-button shape="round" fill="outline" expand="full" (click)="presentAlert()">
+              Saber Mais...
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <!--Intolerancia Alimentar Card-->
+    <ion-card>
+      <h3 class="centrao">
+        Intolerância Alimentar
+      </h3>
+      <ion-card-content>
+        <div>
+          <div slot="start">
+            <img src="assets/intolerancia.jpg" alt="">
+          </div>
+          <div slot="end">
+            <ion-button shape="round" fill="outline" expand="full" (click)="presentAlert2()">
+              Saber Mais...
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <!--Importancia da atividade Fisica Card-->
+    <ion-card>
+      <h3 class="centrao">
+        Importância da atividade física
+      </h3>
+      <ion-card-content>
+        <div>
+          <div slot="start">
+            <img src="assets/atividade.png" alt="">
+          </div>
+          <div slot="end">
+            <ion-button shape="round" fill="outline" expand="full" (click)="presentAlert3()">
+              Saber Mais...
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ion-button class="marcola" id="bots" (click)="presentAlert3()">Importância da atividade física&nbsp; &nbsp;
+    <ion-icon name="md-bicycle" class="iconb"></ion-icon>
+  </ion-button>
+  <ion-button class="marcola" id="bots" (click)="presentAlert4()">Importância da alimentação&nbsp; &nbsp;
+    <ion-icon name="md-restaurant"></ion-icon>
+  </ion-button>
 </ion-content>
