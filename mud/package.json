@@ -46,7 +46,7 @@
     "jquery": "^3.4.1",
     "onesignal-cordova-plugin": "2.5.2",
     "phonegap-plugin-barcodescanner": "8.1.0",
-    "rxfire": "^3.8.2",
+    "rxfire": "^3.8.3",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.1",
     "zone.js": "~0.8.29"
