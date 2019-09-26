@@ -91,11 +91,11 @@
       <ion-card id="cardo2">
         <ion-item>
           <ion-label position="stacked">Título</ion-label>
-          <ion-input required type="text" maxLength="44" id="1" name="inserirtitulo" placeholder="Adicionar título"></ion-input>
+          <ion-input [(ngModel)]="stringo"  required type="text" maxLength="44" id="1" name="inserirtitulo" placeholder="Adicionar título"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked" text-wrap>Corpo da mensagem </ion-label>
-          <ion-textarea id="2"  name="inserirtxt" maxLength="120" placeholder="Adicionar texto" multiline="4"></ion-textarea>
+          <ion-textarea id="2" [(ngModel)]="stringo2" name="inserirtxt" maxLength="120" placeholder="Adicionar texto" multiline="4"></ion-textarea>
         </ion-item>
     
         <ion-button (click)="inserirMural()" color="medio" expand="full">Adicionar</ion-button>
