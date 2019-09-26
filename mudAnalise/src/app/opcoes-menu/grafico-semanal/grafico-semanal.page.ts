@@ -27,6 +27,9 @@ export class GraficoSemanalPage implements OnInit
   grafObj;
   grafSel
   @ViewChild("grafico") grafElem;
+  //observações
+  obs
+  obsData
 
   /**
    * gera uma cor aleatoria
@@ -44,7 +47,6 @@ export class GraficoSemanalPage implements OnInit
 
   /**
    * converte int pra float pQ O ANGULAR NAO CONSEGUE LIDAR COM TIPOS
-   * PHP RAINHA ANGULAR NADINHA 
    * (tambem atualiza a view)
    */
   changeOpt()
@@ -59,12 +61,13 @@ export class GraficoSemanalPage implements OnInit
   changeGraf()
   {
     let dataset = [];
-
+    
+    //preenche o dataset condicionalmente
     switch(this.grafSel) {
       case "alim":
-        let first = true;
+        let first = true; 
+        this.obs = false;
         //itera sobre cada semana
-        console.log(this.alimentacao.length);        
         this.alimentacao.forEach((sem) => 
         { 
           let i = 0;
@@ -95,10 +98,38 @@ export class GraficoSemanalPage implements OnInit
         break;
       /*case "atvd":
         dataset = this.atividade;
-        break;
-      case "bemes":
-        dataset = this.bemEstar;
         break;*/
+      case "bemes":
+          //itera sobre cada semana 
+          this.obs = true;
+          let i = 0;
+          this.bemEstar.forEach((sem) => 
+          { 
+            //datset secundario pra observaoces
+            this.obsData.push({
+              "semana": this.semana[i].data_inicial,
+              "value": sem.comentario
+            });
+
+            //dataset principal pro grafico
+            //if for a primeira vez, cria objeto de dataset
+            if(i == 0){     
+              dataset.push({
+                label: "frequencia",
+                data: [sem.vezes],
+                borderColor: this.randColor(),
+                fill: false,
+                borderWidth: 1
+              });
+            }
+            //else so add o valor no dataset correspondente
+            else{
+              dataset[0].data.push(sem.vezes);
+            }
+            
+            i++;
+          });
+        break;
     }
 
     //console.log(dataset);
@@ -196,6 +227,8 @@ export class GraficoSemanalPage implements OnInit
     this.paciente = this.data.getDados("user_sessao");
     this.pegaDados(this.paciente.id_usuario);
     this.semKey = 0;
+    this.obs = false;
+    this.obsData = [];
   }
 
   ngOnInit() { }
