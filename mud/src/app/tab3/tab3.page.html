@@ -10,7 +10,6 @@
 >>>>>>> Stashed changes
   <ion-toolbar color="verdemud3">
     <ion-icon (click)="Mural()" id="mural" name="md-arrow-back"></ion-icon>
-    <ion-img id="sobre" src="../../assets/sobre.png"></ion-img>
   </ion-toolbar>
 </ion-header>
 <<<<<<< Updated upstream
@@ -25,7 +24,9 @@
   </ion-button>-->
   <ion-list>
     <ion-item lines="full">
-      Veja aqui algumas dicas para te ajudar a lidar com a ansiedade e a Síndrome do Pânico.
+      <h4>
+        Confira algumas dicas para te ajudar a lidar com a ansiedade e a Síndrome do Pânico.
+      </h4>
     </ion-item>
 
     <!-- Ansiedade Card -->
@@ -92,7 +93,7 @@
       <ion-card-content>
         <div>
           <div slot="start">
-            <img src="assets/intolerancia.jpg" alt="">
+            <img src="assets/allergy.png" alt="">
           </div>
           <div slot="end">
             <ion-button shape="round" fill="outline" expand="full" (click)="presentAlert2()">
@@ -120,27 +121,27 @@
         </div>
       </ion-card-content>
     </ion-card>
+    <!-- Importância de uma Alimentação Saudável's Card-->
+    <ion-card>
+      <h3 class="centrao">
+        Importância da Alimentação Saudável
+      </h3>
+      <ion-card-content>
+        <div>
+          <div slot="start">
+            <img src="assets/healthy.jpg" alt="">
+          </div>
+          <div slot="end">
+            <ion-button shape="round" fill="outline" expand="full" (click)="presentAlert4()">
+
+              Saber Mais...
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  <ion-button class="btn1" id="bots" expand="block" (click)="showModal()" shape="round" fill="outline"> Ansiedade</ion-button>
-      <ion-button class="modals" id="bots" expand="block" (click)="showModal2()" shape="round" fill="outline"> Mindfulness</ion-button>
-      <ion-button class="marcola1" id="bots" (click)="presentAlert()" shape="round" fill="outline">Sindrome do pânico</ion-button>
-      <ion-button  class="marcola" id="bots" (click)="presentAlert2()" shape="round" fill="outline">Intolerância alimentar</ion-button>
-      <ion-button class="marcola" id="bots" (click)="presentAlert3()" shape="round" fill="outline">Importância da atividade física</ion-button>
-      <ion-button class="marcola" id="bots" (click)="presentAlert4()" shape="round" fill="outline">Importância da alimentação</ion-button>
-</ion-content>
-=======
->>>>>>> Stashed changes
-  <ion-button class="marcola" id="bots" (click)="presentAlert3()">Importância da atividade física&nbsp; &nbsp;
-    <ion-icon name="md-bicycle" class="iconb"></ion-icon>
-  </ion-button>
-  <ion-button class="marcola" id="bots" (click)="presentAlert4()">Importância da alimentação&nbsp; &nbsp;
-    <ion-icon name="md-restaurant"></ion-icon>
-  </ion-button>
-<<<<<<< Updated upstream
 </ion-content>
 =======
 </ion-content>

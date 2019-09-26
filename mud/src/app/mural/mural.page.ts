@@ -95,13 +95,13 @@ export class MuralPage implements OnInit {
               corzita = "rgba(95, 211, 188, 1)";//"#FFCCBC"; 'rgba(255, 255, 255,'+opacidade+')'
               break;
             case 1:
-              corzita = "rgba(33, 120, 103, 1)";//"#DCEDC8";
+              corzita = "rgba(41, 148, 127, 1)";//"#DCEDC8";
             break;
             case 2:
-                corzita = "rgba(44, 160, 137, 1)";//"#DCEDC8";
+                corzita = "rgba(48, 176, 151, 1)";//"#DCEDC8";
               break;
             case 3:
-                corzita = "rgba(22, 80, 68, 1)"//"#B3E5FC"; 
+                corzita = "rgba(183, 235, 225, 1)"//"#B3E5FC"; 
               j = -1;
               break;
             }
