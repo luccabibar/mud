@@ -20,6 +20,9 @@ export class Tab3Page {
   @ViewChild(IonSlides) IonSlides: IonSlides;
   @ViewChild(IonContent) content: IonContent;
 
+  stringo: string;
+  stringo2: string;
+
   public murais = [
   ];
 
@@ -238,15 +241,14 @@ public async alertaDeletar(mural){
         const alert = await this.AlertController.create({
           header: 'Erro!',
           subHeader: 'Erro ao inserir nova nota.',
-          //message: JSON.stringify(response),
           buttons: ['OK']
         });
 
         await alert.present();
       })
 
-    document.getElementById("1").innerHTML = "";
-    document.getElementById("2").innerHTML = "";
+    this.stringo = "";
+    this.stringo2 = "";
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slidePrev();
     this.IonSlides.lockSwipes(true);
@@ -260,6 +262,8 @@ public async alertaDeletar(mural){
 
     document.getElementById("divo1").style.display='none';
     document.getElementById("divo2").style.display='unset';
+    this.stringo = "";
+    this.stringo2 = "";
  }
 
  voltanovanota()
