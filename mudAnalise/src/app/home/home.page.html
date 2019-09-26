@@ -10,24 +10,25 @@
 </ion-header>
 
 <ion-content>
-  <ion-item tappable routerLink="/cadastro">
-    <ion-avatar slot="start">
-      <img src="assets/perfil_psi.png">
-    </ion-avatar>
-    <ion-label>
-      <h2 *ngIf="profissional">
-        <strong> {{profissional.nome}}</strong>
-      </h2>
-      <p *ngIf="profissional"> <small>CRP: </small> {{profissional.crp}}</p>
-    </ion-label>
-    <ion-buttons slot="end">
-      <!-- <ion-button class="tamanho" routerLink="/alterar-senha">
-        <ion-icon name="key"></ion-icon>
-        <ion-icon name="lock"></ion-icon>
-      </ion-button> -->
-    </ion-buttons>
-  </ion-item>
-
+  <ion-card>
+    <ion-item tappable routerLink="/cadastro">
+      <ion-avatar slot="start">
+        <img src="assets/perfil_psi.png">
+      </ion-avatar>
+      <ion-label>
+        <h2 *ngIf="profissional">
+          <strong> {{profissional.nome}}</strong>
+        </h2>
+        <p *ngIf="profissional"> <small>CRP: </small> {{profissional.crp}}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <!-- <ion-button class="tamanho" routerLink="/alterar-senha">
+            <ion-icon name="key"></ion-icon>
+            <ion-icon name="lock"></ion-icon>
+          </ion-button> -->
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
   <ion-card color="escuro">
     <ion-item color="escuro">
       <ion-label color="branco" text-wrap>Pareamento QR</ion-label>
@@ -39,22 +40,19 @@
     <!--Lista de Pacientes-->
   </ion-card>
 
-  <ion-refresher  (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content
-        pullingIcon="arrow-dropdown"
-        pullingText="Pull to refresh"
-        refreshingSpinner="circles"
-        refreshingText="Refreshing...">
-      </ion-refresher-content>
-    </ion-refresher> 
-    
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-card>
     <ion-list>
       <div *ngIf="noSess == true" padding style="text-align: center;">
         nenhuma sessão ativa no momento
       </div>
       <ion-item-sliding *ngFor="let sessao of sessoes">
-        <ion-item tappable  (click)="abreSessao(sessao)">
+        <ion-item tappable (click)="abreSessao(sessao)">
           <ion-avatar slot="start">
             <img src="assets/perfil_generico2.png">
           </ion-avatar>
@@ -76,7 +74,7 @@
   <div *ngIf="existe===1">
     <ion-card>
       <ion-card-content>
-       <strong>Carregando dados:</strong> 
+        <strong>Carregando dados:</strong>
         <ion-spinner name="crescent" slot="end"> </ion-spinner>
       </ion-card-content>
     </ion-card>
