@@ -1,3 +1,4 @@
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -28,7 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CallNumber,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     DadosService,
-    
+    ScreenOrientation
   ],
   bootstrap: [AppComponent]
 })
