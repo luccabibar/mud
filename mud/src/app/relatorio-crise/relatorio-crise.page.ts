@@ -124,6 +124,7 @@ export class RelatorioCrisePage implements OnInit {
   {
     this.adicionou_sit = true;
     document.getElementById("addsitu").style.display='unset';
+    document.getElementById("fab").style.display='none';
     document.getElementById("escolhersitu").style.display='none';
     /*this.conta++;
     if(this.conta == 1)
@@ -322,7 +323,33 @@ export class RelatorioCrisePage implements OnInit {
     let sint_instabilidade = (<HTMLInputElement>document.getElementById("23")).value;
     let sint_medo_morrer = (<HTMLInputElement>document.getElementById("24")).value;
     let sint_medo_perder_controle = (<HTMLInputElement>document.getElementById("25")).value;*/
-    let situacoes = (<HTMLInputElement>document.getElementById("25")).value;
+    let situacoes;
+    if(this.adicionou_sit)
+    {
+      situacoes = (<HTMLInputElement>document.getElementById("26")).value;
+
+      this.bancoService.insertGenerico("INSERT INTO situacao(usuario_id,situacao) VALUES ('"+this.dadosService.getId()+"','"+situacoes+"');")
+            .then(async(response)=>{
+              
+            })
+              .catch(async(response)=>{
+                const alert = await this.alertController.create({
+                  header: 'Erro',
+                  message: 'Erro ao adicionar nova situação de crise.',
+                  buttons:  [
+                    {
+                      text: 'OK',
+                    }
+                  ],
+                  });
+
+                  await alert.present();
+               })
+    }
+    else{
+      situacoes = (<HTMLInputElement>document.getElementById("25")).value;
+    }
+    
     /*if((<HTMLInputElement>document.getElementById("25")).value!="")
     {
       situacoes+=(<HTMLInputElement>document.getElementById("25")).value;

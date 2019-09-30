@@ -55,9 +55,9 @@ export class PerfilUserPage {
       this.nav.navigateForward('sessoes');
   }
 
-  async editarSintomas()
+  editarContatos()
   {
-    
+    this.nav.navigateForward('contato');
   }
 
   async salvarPerfil()

@@ -46,7 +46,7 @@
     "jquery": "^3.4.1",
     "onesignal-cordova-plugin": "2.5.2",
     "phonegap-plugin-barcodescanner": "8.1.0",
-    "rxfire": "^3.8.2",
+    "rxfire": "^3.8.3",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.1",
     "zone.js": "~0.8.29"
@@ -65,6 +65,7 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.14.2",
+    "angular": "1.7.8",
     "codelyzer": "~4.5.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.1.3",

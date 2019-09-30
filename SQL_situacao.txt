@@ -1,0 +1,8 @@
+CREATE TABLE situacao (
+	id SERIAL PRIMARY KEY,
+	usuario_id INTEGER NOT NULL,
+	situacao VARCHAR(200),
+	CONSTRAINT fk_usuario_situacao
+	FOREIGN KEY (usuario_id)
+	REFERENCES usuario(id_usuario)
+);
