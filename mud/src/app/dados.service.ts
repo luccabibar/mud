@@ -23,6 +23,11 @@ export class DadosService {
     return (nome && typeof this.dados[nome] !== "undefined") ? this.dados[nome] : false;  
   }
 
+  cont1_nome = "";
+  cont2_nome = "";
+  cont1_num = "";
+  cont2_num = "";
+
   Nome = "";
   Cpf = "";
   Email = "";
@@ -36,6 +41,41 @@ export class DadosService {
 
   crise_hr_inicio = "";
   crise_hr_fim = "";
+
+  getCont1_nome()
+  {
+    return this.cont1_nome;
+  }
+  setCont1_nome(x: string)
+  {
+    this.cont1_nome = x;
+  }
+  getCont1_num()
+  {
+    return this.cont1_num;
+  }
+  setCont1_num(x: string)
+  {
+    this.cont1_num = x;
+  }
+
+  getCont2_nome()
+  {
+    return this.cont2_nome;
+  }
+  setCont2_nome(x: string)
+  {
+    this.cont2_nome = x;
+  }
+  getCont2_num()
+  {
+    return this.cont2_num;
+  }
+  setCont2_num(x: string)
+  {
+    this.cont2_num = x;
+  }
+
 
   getCrise_hr_inicio()
   {
@@ -153,6 +193,10 @@ export class DadosService {
     this.setProfissional(null);
     this.setDataNasc("");
     this.setCelular("");
+    this.setCont1_nome("");
+    this.setCont1_num("");
+    this.setCont2_nome("");
+    this.setCont2_num("");
   }
 
 

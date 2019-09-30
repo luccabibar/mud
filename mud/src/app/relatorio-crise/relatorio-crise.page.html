@@ -134,9 +134,9 @@
                         <ion-select-option class="option" value="Situação 2">Situação 2</ion-select-option>
                         <ion-select-option class="option" value="Situação 3">Situação 3</ion-select-option>
                     </ion-select> -->
-                    <ion-select (ionChange)="sitBanco($event)" >
+                    <ion-select (ionChange)="sitBanco($event)" id="25">
                       <ng-container *ngFor="let situacao of h" ><!-- for dessa desgraça que busca do banco os anos -->
-                          <ion-select-option value="{{id}}" id="28">{{situacao}}</ion-select-option>
+                          <ion-select-option value="{{situacao}}">{{situacao}}</ion-select-option>
                       </ng-container>
                      
                     </ion-select>
@@ -144,8 +144,8 @@
                 </div>
                 <div id="addsitu" style="display: none;">
                     <ion-item padding-horizontal>
-                        <ion-label class="label" position="stacked" text-wrap>Adicionar nova situação?</ion-label>
-                        <ion-input type="text" name="situ" id="28" placeholder="Qual foi a situação?"></ion-input>
+                        <ion-label class="label" position="stacked" style="margin-bottom: 1rem;" text-wrap>Adicionar nova situação</ion-label>
+                        <ion-input type="text" name="situ" id="26" placeholder="Qual foi a situação?"></ion-input>
                     </ion-item>
                 </div>
                 <div id="fab">
