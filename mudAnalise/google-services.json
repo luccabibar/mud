@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "465038185208",
+    "firebase_url": "https://mud-notificacao.firebaseio.com",
+    "project_id": "mud-notificacao",
+    "storage_bucket": "mud-notificacao.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465038185208:android:c1c1c36364ee1728",
+        "android_client_info": {
+          "package_name": "com.mud.notifications"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465038185208-5b0cjhtkkfvqt7st4jqj3msossgeekqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_S950DoBt5vOjpzhq4-Qk2NUM3slG9oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465038185208-5b0cjhtkkfvqt7st4jqj3msossgeekqb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
