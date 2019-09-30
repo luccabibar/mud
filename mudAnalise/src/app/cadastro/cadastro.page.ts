@@ -157,8 +157,8 @@ export class CadastroPage implements OnInit {
 
   public async desejaAlterar() {
     const alert = await this.alertController.create({
-      header: 'Registro',
-      message: 'Deseja Salvar as alterações do perfil?',
+      header: 'Alteração',
+      message: 'Deseja salvar as alterações do perfil?',
       inputs: [
         {
           name: 'senha',
@@ -638,8 +638,8 @@ export class CadastroPage implements OnInit {
 
   async sairCad() {
     const alert = await this.alertController.create({
-      header: 'Registro',
-      message: 'Deseja sair?',
+      header: 'Alerta',
+      message: 'Deseja retornar para a página anterior?',
       buttons: [
         {
           text: 'Não',
