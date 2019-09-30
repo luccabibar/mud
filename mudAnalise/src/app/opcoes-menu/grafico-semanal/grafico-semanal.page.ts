@@ -25,7 +25,7 @@ export class GraficoSemanalPage implements OnInit
   semKey;
   //grafico
   grafObj;
-  grafSel
+  grafSel;
   @ViewChild("grafico") grafElem;
   //observações
   obs
@@ -103,6 +103,8 @@ export class GraficoSemanalPage implements OnInit
           //itera sobre cada semana 
           this.obs = true;
           let i = 0;
+          console.log(this.bemEstar);
+          
           this.bemEstar.forEach((sem) => 
           { 
             //datset secundario pra observaoces
@@ -129,6 +131,10 @@ export class GraficoSemanalPage implements OnInit
             
             i++;
           });
+        break;
+
+      case "sono":
+        console.log(this.sono);
         break;
     }
 
@@ -165,7 +171,7 @@ export class GraficoSemanalPage implements OnInit
       "ali.carboidratos, ali.proteinas, ali.laticinios, ali.verd_frut, ali.hidratacao, " +
       "atv.a_realizou, atv.tempo, atv.intensidade, " +
       "bem.b_realizou, bem.vezes, bem.comentario, " +
-      "son.hora_comeco, son.vezes_acordou, son.acordou_naturalmente " +
+      "son.duracao_sono, son.vezes_acordou, son.acordou_naturalmente " +
       "FROM semana AS sem " +
       "JOIN alimentacao AS ali ON sem.id_semana = ali.semana_id " +
       "JOIN atividade_fisica AS atv ON sem.id_semana = atv.semana_id " +
@@ -188,6 +194,7 @@ export class GraficoSemanalPage implements OnInit
         let dataIni = (row.data_inicial).split('-');
         dataIni = dataIni[2] + "/" + dataIni[1] + "/" + dataIni[0];
 
+        //5 pacotes de dados brutos
         this.semana.push({
           "data_inicial": dataIni,
           "observacao": row.observacao
@@ -210,7 +217,7 @@ export class GraficoSemanalPage implements OnInit
           "comentario": row.comentario
         });
         this.sono.push({
-          "comeco": row.hora_comeco,
+          "duracao": row.duracao_sono,
           "acordVezes": row.vezes_acordou,
           "acordNat": row.acordou_naturalmente
         });
