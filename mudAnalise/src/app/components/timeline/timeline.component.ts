@@ -23,19 +23,16 @@ export class TimelineComponent implements OnInit {
     toast.present();
   }
   
+  /**
+   * 
+   * @param info 
+   * @param semanaId 
+   * @param icone 
+   */
   async onClick(info,semanaId,icone){
     this.router.navigateByUrl('/detalhes-semanal/'+info+"-"+semanaId+"-"+icone);
   }
 
-  /*
-  async detalhesSemana() {
-    const modal = await this.modalController.create({
-      component: ModalPage,
-      componentProps: { value: 123 }
-    });
-    return await modal.present();
-  }
-  */
 
 
 
