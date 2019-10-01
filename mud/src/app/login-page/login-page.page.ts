@@ -1,3 +1,4 @@
+import { FCM } from '@ionic-native/fcm/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Router, RouterModule } from '@angular/router';
 import { Component, OnInit, Renderer, ViewChild, Input} from '@angular/core';
@@ -21,7 +22,7 @@ export class LoginPagePage {
 
   public submitAttempt: boolean = false;
 
-  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router, private ScreenOrientation: ScreenOrientation) { 
+  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router, private ScreenOrientation: ScreenOrientation, private fcm:FCM) { 
     
   }
 
@@ -99,7 +100,17 @@ export class LoginPagePage {
         this.dadosService.setCrp(String(response[0].crp));
         this.dadosService.setDataNasc(String(response[0].dt_nasc));
 
-        
+        this.fcm.getToken().then(token => {
+          this.BancoService.selectGenerico("SELECT * FROM notificacao WHERE id_user="+response[0].id_usuario+";")
+          .then(async(response)=>{
+            this.BancoService.updateGenerico("UPDATE notificacao SET token='"+token+"' WHERE id_user="+response[0].id_usuario+";");
+          })
+          .catch(async(response)=>{
+            this.BancoService.insertGenerico("INSERT INTO notificacao VALUES("+ response[0].id_usuario +","+"'"+token+"')" );
+          });
+         
+        })
+
         return;
       } 
       else if(response[0].senha != senha)
