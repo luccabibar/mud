@@ -35,14 +35,134 @@ export class ContatoPage implements OnInit {
     this.num2 = this.dadosService.getCont2_num();
   }
 
-  salvarContatos()
+  async salvarContatos()
   {
+    const alert = await this.alertController.create({
+    header: "Confirmação",
+    subHeader: "Confirmar alteração",
+    message: "Deseja mesmo alterar seu perfil com as informações preenchidas?",
+    inputs: [
+      {
+        name: 'senha',
+        placeholder: 'Senha',
+        type: 'password'
+      },
+      {
+        name: 'senha2',
+        placeholder: 'Redigite',
+        type: 'password'
+      }
+    ],
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancelar',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Alterar',
+        handler: data => {
+          if(data.senha == data.senha2)
+          {
+            // senhas batem, então conferir no banco de dados se o usuário digitou a senha certa.
+            this.bancoService.verificaSenha(this.dadosService.getId().toString(),data.senha)
+            .then(async(response)=>{
+              if(response[0].senha == data.senha)
+              {
+                //passou pela verificação de senha, agora será feita a auteração em si
+                  let nome1 = (<HTMLInputElement>document.getElementById("43")).value;
+                  let num1 = (<HTMLInputElement>document.getElementById("44")).value;
+                  let nome2 = (<HTMLInputElement>document.getElementById("45")).value;
+                  let num2 = (<HTMLInputElement>document.getElementById("46")).value;
 
+                  this.bancoService.updateGenerico("UPDATE contato SET nome='"+nome1+"',telefone='"+num1+"' WHERE telefone='"+this.dadosService.getCont1_num()+"';")
+                  .then(async(response)=>{
+                
+                  })
+                  .catch(async(response)=>{
+                    const alert = await this.alertController.create({
+                      header: 'Erro',
+                      subHeader: nome1,
+                      message: 'Erro ao salvar alterações. Tente novamente',
+                      buttons:  [
+                        {
+                          text: 'OK',
+                        }
+                      ],
+                      });
+    
+                      await alert.present();
+                  })
+                  this.bancoService.updateGenerico("UPDATE contato SET nome='"+nome2+"',telefone='"+num2+"' WHERE telefone='"+this.dadosService.getCont2_num()+"';")
+                  .then(async(response)=>{
+                
+                  })
+                  .catch(async(response)=>{
+                    const alert = await this.alertController.create({
+                      header: 'Erro',
+                      subHeader: nome1,
+                      message: 'Erro ao salvar alterações. Tente novamente',
+                      buttons:  [
+                        {
+                          text: 'OK',
+                        }
+                      ],
+                      });
+    
+                      await alert.present();
+                  })
+                }
+                else
+                {
+                  const alert = await this.alertController.create({
+                  header: 'Erro',
+                  message: 'As senhas não batem. Tente novamente.',
+                  buttons:  [
+                    {
+                      text: 'OK',
+                    }
+                  ],
+                  });
+
+                  await alert.present();
+                }
+            })
+              .catch(async(response)=>{
+                const alert = await this.alertController.create({
+                  header: 'Erro',
+                  message: 'Senha incorreta! Tente novamente!.',
+                  buttons:  [
+                    {
+                      text: 'OK',
+                    }       ],
+                 });
+                await alert.present();
+               })
+          }
+          else
+          {
+            this.alertController.create({
+              header: 'Erro',
+              message: 'As senhas não batem. Tente novamente.',
+              buttons: ['Ok']
+            }).then(alert => {
+              alert.present();
+            });
+          }
+          //se clicar em alterar tem que dar o loading com sucesso ou falha na alteração
+        }
+      }
+    ]
+  });
+    
+    await alert.present();
   }
 
   sair()
   {
-
+    this.router.navigateByUrl('/tabs/perfil-user');
   }
 
   ativa()
