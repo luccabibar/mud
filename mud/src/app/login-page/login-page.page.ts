@@ -18,6 +18,7 @@ export class LoginPagePage {
   @ViewChild('mail')  onu: IonInput;
   senh: string;
   emai: string;
+  id: number;
 
   public submitAttempt: boolean = false;
 
@@ -98,7 +99,17 @@ export class LoginPagePage {
         this.dadosService.setProfissional(Boolean(response[0].profissional));
         this.dadosService.setCrp(String(response[0].crp));
         this.dadosService.setDataNasc(String(response[0].dt_nasc));
+        this.BancoService.selectGenerico("SELECT * FROM contato WHERE id_usuario='"+this.dadosService.getId()+"';")
+        .then(async(response)=>{
+          this.dadosService.setCont1_nome(String(response[0].nome));
+          this.dadosService.setCont2_nome(String(response[1].nome));
+          this.dadosService.setCont1_num(String(response[0].telefone));
+          this.dadosService.setCont2_num(String(response[1].telefone));
+        })
 
+        .catch(async(response)=>{
+
+          })
         
         return;
       } 
@@ -133,6 +144,7 @@ export class LoginPagePage {
   
       await alert.present();
        })
+      
 }
 
   direcCadast()
