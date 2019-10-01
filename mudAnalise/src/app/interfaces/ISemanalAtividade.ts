@@ -1,3 +1,6 @@
+/**
+ * Interface que preenchera os dados relativos à Atividade Fisica do Relatorio Semanal
+ */
 export interface ISemanaAtividade{
     // o id repetiu entao cuidado
     id_atividade: number;

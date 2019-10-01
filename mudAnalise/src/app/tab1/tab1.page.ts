@@ -22,17 +22,6 @@ export class Tab1Page {
 
   information;
 
-
-  // public crises = [
-  //   { data: "25/08/2019", tipo: "leve" },
-  //   { data: "29/08/2019", tipo: "moderado" },
-  //   { data: "19/07/2019", tipo: "forte" },
-  //   { data: "06/09/2019", tipo: "extremo" },
-
-
-  // ]
-
-
   constructor(
     private alertController: AlertController,
     private callNumber: CallNumber,
@@ -56,6 +45,9 @@ export class Tab1Page {
   };
 
 
+  /**
+   * se entrou na pagina, carrega os dados profissional e do paciente selecionado
+   */
   ionViewWillEnter() {
     this.user_sessao = this.ds.getDados("user_sessao");
     this.profissional = this.ds.getDados("user");
@@ -70,7 +62,9 @@ export class Tab1Page {
       
     }
   }
-
+/**
+ * Metodo efetuar chamada telefonica
+ */
   async callNow() {
     this.callNumber.callNumber(this.user_sessao.celular, true)
       .then(res => console.log('Launched dialer!', res))
@@ -89,6 +83,10 @@ export class Tab1Page {
 
   }
 
+  /**
+   * recebe intendidade como int e coloca o correspondente em string
+   * @param intensidade 
+   */
   public mudaIntensidade(intensidade) {
     if (intensidade == "1") {
       intensidade = "leve"
@@ -105,6 +103,11 @@ export class Tab1Page {
   }
 
   //#region aqui vou puxar as crises do banco
+
+  /**
+   * Pega os dados vitais da crise e monta um JSON para facilitar a manipulacao dos dados
+   * @param crises 
+   */
   private geraJSON(crises) {
     let temp = [];
     for (let cri of crises) {
@@ -122,6 +125,11 @@ export class Tab1Page {
     return temp;
   }
 
+  /**
+   * Calcula a duracao da Crise
+   * @param hora_inicio 
+   * @param hora_fim 
+   */
   public duracao(hora_inicio, hora_fim) {
     var start = moment(hora_inicio, "HH:mm");
     var end = moment(hora_fim, "HH:mm");
@@ -133,6 +141,9 @@ export class Tab1Page {
     return minutes;
   }
 
+  /**
+   * Carrega a interface com os dados de certa Crise
+   */
   carregarCrises() {
     this.bd.selectGenerico("SELECT * FROM crise WHERE usuario_id=" + this.user_sessao.id_usuario + ";")
     .then(async (resposta) => {
@@ -168,7 +179,10 @@ export class Tab1Page {
       })
   }
 
-
+/**
+ * REcarrega as crises pelo metodo de Refresh
+ * @param event 
+ */
   doRefresh(event) {
     this.carregarCrises();
 
