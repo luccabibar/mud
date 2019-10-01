@@ -41,7 +41,7 @@
     "cordova-android": "8.0.0",
     "cordova-browser": "6.0.0",
     "cordova-plugin-qrscanner": "3.0.1",
-    "cordova-plugin-screen-orientation": "^3.0.2",
+    "cordova-plugin-screen-orientation": "3.0.2",
     "core-js": "^2.6.9",
     "firebase": "^7.0.0",
     "firesql": "^2.0.2",

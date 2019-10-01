@@ -1,3 +1,4 @@
+import { FirebasebdService } from './../servicos/firebasebd.service';
 import { Router } from '@angular/router';
 import { IUsuario } from './../interfaces/IUsuario';
 import { BancoService } from './../servicos/banco.service';
@@ -49,6 +50,7 @@ export class Tab3Page {
   constructor(
     private dadosService: DadosService,
     private BancoService: BancoService,
+    private FirebasebdService: FirebasebdService,
     private AlertController: AlertController,
     private router: Router,
     private loadingCtrl: LoadingController
@@ -223,7 +225,8 @@ public async alertaDeletar(mural){
 
     let titulo = (<HTMLInputElement>document.getElementById("1")).value;
     let texto = (<HTMLInputElement>document.getElementById("2")).value;
-
+    let id_cel=20;
+    this.FirebasebdService.criar_Novo(id_cel);
     // JP, coloquei o campo this.profissional.id_usuario para sring pq o inserir  mural pede isso
     this.BancoService.inserirMural(titulo, texto, this.user_sessao.id_usuario, this.profissional.id_usuario).then(async (response) => {
       /*const alert = await this.AlertController.create({
