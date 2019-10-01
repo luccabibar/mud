@@ -1,3 +1,6 @@
+/**
+ * interface da Alimentacao do Relatorio Semanal
+ */
 export interface ISemanalAlimentacao{
     id_alimentacao: number;
     semana_id: number;
