@@ -11,8 +11,8 @@ export class FirebasebdService {
   fireSQL;
   constructor(private firestore: AngularFirestore) { this.fireSQL = new FireSQL(firebase.firestore(), { includeId: true});}
 
-  criar_Novo() {
-    this.firestore.collection('teste').add({Nome:'jose', Idade:17});
+  criar_Novo(id_cell) {
+    this.firestore.collection('mural').add({id:id_cell});
   }
   update(){
     this.firestore.doc('teste/' + 'olvuuNFh4jjbLymaAJEv').update({Nome:'jp', Idade:15});
