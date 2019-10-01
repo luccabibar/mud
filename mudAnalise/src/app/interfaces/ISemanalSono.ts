@@ -1,7 +1,7 @@
 export interface ISemanalSono{
     id_sono: number;
     semana_id: number;
-    hora_comeco: string;
+    duracao_sono: string;
     acordou: boolean;
     vezes_acordou: number;
     acordou_naturalmente: boolean;

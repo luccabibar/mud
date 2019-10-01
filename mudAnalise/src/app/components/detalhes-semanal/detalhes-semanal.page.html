@@ -5,7 +5,7 @@
       <ion-button routerLink="/tabs/tab2">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
-    </ion-buttons> 
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
@@ -18,10 +18,10 @@
     <ion-card-content>
       <ion-item>
         <div>
-          Início do Sono:
+          Duração Média:
         </div>
         <div slot="end">
-          <strong> {{sono.hora_comeco}}hrs </strong>
+          <strong> {{sono.duracao_sono}}hrs </strong>
         </div>
       </ion-item>
       <ion-item>
@@ -141,48 +141,48 @@
       <ion-label><strong>{{ myId }} </strong></ion-label>
     </ion-item>
     <ion-card-content>
-        <ion-label><strong>Consumo Semanal de </strong></ion-label>
+      <ion-label><strong>Consumo Semanal de </strong></ion-label>
 
-        <ion-item>
-          <div>
-            Carboidratos:
-          </div>
-          <div slot="end">
-            <strong *ngIf="alimentacao.carboidratos==='0'">Pouco (1 a 2 dias)</strong>
-            <strong *ngIf="alimentacao.carboidratos==='1'">Médio (3 a 5 dias)</strong>
-            <strong *ngIf="alimentacao.carboidratos==='2'">Muito (6 a 7 dias)</strong>
-          </div>
-        </ion-item>
-        <ion-item>
-          <div>
-            Proteinas:
-          </div>
-          <div slot="end">
-            <strong *ngIf="alimentacao.proteinas==='0'">Pouco (1 a 2 dias)</strong>
-            <strong *ngIf="alimentacao.proteinas==='1'">Médio (3 a 5 dias)</strong>
-            <strong *ngIf="alimentacao.proteinas==='2'">Muito (6 a 7 dias)</strong>
-          </div>
-        </ion-item>
-        <ion-item>
-          <div>
-            Laticínios:
-          </div>
-          <div slot="end">
-            <strong *ngIf="alimentacao.laticinios==='0'">Pouco (1 a 2 dias)</strong>
-            <strong *ngIf="alimentacao.laticinios==='1'">Médio (3 a 5 dias)</strong>
-            <strong *ngIf="alimentacao.laticinios==='2'">Muito (6 a 7 dias)</strong>
-          </div>
-        </ion-item>
-        <ion-item>
-          <div>
-            Verduras e Frutas:
-          </div>
-          <div slot="end">
-            <strong *ngIf="alimentacao.verd_frut==='0'">Pouco (1 a 2 dias)</strong>
-            <strong *ngIf="alimentacao.verd_frut==='1'">Médio (3 a 5 dias)</strong>
-            <strong *ngIf="alimentacao.verd_frut==='2'">Muito (6 a 7 dias)</strong>
-          </div>
-        </ion-item>
+      <ion-item>
+        <div>
+          Carboidratos:
+        </div>
+        <div slot="end">
+          <strong *ngIf="alimentacao.carboidratos==='0'">Pouco (1 a 2 dias)</strong>
+          <strong *ngIf="alimentacao.carboidratos==='1'">Médio (3 a 5 dias)</strong>
+          <strong *ngIf="alimentacao.carboidratos==='2'">Muito (6 a 7 dias)</strong>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div>
+          Proteinas:
+        </div>
+        <div slot="end">
+          <strong *ngIf="alimentacao.proteinas==='0'">Pouco (1 a 2 dias)</strong>
+          <strong *ngIf="alimentacao.proteinas==='1'">Médio (3 a 5 dias)</strong>
+          <strong *ngIf="alimentacao.proteinas==='2'">Muito (6 a 7 dias)</strong>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div>
+          Laticínios:
+        </div>
+        <div slot="end">
+          <strong *ngIf="alimentacao.laticinios==='0'">Pouco (1 a 2 dias)</strong>
+          <strong *ngIf="alimentacao.laticinios==='1'">Médio (3 a 5 dias)</strong>
+          <strong *ngIf="alimentacao.laticinios==='2'">Muito (6 a 7 dias)</strong>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div>
+          Verduras e Frutas:
+        </div>
+        <div slot="end">
+          <strong *ngIf="alimentacao.verd_frut==='0'">Pouco (1 a 2 dias)</strong>
+          <strong *ngIf="alimentacao.verd_frut==='1'">Médio (3 a 5 dias)</strong>
+          <strong *ngIf="alimentacao.verd_frut==='2'">Muito (6 a 7 dias)</strong>
+        </div>
+      </ion-item>
 
       <ion-item>
         <div>
