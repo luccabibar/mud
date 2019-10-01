@@ -44,6 +44,9 @@ export class Tab2Page {
     }
   } 
 
+  /**
+   * Carrega o as semanas em um array para dps mostra-los na timeline
+   */
   public async carregaSemanas() {
     this.bd.selectGenerico("SELECT * FROM semana WHERE usuario_id='" + this.user_sessao.id_usuario + "';").then(async (resposta) => {
       console.log(resposta);
@@ -68,7 +71,10 @@ export class Tab2Page {
       this.existe = 2;
     })
   }
-
+/**
+ * assim como o geraJson para as crises, pega as informacoes vitais da semana para melhor organizar os dados na tab2
+ * @param semanas 
+ */
   private geraJSON(semanas) {
     let temp = [];
     for (let sem of semanas) {
@@ -105,7 +111,10 @@ export class Tab2Page {
   }
 
 
-
+/**
+ * abre um item da timeline, exibindo os 4 subitems
+ * @param index 
+ */
   toggleSection(index) {
     this.information[index].open = !this.information[index].open;
 
@@ -116,7 +125,11 @@ export class Tab2Page {
         .map(item => item.open = false);
     }
   }
-
+/**
+ * executado quando clica em um item da timelien
+ * @param index 
+ * @param childIndex 
+ */
   toggleItem(index, childIndex) {
     this.information[index].children[childIndex].open = !this.information[index].children[childIndex].open;
   }

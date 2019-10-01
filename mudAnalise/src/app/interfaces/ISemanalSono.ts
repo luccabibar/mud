@@ -1,3 +1,6 @@
+/**
+ * Interface da tabela de Sono, relativo ao relatorio semanal
+ */
 export interface ISemanalSono{
     id_sono: number;
     semana_id: number;
