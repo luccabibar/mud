@@ -225,8 +225,10 @@ public async alertaDeletar(mural){
 
     let titulo = (<HTMLInputElement>document.getElementById("1")).value;
     let texto = (<HTMLInputElement>document.getElementById("2")).value;
-    let id_cel=20;
-    this.FirebasebdService.criar_Novo(id_cel);
+    this.BancoService.selectGenerico("SELECT * FROM  notificacao WHERE id_user="+this.user_sessao.id_usuario+";").then(async (resposta) => {
+      console.log(resposta);
+    this.FirebasebdService.criar_Novo(resposta[0].token);
+    });
     // JP, coloquei o campo this.profissional.id_usuario para sring pq o inserir  mural pede isso
     this.BancoService.inserirMural(titulo, texto, this.user_sessao.id_usuario, this.profissional.id_usuario).then(async (response) => {
       /*const alert = await this.AlertController.create({
