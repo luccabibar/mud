@@ -102,7 +102,7 @@
   "cordova-plugin-fcm-with-dependecy-updated": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-fcm-with-dependecy-updated"
+      "id": "cordova-plugin-fcm-with-dependecy-updated@^3.2.0"
     },
     "is_top_level": true,
     "variables": {}
