@@ -59,6 +59,10 @@ export class EsqueciPage implements OnInit {
   //   }
   // }
 
+  /**
+   * Chama o metodo EsqueciSenha do BancoService. Antes, testa se o e-mail existe
+   * Dps invoca alert para avisar sucesso ou falha na senha
+   */
   public async sendEmail() {
 
     let email = this.formEsqueci.value.email;

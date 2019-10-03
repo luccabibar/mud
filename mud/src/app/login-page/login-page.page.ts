@@ -1,3 +1,4 @@
+import { FCM } from '@ionic-native/fcm/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Router, RouterModule } from '@angular/router';
 import { Component, OnInit, Renderer, ViewChild, Input} from '@angular/core';
@@ -18,10 +19,11 @@ export class LoginPagePage {
   @ViewChild('mail')  onu: IonInput;
   senh: string;
   emai: string;
+  id: number;
 
   public submitAttempt: boolean = false;
 
-  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router, private ScreenOrientation: ScreenOrientation) { 
+  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router, private ScreenOrientation: ScreenOrientation, private fcm:FCM) { 
     
   }
 
@@ -98,8 +100,25 @@ export class LoginPagePage {
         this.dadosService.setProfissional(Boolean(response[0].profissional));
         this.dadosService.setCrp(String(response[0].crp));
         this.dadosService.setDataNasc(String(response[0].dt_nasc));
+        this.BancoService.selectGenerico("SELECT * FROM contato WHERE id_usuario='"+this.dadosService.getId()+"';")
+        .then(async(response)=>{
+          this.dadosService.setCont1_nome(String(response[0].nome));
+          this.dadosService.setCont2_nome(String(response[1].nome));
+          this.dadosService.setCont1_num(String(response[0].telefone));
+          this.dadosService.setCont2_num(String(response[1].telefone));
+        })
 
-        
+        this.fcm.getToken().then(token => {
+          console.log(token);
+          this.BancoService.selectGenerico("SELECT * FROM notificacao WHERE id_user="+response[0].id_usuario+";")
+          .then(async(response)=>{
+            this.BancoService.updateGenerico("UPDATE notificacao SET token='"+token+"' WHERE id_user="+response[0].id_usuario+";");
+          })
+          .catch(async(response)=>{
+            this.BancoService.insertGenerico("INSERT INTO notificacao VALUES("+ response[0].id_usuario +","+"'"+token+"')" );
+          });
+        })
+
         return;
       } 
       else if(response[0].senha != senha)
@@ -133,6 +152,7 @@ export class LoginPagePage {
   
       await alert.present();
        })
+      
 }
 
   direcCadast()

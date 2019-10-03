@@ -65,7 +65,11 @@ export class DetalhesCrisePage implements OnInit {
     this.criseId = this.array[0];
   }
 
-
+  /**
+   * Este metodo calcula a duracao da crise recebendo os dois parametros abaixo
+   * @param hora_inicio Hora inicial da crise
+   * @param hora_fim  Hora final da Crise
+   */
   public duracao(hora_inicio, hora_fim) {
     this.start = moment(hora_inicio, "HH:mm");
     this.end = moment(hora_fim, "HH:mm");
@@ -77,6 +81,9 @@ export class DetalhesCrisePage implements OnInit {
     this.intervalo = minutes;
   }
 
+  /**
+   * Organiza em um array os sintomas recebidos da tabela sintomas(relativos ao usuario, durante uma crise X)
+   */
   public organizaSintomas() {
     let j = 0;
     for (let i = 1; i < this.crises.sintoma_inicial.length; i += 2) {
@@ -93,7 +100,10 @@ export class DetalhesCrisePage implements OnInit {
     console.log("SINTOMAS: ", this.listaSintomas);
     this.existeSintoma = 0;
   }
-
+/**
+ * Puxa os dados referentes à determinada crise, utilizando BancoService, preenchendo
+ * a interface de Crise
+ */
   public async pegaCrise() {
     this.bd.selectGenerico("SELECT * FROM crise WHERE id_crise=" + this.criseId + " ;").then(async (resposta) => {
       console.log("Crises:", resposta)

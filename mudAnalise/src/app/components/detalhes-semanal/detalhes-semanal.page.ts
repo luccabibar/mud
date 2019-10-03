@@ -13,6 +13,7 @@ import { buildDriverProvider } from 'protractor/built/driverProviders';
 })
 export class DetalhesSemanalPage implements OnInit {
 
+  // Cria instancia local das interfaces de cada pilar do relatorio semanal
   public sono: ISemanalSono;
   public lazer: ISemanaLazer;
   public atividade: ISemanaAtividade;
@@ -29,6 +30,7 @@ export class DetalhesSemanalPage implements OnInit {
   }
 
   ngOnInit() {
+    // Pega os parametros recebidos por Router 
     this.myId = this.activatedRoute.snapshot.paramMap.get('myId');
     this.array = this.myId.split("-");
     // divide o array em
@@ -40,21 +42,25 @@ export class DetalhesSemanalPage implements OnInit {
   public ionViewDidEnter() {
     this.myId = this.activatedRoute.snapshot.paramMap.get('myId');
     this.array = this.myId.split("-");
+
     // divide o array em
 
     this.icone = this.array[2];
     this.semanaId = this.array[1];
     this.myId = this.array[0];
 
+    // se parametro recebidos por Router é X,entao sabemos que há de se abrir tal detalhe semanal
+
     if (this.myId == "Sono") { this.pegaSono(); }
-    if (this.myId == "Atividade Física") {  this.pegaAtividade(); }
-    if (this.myId == "Lazer") {this.pegaLazer(); }
+    if (this.myId == "Atividade Física") { this.pegaAtividade(); }
+    if (this.myId == "Lazer") { this.pegaLazer(); }
     if (this.myId == "Alimentação") { this.pegaAlimentacao() }
 
- 
+
   }
-  //  TODO --> conectar com o banco e puxar detalhe semanal onde semana Id = x && 
-  // id usuario =x && id_prof = x
+ /**
+  * pega os detalhes sobre o sono do paciente em dada semana
+  */
   public async pegaSono() {
     this.bd.selectGenerico("SELECT * FROM sono WHERE semana_id=" + this.semanaId + " ;").then(async (resposta) => {
       console.log("SONO", resposta)
@@ -81,7 +87,9 @@ export class DetalhesSemanalPage implements OnInit {
     })
 
   }
-
+/**
+ * pega os detalhes das atividades fisicas do paciente em dada semana
+ */
   public async pegaAtividade() {
     this.bd.selectGenerico("SELECT * FROM atividade_fisica WHERE semana_id=" + this.semanaId + " ;").then(async (resposta) => {
       console.log("ATIVIDADE FISICA:", resposta)
@@ -102,7 +110,10 @@ export class DetalhesSemanalPage implements OnInit {
     })
   }
 
-  public async pegaLazer(){
+  /**
+   * pega os detalhes sobre o lazer do paciente em dada semana
+   */
+  public async pegaLazer() {
     this.bd.selectGenerico("SELECT * FROM bem_estar WHERE semana_id=" + this.semanaId + " ;").then(async (resposta) => {
       console.log("Bem-Estar:", resposta)
       this.lazer = resposta[0];
@@ -121,8 +132,10 @@ export class DetalhesSemanalPage implements OnInit {
       this.existe = 2;
     })
   }
-
-  public async pegaAlimentacao(){
+/**
+ * Recebe os detalhes sobre a alimentacao do paciente em destaque dada a semana
+ */
+  public async pegaAlimentacao() {
     this.bd.selectGenerico("SELECT * FROM alimentacao WHERE semana_id=" + this.semanaId + " ;").then(async (resposta) => {
       console.log("Alimentação:", resposta)
       this.alimentacao = resposta[0];

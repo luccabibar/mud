@@ -15,27 +15,17 @@ export class TimelineComponent implements OnInit {
   constructor(private toastCtrl:ToastController, public modalController: ModalController, public router:Router ) { }
 
   ngOnInit() {}
- 
-  async buyItem(timeline){
-    let toast = await this.toastCtrl.create({
-      message: "Added to the cart: ${timeline.name}"
-    })
-    toast.present();
-  }
   
+  /**
+   * 
+   * @param info Informa qual detalhe vai ser exposto (alimentacao,lazer,sono,)
+   * @param semanaId pega o id da semana escolhida
+   * @param icone indica qual icon vai ser mostrado (alimentacao,lazer,sono...)
+   */
   async onClick(info,semanaId,icone){
     this.router.navigateByUrl('/detalhes-semanal/'+info+"-"+semanaId+"-"+icone);
   }
 
-  /*
-  async detalhesSemana() {
-    const modal = await this.modalController.create({
-      component: ModalPage,
-      componentProps: { value: 123 }
-    });
-    return await modal.present();
-  }
-  */
 
 
 
