@@ -42,12 +42,16 @@ export class LoginPage implements OnInit {
   }
   ngOnInit() {
   }
-
+/**
+ * Metodo para logar no sistema, conferindo campos email e senha 
+ */
   public async login() {
 
     let email = this.formLogin.value.email
     if (this.formLogin.valid) {
-
+      /**
+       * Consulta o Email e, se acha-lo, carrega os dados desse email valido para ver se a senha dele bate
+       */
       this.bd.selectGenerico("SELECT * FROM usuario WHERE email='" + email + "';").then(async (resposta) => {
         console.log(resposta)
         if (resposta[0].senha == this.formLogin.value.senha) {

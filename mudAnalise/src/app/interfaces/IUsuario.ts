@@ -1,3 +1,6 @@
+/**
+ * interface do Usuario, preenchida apos puxar os dados do profissional/paciente 
+ */
 export interface IUsuario {
     id_usuario?: number;
     nome: string;

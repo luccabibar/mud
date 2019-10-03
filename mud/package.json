@@ -23,6 +23,7 @@
     "@angular/router": "^7.2.2",
     "@ionic-native/barcode-scanner": "^5.12.0",
     "@ionic-native/core": "^5.0.0",
+    "@ionic-native/fcm": "^5.14.0",
     "@ionic-native/firebase": "^5.14.0",
     "@ionic-native/onesignal": "^5.12.0",
     "@ionic-native/screen-orientation": "^5.12.0",
@@ -37,6 +38,7 @@
     "brmasker4": "^1.0.3",
     "cordova-android": "8.0.0",
     "cordova-plugin-fcm": "2.1.2",
+    "cordova-plugin-fcm-with-dependecy-updated": "^3.2.0",
     "cordova-plugin-firebase": "^2.0.5",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "core-js": "^2.5.4",
@@ -100,7 +102,8 @@
       "cordova-plugin-screen-orientation": {},
       "onesignal-cordova-plugin": {},
       "cordova-plugin-firebase": {},
-      "cordova-plugin-fcm": {}
+      "cordova-plugin-fcm": {},
+      "cordova-plugin-fcm-with-dependecy-updated": {}
     },
     "platforms": [
       "android"
