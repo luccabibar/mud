@@ -261,9 +261,11 @@ export class Tab3Page {
     this.IonSlides.slideNext();
     this.IonSlides.lockSwipes(true);
 
-    document.getElementById("divo1").style.display = 'none';
-    document.getElementById("divo2").style.display = 'unset';
-  }
+    document.getElementById("divo1").style.display='none';
+    document.getElementById("divo2").style.display='unset';
+    this.stringo = "";
+    this.stringo2 = "";
+ }
 
   voltanovanota() {
     this.IonSlides.lockSwipes(false);

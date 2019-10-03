@@ -25,6 +25,7 @@
     "@angular/router": "^7.2.15",
     "@ionic-native/call-number": "^5.13.0",
     "@ionic-native/core": "^5.13.0",
+    "@ionic-native/fcm": "^5.14.0",
     "@ionic-native/firebase": "^5.14.0",
     "@ionic-native/qr-scanner": "^5.13.0",
     "@ionic-native/screen-orientation": "^5.14.0",
@@ -40,6 +41,7 @@
     "chart.js": "^2.8.0",
     "cordova-android": "8.0.0",
     "cordova-browser": "6.0.0",
+    "cordova-plugin-fcm-with-dependecy-updated": "^3.2.0",
     "cordova-plugin-qrscanner": "3.0.1",
     "cordova-plugin-screen-orientation": "3.0.2",
     "core-js": "^2.6.9",
@@ -101,7 +103,8 @@
       "mx.ferreyra.callnumber": {},
       "cordova-plugin-qrscanner": {},
       "call-number": {},
-      "cordova-plugin-screen-orientation": {}
+      "cordova-plugin-screen-orientation": {},
+      "cordova-plugin-fcm-with-dependecy-updated": {}
     },
     "platforms": [
       "android",

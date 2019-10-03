@@ -21,6 +21,8 @@ import { AngularFireModule } from 'angularfire2';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FCM } from '@ionic-native/fcm/ngx';
+
 const config = {
   apiKey: "AIzaSyDns6l1bdVQVtTNmPpeFVk8LBauDCKKiuk",
     authDomain: "mud-notificacao.firebaseapp.com",
@@ -41,6 +43,7 @@ const config = {
     HttpClientModule, BrowserAnimationsModule, BrowserModule
   ],
   providers: [
+    FCM,
     StatusBar,
     SplashScreen,
     CallNumber,
