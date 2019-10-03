@@ -1,52 +1,40 @@
 <ion-header>
     
   <ion-toolbar color="verdemud3">
-      <ion-icon (click)="pagsessao()" id="cog" name="reverse-camera"></ion-icon>
+      <ion-title>Contatos</ion-title>
       <ion-icon (click)="sair()" id="exit" name="exit"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
-      <form [formGroup]="perfil">
-      <img id="img" src="../../assets/perfilmud.png" />
-    <ion-card-header>
-      <ion-card-title (ionChange)="ativa()" style="font-size: 1.5rem;"><ion-input formControlName="nome" value="{{nome}}" type="text" name="nome" id="6"></ion-input></ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        
-        <ion-item>
-          <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> CPF</ion-label>
-          <ion-input value="{{cpf}}" (ionChange)="ativa()" formControlName="cpf" type="text" name="nome" id="5" placeholder="Informe seu CPF"></ion-input>
-        </ion-item>
-      
-      </ion-list>
-    </ion-card-content>
-  </form>
-  </ion-card>
-
-  <ion-card>
-    <form [formGroup]="perfil">
+    <form [formGroup]="contato1">
     <img id="img" src="../../assets/perfilmud.png" />
   <ion-card-header>
-    <ion-card-title (ionChange)="ativa()" style="font-size: 1.5rem;"><ion-input formControlName="nome" value="{{nome}}" type="text" name="nome" id="6"></ion-input></ion-card-title>
+    <ion-card-title (ionChange)="ativa()" style="font-size: 1.5rem;"><ion-input formControlName="nome1" value="{{nome1}}" type="text" name="nome1" id="43"></ion-input></ion-card-title>
+    <ion-card-subtitle (ionChange)="ativa()" style="margin-top: -1rem; margin-bottom: -2rem; font-size: 1.2rem;"><ion-input formControlName="num1" value="{{num1}}" type="text" name="num1" id="44"></ion-input></ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
-    <ion-list>
-      
-      <ion-item>
-        <ion-label class="label" position="stacked"><ion-icon name="body"></ion-icon> CPF</ion-label>
-        <ion-input value="{{cpf}}" (ionChange)="ativa()" formControlName="cpf" type="text" name="nome" id="5" placeholder="Informe seu CPF"></ion-input>
-      </ion-item>
 
-    
-    </ion-list>
   </ion-card-content>
 </form>
 </ion-card>
 
-<ion-button (click)="salvarPerfil()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;" disabled="{{desativado}}">Salvar Perfil</ion-button>
+
+<ion-card>
+  <form [formGroup]="contato2">
+  <img id="img" src="../../assets/perfilmud.png" />
+<ion-card-header>
+  <ion-card-title (ionChange)="ativa()" style="font-size: 1.5rem;"><ion-input formControlName="nome2" value="{{nome2}}" type="text" name="nome2" id="45"></ion-input></ion-card-title>
+  <ion-card-subtitle (ionChange)="ativa()" style="margin-top: -1rem; margin-bottom: -2rem; font-size: 1.2rem;"><ion-input formControlName="num2" value="{{num2}}" type="text" name="num2" id="46"></ion-input></ion-card-subtitle>
+</ion-card-header>
+<ion-card-content>
+    
+</ion-card-content>
+</form>
+</ion-card>
+
+<ion-button (click)="salvarContatos()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;" disabled="{{desativado}}">Salvar Perfil</ion-button>
   
 
 </ion-content>

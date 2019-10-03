@@ -18,6 +18,7 @@ export class GraficoCrisePage implements OnInit {
   totalCrises;
   totalCrisesMes;
   totalCrisesDias;
+  public user_sessao;
   h = [];
   primeiro;
   constructor(private BancoService: BancoService, private ds: DadosService, private router: Router) {
@@ -30,19 +31,19 @@ export class GraficoCrisePage implements OnInit {
   }
   async RetornarListaAnos(){
     //DEVERÁ TER UMA NOVA CONDIÇÃO NO WHERE NO SQL, NO CASO "usuario_id". Para que concatenar com o resto
-    let ReturnAnos = await this.BancoService.selectGenerico("SELECT EXTRACT('YEAR' FROM hora_inicio) AS ANO FROM crise GROUP BY ANO ORDER BY ANO DESC;");
+    let ReturnAnos = await this.BancoService.selectGenerico("SELECT EXTRACT('YEAR' FROM hora_inicio) AS ANO FROM crise WHERE usuario_id = " +this.user_sessao.id_usuario+" GROUP BY ANO ORDER BY ANO DESC;");
     let anos=[];
     for(let i in ReturnAnos)
       anos[i]=ReturnAnos[i].ano;
     return anos;
   }
   async lineChartMethod($event = null) {
-
+    console.log("id do usuario:"+this.user_sessao.id_usuario + "\n sql:"+"SELECT EXTRACT('YEAR' FROM hora_inicio) AS ANO FROM crise WHERE usuario_id = " +this.user_sessao.id_usuario+" GROUP BY ANO ORDER BY ANO DESC;");
     this.h = await this.RetornarListaAnos();
     this.primeiro = this.h[0];
-    console.log("p:"+this.primeiro+"  h:"+this.h[0]);
+    //console.log("p:"+this.primeiro+"  h:"+this.h[0]);
     let crises;
-    console.log(this.h);
+    //console.log(this.h);
     //
     //
     //
@@ -51,12 +52,12 @@ export class GraficoCrisePage implements OnInit {
     //
     //
     if($event!=null){//o $event é ele que identifica se foi selecionado
-       crises = await this.BancoService.selectGenerico("SELECT COUNT(id_crise) AS CRISE,EXTRACT('MONTH' FROM hora_inicio) AS MESES FROM crise WHERE EXTRACT('YEAR' FROM hora_inicio)="+$event.target.value+" GROUP BY MESES ORDER BY MESES");
+       crises = await this.BancoService.selectGenerico("SELECT COUNT(id_crise) AS CRISE,EXTRACT('MONTH' FROM hora_inicio) AS MESES FROM crise WHERE EXTRACT('YEAR' FROM hora_inicio)="+$event.target.value+" AND usuario_id =" + this.user_sessao.id_usuario + " GROUP BY MESES ORDER BY MESES");
        console.log("1"+$event.target.value);//pegando esse valor, semelhante em js no qual há uma var element html, exemplo.value
     }
     else{
-       crises = await this.BancoService.selectGenerico("SELECT COUNT(id_crise) AS CRISE,EXTRACT('MONTH' FROM hora_inicio) AS MESES FROM crise WHERE EXTRACT('YEAR' FROM hora_inicio)="+this.h[0]+" GROUP BY MESES ORDER BY MESES");
-       console.log("2"+this.h[0]);
+       crises = await this.BancoService.selectGenerico("SELECT COUNT(id_crise) AS CRISE,EXTRACT('MONTH' FROM hora_inicio) AS MESES FROM crise WHERE EXTRACT('YEAR' FROM hora_inicio)="+this.h[0]+ "AND usuario_id =" + this.user_sessao.id_usuario + " GROUP BY MESES ORDER BY MESES");
+       //console.log("2"+this.h[0]);
     }
     let valor = [0,0,0,0,0,0,0,0,0,0,0,0];
     let totalCrises= 0;
@@ -67,7 +68,7 @@ export class GraficoCrisePage implements OnInit {
     this.totalCrises = totalCrises * 1;
     this.totalCrisesMes = (totalCrises/12).toFixed(2);
     this.totalCrisesDias = (totalCrises/365).toFixed(2);
-    console.log(totalCrises);
+    //console.log(totalCrises);
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: 'line',
       data: {
@@ -111,6 +112,5 @@ export class GraficoCrisePage implements OnInit {
     alert($e.target.value);
   }
   view;
-  public user_sessao;
 
 }
