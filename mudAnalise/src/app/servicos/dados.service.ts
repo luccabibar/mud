@@ -17,6 +17,9 @@ export class DadosService {
   DataNasc = "";
   Id = 0;
 
+  /**
+   * GETTERS E SETTERS
+   */
   getNome()
   {
     return this.Nome;
@@ -89,6 +92,9 @@ export class DadosService {
     this.Id = x;
   }
 
+  /**
+   * Apaga os campos do formulario de cadastro/alteracao
+   */
   limpaDados()
   {
     this.setId(0);

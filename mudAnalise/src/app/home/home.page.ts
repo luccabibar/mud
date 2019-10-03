@@ -32,6 +32,10 @@ export class HomePage implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * preenche os dados do profissional
+   * se nao vem nada, erro na conexão --> apaga todos os dados do sistema
+   */
   ionViewDidEnter() {
     this.profissional = this.ds.getDados("user");
     if (!this.profissional) {
@@ -41,6 +45,10 @@ export class HomePage implements OnInit {
     }
   }
 
+  /**
+   * atualiza as sessoes
+   * @param event evento de scroll
+   */
   doRefresh(event) {
     this.carregaSessoes();
 
@@ -50,7 +58,9 @@ export class HomePage implements OnInit {
     }, 2000);
   }
 
-
+/**
+ * Pega as sessoes pertencentes a determinado usuario, o qual possui vinculo com o profissional logado
+ */
   public async carregaSessoes() {
     this.bd.selectGenerico("SELECT * FROM sessao INNER JOIN usuario ON sessao.usuario_id=usuario.id_usuario WHERE profissional_id='" + this.profissional.id_usuario + "' AND status = 1;").then(async (resposta) => {
       console.log(resposta);
@@ -63,6 +73,10 @@ export class HomePage implements OnInit {
     })
   }
 
+  /**
+   * preenche a interface da sessao escolhida com os dados do paciente 
+   * @param sessao 
+   */
   public abreSessao(sessao) {
     let usuario: IUsuario = {
       id_usuario: sessao.id_usuario,
@@ -77,6 +91,10 @@ export class HomePage implements OnInit {
     this.router.navigateByUrl("/tabs");
   }
 
+  /**
+   * quando há logout, apagam-se os dados do app e volta pro login
+   * @param trava 
+   */
   public async logout(trava) {
     if (trava == 0) {
       this.ds.removeDados(true, '');
@@ -107,7 +125,9 @@ export class HomePage implements OnInit {
     }
 
   }
-
+/**
+ * Alert de delecao
+ */
   async deletadoSucesso() {
     const alert = await this.AlertController.create({
       header: '',
@@ -121,6 +141,10 @@ export class HomePage implements OnInit {
 
   }
 
+  /**
+   * alerta para apagar sessao com usuario
+   * @param idSessao 
+   */
   async alertaDeletar(idSessao) {
     const alert = await this.AlertController.create({
       header: 'Apagar Resgistro',
@@ -146,7 +170,10 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-
+/**
+ * Recebe o idSessao e assim da update pra status=0, apagando o vinculo do paciente X e psicologo Y
+ * @param idSessao 
+ */
   public apagarSessao(idSessao) {
     let sql = "UPDATE sessao SET  status = 0, deleted_at=NOW() WHERE id_sessao=" + idSessao + ";";
     this.bd.updateGenerico(sql).then(async resposta => {

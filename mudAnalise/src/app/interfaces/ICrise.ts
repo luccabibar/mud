@@ -1,5 +1,7 @@
+/**
+ * Interface de crise, pra armazenar os dados que vem do Banco
+ */
 export interface ICrise {
-    // o id repetiu entao cuidado
     id_crise: number;
     usuario_id: number;
     local: string;

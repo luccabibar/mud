@@ -15,6 +15,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
+import { FCM } from '@ionic-native/fcm/ngx';
+
 const config = {
   apiKey: "AIzaSyDns6l1bdVQVtTNmPpeFVk8LBauDCKKiuk",
     authDomain: "mud-notificacao.firebaseapp.com",
@@ -34,6 +36,7 @@ const config = {
     AngularFirestoreModule,
     AngularFireDatabaseModule],
   providers: [
+    FCM,
     StatusBar,
     SplashScreen,
     BarcodeScanner,
