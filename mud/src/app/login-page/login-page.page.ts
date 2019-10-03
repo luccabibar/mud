@@ -101,6 +101,7 @@ export class LoginPagePage {
         this.dadosService.setDataNasc(String(response[0].dt_nasc));
 
         this.fcm.getToken().then(token => {
+          console.log(token);
           this.BancoService.selectGenerico("SELECT * FROM notificacao WHERE id_user="+response[0].id_usuario+";")
           .then(async(response)=>{
             this.BancoService.updateGenerico("UPDATE notificacao SET token='"+token+"' WHERE id_user="+response[0].id_usuario+";");
@@ -108,7 +109,6 @@ export class LoginPagePage {
           .catch(async(response)=>{
             this.BancoService.insertGenerico("INSERT INTO notificacao VALUES("+ response[0].id_usuario +","+"'"+token+"')" );
           });
-         
         })
 
         return;
