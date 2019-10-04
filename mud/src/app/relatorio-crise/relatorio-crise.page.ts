@@ -124,65 +124,18 @@ export class RelatorioCrisePage implements OnInit {
   {
     this.adicionou_sit = true;
     document.getElementById("addsitu").style.display='unset';
+    document.getElementById("fab2").style.display='unset';
     document.getElementById("fab").style.display='none';
     document.getElementById("escolhersitu").style.display='none';
-    /*this.conta++;
-    if(this.conta == 1)
-    {
-    document.getElementById("addsitu").style.display='unset';
-    document.getElementById("escolhersitu").style.display='none';
-    }
-    if(this.conta == 2)
-    {
-    document.getElementById("escolhersitu").style.display='unset';
+   
+  }
+
+  async selectsitu()
+  {
     document.getElementById("addsitu").style.display='none';
-    this.conta = 0;
-    }*/
-    /*const alert = await this.alertController.create({
-      header: "Adicionar nova situação",
-      message: "Digite abaixo a situação que deseja adicionar:",
-      inputs: [
-        {
-          name: 'sit',
-          placeholder: 'Escreva a situação',
-          type: 'text'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancelar',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Adicionar',
-          handler: data => {
-            this.bancoService.insertGenerico("INSERT INTO situacao(usuario_id,situacao) VALUES ('"+this.dadosService.getId()+"','"+data.sit+"');")
-            .then(async(response)=>{
-              
-            })
-              .catch(async(response)=>{
-                const alert = await this.alertController.create({
-                  header: 'Erro',
-                  message: 'Erro ao adicionar nova situação de crise. Tente novamente!',
-                  buttons:  [
-                    {
-                      text: 'OK',
-                    }
-                  ],
-                  });
-
-                  await alert.present();
-               })
-          }
-        }
-      ]
-    });
-      
-    await alert.present();*/
-
+    document.getElementById("fab2").style.display='none';
+    document.getElementById("fab").style.display='unset';
+    document.getElementById("escolhersitu").style.display='unset';
   }
 
   addoutras()
