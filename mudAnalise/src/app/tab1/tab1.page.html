@@ -41,7 +41,7 @@
   <ion-list>
     <ion-card>
         <ion-card-header>
-          <ion-item tappable routerLink="/grafico-crise" lines="full" class="ion-align-items-center">
+          <ion-item tappable routerLink="/tabs/tab1" lines="full" class="ion-align-items-center">
             <ion-icon slot="start" color="big" name="stats"></ion-icon>
             <ion-label>Gráficos Sobre...</ion-label>
           </ion-item>
@@ -84,11 +84,11 @@
       <div *ngFor="let item of information; let i = index;">
         <div>
           <ion-item tappable [routerLink]="'/detalhes-crise/'+item.criseId+'-'+item.intensidade" lines="full"
-            *ngIf="item.duracao>0" [attr.track]="item.intensidade | lowercase">
+           [attr.track]="item.intensidade | lowercase">
             <ion-label>
               <div>
                 <h2>{{item.name}} - <strong>{{item.intensidade}}</strong></h2>
-                <p>Durou {{item.duracao}} minutos</p>
+                <p>Durou de {{item.duracao}}</p>
               </div>
             </ion-label>
             <ion-buttons slot="end">

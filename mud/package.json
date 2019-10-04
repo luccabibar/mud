@@ -38,7 +38,7 @@
     "brmasker4": "^1.0.3",
     "cordova-android": "8.0.0",
     "cordova-plugin-fcm": "2.1.2",
-    "cordova-plugin-fcm-with-dependecy-updated": "^3.2.0",
+    "cordova-plugin-fcm-with-dependecy-updated": "3.2.0",
     "cordova-plugin-firebase": "^2.0.5",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "core-js": "^2.6.9",
