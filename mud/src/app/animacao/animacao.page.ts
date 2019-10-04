@@ -26,8 +26,8 @@ export class AnimacaoPage implements OnInit, OnDestroy {
     let minuto = new Date().getMinutes();
     let segundo = new Date().getSeconds();
     horas=ano+"-"+mes+"-"+dia+" "+hora+":"+minuto+":"+segundo;
-    this.dadosService.setCrise_hr_inicio(horas);
-    console.log(this.dadosService.getCrise_hr_inicio());
+   /* this.dadosService.setCrise_hr_inicio(horas);
+    console.log(this.dadosService.getCrise_hr_inicio());*/
     
     this.mandaAlerta();
   }

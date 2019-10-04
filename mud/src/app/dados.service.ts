@@ -39,8 +39,7 @@ export class DadosService {
   data_relatorioS_I = null;
   data_relatorioS_F = null;
 
-  crise_hr_inicio = "";
-  crise_hr_fim = "";
+  duracao = null;
 
   getCont1_nome()
   {
@@ -76,22 +75,15 @@ export class DadosService {
     this.cont2_num = x;
   }
 
+  setDuracao_crise(x: string)
+  {
+    
+    this.duracao = parseInt(x);
+  }
 
-  getCrise_hr_inicio()
+  getDuracao_crise()
   {
-    return this.crise_hr_inicio;
-  }
-  setCrise_hr_fim(x: string)
-  {
-    this.crise_hr_fim = x;
-  }
-  getCrise_hr_fim()
-  {
-    return this.crise_hr_fim;
-  }
-  setCrise_hr_inicio(x: string)
-  {
-    this.crise_hr_inicio = x;
+    return this.duracao;
   }
 
   getData_relatorioS_I()
