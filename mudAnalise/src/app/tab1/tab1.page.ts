@@ -159,7 +159,7 @@ export class Tab1Page {
    * Carrega a interface com os dados de certa Crise
    */
   carregarCrises() {
-    this.bd.selectGenerico("SELECT * FROM crise WHERE usuario_id=" + this.user_sessao.id_usuario + ";")
+    this.bd.selectGenerico("SELECT * FROM crise WHERE usuario_id=" + this.user_sessao.id_usuario + " ORDER BY created_at DESC;")
     .then(async (resposta) => {
       console.log(resposta);
       this.crises = resposta;

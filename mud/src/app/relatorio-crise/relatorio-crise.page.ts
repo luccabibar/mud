@@ -214,6 +214,8 @@ export class RelatorioCrisePage implements OnInit {
     let data_crise = (<HTMLInputElement>document.getElementById("5")).value;
 
     let duracao_crise = (<HTMLInputElement>document.getElementById("tempo")).value;
+    this.dadosService.setDuracao_crise(duracao_crise);
+
 
     let acompanhado = true;
     if((<HTMLInputElement>document.getElementById("8")).value)
@@ -366,7 +368,7 @@ export class RelatorioCrisePage implements OnInit {
     let situacao3 = (<HTMLInputElement>document.getElementById("28")).value;*/
     let intensidade = (<HTMLInputElement>document.getElementById("preocupa")).value;
 
-    let horas="";
+    /*let horas="";
     let dia = new Date().getDay();
     let mes = new Date().getMonth();
     let ano = new Date().getFullYear();
@@ -374,9 +376,9 @@ export class RelatorioCrisePage implements OnInit {
     let minuto = new Date().getMinutes();
     let segundo = new Date().getSeconds();
     horas=ano+"-"+mes+"-"+dia+" "+hora+":"+minuto+":"+segundo;
-    this.dadosService.setCrise_hr_fim(horas);
+    this.dadosService.setCrise_hr_fim(horas);*/
 
-    this.bancoService.relatorio_crise(this.dadosService.getId().toString(),local_crise,sintomas_crise,this.dadosService.getCrise_hr_inicio().toString(),this.dadosService.getCrise_hr_fim().toString(),intensidade,situacoes,pessoa_acompanhamento)
+    this.bancoService.relatorio_crise(this.dadosService.getId().toString(),local_crise,sintomas_crise, this.dadosService.getDuracao_crise(),intensidade,situacoes,pessoa_acompanhamento)
     .then(async(response)=>{
         const alert = await this.alertController.create({
           header: 'Relátorio enviado',
