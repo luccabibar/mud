@@ -110,17 +110,17 @@ export class DetalhesCrisePage implements OnInit {
       this.existe = 0;
       this.organizaSintomas();
       this.duracao = this.crises.duracao;
-      if(this.duracao == "0")
+      if(this.duracao == 0)
         this.duracao_texto = "Menos de 10 minutos";
-      if(this.duracao == "200")
+      if(this.duracao == 200)
         this.duracao_texto = "10 - 15 minutos";
-      if(this.duracao == "400")
+      if(this.duracao == 400)
         this.duracao_texto = "15 - 30 minutos";
-      if(this.duracao == "600")
+      if(this.duracao == 600)
         this.duracao_texto = "31 - 45 minutos";
-      if(this.duracao == "800")
+      if(this.duracao == 800)
         this.duracao_texto = "46 - 60 minutos";
-      if(this.duracao == "1000")
+      if(this.duracao == 1000)
         this.duracao_texto = "Mais de 60 minutos";
     }).catch(async (resposta) => {
       console.log(resposta);

@@ -19,6 +19,8 @@ export class Tab1Page {
   public profissional;
   public crises;
   public existe = 1;
+  public duracao;
+  public duracao_text;
 
   information;
 
@@ -111,12 +113,24 @@ export class Tab1Page {
   private geraJSON(crises) {
     let temp = [];
     for (let cri of crises) {
+      if(cri.duracao == 0)
+        this.duracao_text = "Menos de 10 minutos";
+      if(cri.duracao == 200)
+        this.duracao_text = "10 - 15 minutos";
+      if(cri.duracao == 400)
+        this.duracao_text = "15 - 30 minutos";
+      if(cri.duracao == 600)
+        this.duracao_text = "31 - 45 minutos";
+      if(cri.duracao == 800)
+        this.duracao_text = "46 - 60 minutos";
+      if(cri.duracao == 1000)
+        this.duracao_text = "Mais de 60 minutos";
       temp.push(
         {
           "criseId": cri.id_crise,
           "name": moment(cri.created_at).format('DD/MM/YYYY'),
           "intensidade": this.mudaIntensidade(cri.intensidade),
-          "duracao": this.duracao(cri.hora_inicio, cri.hora_fim)
+          "duracao": this.duracao_text,
 
         }
       ); 
@@ -130,7 +144,7 @@ export class Tab1Page {
    * @param hora_inicio 
    * @param hora_fim 
    */
-  public duracao(hora_inicio, hora_fim) {
+  /*public duracao(hora_inicio, hora_fim) {
     var start = moment(hora_inicio, "HH:mm");
     var end = moment(hora_fim, "HH:mm");
     var minutes = end.diff(start, 'minutes');
@@ -139,7 +153,7 @@ export class Tab1Page {
       minutes = 0;
     }
     return minutes;
-  }
+  }*/
 
   /**
    * Carrega a interface com os dados de certa Crise
