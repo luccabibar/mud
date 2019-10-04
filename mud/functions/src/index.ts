@@ -8,19 +8,30 @@ import * as admin from 'firebase-admin';
 //  response.send("Hello from Firebase!");
 // });
 
-/* export const sendOnFireStoreCreate = functions.firestore
+ export const sendOnFireStoreCreate = functions.firestore
  .document('discounts/{discountId}')
  .onCreate(async snapshot => {
-    const discount = snapshot.data();
 
     const notification: admin.messaging.Notification = {
         title: 'New Hugo Available',
-        body: discount.headline
+        body: "socorrro"
     }; 
 
     const payload: admin.messaging.Message = {
         notification,
-        topic: 'discounts'
+        webpush:{
+            notification:{
+                vibrate:[200,100,200],
+                icon:'https://angularfirebase.com/images/logo.png',
+                actions:
+                [{
+                       action: 'like', 
+                       title: 'yaaaaa',
+                }]
+            }
+        },
+        topic:"discounts",
     };
+
     return admin.messaging().send(payload);
- });*/
+ });
