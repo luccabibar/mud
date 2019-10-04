@@ -16,7 +16,6 @@
         <ion-card-header>
           <!-- <strong> {{ crises.created_at}}</strong> -->
           <ion-icon name="pulse"></ion-icon> {{this.tipo }}<br>
-          <ion-icon name="stopwatch"></ion-icon> {{this.intervalo}} minutos
           <hr>
         </ion-card-header>
 
@@ -79,18 +78,10 @@
             </ion-item>
             <ion-item>
               <div slot="start">
-                <ion-icon name="time"></ion-icon> Hora Inicial:
+                <ion-icon name="time"></ion-icon> Duracao:
               </div>
               <div>
-                <strong>{{this.comeco}}</strong>
-              </div>
-            </ion-item>
-            <ion-item>
-              <div slot="start">
-                <ion-icon name="time"></ion-icon> Hora Final:
-              </div>
-              <div>
-                <strong>{{ this.fim}}</strong>
+                <strong>{{this.duracao_texto}}</strong>
               </div>
             </ion-item>
           </div>
