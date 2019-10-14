@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'alterar-senha', loadChildren: './alterar-senha/alterar-senha.module#AlterarSenhaPageModule' },
   // { path: 'detalhes-crise/:id', loadChildren: './detalhes-crise/detalhes-crise.module#DetalhesCrisePageModule' }
   { path: 'detalhes-crise/:info', loadChildren: './detalhes-crise/detalhes-crise.module#DetalhesCrisePageModule' },  { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule' },
+  { path: 'guia', loadChildren: './guia/guia.module#GuiaPageModule' },
 
 
 

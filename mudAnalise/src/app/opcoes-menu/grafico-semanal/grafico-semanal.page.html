@@ -20,19 +20,31 @@
     <!--seletor de grafico-->
     <ion-select placeholder="Selecione um gráfico" [(ngModel)]="grafSel" (ionChange)="changeGraf();">
       <ion-select-option value="alim">Alimentação</ion-select-option>
-      <ion-select-option value="atvd">Atividade Física</ion-select-option>
-      <ion-select-option value="bemes">Bem Estar</ion-select-option>
+      <ion-select-option value="hidr">Consumno de água</ion-select-option>
+      <ion-select-option value="lazr">Lazer</ion-select-option>
+      <ion-select-option value="sono">Sono</ion-select-option>
     </ion-select>
     <!--grafico-->
     <canvas #grafico>
 
     </canvas>
     <!--observacoes-->
-    <br>
-    Observacoes:  {{semana && semana[semKey].observacao}}
+    <ion-card *ngIf="obs">
+      <ion-card-header>
+        <ion-card-title>
+            Observacoes:
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item *ngFor="let semana of obsData">
+          {{semana.semana}} {{semana.value}}
+        </ion-item>
+      </ion-card-content>
+
+    </ion-card>
   </div>
 
-  <ion-card>
-    Para melhor visualização dos gráficos, recomendamos a plataforma mudAnálise web
-  </ion-card>
+  <!-- kek -->
+  <p>Para melhor visualização dos gráficos, recomendamos a plataforma mudAnálise web</p>  
 </ion-content>
