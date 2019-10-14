@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DadosService {
 
-  constructor() { }
+  constructor(private localNotifications: LocalNotifications) { }
 
   dados = [];
 
@@ -192,4 +193,13 @@ export class DadosService {
   }
 
 
+  Notificacao()
+  {
+    this.localNotifications.schedule({
+      id: 1,
+      text: 'Single ILocalNotification',
+      //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+      data: { mydata: "nao sei" }
+    });
+  }
 }

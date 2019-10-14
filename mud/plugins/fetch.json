@@ -10,7 +10,7 @@
   "cordova-plugin-statusbar": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-statusbar@^2.4.2"
+      "id": "cordova-plugin-statusbar@^2.4.3"
     },
     "is_top_level": true,
     "variables": {}
@@ -18,15 +18,15 @@
   "cordova-plugin-device": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-device@^2.0.2"
+      "id": "cordova-plugin-device"
     },
-    "is_top_level": true,
+    "is_top_level": false,
     "variables": {}
   },
   "cordova-plugin-splashscreen": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-splashscreen@^5.0.2"
+      "id": "cordova-plugin-splashscreen@^5.0.3"
     },
     "is_top_level": true,
     "variables": {}
@@ -34,7 +34,7 @@
   "cordova-plugin-ionic-webview": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-ionic-webview@^4.1.1"
+      "id": "cordova-plugin-ionic-webview@^4.1.2"
     },
     "is_top_level": true,
     "variables": {
@@ -44,7 +44,7 @@
   "cordova-plugin-ionic-keyboard": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-ionic-keyboard@^2.1.3"
+      "id": "cordova-plugin-ionic-keyboard@^2.2.0"
     },
     "is_top_level": true,
     "variables": {}
@@ -78,7 +78,7 @@
   "onesignal-cordova-plugin": {
     "source": {
       "type": "registry",
-      "id": "onesignal-cordova-plugin"
+      "id": "onesignal-cordova-plugin@2.5.2"
     },
     "is_top_level": true,
     "variables": {}
@@ -91,20 +91,33 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-fcm": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-fcm"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-fcm-with-dependecy-updated": {
     "source": {
       "type": "registry",
       "id": "cordova-plugin-fcm-with-dependecy-updated@^3.2.0"
     },
     "is_top_level": true,
+    "variables": {
+      "FCM_CORE_VERSION": "16.0.9",
+      "FCM_VERSION": "18.0.0",
+      "GRADLE_TOOLS_VERSION": "3.5.0",
+      "GOOGLE_SERVICES_VERSION": "4.2.0"
+    }
+  },
+  "cordova-plugin-local-notification": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-local-notification"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-badge": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-badge@>=0.8.5"
+    },
+    "is_top_level": false,
     "variables": {}
   }
 }
