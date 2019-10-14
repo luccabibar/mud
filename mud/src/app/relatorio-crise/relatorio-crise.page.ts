@@ -224,15 +224,15 @@ export class RelatorioCrisePage implements OnInit {
     }
     //let acompanhadoNao = (<HTMLInputElement>document.getElementById("9")).value;
 
-    let pessoa_acompanhamento = "null";
-    let acomp_amigo = (<HTMLInputElement>document.getElementById("9")).value;
+    let pessoa_acompanhamento = "-1";
+    let acomp_amigo = (<HTMLInputElement>document.getElementById("9")).checked;
     if(acomp_amigo)
     {
       pessoa_acompanhamento = "0";
     }
     // 0 = amigo let acomp_amigo = (<HTMLInputElement>document.getElementById("10")).value
-    let acomp_familia = (<HTMLInputElement>document.getElementById("10")).value;
-    let acomp_desc = (<HTMLInputElement>document.getElementById("11")).value;
+    let acomp_familia = (<HTMLInputElement>document.getElementById("10")).checked;
+    let acomp_desc = (<HTMLInputElement>document.getElementById("11")).checked;
     if(acomp_familia)
     {
       pessoa_acompanhamento = "1";

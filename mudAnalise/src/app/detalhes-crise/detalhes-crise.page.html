@@ -73,7 +73,7 @@
                 <strong *ngIf="this.crises.acompanhamento==='1'">Familiar</strong>
                 <strong *ngIf="this.crises.acompanhamento==='2'">Amigo</strong>
                 <strong *ngIf="this.crises.acompanhamento==='3'">Desconhecido</strong>
-                {{this.crises.acompanhamento}}
+                <strong *ngIf="this.crises.acompanhamento==='-1'">Desacompanhado</strong>
               </div>
             </ion-item>
             <ion-item>
