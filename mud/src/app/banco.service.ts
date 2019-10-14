@@ -179,17 +179,16 @@ export class BancoService {
   return this.http.post(this.API_URL+'relatorioSemanal', data,{headers: header}).toPromise();
   }
 
-  relatorio_crise(usuario_id: string,local: string,sint_inicial: string,hora_inicio: string,hora_fim: string,intensidade: string, situacao: string,acompanhamento: string)
+  relatorio_crise(usuario_id: string,local: string,sint_inicial: string,duracao: number,intensidade: string, situacao: string,acompanhamento: string)
   {
     var data={
       usuario_id: usuario_id,
       local: local,
       sint_inicial: sint_inicial,
-      hora_inicio: hora_inicio,
-      hora_fim: hora_fim,
       intensidade: intensidade,
       situacao: situacao,
-      acompanhamento: acompanhamento
+      acompanhamento: acompanhamento,
+      duracao: duracao
     };
     let header=new HttpHeaders({'Content-type':'application/json'});
     return this.http.post(this.API_URL+'relatorioCrise', data,{headers: header}).toPromise(); 

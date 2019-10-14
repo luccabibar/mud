@@ -8,8 +8,7 @@ export interface ICrise {
     sintoma_inicial: string;
     situacao: string;
     acompanhamento: string;
-    hora_inicio: string;
-    hora_fim: string;
+    duracao: number;
     intensidade: number;
     created_at?: string;
     updated_at?: string;

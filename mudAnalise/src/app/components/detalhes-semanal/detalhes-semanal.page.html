@@ -87,7 +87,7 @@
           <strong *ngIf="atividade.tempo==='800'">+ de 3hrs</strong>
         </div>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="atividade.realizou">
         <div>
           Intensidade da(s) atividade(s):
         </div>

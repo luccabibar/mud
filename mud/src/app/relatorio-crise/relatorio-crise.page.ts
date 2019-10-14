@@ -124,65 +124,18 @@ export class RelatorioCrisePage implements OnInit {
   {
     this.adicionou_sit = true;
     document.getElementById("addsitu").style.display='unset';
+    document.getElementById("fab2").style.display='unset';
     document.getElementById("fab").style.display='none';
     document.getElementById("escolhersitu").style.display='none';
-    /*this.conta++;
-    if(this.conta == 1)
-    {
-    document.getElementById("addsitu").style.display='unset';
-    document.getElementById("escolhersitu").style.display='none';
-    }
-    if(this.conta == 2)
-    {
-    document.getElementById("escolhersitu").style.display='unset';
+   
+  }
+
+  async selectsitu()
+  {
     document.getElementById("addsitu").style.display='none';
-    this.conta = 0;
-    }*/
-    /*const alert = await this.alertController.create({
-      header: "Adicionar nova situação",
-      message: "Digite abaixo a situação que deseja adicionar:",
-      inputs: [
-        {
-          name: 'sit',
-          placeholder: 'Escreva a situação',
-          type: 'text'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancelar',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Adicionar',
-          handler: data => {
-            this.bancoService.insertGenerico("INSERT INTO situacao(usuario_id,situacao) VALUES ('"+this.dadosService.getId()+"','"+data.sit+"');")
-            .then(async(response)=>{
-              
-            })
-              .catch(async(response)=>{
-                const alert = await this.alertController.create({
-                  header: 'Erro',
-                  message: 'Erro ao adicionar nova situação de crise. Tente novamente!',
-                  buttons:  [
-                    {
-                      text: 'OK',
-                    }
-                  ],
-                  });
-
-                  await alert.present();
-               })
-          }
-        }
-      ]
-    });
-      
-    await alert.present();*/
-
+    document.getElementById("fab2").style.display='none';
+    document.getElementById("fab").style.display='unset';
+    document.getElementById("escolhersitu").style.display='unset';
   }
 
   addoutras()
@@ -214,6 +167,8 @@ export class RelatorioCrisePage implements OnInit {
     let data_crise = (<HTMLInputElement>document.getElementById("5")).value;
 
     let duracao_crise = (<HTMLInputElement>document.getElementById("tempo")).value;
+    this.dadosService.setDuracao_crise(duracao_crise);
+
 
     let acompanhado = true;
     if((<HTMLInputElement>document.getElementById("8")).value)
@@ -222,15 +177,15 @@ export class RelatorioCrisePage implements OnInit {
     }
     //let acompanhadoNao = (<HTMLInputElement>document.getElementById("9")).value;
 
-    let pessoa_acompanhamento = "null";
-    let acomp_amigo = (<HTMLInputElement>document.getElementById("9")).value;
+    let pessoa_acompanhamento = "-1";
+    let acomp_amigo = (<HTMLInputElement>document.getElementById("9")).checked;
     if(acomp_amigo)
     {
       pessoa_acompanhamento = "0";
     }
     // 0 = amigo let acomp_amigo = (<HTMLInputElement>document.getElementById("10")).value
-    let acomp_familia = (<HTMLInputElement>document.getElementById("10")).value;
-    let acomp_desc = (<HTMLInputElement>document.getElementById("11")).value;
+    let acomp_familia = (<HTMLInputElement>document.getElementById("10")).checked;
+    let acomp_desc = (<HTMLInputElement>document.getElementById("11")).checked;
     if(acomp_familia)
     {
       pessoa_acompanhamento = "1";
@@ -366,7 +321,7 @@ export class RelatorioCrisePage implements OnInit {
     let situacao3 = (<HTMLInputElement>document.getElementById("28")).value;*/
     let intensidade = (<HTMLInputElement>document.getElementById("preocupa")).value;
 
-    let horas="";
+    /*let horas="";
     let dia = new Date().getDay();
     let mes = new Date().getMonth();
     let ano = new Date().getFullYear();
@@ -374,9 +329,9 @@ export class RelatorioCrisePage implements OnInit {
     let minuto = new Date().getMinutes();
     let segundo = new Date().getSeconds();
     horas=ano+"-"+mes+"-"+dia+" "+hora+":"+minuto+":"+segundo;
-    this.dadosService.setCrise_hr_fim(horas);
+    this.dadosService.setCrise_hr_fim(horas);*/
 
-    this.bancoService.relatorio_crise(this.dadosService.getId().toString(),local_crise,sintomas_crise,this.dadosService.getCrise_hr_inicio().toString(),this.dadosService.getCrise_hr_fim().toString(),intensidade,situacoes,pessoa_acompanhamento)
+    this.bancoService.relatorio_crise(this.dadosService.getId().toString(),local_crise,sintomas_crise, this.dadosService.getDuracao_crise(),intensidade,situacoes,pessoa_acompanhamento)
     .then(async(response)=>{
         const alert = await this.alertController.create({
           header: 'Relátorio enviado',
