@@ -14,10 +14,12 @@ const routes: Routes = [
   { path: 'editar-sintoma', loadChildren: './editar-sintoma/editar-sintoma.module#EditarSintomaPageModule' },
   { path: 'animacao', loadChildren: './animacao/animacao.module#AnimacaoPageModule' },
   { path: 'sessoes', loadChildren: './sessoes/sessoes.module#SessoesPageModule' },
-  { path: 'tab3', loadChildren: './tab3/tab3.module#Tab3PageModule' },  { path: 'esqueci', loadChildren: './esqueci/esqueci.module#EsqueciPageModule' },
+  { path: 'tab3', loadChildren: './tab3/tab3.module#Tab3PageModule' },
+  { path: 'esqueci', loadChildren: './esqueci/esqueci.module#EsqueciPageModule' },
   { path: 'ligar', loadChildren: './ligar/ligar.module#LigarPageModule' },
   { path: 'sobre', loadChildren: './sobre/sobre.module#SobrePageModule' },
   { path: 'contato', loadChildren: './contato/contato.module#ContatoPageModule' },
+  { path: 'guia', loadChildren: './guia/guia.module#GuiaPageModule' },
 
 
   
