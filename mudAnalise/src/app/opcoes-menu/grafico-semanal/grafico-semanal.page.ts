@@ -18,15 +18,18 @@ export class GraficoSemanalPage implements OnInit
   //dados do paciente (banco)
   semana;
   alimentacao;
-  atividade;
-  bemEstar;
+  hidratacao;
+  lazer;
   sono;
   //controle da view
   semKey;
   //grafico
   grafObj;
-  grafSel
+  grafSel;
   @ViewChild("grafico") grafElem;
+  //observações
+  obs
+  obsData
 
   /**
    * gera uma cor aleatoria
@@ -44,7 +47,6 @@ export class GraficoSemanalPage implements OnInit
 
   /**
    * converte int pra float pQ O ANGULAR NAO CONSEGUE LIDAR COM TIPOS
-   * PHP RAINHA ANGULAR NADINHA 
    * (tambem atualiza a view)
    */
   changeOpt()
@@ -59,12 +61,15 @@ export class GraficoSemanalPage implements OnInit
   changeGraf()
   {
     let dataset = [];
-
+    
+    //preenche o dataset condicionalmente
     switch(this.grafSel) {
-      case "alim":
-        let first = true;
+      //case alimentacao
+      case "alim":{
+        let first = true; 
+        this.obs = false;
+
         //itera sobre cada semana
-        console.log(this.alimentacao.length);        
         this.alimentacao.forEach((sem) => 
         { 
           let i = 0;
@@ -93,18 +98,81 @@ export class GraficoSemanalPage implements OnInit
           first = false;
         });
         break;
-      /*case "atvd":
-        dataset = this.atividade;
+      }
+      //case lazer
+      case "lazr":{
+        this.obs = true;
+        let i = 0;
+        console.log(this.lazer);
+        
+        //itera sobre cada semana 
+        this.lazer.forEach((sem) => 
+        { 
+          //datset secundario pra observaoces
+          this.obsData.push({
+            "semana": this.semana[i].data_inicial,
+            "value": sem.comentario
+          });
+
+          //dataset principal pro grafico
+          //if for a primeira vez, cria objeto de dataset
+          if(i == 0){     
+            dataset.push({
+              label: "frequencia",
+              data: [sem.vezes],
+              borderColor: this.randColor(),
+              fill: false,
+              borderWidth: 1
+            });
+          }
+          //else so add o valor no dataset correspondente
+          else{
+            dataset[0].data.push(sem.vezes);
+          }
+          
+          i++;
+        });
         break;
-      case "bemes":
-        dataset = this.bemEstar;
-        break;*/
+      }
+      //case hidratacao
+      case "hidr":{
+        this.obs = false;
+        let i = 0;
+        console.log(this.hidratacao);
+        
+        //itera sobre cada semana
+        this.hidratacao.forEach((sem) => 
+        {
+          //if for a primeira iter cria o objeto dataset
+          if(i == 0){
+            dataset.push({
+              label: "frequencia",
+              data: [sem.hidratacao],
+              borderColor: this.randColor(),
+              fill: false,
+              borderWidth: 1
+            });
+          }
+          //else apenas pusha valor
+          else{
+            dataset[0].data.push(sem.vezes);
+          }
+
+          i++;
+        });
+        break;
+      }
+      //case sono
+      case "sono":{
+        console.log(this.sono);
+        break;
+      }
     }
 
     //console.log(dataset);
 
-    let grafOpts = {
-      type: 'line',
+    let grafStuff = {
+      type: 'bar',
       data: {
         //labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
         datasets: dataset
@@ -118,8 +186,18 @@ export class GraficoSemanalPage implements OnInit
           }]
         }
       }
-    }; 
-    this.grafObj = new Chart(this.grafElem.nativeElement, grafOpts);
+    };
+
+    //cria um objeto grafico caso nao existe
+    if(this.grafObj == null){
+      this.grafObj = new Chart(this.grafElem.nativeElement, grafStuff);
+    }
+    //else limpa o obj grafico e add o novo dataset
+    else{
+      console.log("yare yare");
+      this.grafObj.data.datasets = dataset;
+      this.grafObj.update();
+    }
   }
 
   /**
@@ -132,12 +210,10 @@ export class GraficoSemanalPage implements OnInit
   {
     let sql = "SELECT sem.data_inicial, sem.observacao, " +
       "ali.carboidratos, ali.proteinas, ali.laticinios, ali.verd_frut, ali.hidratacao, " +
-      "atv.a_realizou, atv.tempo, atv.intensidade, " +
       "bem.b_realizou, bem.vezes, bem.comentario, " +
-      "son.hora_comeco, son.vezes_acordou, son.acordou_naturalmente " +
+      "son.duracao_sono, son.vezes_acordou, son.acordou_naturalmente " +
       "FROM semana AS sem " +
       "JOIN alimentacao AS ali ON sem.id_semana = ali.semana_id " +
-      "JOIN atividade_fisica AS atv ON sem.id_semana = atv.semana_id " +
       "JOIN bem_estar AS bem ON sem.id_semana = bem.semana_id " +
       "JOIN sono AS son ON sem.id_semana = son.semana_id " +
       "WHERE sem.usuario_id = " + id + " ";
@@ -148,8 +224,8 @@ export class GraficoSemanalPage implements OnInit
     {
       this.semana = [];
       this.alimentacao = [];
-      this.atividade = [];
-      this.bemEstar = [];
+      this.hidratacao = [];
+      this.lazer = [];
       this.sono = [];
 
       resp.forEach(row => 
@@ -157,6 +233,7 @@ export class GraficoSemanalPage implements OnInit
         let dataIni = (row.data_inicial).split('-');
         dataIni = dataIni[2] + "/" + dataIni[1] + "/" + dataIni[0];
 
+        //5 pacotes de dados brutos
         this.semana.push({
           "data_inicial": dataIni,
           "observacao": row.observacao
@@ -166,20 +243,17 @@ export class GraficoSemanalPage implements OnInit
           "proteinas": row.proteinas,              
           "laticinios": row.laticinios,              
           "verd_frut": row.verd_frut,              
+        });
+        this.hidratacao.push({
           "hidratacao": row.hidratacao                
         });
-        this.atividade.push({
-          "a_realizou": row.a_realizou,
-          "tempo": row.tempo,
-          "intensidade": row.intensidade
-        });
-        this.bemEstar.push({
+        this.lazer.push({
           "b_realizou": row.b_realizou,
           "vezes": row.vezes,
           "comentario": row.comentario
         });
         this.sono.push({
-          "comeco": row.hora_comeco,
+          "duracao": row.duracao_sono,
           "acordVezes": row.vezes_acordou,
           "acordNat": row.acordou_naturalmente
         });
@@ -193,9 +267,12 @@ export class GraficoSemanalPage implements OnInit
 
   constructor(private db: BancoService, private data: DadosService) 
   {    
+    this.grafObj = null;
     this.paciente = this.data.getDados("user_sessao");
     this.pegaDados(this.paciente.id_usuario);
     this.semKey = 0;
+    this.obs = false;
+    this.obsData = [];
   }
 
   ngOnInit() { }
