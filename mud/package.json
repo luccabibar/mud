@@ -37,11 +37,9 @@
     "barcode-scanner": "0.0.2",
     "br-mask": "0.0.6",
     "brmasker4": "^1.0.3",
-    "cordova-android": "^8.1.0",
+    "cordova-android": "8.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-badge": "^0.8.8",
-    "cordova-plugin-fcm-with-dependecy-updated": "3.2.0",
-    "cordova-plugin-firebase": "^2.0.5",
     "cordova-plugin-local-notification": "^0.9.0-beta.2",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "core-js": "^2.6.9",
@@ -104,18 +102,11 @@
       "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-screen-orientation": {},
       "onesignal-cordova-plugin": {},
-      "cordova-plugin-firebase": {},
-      "cordova-plugin-fcm-with-dependecy-updated": {
-        "FCM_CORE_VERSION": "16.0.9",
-        "FCM_VERSION": "18.0.0",
-        "GRADLE_TOOLS_VERSION": "3.5.0",
-        "GOOGLE_SERVICES_VERSION": "4.2.0"
-      },
       "cordova-plugin-local-notification": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }
