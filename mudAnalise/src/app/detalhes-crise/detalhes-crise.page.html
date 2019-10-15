@@ -70,17 +70,10 @@
               </div>
             </ion-item>
 
-
             <ion-item>
-              <div>
-                <ion-icon name="people"></ion-icon> Acompanhamento:
-              </div>
-              <div slot="end">
-                <strong *ngIf="this.crises.acompanhamento==='1'">Familiar</strong>
-                <strong *ngIf="this.crises.acompanhamento==='2'">Amigo</strong>
-                <strong *ngIf="this.crises.acompanhamento==='3'">Desconhecido</strong>
-                <strong *ngIf="this.crises.acompanhamento==='-1'">Desacompanhado</strong>
-              </div>
+                <div>
+                    <ion-icon name="people"></ion-icon> Acompanhamento:
+                </div>
             </ion-item>
             <ion-item>
               <div slot="start">
@@ -89,7 +82,7 @@
                   <strong *ngIf="this.crises.acompanhamento==='1'">Familiar</strong>
                   <strong *ngIf="this.crises.acompanhamento==='2'">Amigo</strong>
                   <strong *ngIf="this.crises.acompanhamento==='3'">Desconhecido</strong>
-                  {{this.crises.acompanhamento}}
+                  <strong *ngIf="this.crises.acompanhamento==='-1'">Desacompanhado</strong>
                 </ion-item>
               </div>
             </ion-item>
