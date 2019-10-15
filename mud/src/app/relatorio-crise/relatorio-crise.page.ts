@@ -25,6 +25,7 @@ export class RelatorioCrisePage implements OnInit {
     await this.sitBanco(null);
     document.getElementById("lblTempo").innerHTML = '- de 10 mins';
     document.getElementById("lblGrau").innerHTML = 'Leve';
+    this.selectsitu();
   }
 
   antSlide()
@@ -123,19 +124,19 @@ export class RelatorioCrisePage implements OnInit {
   async addsitu()
   {
     this.adicionou_sit = true;
-    document.getElementById("addsitu").style.display='unset';
+    document.getElementById("addsitua").style.display='unset';
     document.getElementById("fab2").style.display='unset';
-    document.getElementById("fab").style.display='none';
     document.getElementById("escolhersitu").style.display='none';
-   
+    document.getElementById("fabuloso").style.display='none';
   }
 
   async selectsitu()
   {
-    document.getElementById("addsitu").style.display='none';
+    this.adicionou_sit = false;
+    document.getElementById("addsitua").style.display='none';
     document.getElementById("fab2").style.display='none';
-    document.getElementById("fab").style.display='unset';
     document.getElementById("escolhersitu").style.display='unset';
+    document.getElementById("fabuloso").style.display='unset';
   }
 
   addoutras()
