@@ -10,7 +10,7 @@ import * as moment from 'moment';
   styleUrls: ['./detalhes-crise.page.scss'],
 })
 export class DetalhesCrisePage implements OnInit {
-
+ 
 
   public crises: ICrise;
 

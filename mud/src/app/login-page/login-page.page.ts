@@ -160,5 +160,10 @@ export class LoginPagePage {
       this.nav.navigateForward('cadastro');
   }
 
+  guia()
+  {
+    this.nav.navigateForward('guia');
+  }
+
 }
 

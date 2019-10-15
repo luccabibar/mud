@@ -21,6 +21,10 @@ export class Tab2Page {
   dataInicio = "INICIO";
   dataFinal = "FINAL";
 
+  ngOnInit()
+  {
+    this.dadosService.Notificacao();
+  }
   relatcrise()
   {
     this.router.navigateByUrl('/animacao');
