@@ -196,7 +196,7 @@ export class DadosService {
 
   Notificacao()
   {
-    this.BancoService.selecionarMural(this.getId()).then(async(response)=>{
+    this.BancoService.selecionarMuralNotifica(this.getId()).then(async(response)=>{
         if(response==null)
         {
           return null;
