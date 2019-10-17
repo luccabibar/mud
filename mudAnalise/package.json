@@ -41,7 +41,6 @@
     "chart.js": "^2.8.0",
     "cordova-android": "8.0.0",
     "cordova-browser": "6.0.0",
-    "cordova-plugin-fcm-with-dependecy-updated": "3.2.0",
     "cordova-plugin-qrscanner": "3.0.1",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "core-js": "^2.6.9",
@@ -104,8 +103,7 @@
       "mx.ferreyra.callnumber": {},
       "cordova-plugin-qrscanner": {},
       "call-number": {},
-      "cordova-plugin-screen-orientation": {},
-      "cordova-plugin-fcm-with-dependecy-updated": {}
+      "cordova-plugin-screen-orientation": {}
     },
     "platforms": [
       "android",
