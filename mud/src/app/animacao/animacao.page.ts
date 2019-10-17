@@ -39,6 +39,7 @@ export class AnimacaoPage implements OnInit, OnDestroy {
 
   para()
   {
+    this.conta = 1;
     clearInterval( this.timer );
   }
 
