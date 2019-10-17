@@ -22,6 +22,7 @@ export class Tab3Page {
   }
 
 
+  //mostra as informações
   async presentAlert(){
     const alert = await this.alertController.create({
       header: "Síndrome do pânico",

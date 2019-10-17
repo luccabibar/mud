@@ -29,16 +29,16 @@ export class ContatoPage implements OnInit {
       nome2: [ this.nome1 , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
       num2: [this.num2, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])]
     });
-  }
+  } //validações
 
-  ngOnInit() {
+  ngOnInit() { //pega os nomes e numeros dos contatos
     this.nome1 = this.dadosService.getCont1_nome();
     this.num1 = this.dadosService.getCont1_num();
     this.nome2 = this.dadosService.getCont2_nome();
     this.num2 = this.dadosService.getCont2_num();
   }
 
-  async salvarContatos()
+  async salvarContatos() //salva os contatos
   {
     const alert = await this.alertController.create({
     header: "Confirmação",

@@ -48,8 +48,8 @@ export class LoginPagePage {
     }
   }
 
-  //
-  foca(oque: string)
+  
+  foca(oque: string) //foca na senha ou no email se estao errados
   {
     if(oque == "senha")
     {
@@ -68,7 +68,7 @@ export class LoginPagePage {
     }
   }
 
-  login()
+  login() //realiza o login
   {
     let email = (<HTMLInputElement>document.getElementById("1")).value;
     let senha = (<HTMLInputElement>document.getElementById("2")).value;
@@ -155,7 +155,7 @@ export class LoginPagePage {
       
 }
 
-  direcCadast()
+  direcCadast() 
   {
       this.nav.navigateForward('cadastro');
   }

@@ -34,7 +34,7 @@ export class CadastroUserPage implements OnInit {
   public conta = 0;
   public cont = 0;
 
-  matchingPasswords(senhaKey: string, confirmasenhaKey: string) {
+  matchingPasswords(senhaKey: string, confirmasenhaKey: string) { //confirma se as senhas sao iguais
     return (group: FormGroup): {[key: string]: any} => {
       let senha = group.controls[senhaKey];
       let confirmasenha= group.controls[confirmasenhaKey];
@@ -71,7 +71,7 @@ export class CadastroUserPage implements OnInit {
         situ1: ['' ,  Validators.compose([Validators.required, Validators.minLength(1)])],
         cbox : [false, CadastroUserPage.mustBeTruthy]
       });
-   }
+   } //validações
   
 
 
@@ -97,20 +97,20 @@ export class CadastroUserPage implements OnInit {
     {validator: this.matchingPasswords('senha', 'confirmasenha')}
   })*/
 
-    proxSlide()
+    proxSlide() //envia pro proximo slide
     {
       this.IonSlides.lockSwipes(false);
       this.IonSlides.slideNext();
       this.IonSlides.lockSwipes(true);
     }
 
-    addcontato()
+    addcontato() //abre uma nova opção para adicionar contato
     {
       document.getElementById("contato2").style.display='unset';
       document.getElementById("fab").style.display='none';
     }
 
-    addsitu1()
+    addsitu1() //adiciona mais situações
     {
       this.conta++;
       if(this.conta == 1)
@@ -129,7 +129,7 @@ export class CadastroUserPage implements OnInit {
 
     }
 
-    foca(oque: string)
+    foca(oque: string)  //foca nos input
     {
       if(oque == "cpf")
       {
@@ -155,7 +155,7 @@ export class CadastroUserPage implements OnInit {
       }
     }
 
-    async save(){
+    async save(){  //valida se tudo foi preenchido e se o celular e o cpf nao foram cadastrados ainda
       
       if(this.slideOneForm.invalid){
           this.IonSlides.slideTo(0);
@@ -274,7 +274,7 @@ export class CadastroUserPage implements OnInit {
     
     }
 
-    cadastra()
+    cadastra() 
     {
           if(this.slideThreeForm.invalid){
             this.IonSlides.slideTo(0);
@@ -297,7 +297,7 @@ export class CadastroUserPage implements OnInit {
   }
 
 
-  cadUsu1()
+  cadUsu1()  //cadastra os dados da pg 1
   {
     let nome = (<HTMLInputElement>document.getElementById("0")).value;
     let email = (<HTMLInputElement>document.getElementById("15")).value;
@@ -326,7 +326,7 @@ export class CadastroUserPage implements OnInit {
 
   }
   
-  cadUsu2()
+  cadUsu2() //cadastra os dados da pg 2
   {
     let cont1_nome = (<HTMLInputElement>document.getElementById("6")).value;
     let cont1_tell = (<HTMLInputElement>document.getElementById("7")).value;
@@ -358,7 +358,7 @@ export class CadastroUserPage implements OnInit {
     })
   }
 
-  cadUsu3()
+  cadUsu3() //cadastra os dados da pg 3
   {
     let intolerancia = (<HTMLInputElement>document.getElementById("10")).value;
     let data_primeira_crise = (<HTMLInputElement>document.getElementById("11")).value;
@@ -399,7 +399,7 @@ export class CadastroUserPage implements OnInit {
     })
   }
     
-async ngOnInit() {
+async ngOnInit() { //trava os slides
   this.IonSlides.lockSwipes(true);
   //await this.sitBanco(null);
 }

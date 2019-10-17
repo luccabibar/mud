@@ -28,7 +28,7 @@ export class RelatorioCrisePage implements OnInit {
     this.selectsitu();
   }
 
-  antSlide()
+  antSlide() //volta pro slide anterior
   {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slidePrev();
@@ -46,7 +46,7 @@ export class RelatorioCrisePage implements OnInit {
     }
   }
 
-  proxSlide()
+  proxSlide() //vai pro proximo slide
   {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slideNext();
@@ -59,7 +59,7 @@ export class RelatorioCrisePage implements OnInit {
     }
   }
 
-  troca()
+  troca() //troca os botoes
   {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slideNext();
@@ -69,7 +69,7 @@ export class RelatorioCrisePage implements OnInit {
     document.getElementById("botoes").style.display='unset';
   }
 
-  mudaLabel()
+  mudaLabel() //muda os labels 
   {
     let tempo = (<HTMLInputElement>document.getElementById("tempo")).value;
     if(tempo == "0")
@@ -98,7 +98,7 @@ export class RelatorioCrisePage implements OnInit {
     }
   }
 
-  mudaLabel2()
+  mudaLabel2() //muda os labels
   {
     let grau = (<HTMLInputElement>document.getElementById("preocupa")).value;
     if(grau == "0")
@@ -121,7 +121,7 @@ export class RelatorioCrisePage implements OnInit {
 
   adicionou_sit = false;
 
-  async addsitu()
+  async addsitu() //adiciona nova situação
   {
     this.adicionou_sit = true;
     document.getElementById("addsitua").style.display='unset';
@@ -130,7 +130,7 @@ export class RelatorioCrisePage implements OnInit {
     document.getElementById("fabuloso").style.display='none';
   }
 
-  async selectsitu()
+  async selectsitu() //seleciona uma situação ja existente
   {
     this.adicionou_sit = false;
     document.getElementById("addsitua").style.display='none';
@@ -139,13 +139,13 @@ export class RelatorioCrisePage implements OnInit {
     document.getElementById("fabuloso").style.display='unset';
   }
 
-  addoutras()
+  addoutras() //mostra e tira botoes
   {
     document.getElementById("outras").style.display='unset';
     document.getElementById("mostram").style.display='none';
   }
 
-  porquem()
+  porquem() //mostra a div se estiver acompanhado
   {
     this.contar++;
     if(this.contar==1)
@@ -159,7 +159,7 @@ export class RelatorioCrisePage implements OnInit {
     }
   }
 
-  envRel()
+  envRel() //envia o relatorio
   {
     let local_crise = " ";
     local_crise = (<HTMLInputElement>document.getElementById("4")).value;

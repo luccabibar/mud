@@ -57,7 +57,7 @@ export class EsqueciPage implements OnInit {
   //   }
   // }
 
-  public async sendEmail() {
+  public async sendEmail() { //envia o email
 
     let email = this.formEsqueci.value.email;
     console.log(email);

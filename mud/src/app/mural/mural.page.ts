@@ -52,7 +52,7 @@ export class MuralPage implements OnInit {
   {
     this.navCtrl.navigateForward('sobre');
   }
-  public addMural()
+  public addMural() //adiciona mural
   { 
     var dato ="";
     let id=this.dadosService.getId();
