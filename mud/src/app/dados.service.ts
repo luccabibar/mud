@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-
+import { BancoService } from './banco.service';
+import {AlertController} from  '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class DadosService {
 
-  constructor(private localNotifications: LocalNotifications) { }
+  constructor(private localNotifications: LocalNotifications, private BancoService: BancoService, private AlertController: AlertController) { }
 
   dados = [];
 
@@ -195,11 +196,29 @@ export class DadosService {
 
   Notificacao()
   {
-    this.localNotifications.schedule({
-      id: 1,
-      text: 'Single ILocalNotification',
-      //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
-      data: { mydata: "nao sei" }
-    });
+    this.BancoService.selecionarMural(this.getId()).then(async(response)=>{
+        if(response==null)
+        {
+          return null;
+        }
+        else if(response[0]=="1")
+        {
+          this.localNotifications.schedule({
+            id: 1,
+            text: 'Você tem um novo mural',
+            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+            data: { mydata: "novo mural" }
+          });
+        }
+      }).catch(async(response)=>{
+
+        const alert = await this.AlertController.create({
+          header: 'erro as buscar o mural',
+          message: "erro de http",
+          buttons: ['OK']
+        });
+    
+        await alert.present()
+      });
   }
 }

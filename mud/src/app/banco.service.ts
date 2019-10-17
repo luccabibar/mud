@@ -147,7 +147,15 @@ export class BancoService {
     return this.http.post(this.API_URL+'selecionarMurais', data,{headers: header}).toPromise();
 
   }
+  selecionarMuralNotifica(id_usuario: number)
+  {
+    var data = {
+      id_usuario: id_usuario
+    };
+    let header=new HttpHeaders({'Content-type':'application/json'});
+    return this.http.post(this.API_URL+'selecionarMuraisNotifica', data,{headers: header}).toPromise();
 
+  }
   enviarRelatorioSemanal(id_usuario: string,coment_final: string,Data_relatorioS_I: string,Data_relatorioS_F: string,carboidratos: string,proteinas: string,lacticinios: string,verdfrut: string,agua: string,fez_atv: string,duracao_atv: string,intensidade_atv: string,fez_lazer: string,coment_lazer: string,vezes_Lazer: string,acomp_lazer: string,horario_dorm: number,despertou: string,vezes_sono: string,acordou_precoce: string)
   { 
     var dateI=new Date(Data_relatorioS_I).toDateString();
