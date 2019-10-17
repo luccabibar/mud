@@ -18,9 +18,9 @@
   "cordova-plugin-device": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-device"
+      "id": "cordova-plugin-device@^2.0.3"
     },
-    "is_top_level": false,
+    "is_top_level": true,
     "variables": {}
   },
   "cordova-plugin-splashscreen": {
@@ -52,7 +52,7 @@
   "phonegap-plugin-barcodescanner": {
     "source": {
       "type": "registry",
-      "id": "phonegap-plugin-barcodescanner@^8.1.0"
+      "id": "phonegap-plugin-barcodescanner@8.1.0"
     },
     "is_top_level": true,
     "variables": {
@@ -82,27 +82,6 @@
     },
     "is_top_level": true,
     "variables": {}
-  },
-  "cordova-plugin-firebase": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-firebase@^2.0.5"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
-  "cordova-plugin-fcm-with-dependecy-updated": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-fcm-with-dependecy-updated@^3.2.0"
-    },
-    "is_top_level": true,
-    "variables": {
-      "FCM_CORE_VERSION": "16.0.9",
-      "FCM_VERSION": "18.0.0",
-      "GRADLE_TOOLS_VERSION": "3.5.0",
-      "GOOGLE_SERVICES_VERSION": "4.2.0"
-    }
   },
   "cordova-plugin-local-notification": {
     "source": {
