@@ -201,7 +201,7 @@ export class DadosService {
         {
           return null;
         }
-        else if(response[0]=="1")
+        else if(response[0].novo=="1")
         {
           this.localNotifications.schedule({
             id: 1,
@@ -209,9 +209,9 @@ export class DadosService {
             //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
             data: { mydata: "novo mural" }
           });
+          
         }
       }).catch(async(response)=>{
-
         const alert = await this.AlertController.create({
           header: 'erro as buscar o mural',
           message: "erro de http",

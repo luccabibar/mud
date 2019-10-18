@@ -47,7 +47,6 @@
     "firebase": "^6.6.2",
     "firesql": "^2.0.2",
     "jquery": "^3.4.1",
-    "onesignal-cordova-plugin": "2.5.2",
     "phonegap-plugin-barcodescanner": "8.1.0",
     "rxfire": "^3.8.4",
     "rxjs": "^6.5.3",
@@ -101,7 +100,6 @@
       "cordova-plugin-ionic-keyboard": {},
       "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-screen-orientation": {},
-      "onesignal-cordova-plugin": {},
       "cordova-plugin-local-notification": {}
     },
     "platforms": [

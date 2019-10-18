@@ -75,14 +75,6 @@
     "is_top_level": false,
     "variables": {}
   },
-  "onesignal-cordova-plugin": {
-    "source": {
-      "type": "registry",
-      "id": "onesignal-cordova-plugin@2.5.2"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-local-notification": {
     "source": {
       "type": "registry",
