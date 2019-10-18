@@ -71,6 +71,8 @@ function loadDataset(opt)
 {
 	let dataset = [];
 	let datasec = [];
+	let opts;
+	let secopts;
 	//carrega um dataset diferente com base no indice selecionado
 	switch(opt){
 		//case Alimentação
@@ -110,6 +112,8 @@ function loadDataset(opt)
 				first = false;
 			});
 
+			opts = {};
+
 			break;
 		}
 		//case Consumno de água
@@ -136,6 +140,9 @@ function loadDataset(opt)
 
 				i++;
 			});
+
+			opts = {};
+
 			break;
 		}
 		//case Lazer
@@ -162,44 +169,70 @@ function loadDataset(opt)
 
 				i++;
 			});
+
+			opts = {};
+
 			break;
 		}
 		//case Sono
 		case 3:{
+			//ok desse aqui eu gosto
 			//cores custom
 			let colors = ['3399ff', 'ff3333'];
 			let i = 0;
 			sono.forEach((sem) => 
 			{
-				console.log(sem.acordNat);
-				color = colors[(sem.acordNat == 't') ? 0 : 1];
-				console.log(color);
+				let qualDset = (sem.acordNat == 't') ? true : false;
 				
-				//if for a primeira vez, cria objeto de dataset e datasec
+				//if for a primeira vez, cria dois objetos datasets, um pras semanas em que acorodu naturalmente e outro pro caso contrario (e tambem o objeto datasec)
 				if(i == 0){     
 					dataset.push({
-						label: "horas dormidas",
-						data: [sem.duracao],
-						//cor custom
-						borderColor: ['#' + colors + 'ff'],
-						backgroundColor: ['#' + colors + '99'],
+						label: "horas dormidas (acorodu natralmente)",
+						//adiciona valor caso tenha acordado naturalmente, caso contrario adciona 0
+						data: [(qualDset) ? sem.duracao : 0],
+						borderColor: '#' + colors[0] + 'ff',
+						backgroundColor: '#' + colors[0] + '99',
 						fill: false,
 						borderWidth: 1
 					});
+					dataset.push({
+						label: "horas dormidas (nao acorodu natralmente)",
+						//adiciona valor caso nao tenha acordado naturalmente, caso contrario adciona 0
+						data: [(!qualDset) ? sem.duracao : 0],
+						borderColor: '#' + colors[1] + 'ff',
+						backgroundColor: '#' + colors[1] + '99',
+						fill: false,
+						borderWidth: 1
+					});
+
 				}
 				//else so add o valor no dataset correspondente
 				else{
-					dataset[0].data.push(sem.vezes);
-					dataset[0].borderColor.push(['#' + colors + 'ff']);
-					dataset[0].backgroundColor.push(['#' + colors + '99']);
+					dataset[0].data.push((qualDset) ? sem.duracao : 0);					
+					dataset[1].data.push((!qualDset) ? sem.duracao : 0);					
 				}
 
 				i++;
 			});
+
+			opts = {
+				scales: {
+					xAxes: [{
+						stacked: true
+					}],
+					yAxes: [{
+						stacked: true
+					}]
+				}
+			};
+
+			secopts = {};
+
 			break;
 		}	
 	}
-	return {'data': dataset, 'datasec': datasec};	
+
+	return {'data': dataset, 'datasec': datasec, 'options': opts, 'secOptions': secopts};	
 }
 
 /**
@@ -215,15 +248,7 @@ function updateGraf(dataset)
 			//labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
 			datasets: dataset.data
 		},
-		options: {
-			scales: {
-			yAxes: [{
-				ticks: {
-				beginAtZero: true
-				}
-			}]
-			}
-		}
+		options: dataset.options
 	};
 
 	//cria um objeto grafico caso nao existe
@@ -242,6 +267,7 @@ function updateGraf(dataset)
 		if(grafSec == null){
 			//say sike rn
 			grafStuff.data.datasets = dataset.datasec;
+			grafStuff.options = dataset.secOptions;
 			grafSec = new Chart($("#graf-sec")[0], grafStuff);
 		}
 		//else limpa o obj grafico e add o novo dataset
