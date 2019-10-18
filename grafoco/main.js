@@ -112,7 +112,16 @@ function loadDataset(opt)
 				first = false;
 			});
 
-			opts = {};
+			opts = {
+				scales: {
+					xAxes: [{
+						stacked: false
+					}],
+					yAxes: [{
+						stacked: false
+					}]
+				}
+			};
 
 			break;
 		}
@@ -141,7 +150,16 @@ function loadDataset(opt)
 				i++;
 			});
 
-			opts = {};
+			opts = {
+				scales: {
+					xAxes: [{
+						stacked: false
+					}],
+					yAxes: [{
+						stacked: false
+					}]
+				}
+			};
 
 			break;
 		}
@@ -170,7 +188,16 @@ function loadDataset(opt)
 				i++;
 			});
 
-			opts = {};
+			opts = {
+				scales: {
+					xAxes: [{
+						stacked: false
+					}],
+					yAxes: [{
+						stacked: false
+					}]
+				}
+			};
 
 			break;
 		}
@@ -187,18 +214,18 @@ function loadDataset(opt)
 				//if for a primeira vez, cria dois objetos datasets, um pras semanas em que acorodu naturalmente e outro pro caso contrario (e tambem o objeto datasec)
 				if(i == 0){     
 					dataset.push({
-						label: "horas dormidas (acorodu natralmente)",
+						label: "vezes acordadas durante a noite (acorodu natralmente)",
 						//adiciona valor caso tenha acordado naturalmente, caso contrario adciona 0
-						data: [(qualDset) ? sem.duracao : 0],
+						data: [(qualDset) ? sem.acordVezes : 0],
 						borderColor: '#' + colors[0] + 'ff',
 						backgroundColor: '#' + colors[0] + '99',
 						fill: false,
 						borderWidth: 1
 					});
 					dataset.push({
-						label: "horas dormidas (nao acorodu natralmente)",
+						label: "vezes acordadas durante a noite (nao acorodu natralmente)",
 						//adiciona valor caso nao tenha acordado naturalmente, caso contrario adciona 0
-						data: [(!qualDset) ? sem.duracao : 0],
+						data: [(!qualDset) ? sem.acordVezes : 0],
 						borderColor: '#' + colors[1] + 'ff',
 						backgroundColor: '#' + colors[1] + '99',
 						fill: false,
@@ -208,8 +235,8 @@ function loadDataset(opt)
 				}
 				//else so add o valor no dataset correspondente
 				else{
-					dataset[0].data.push((qualDset) ? sem.duracao : 0);					
-					dataset[1].data.push((!qualDset) ? sem.duracao : 0);					
+					dataset[0].data.push((qualDset) ? sem.acordVezes : 0);					
+					dataset[1].data.push((!qualDset) ? sem.acordVezes : 0);					
 				}
 
 				i++;
