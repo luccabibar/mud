@@ -1,20 +1,5 @@
 
 /**
- * gera uma cor aleatoria
- * 
- * @returns string comm a cor em hexdec
- */
-function randColor()
-{
-	let vals = "0123456789ABCDEF"
-	let cor = "#";
-	for (let i = 0; i < 6; i++) {
-		cor += vals[Math.floor(Math.random() * 16)];
-	}
-	return cor;
-}
-
-/**
  * pega todos os dados da API e joga em variaveis "estaticas"
  */
 function loadData()
@@ -85,10 +70,14 @@ function loadData()
 function loadDataset(opt)
 {
 	let dataset = [];
+	let datasec = [];
 	//carrega um dataset diferente com base no indice selecionado
 	switch(opt){
 		//case Alimentação
 		case 0:{
+			//cores custom
+			let colors = ['ffa500', 'ff3333', '5cbdbb','9ad318'];
+
 			let first = true;
 			//itera sobre cada semana
 			alimentacao.forEach((sem) => 
@@ -104,7 +93,9 @@ function loadDataset(opt)
 						dataset.push({
 							label: key,
 							data: [value],
-							borderColor: randColor(),
+							//cores custom
+							borderColor: "#" + colors[i] + "ff",
+							backgroundColor: "#" + colors[i] + "99",
 							fill: false,
 							borderWidth: 1
 						});
@@ -132,7 +123,8 @@ function loadDataset(opt)
 					dataset.push({
 						label: "frequencia",
 						data: [sem.hidratacao],
-						borderColor: randColor(),
+						borderColor: '#' + '1f06f0' + 'ff',
+						backgroundColor: '#' + '1f06f0' + '99',
 						fill: false,
 						borderWidth: 1
 					});
@@ -151,14 +143,14 @@ function loadDataset(opt)
 			let i = 0;
 			//itera sobre cada semana 
 			lazer.forEach((sem) => 
-			{ 
-			
+			{ 		
 				//if for a primeira vez, cria objeto de dataset
 				if(i == 0){     
 					dataset.push({
 						label: "frequencia",
 						data: [sem.vezes],
-						borderColor: randColor(),
+						borderColor: '#' + 'ffd700' + 'ff',
+						backgroundColor: '#' + 'ffd700' + '99',
 						fill: false,
 						borderWidth: 1
 					});
@@ -174,11 +166,40 @@ function loadDataset(opt)
 		}
 		//case Sono
 		case 3:{
+			//cores custom
+			let colors = ['3399ff', 'ff3333'];
+			let i = 0;
+			sono.forEach((sem) => 
+			{
+				console.log(sem.acordNat);
+				color = colors[(sem.acordNat == 't') ? 0 : 1];
+				console.log(color);
+				
+				//if for a primeira vez, cria objeto de dataset e datasec
+				if(i == 0){     
+					dataset.push({
+						label: "horas dormidas",
+						data: [sem.duracao],
+						//cor custom
+						borderColor: ['#' + colors + 'ff'],
+						backgroundColor: ['#' + colors + '99'],
+						fill: false,
+						borderWidth: 1
+					});
+				}
+				//else so add o valor no dataset correspondente
+				else{
+					dataset[0].data.push(sem.vezes);
+					dataset[0].borderColor.push(['#' + colors + 'ff']);
+					dataset[0].backgroundColor.push(['#' + colors + '99']);
+				}
 
+				i++;
+			});
 			break;
 		}	
 	}
-	return dataset;	
+	return {'data': dataset, 'datasec': datasec};	
 }
 
 /**
@@ -192,7 +213,7 @@ function updateGraf(dataset)
 		type: 'bar',
 		data: {
 			//labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
-			datasets: dataset
+			datasets: dataset.data
 		},
 		options: {
 			scales: {
@@ -211,9 +232,23 @@ function updateGraf(dataset)
 	}
 	//else limpa o obj grafico e add o novo dataset
 	else{
-		console.log("yare yare");
-		grafObj.data.datasets = dataset;
+		grafObj.data.datasets = dataset.data;
 		grafObj.update();
+	}
+
+	//faz o mesmo mas pro outro graf
+	if(dataset.datasec.length != 0){
+		//cria um objeto grafico caso nao existe
+		if(grafSec == null){
+			//say sike rn
+			grafStuff.data.datasets = dataset.datasec;
+			grafSec = new Chart($("#graf-sec")[0], grafStuff);
+		}
+		//else limpa o obj grafico e add o novo dataset
+		else{
+			grafSec.data.datasets = dataset.datasec;
+			grafSec.update();
+		}
 	}
 }
 
@@ -222,6 +257,13 @@ function changeGraf()
 	let index = $("#tipo-graf")[0].selectedIndex;
 	let dataset = loadDataset(index); 
 	updateGraf(dataset);
+	//graf secundario
+	if(dataset.datasec.length != 0){
+		$("#graf-sec").css('visibility', 'visible');
+	}
+	else{
+		$("#graf-sec").css('visibility', 'hidden');
+	}
 }
 
 //5 arrays principais de dados brutos
@@ -233,11 +275,13 @@ let sono = [];
 
 //objeto do grafico em si
 let grafObj = null;
+let grafSec = null;
 
 window.onload = () => 
 {
 	loadData();
 
 	$("#tipo-graf").change(changeGraf);
+	$("#refresh").click(changeGraf)
 };
 
