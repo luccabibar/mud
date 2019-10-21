@@ -205,7 +205,7 @@ export class DadosService {
         {
           this.localNotifications.schedule({
             id: 1,
-            text: 'Você tem um novo mural',
+            text: 'Você tem' +response.valueOf.length +'novos murais '+ this.getNome(),
             //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
             data: { mydata: "novo mural" }
           });
