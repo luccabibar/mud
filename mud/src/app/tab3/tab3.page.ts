@@ -22,6 +22,17 @@ export class Tab3Page {
   }
 
 
+  async presentAlert8(){
+    const alert8 = await this.alertController.create({
+      header: "Respiração diafragmática",
+      subHeader: "O porque e como fazer...",
+      message:'<div class=message><strong>Respiração diafragmática</strong> -<br> A respiração ideal chamada diafragmática é necessária porque expande o diafragma e leva o oxigênio até o abdômen, o corpo e o cérebro.<br> Em casa, na rua, na condução, no trabalho, nos estudos ou no trânsito qualquer pessoa pode fazer a respiração diafragmática, aliviando assim as crises de ansiedade, tensão e stress.<br>A ansiedade generalizada e as crises de pânico também podem ser descaracterizadas e sua intensidade diminuída através da prática de uma respiração diafragmática adequada.<br><br>Como fazer uma respiração ideal? <br> 1-Coloque-se de forma confortável sentado ou deitado<br> 2- Coloque a mão no abdômen (barriga) próxima ao umbigo <br>3-Feche os olhos e concentre-se em sua respiração <br> 4-Inspire pelo nariz e encha os pulmões de ar, leve-o até o abdômen, percebendo que ele se movimenta. Você pode imaginar que está enchendo uma bexiga que está dentro de sua barriga. Ao inspirar conte até quatro (mentalmente) para que o pulmão e o abdômen fiquem expandidos <br> 5-Retenha o ar por dois tempos (conte até dois mentalmente), mantendo a barriga e os pulmões cheios <br> 6- Expire lentamente pela boca, contando até cinco, esvaziando completamente o pulmão e o abdômen <br> 7-Reinicie os movimentos após reter os pulmões vazios por dois tempos</div>',
+      buttons:['OK'],
+    });
+    await alert8.present();
+    
+  }
+
   async presentAlert(){
     const alert = await this.alertController.create({
       header: "Síndrome do pânico",
