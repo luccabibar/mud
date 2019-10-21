@@ -22,9 +22,6 @@ export class Tab3Page {
   }
 
 
-<<<<<<< HEAD
-  //mostra as informações
-=======
   async presentAlert8(){
     const alert8 = await this.alertController.create({
       header: "Respiração diafragmática",
@@ -36,7 +33,6 @@ export class Tab3Page {
     
   }
 
->>>>>>> master
   async presentAlert(){
     const alert = await this.alertController.create({
       header: "Síndrome do pânico",
