@@ -16,10 +16,11 @@
       
         <ion-card>          
             <ion-card-content>
+                <form [formGroup]="slide1form"> 
                 <ion-list>
                 <ion-item padding-horizontal>
                     <ion-label class="label" position="stacked" text-wrap>Onde ocorreu a crise?</ion-label>
-                    <ion-select id="4" placeholder="Selecionar situação" cancelText="Cancelar" okText="Selecionado">
+                    <ion-select formControlName="lugar" id="4" placeholder="Selecionar situação" cancelText="Cancelar" okText="Selecionado">
                         <ion-select-option class="option" value="Casa">Casa</ion-select-option>
                         <ion-select-option class="option" value="Ambiente publico">Ambiente público</ion-select-option>
                         <ion-select-option class="option" value="Escola">Escola</ion-select-option>
@@ -27,10 +28,10 @@
                         <ion-select-option class="option" value="Transito">Trânsito</ion-select-option>
                     </ion-select>
                 </ion-item>
-                <ion-item padding-horizontal>
+                <!--<ion-item padding-horizontal>
                     <ion-label class="label" position="stacked" text-wrap>Quando ocorreu a crise?</ion-label>
                     <ion-datetime id="5" backdropDismiss display-format="D MMM, YYYY" name="data_crise" month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro" month-short-names="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez" picker-format="D MMMM YYYY"></ion-datetime>
-                </ion-item>
+                </ion-item>-->
                 <ion-item padding-horizontal lines="none">
                     <ion-text style="font-size: 15px !important;" color="verdemud4" text-wrap>Quanto tempo durou a crise?</ion-text>
                 </ion-item>
@@ -39,6 +40,7 @@
                 </ion-item>
                 <ion-label class="label" id="lblTempo" position="fixed"></ion-label>
               </ion-list>
+            </form>
             </ion-card-content>
           </ion-card>
         
