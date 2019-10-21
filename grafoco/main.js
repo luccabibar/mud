@@ -16,7 +16,7 @@ function loadData()
 		"JOIN sono AS son ON sem.id_semana = son.semana_id " +
 		"WHERE sem.usuario_id = " + 6 + " " +
 		"ORDER BY sem.created_at " +
-		") AS semana ORDER BY created_at asc;"
+		") AS semana ORDER BY created_at asc;";
 	let data = {
 		'sql': sql
 	};
