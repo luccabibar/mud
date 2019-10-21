@@ -197,7 +197,7 @@ export class DadosService {
   Notificacao()
   {
     this.BancoService.selecionarMuralNotifica(this.getId()).then(async(response)=>{
-        if(response==null)
+        if(response=="0")
         {
           return null;
         }
@@ -209,7 +209,14 @@ export class DadosService {
             //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
             data: { mydata: "novo mural" }
           });
-          
+          this.BancoService.alterarNotifica(this.getId()).then(async(response)=>{
+            return null;
+          }).catch(async(response)=>{
+            if(response==null)
+            {
+              return null;
+            }
+          });
         }
       }).catch(async(response)=>{
         if(response==null)
