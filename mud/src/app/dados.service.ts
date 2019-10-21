@@ -212,13 +212,10 @@ export class DadosService {
           
         }
       }).catch(async(response)=>{
-        const alert = await this.AlertController.create({
-          header: 'erro as buscar o mural',
-          message: "erro de http",
-          buttons: ['OK']
-        });
-    
-        await alert.present()
+        if(response==null)
+        {
+          return null;
+        }
       });
   }
 }
