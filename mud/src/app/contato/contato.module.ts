@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { ContatoPage } from './contato.page';
 
+import { BrMaskerModule } from 'br-mask'
+
 const routes: Routes = [
   {
     path: '',
@@ -20,6 +22,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    BrMaskerModule,
     RouterModule.forChild(routes)
   ],
   declarations: [ContatoPage]

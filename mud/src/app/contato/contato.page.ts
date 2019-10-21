@@ -5,6 +5,7 @@ import { DadosService } from '../dados.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-contato',
   templateUrl: './contato.page.html',
@@ -74,7 +75,7 @@ export class ContatoPage implements OnInit {
             .then(async(response)=>{
               if(response[0].senha == data.senha)
               {
-                //passou pela verificação de senha, agora será feita a auteração em si
+                //passou pela verificação de senha, agora será feita a alteração em si
                   let nome1 = (<HTMLInputElement>document.getElementById("43")).value;
                   let num1 = (<HTMLInputElement>document.getElementById("44")).value;
                   let nome2 = (<HTMLInputElement>document.getElementById("45")).value;
@@ -100,7 +101,7 @@ export class ContatoPage implements OnInit {
                   })
                   this.bancoService.updateGenerico("UPDATE contato SET nome='"+nome2+"',telefone='"+num2+"' WHERE telefone='"+this.dadosService.getCont2_num()+"';")
                   .then(async(response)=>{
-                
+                    this.nav.navigateForward('/tabs/perfil-user');
                   })
                   .catch(async(response)=>{
                     const alert = await this.alertController.create({
@@ -116,6 +117,7 @@ export class ContatoPage implements OnInit {
     
                       await alert.present();
                   })
+
                 }
                 else
                 {
@@ -170,6 +172,13 @@ export class ContatoPage implements OnInit {
 
   ativa()
   {
-    this.desativado = false;
+    if(this.contato1.valid && this.contato2.valid)
+    {
+      this.desativado = false;
+    }
+    else
+    {
+      this.desativado = true;
+    }
   }
 }

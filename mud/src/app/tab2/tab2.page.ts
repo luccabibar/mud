@@ -23,13 +23,11 @@ export class Tab2Page {
 
   ngOnInit()
   {
-    this.dadosService.Notificacao();
-
 
 // Create an Observable that will publish a value on an interval
 const secondsCounter = interval(2000);
 // Subscribe to begin publishing values
-secondsCounter.subscribe(n =>{ alert('ola')});
+secondsCounter.subscribe(n =>{  this.dadosService.Notificacao();});
   }
   relatcrise()
   {
