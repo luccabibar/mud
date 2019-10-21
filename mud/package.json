@@ -48,7 +48,7 @@
     "firesql": "^2.0.2",
     "jquery": "^3.4.1",
     "phonegap-plugin-barcodescanner": "8.1.0",
-    "rxfire": "^3.8.4",
+    "rxfire": "^3.8.6",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
     "zone.js": "~0.8.29"
