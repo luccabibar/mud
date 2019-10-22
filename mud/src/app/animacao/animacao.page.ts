@@ -99,7 +99,7 @@ export class AnimacaoPage implements OnInit, OnDestroy {
         }
       }
       contatempo++;
-    }, 75);
+    }, 80);
   }
 
    async vaiRelatCrise()  //envia para a pagina de relatorio de crise
