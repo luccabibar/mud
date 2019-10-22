@@ -16,7 +16,7 @@ export class AnimacaoPage implements OnInit, OnDestroy {
   public timer;
   public conta = 0;
 
-  ngOnInit() {
+  ngOnInit() {     //inicia as funções quando a página é aberta
     this.animacao();
     let horas="";
     let dia = new Date().getDay();
@@ -26,23 +26,24 @@ export class AnimacaoPage implements OnInit, OnDestroy {
     let minuto = new Date().getMinutes();
     let segundo = new Date().getSeconds();
     horas=ano+"-"+mes+"-"+dia+" "+hora+":"+minuto+":"+segundo;
-    this.dadosService.setCrise_hr_inicio(horas);
-    console.log(this.dadosService.getCrise_hr_inicio());
+   /* this.dadosService.setCrise_hr_inicio(horas);
+    console.log(this.dadosService.getCrise_hr_inicio());*/
     
     this.mandaAlerta();
   }
 
-  ngOnDestroy()
+  ngOnDestroy()  //para o funcionamento da animação
   {
     clearInterval( this.timer );
   }
 
-  para()
+  para()   //para o funcionamento da animação e do contador para enviar notificação
   {
+    this.conta = 1;
     clearInterval( this.timer );
   }
 
-  animacao()
+  animacao()   //função que cria a animação
   {
     var contatempo = 0;
     var teste = 124;
@@ -50,7 +51,7 @@ export class AnimacaoPage implements OnInit, OnDestroy {
     var fonte = 14;
     var aux = 0;
     var opacidade = 1;  
-    this.timer = setInterval(function() {
+    this.timer = setInterval(function() {     
       if( chegou == 0){
         teste+=3;
         opacidade-=0.023;
@@ -98,10 +99,10 @@ export class AnimacaoPage implements OnInit, OnDestroy {
         }
       }
       contatempo++;
-    }, 75);
+    }, 80);
   }
 
-   async vaiRelatCrise()
+   async vaiRelatCrise()  //envia para a pagina de relatorio de crise
   {
     
       const alert = await this.AlertController.create({
@@ -123,7 +124,7 @@ export class AnimacaoPage implements OnInit, OnDestroy {
   
   }
 
-  async mandaAlerta()
+  async mandaAlerta()   //envia um alerta perguntando se a pessoa está se sentindo melhor de 9 minutos
   {
     await new Promise(resolve => setTimeout(resolve, 540000)); 
     if(this.conta == 0)
@@ -140,8 +141,8 @@ export class AnimacaoPage implements OnInit, OnDestroy {
           }, {
             text: 'Sim',
             handler: () => {
-              this.router.navigateByUrl('/ligar');
-              clearInterval( this.timer );
+              this.router.navigateByUrl('/ligar');  //envia para a pagina de ligar para um contatos
+              clearInterval( this.timer );         
             }
           }
         ]

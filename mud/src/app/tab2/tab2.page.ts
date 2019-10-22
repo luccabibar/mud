@@ -6,7 +6,7 @@ import { BancoService } from './../banco.service';
 import { identifierModuleUrl, ReturnStatement } from '@angular/compiler';
 import { parseSelectorToR3Selector } from '@angular/compiler/src/core';
 import { all } from 'q';
-
+import { interval } from 'rxjs';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -21,6 +21,14 @@ export class Tab2Page {
   dataInicio = "INICIO";
   dataFinal = "FINAL";
 
+  ngOnInit()
+  {
+
+// Create an Observable that will publish a value on an interval
+const secondsCounter = interval(2000);
+// Subscribe to begin publishing values
+secondsCounter.subscribe(n =>{  this.dadosService.Notificacao();});
+  }
   relatcrise()
   {
     this.router.navigateByUrl('/animacao');

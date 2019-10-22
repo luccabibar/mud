@@ -62,3 +62,4 @@ typings/
 
 quickCopy.bat
 mud/package-lock\.json
+*.sh

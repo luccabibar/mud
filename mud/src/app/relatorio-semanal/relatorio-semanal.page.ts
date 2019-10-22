@@ -46,14 +46,14 @@ export class RelatorioSemanalPage implements OnInit {
     this.slide4form = formBuilder.group({
         horaDormir: ['', Validators.compose([Validators.required])]
     });
-  }
+  } //validações
   
   ngOnInit() {
     this.IonSlides.lockSwipes(true);
     document.getElementById("lblTemp").innerHTML = '- de 30 mins';
   }
 
-  antSlide()
+  antSlide() //vai pro slide anterior
   {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slidePrev();
@@ -71,7 +71,7 @@ export class RelatorioSemanalPage implements OnInit {
     }
   }
 
-  async proxSlide()
+  async proxSlide() //vai pro proximo slide
   {
     if(this.conta3 == 3)
     {
@@ -125,7 +125,7 @@ export class RelatorioSemanalPage implements OnInit {
     }
   }
 
-  async troca()
+  async troca() //troca os botões
   {
     if(this.slide1form.invalid)
     {
@@ -150,7 +150,7 @@ export class RelatorioSemanalPage implements OnInit {
     }
   }
 
-  fezAtvd()
+  fezAtvd() //aparece div se fez
   {
     this.cont++;
     if(this.cont==1)
@@ -164,7 +164,7 @@ export class RelatorioSemanalPage implements OnInit {
     }
   }
 
-  dedicou()
+  dedicou() //aparece div se dedicou
   {
     this.cont2++;
     if(this.cont2==1)
@@ -178,7 +178,7 @@ export class RelatorioSemanalPage implements OnInit {
     }
   }
 
-  despertou()
+  despertou() //aparece div se despertou
   {
     this.cont3++;
     if(this.cont3==1)
@@ -192,7 +192,7 @@ export class RelatorioSemanalPage implements OnInit {
     }
   }
 
-  duracAtv()
+  duracAtv() //muda os labels
   {
     let temp = (<HTMLInputElement>document.getElementById("atv_temp")).value;
     if(temp == "0")
@@ -217,7 +217,7 @@ export class RelatorioSemanalPage implements OnInit {
     }
   }
 
-  maisVzs()
+  maisVzs() 
   {
     let pega = (<HTMLInputElement>document.getElementById("mostraVzs")).innerText;
     this.solta = parseInt(pega);
@@ -242,7 +242,7 @@ export class RelatorioSemanalPage implements OnInit {
   }
  
 
-  async salva()
+  async salva() //salva os dados
   {
     let horario_dorm="";
     //alimentação

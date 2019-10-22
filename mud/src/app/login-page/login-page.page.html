@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content> 
   <ion-img id="logoLogin" src="../../assets/logomud.png"></ion-img>
 
 <!--ITEM EMAIL-->
@@ -31,4 +31,12 @@
 
 <a routerLink="cadastro" id="hrefCadast" (click)="direcCadast()"  padding-horizontal >Não possui uma conta? <b> Cadastre-se</b></a>
 
+<div id="fab" style="display: unset;">
+    <ion-fab style="padding-top:2.5rem;" padding-horizontal horizontal="end" activated="false">
+    <ion-fab-button  size="small" (click)="guia()" color="verdemud4">
+        <ion-icon name="md-help"></ion-icon>
+    </ion-fab-button>
+    
+    </ion-fab>
+</div>
 </ion-content>

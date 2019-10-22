@@ -3,7 +3,7 @@
     <ion-title>Detalhes da crise</ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/tabs/tab1">
-        <ion-icon slot="icon-only" name="exit"></ion-icon>
+        <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -16,7 +16,6 @@
         <ion-card-header>
           <!-- <strong> {{ crises.created_at}}</strong> -->
           <ion-icon name="pulse"></ion-icon> {{this.tipo }}<br>
-          <ion-icon name="stopwatch"></ion-icon> {{this.intervalo}} minutos
           <hr>
         </ion-card-header>
 
@@ -49,7 +48,7 @@
                   <ion-spinner name="crescent" slot="end"> </ion-spinner>
                 </div>
                 <div *ngIf="existeSintoma===0">
-                  <ion-item *ngFor="let sintoma of listaSintomas; let i = index;">
+                  <ion-item *ngFor="let sintoma of listaSintomas; let i = index;" lines="none">
                     <ion-icon name="arrow-dropright"></ion-icon>
                     <strong>{{sintoma.nome}}</strong><br>
                   </ion-item>
@@ -61,36 +60,39 @@
               <div>
                 <ion-icon name="business"></ion-icon> Situação:
               </div>
-              <div slot="end">
+            </ion-item>
+            <ion-item>
+              <div slot="start">
+                <ion-item  lines="none">
+                  <ion-icon name="arrow-dropright"></ion-icon>
+                  <strong>{{this.crises.situacao}}</strong>
+                </ion-item>
+              </div>
+            </ion-item>
 
-                <strong>{{this.crises.situacao}}</strong>
-              </div>
-            </ion-item>
             <ion-item>
-              <div>
-                <ion-icon name="people"></ion-icon> Acompanhamento:
-              </div>
-              <div slot="end">
-                <strong *ngIf="this.crises.acompanhamento==='1'">Familiar</strong>
-                <strong *ngIf="this.crises.acompanhamento==='2'">Amigo</strong>
-                <strong *ngIf="this.crises.acompanhamento==='3'">Desconhecido</strong>
-                {{this.crises.acompanhamento}}
-              </div>
+                <div>
+                    <ion-icon name="people"></ion-icon> Acompanhamento:
+                </div>
             </ion-item>
             <ion-item>
               <div slot="start">
-                <ion-icon name="time"></ion-icon> Hora Inicial:
-              </div>
-              <div>
-                <strong>{{this.comeco}}</strong>
+                <ion-item  lines="none">
+                  <ion-icon name="arrow-dropright"></ion-icon>
+                  <strong *ngIf="this.crises.acompanhamento==='1'">Familiar</strong>
+                  <strong *ngIf="this.crises.acompanhamento==='2'">Amigo</strong>
+                  <strong *ngIf="this.crises.acompanhamento==='3'">Desconhecido</strong>
+                  <strong *ngIf="this.crises.acompanhamento==='-1'">Desacompanhado</strong>
+                </ion-item>
               </div>
             </ion-item>
-            <ion-item>
+
+            <ion-item  lines="none">
               <div slot="start">
-                <ion-icon name="time"></ion-icon> Hora Final:
+                <ion-icon name="time"></ion-icon> Duracao:
               </div>
               <div>
-                <strong>{{ this.fim}}</strong>
+                <strong>{{this.duracao_texto}}</strong>
               </div>
             </ion-item>
           </div>

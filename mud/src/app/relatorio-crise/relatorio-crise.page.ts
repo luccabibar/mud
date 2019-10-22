@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DadosService } from '../dados.service';
 import { BancoService } from '../banco.service';
 import { alertController } from '@ionic/core';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-relatorio-crise',
@@ -13,21 +14,30 @@ import { alertController } from '@ionic/core';
 export class RelatorioCrisePage implements OnInit {
 
   @ViewChild(IonSlides) IonSlides: IonSlides;
+  public slide1form: FormGroup;
+
 
   public conta = 0;
   public contar = 0;
   public conta3 = 0;
 
-  constructor(public alertController: AlertController,public bancoService: BancoService,public dadosService: DadosService,public navCtrl: NavController) { }
+  constructor(public alertController: AlertController,public bancoService: BancoService,public dadosService: DadosService,public navCtrl: NavController, public formBuilder: FormBuilder) 
+  {
+    this.slide1form = formBuilder.group({
+      lugar: ['' ,  Validators.compose([Validators.required])]
+    });
+
+   }
 
   async ngOnInit() {
     this.IonSlides.lockSwipes(true);
     await this.sitBanco(null);
     document.getElementById("lblTempo").innerHTML = '- de 10 mins';
     document.getElementById("lblGrau").innerHTML = 'Leve';
+    this.selectsitu();
   }
 
-  antSlide()
+  antSlide() //volta pro slide anterior
   {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slidePrev();
@@ -45,7 +55,7 @@ export class RelatorioCrisePage implements OnInit {
     }
   }
 
-  proxSlide()
+  proxSlide() //vai pro proximo slide
   {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slideNext();
@@ -58,17 +68,30 @@ export class RelatorioCrisePage implements OnInit {
     }
   }
 
-  troca()
+  async troca() //troca os botoes
   {
+    if(this.slide1form.valid)
+    {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slideNext();
     this.IonSlides.lockSwipes(true);
     this.conta3++;
     document.getElementById("btnProximo").style.display='none';
     document.getElementById("botoes").style.display='unset';
+    }
+    else
+    {
+      const alert = await this.alertController.create({
+        header: 'Erro',
+        message: 'Por favor, preencha todos os campos.',
+        buttons: ['OK']
+      });
+      
+      await alert.present();
+    }
   }
 
-  mudaLabel()
+  mudaLabel() //muda os labels 
   {
     let tempo = (<HTMLInputElement>document.getElementById("tempo")).value;
     if(tempo == "0")
@@ -97,7 +120,7 @@ export class RelatorioCrisePage implements OnInit {
     }
   }
 
-  mudaLabel2()
+  mudaLabel2() //muda os labels
   {
     let grau = (<HTMLInputElement>document.getElementById("preocupa")).value;
     if(grau == "0")
@@ -120,78 +143,31 @@ export class RelatorioCrisePage implements OnInit {
 
   adicionou_sit = false;
 
-  async addsitu()
+  async addsitu() //adiciona nova situação
   {
     this.adicionou_sit = true;
-    document.getElementById("addsitu").style.display='unset';
-    document.getElementById("fab").style.display='none';
+    document.getElementById("addsitua").style.display='unset';
+    document.getElementById("fab2").style.display='unset';
     document.getElementById("escolhersitu").style.display='none';
-    /*this.conta++;
-    if(this.conta == 1)
-    {
-    document.getElementById("addsitu").style.display='unset';
-    document.getElementById("escolhersitu").style.display='none';
-    }
-    if(this.conta == 2)
-    {
-    document.getElementById("escolhersitu").style.display='unset';
-    document.getElementById("addsitu").style.display='none';
-    this.conta = 0;
-    }*/
-    /*const alert = await this.alertController.create({
-      header: "Adicionar nova situação",
-      message: "Digite abaixo a situação que deseja adicionar:",
-      inputs: [
-        {
-          name: 'sit',
-          placeholder: 'Escreva a situação',
-          type: 'text'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancelar',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Adicionar',
-          handler: data => {
-            this.bancoService.insertGenerico("INSERT INTO situacao(usuario_id,situacao) VALUES ('"+this.dadosService.getId()+"','"+data.sit+"');")
-            .then(async(response)=>{
-              
-            })
-              .catch(async(response)=>{
-                const alert = await this.alertController.create({
-                  header: 'Erro',
-                  message: 'Erro ao adicionar nova situação de crise. Tente novamente!',
-                  buttons:  [
-                    {
-                      text: 'OK',
-                    }
-                  ],
-                  });
-
-                  await alert.present();
-               })
-          }
-        }
-      ]
-    });
-      
-    await alert.present();*/
-
+    document.getElementById("fabuloso").style.display='none';
   }
 
-  addoutras()
+  async selectsitu() //seleciona uma situação ja existente
+  {
+    this.adicionou_sit = false;
+    document.getElementById("addsitua").style.display='none';
+    document.getElementById("fab2").style.display='none';
+    document.getElementById("escolhersitu").style.display='unset';
+    document.getElementById("fabuloso").style.display='unset';
+  }
+
+  addoutras() //mostra e tira botoes
   {
     document.getElementById("outras").style.display='unset';
     document.getElementById("mostram").style.display='none';
   }
 
-  porquem()
+  porquem() //mostra a div se estiver acompanhado
   {
     this.contar++;
     if(this.contar==1)
@@ -205,7 +181,7 @@ export class RelatorioCrisePage implements OnInit {
     }
   }
 
-  envRel()
+  envRel() //envia o relatorio
   {
     let local_crise = " ";
     local_crise = (<HTMLInputElement>document.getElementById("4")).value;
@@ -214,6 +190,8 @@ export class RelatorioCrisePage implements OnInit {
     let data_crise = (<HTMLInputElement>document.getElementById("5")).value;
 
     let duracao_crise = (<HTMLInputElement>document.getElementById("tempo")).value;
+    this.dadosService.setDuracao_crise(duracao_crise);
+
 
     let acompanhado = true;
     if((<HTMLInputElement>document.getElementById("8")).value)
@@ -222,15 +200,15 @@ export class RelatorioCrisePage implements OnInit {
     }
     //let acompanhadoNao = (<HTMLInputElement>document.getElementById("9")).value;
 
-    let pessoa_acompanhamento = "null";
-    let acomp_amigo = (<HTMLInputElement>document.getElementById("9")).value;
+    let pessoa_acompanhamento = "-1";
+    let acomp_amigo = (<HTMLInputElement>document.getElementById("9")).checked;
     if(acomp_amigo)
     {
       pessoa_acompanhamento = "0";
     }
     // 0 = amigo let acomp_amigo = (<HTMLInputElement>document.getElementById("10")).value
-    let acomp_familia = (<HTMLInputElement>document.getElementById("10")).value;
-    let acomp_desc = (<HTMLInputElement>document.getElementById("11")).value;
+    let acomp_familia = (<HTMLInputElement>document.getElementById("10")).checked;
+    let acomp_desc = (<HTMLInputElement>document.getElementById("11")).checked;
     if(acomp_familia)
     {
       pessoa_acompanhamento = "1";
@@ -366,7 +344,7 @@ export class RelatorioCrisePage implements OnInit {
     let situacao3 = (<HTMLInputElement>document.getElementById("28")).value;*/
     let intensidade = (<HTMLInputElement>document.getElementById("preocupa")).value;
 
-    let horas="";
+    /*let horas="";
     let dia = new Date().getDay();
     let mes = new Date().getMonth();
     let ano = new Date().getFullYear();
@@ -374,9 +352,9 @@ export class RelatorioCrisePage implements OnInit {
     let minuto = new Date().getMinutes();
     let segundo = new Date().getSeconds();
     horas=ano+"-"+mes+"-"+dia+" "+hora+":"+minuto+":"+segundo;
-    this.dadosService.setCrise_hr_fim(horas);
+    this.dadosService.setCrise_hr_fim(horas);*/
 
-    this.bancoService.relatorio_crise(this.dadosService.getId().toString(),local_crise,sintomas_crise,this.dadosService.getCrise_hr_inicio().toString(),this.dadosService.getCrise_hr_fim().toString(),intensidade,situacoes,pessoa_acompanhamento)
+    this.bancoService.relatorio_crise(this.dadosService.getId().toString(),local_crise,sintomas_crise, this.dadosService.getDuracao_crise(),intensidade,situacoes,pessoa_acompanhamento)
     .then(async(response)=>{
         const alert = await this.alertController.create({
           header: 'Relátorio enviado',

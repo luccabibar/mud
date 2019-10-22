@@ -41,9 +41,8 @@
     "chart.js": "^2.8.0",
     "cordova-android": "8.0.0",
     "cordova-browser": "6.0.0",
-    "cordova-plugin-fcm-with-dependecy-updated": "^3.2.0",
     "cordova-plugin-qrscanner": "3.0.1",
-    "cordova-plugin-screen-orientation": "3.0.2",
+    "cordova-plugin-screen-orientation": "^3.0.2",
     "core-js": "^2.6.9",
     "firebase": "^7.2.0",
     "firesql": "^2.0.2",
@@ -63,7 +62,7 @@
     "@angular/compiler": "^7.2.15",
     "@angular/compiler-cli": "^7.2.15",
     "@angular/language-service": "^7.2.15",
-    "@ionic/angular-toolkit": "~1.4.0",
+    "@ionic/angular-toolkit": "^1.4.1",
     "@ionic/lab": "1.0.24",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
@@ -103,8 +102,7 @@
       "mx.ferreyra.callnumber": {},
       "cordova-plugin-qrscanner": {},
       "call-number": {},
-      "cordova-plugin-screen-orientation": {},
-      "cordova-plugin-fcm-with-dependecy-updated": {}
+      "cordova-plugin-screen-orientation": {}
     },
     "platforms": [
       "android",

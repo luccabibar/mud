@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { BancoService } from './banco.service';
+import {AlertController} from  '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class DadosService {
 
-  constructor() { }
+  constructor(private localNotifications: LocalNotifications, private BancoService: BancoService, private AlertController: AlertController) { }
 
   dados = [];
 
@@ -39,8 +41,7 @@ export class DadosService {
   data_relatorioS_I = null;
   data_relatorioS_F = null;
 
-  crise_hr_inicio = "";
-  crise_hr_fim = "";
+  duracao = null;
 
   getCont1_nome()
   {
@@ -76,22 +77,15 @@ export class DadosService {
     this.cont2_num = x;
   }
 
+  setDuracao_crise(x: string)
+  {
+    
+    this.duracao = parseInt(x);
+  }
 
-  getCrise_hr_inicio()
+  getDuracao_crise()
   {
-    return this.crise_hr_inicio;
-  }
-  setCrise_hr_fim(x: string)
-  {
-    this.crise_hr_fim = x;
-  }
-  getCrise_hr_fim()
-  {
-    return this.crise_hr_fim;
-  }
-  setCrise_hr_inicio(x: string)
-  {
-    this.crise_hr_inicio = x;
+    return this.duracao;
   }
 
   getData_relatorioS_I()
@@ -200,4 +194,35 @@ export class DadosService {
   }
 
 
+  Notificacao()
+  {
+    this.BancoService.selecionarMuralNotifica(this.getId()).then(async(response)=>{
+        if(response=="0")
+        {
+          return null;
+        }
+        else if(response[0].novo=="1")
+        {
+          this.localNotifications.schedule({
+            id: 1,
+            text: 'Você tem' +response.valueOf.length +'novos murais '+ this.getNome(),
+            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+            data: { mydata: "novo mural" }
+          });
+          this.BancoService.alterarNotifica(this.getId()).then(async(response)=>{
+            return null;
+          }).catch(async(response)=>{
+            if(response==null)
+            {
+              return null;
+            }
+          });
+        }
+      }).catch(async(response)=>{
+        if(response==null)
+        {
+          return null;
+        }
+      });
+  }
 }

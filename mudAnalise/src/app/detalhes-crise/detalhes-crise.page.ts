@@ -10,7 +10,7 @@ import * as moment from 'moment';
   styleUrls: ['./detalhes-crise.page.scss'],
 })
 export class DetalhesCrisePage implements OnInit {
-
+ 
 
   public crises: ICrise;
 
@@ -21,10 +21,8 @@ export class DetalhesCrisePage implements OnInit {
   existe = 1;
   intervalo = null;
   existeSintoma = 1;
-  start;
-  end;
-  comeco;
-  fim;
+  duracao;
+  duracao_texto;
 
   // param VARs
   criseId = null;
@@ -70,7 +68,7 @@ export class DetalhesCrisePage implements OnInit {
    * @param hora_inicio Hora inicial da crise
    * @param hora_fim  Hora final da Crise
    */
-  public duracao(hora_inicio, hora_fim) {
+  /*public duracao(hora_inicio, hora_fim) {
     this.start = moment(hora_inicio, "HH:mm");
     this.end = moment(hora_fim, "HH:mm");
     var minutes = this.end.diff(this.start, 'minutes');
@@ -79,7 +77,7 @@ export class DetalhesCrisePage implements OnInit {
       minutes = 0;
     }
     this.intervalo = minutes;
-  }
+  }*/
 
   /**
    * Organiza em um array os sintomas recebidos da tabela sintomas(relativos ao usuario, durante uma crise X)
@@ -110,10 +108,20 @@ export class DetalhesCrisePage implements OnInit {
       this.crises = resposta[0];
 
       this.existe = 0;
-      this.duracao(this.crises.hora_inicio, this.crises.hora_fim);
       this.organizaSintomas();
-      this.comeco = moment(this.crises.hora_inicio).format('LTS');
-      this.fim = moment(this.crises.hora_fim).format('LTS');
+      this.duracao = this.crises.duracao;
+      if(this.duracao == 0)
+        this.duracao_texto = "Menos de 10 minutos";
+      if(this.duracao == 200)
+        this.duracao_texto = "10 - 15 minutos";
+      if(this.duracao == 400)
+        this.duracao_texto = "15 - 30 minutos";
+      if(this.duracao == 600)
+        this.duracao_texto = "31 - 45 minutos";
+      if(this.duracao == 800)
+        this.duracao_texto = "46 - 60 minutos";
+      if(this.duracao == 1000)
+        this.duracao_texto = "Mais de 60 minutos";
     }).catch(async (resposta) => {
       console.log(resposta);
       this.existe = 2;

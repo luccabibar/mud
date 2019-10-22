@@ -60,7 +60,7 @@ export class PerfilUserPage {
     this.nav.navigateForward('contato');
   }
 
-  async salvarPerfil()
+  async salvarPerfil() //salva alterações
   {
     const alert = await this.alertController.create({
     header: "Confirmação",
@@ -285,7 +285,7 @@ export class PerfilUserPage {
     await alert.present();
   }
 
-  async sair()
+  async sair() //sair da conta
   {
     const alert = await this.alertController.create({
     header: "Fazer Logoff",
@@ -312,7 +312,7 @@ export class PerfilUserPage {
     await alert.present();
   }
 
-  ativa()
+  ativa() 
   {
     if(this.perfil.valid)
     {

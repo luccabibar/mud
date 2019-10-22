@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import {LocalNotifications} from "@ionic-native/local-notifications/ngx";
 
 import { FCM } from '@ionic-native/fcm/ngx';
 
@@ -41,7 +42,8 @@ const config = {
     SplashScreen,
     BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    ScreenOrientation
+    ScreenOrientation,
+    LocalNotifications
   ],
   bootstrap: [AppComponent]
 })
