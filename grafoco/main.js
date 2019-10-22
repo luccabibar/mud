@@ -5,7 +5,8 @@
 function loadData()
 {
 	//query
-	let sql = "SELECT sem.data_inicial, sem.observacao, " +
+	let sql = "SELECT * FROM (" +  
+		"SELECT sem.created_at, sem.observacao, " +
 		"ali.carboidratos, ali.proteinas, ali.laticinios, ali.verd_frut, ali.hidratacao, " +
 		"bem.b_realizou, bem.vezes, bem.comentario, " +
 		"son.duracao_sono, son.vezes_acordou, son.acordou_naturalmente " +
@@ -14,7 +15,8 @@ function loadData()
 		"JOIN bem_estar AS bem ON sem.id_semana = bem.semana_id " +
 		"JOIN sono AS son ON sem.id_semana = son.semana_id " +
 		"WHERE sem.usuario_id = " + 6 + " " +
-		"ORDER BY sem.data_inicial; ";
+		"ORDER BY sem.created_at " +
+		") AS semana ORDER BY created_at asc;";
 	let data = {
 		'sql': sql
 	};
@@ -30,12 +32,12 @@ function loadData()
 		let dados = resp.dados;
 		dados.forEach((row) => 
 		{			
-			let dataIni = (row.data_inicial).split('-');
+			let dataIni = (row.created_at).split('-');
 			dataIni = dataIni[2] + "/" + dataIni[1] + "/" + dataIni[0];
 
 			//5 pacotes de dados brutos
 			semana.push({
-			"data_inicial": dataIni,
+			"created_at": dataIni,
 			"observacao": row.observacao
 			});
 			alimentacao.push({
@@ -112,7 +114,16 @@ function loadDataset(opt)
 				first = false;
 			});
 
-			opts = {};
+			opts = {
+				scales: {
+					xAxes: [{
+						stacked: false
+					}],
+					yAxes: [{
+						stacked: false
+					}]
+				}
+			}	;
 
 			break;
 		}
@@ -141,7 +152,16 @@ function loadDataset(opt)
 				i++;
 			});
 
-			opts = {};
+			opts = {
+				scales: {
+					xAxes: [{
+						stacked: false
+					}],
+					yAxes: [{
+						stacked: false
+					}]
+				}
+			};
 
 			break;
 		}
@@ -170,7 +190,16 @@ function loadDataset(opt)
 				i++;
 			});
 
-			opts = {};
+			opts = {
+				scales: {
+					xAxes: [{
+						stacked: false
+					}],
+					yAxes: [{
+						stacked: false
+					}]
+				}
+			};
 
 			break;
 		}
@@ -205,11 +234,22 @@ function loadDataset(opt)
 						borderWidth: 1
 					});
 
+					datasec.push({
+						label: "vezes acordadas durante a noite (média semanal)",
+						//adiciona valor caso nao tenha acordado naturalmente, caso contrario adciona 0
+						data: [sem.acordVezes],
+						borderColor: '#' + '66ff66' + 'ff',
+						backgroundColor: '#' + '66ff66' + '99',
+						fill: false,
+						borderWidth: 1
+					});
 				}
 				//else so add o valor no dataset correspondente
 				else{
 					dataset[0].data.push((qualDset) ? sem.duracao : 0);					
-					dataset[1].data.push((!qualDset) ? sem.duracao : 0);					
+					dataset[1].data.push((!qualDset) ? sem.duracao : 0);	
+					
+					datasec[0].data.push(sem.acordVezes);
 				}
 
 				i++;
@@ -226,7 +266,16 @@ function loadDataset(opt)
 				}
 			};
 
-			secopts = {};
+			secopts = {
+				scales: {
+					xAxes: [{
+						stacked: false
+					}],
+					yAxes: [{
+						stacked: false
+					}]
+				}
+			};
 
 			break;
 		}	
@@ -258,6 +307,7 @@ function updateGraf(dataset)
 	//else limpa o obj grafico e add o novo dataset
 	else{
 		grafObj.data.datasets = dataset.data;
+		grafObj.options = dataset.options;
 		grafObj.update();
 	}
 
@@ -273,6 +323,7 @@ function updateGraf(dataset)
 		//else limpa o obj grafico e add o novo dataset
 		else{
 			grafSec.data.datasets = dataset.datasec;
+			grafObj.options = dataset.secOptions;
 			grafSec.update();
 		}
 	}
@@ -308,6 +359,5 @@ window.onload = () =>
 	loadData();
 
 	$("#tipo-graf").change(changeGraf);
-	$("#refresh").click(changeGraf)
+	$("#refresh").click(changeGraf);
 };
-
