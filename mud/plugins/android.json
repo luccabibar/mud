@@ -35,6 +35,9 @@
     "phonegap-plugin-barcodescanner": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.mud.notifications"
+    },
+    "cordova-plugin-document-viewer": {
+      "PACKAGE_NAME": "com.mud.notifications"
     }
   },
   "dependent_plugins": {

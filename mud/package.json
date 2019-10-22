@@ -23,6 +23,7 @@
     "@angular/router": "^7.2.15",
     "@ionic-native/barcode-scanner": "^5.15.0",
     "@ionic-native/core": "^5.15.0",
+    "@ionic-native/document-viewer": "^5.15.1",
     "@ionic-native/fcm": "^5.15.0",
     "@ionic-native/firebase": "^5.15.0",
     "@ionic-native/local-notifications": "^5.15.0",
@@ -40,6 +41,7 @@
     "cordova-android": "8.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-badge": "^0.8.8",
+    "cordova-plugin-document-viewer": "^0.9.13",
     "cordova-plugin-local-notification": "^0.9.0-beta.2",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "core-js": "^2.6.9",
@@ -100,7 +102,8 @@
       "cordova-plugin-ionic-keyboard": {},
       "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-screen-orientation": {},
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-local-notification": {},
+      "cordova-plugin-document-viewer": {}
     },
     "platforms": [
       "browser",

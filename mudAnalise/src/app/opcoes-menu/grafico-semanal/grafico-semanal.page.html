@@ -24,10 +24,19 @@
       <ion-select-option value="lazr">Lazer</ion-select-option>
       <ion-select-option value="sono">Sono</ion-select-option>
     </ion-select>
-    <!--grafico-->
-    <canvas #grafico>
+    <!--graficos-->
+    <div>
+      <div>
+        <canvas #grafico>
 
-    </canvas>
+        </canvas>
+      </div>
+      <div id="grafSecBox" style="visibility: hidden;">
+        <canvas #grafsec>
+
+        </canvas>
+      </div>
+    </div>
     <!--observacoes-->
     <ion-card *ngIf="obs">
       <ion-card-header>
