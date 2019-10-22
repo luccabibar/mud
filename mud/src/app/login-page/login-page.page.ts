@@ -103,8 +103,8 @@ export class LoginPagePage {
         this.BancoService.selectGenerico("SELECT * FROM contato WHERE id_usuario='"+this.dadosService.getId()+"';")
         .then(async(response)=>{
           this.dadosService.setCont1_nome(String(response[0].nome));
-          this.dadosService.setCont2_nome(String(response[1].nome));
           this.dadosService.setCont1_num(String(response[0].telefone));
+          this.dadosService.setCont2_nome(String(response[1].nome));
           this.dadosService.setCont2_num(String(response[1].telefone));
         })
 

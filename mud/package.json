@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^7.2.15",
     "@angular/router": "^7.2.15",
     "@ionic-native/barcode-scanner": "^5.15.0",
+    "@ionic-native/call-number": "^5.15.1",
     "@ionic-native/core": "^5.15.0",
     "@ionic-native/document-viewer": "^5.15.1",
     "@ionic-native/fcm": "^5.15.0",
@@ -38,6 +39,7 @@
     "barcode-scanner": "0.0.2",
     "br-mask": "0.0.6",
     "brmasker4": "^1.0.3",
+    "call-number": "^1.0.1",
     "cordova-android": "8.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-badge": "^0.8.8",
@@ -103,7 +105,8 @@
       "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-screen-orientation": {},
       "cordova-plugin-local-notification": {},
-      "cordova-plugin-document-viewer": {}
+      "cordova-plugin-document-viewer": {},
+      "mx.ferreyra.callnumber": {}
     },
     "platforms": [
       "browser",

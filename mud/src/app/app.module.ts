@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import {LocalNotifications} from "@ionic-native/local-notifications/ngx";
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { FCM } from '@ionic-native/fcm/ngx';
 
@@ -40,6 +41,7 @@ const config = {
     FCM,
     StatusBar,
     SplashScreen,
+    CallNumber,
     BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ScreenOrientation,

@@ -98,5 +98,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "mx.ferreyra.callnumber": {
+    "source": {
+      "type": "registry",
+      "id": "call-number@^1.0.1"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

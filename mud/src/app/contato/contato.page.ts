@@ -26,10 +26,11 @@ export class ContatoPage implements OnInit {
       nome1: [ this.nome1 , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
       num1: [this.num1, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])]
     });
-    this.contato2 = formBuilder.group({
-      nome2: [ this.nome1 , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
-      num2: [this.num2, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])]
-    });
+
+      this.contato2 = formBuilder.group({
+        nome2: [ this.nome1 , Validators.compose([Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')])],
+        num2: [this.num2, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])]
+      });
   } //validações
 
   ngOnInit() { //pega os nomes e numeros dos contatos
@@ -37,6 +38,10 @@ export class ContatoPage implements OnInit {
     this.num1 = this.dadosService.getCont1_num();
     this.nome2 = this.dadosService.getCont2_nome();
     this.num2 = this.dadosService.getCont2_num();
+    if(this.nome2 == "")
+    {
+      document.getElementById("cont2").style.display='none';
+    }
   }
 
   async salvarContatos() //salva os contatos
@@ -83,7 +88,8 @@ export class ContatoPage implements OnInit {
 
                   this.bancoService.updateGenerico("UPDATE contato SET nome='"+nome1+"',telefone='"+num1+"' WHERE telefone='"+this.dadosService.getCont1_num()+"';")
                   .then(async(response)=>{
-                
+                    this.dadosService.setCont1_nome(nome1);
+                    this.dadosService.setCont1_num(num1);
                   })
                   .catch(async(response)=>{
                     const alert = await this.alertController.create({
@@ -99,9 +105,12 @@ export class ContatoPage implements OnInit {
     
                       await alert.present();
                   })
+                  if(this.nome2 != "")
+                  {
                   this.bancoService.updateGenerico("UPDATE contato SET nome='"+nome2+"',telefone='"+num2+"' WHERE telefone='"+this.dadosService.getCont2_num()+"';")
                   .then(async(response)=>{
-                    this.nav.navigateForward('/tabs/perfil-user');
+                    this.dadosService.setCont2_nome(nome2);
+                    this.dadosService.setCont2_num(num2);
                   })
                   .catch(async(response)=>{
                     const alert = await this.alertController.create({
@@ -117,7 +126,7 @@ export class ContatoPage implements OnInit {
     
                       await alert.present();
                   })
-
+                  }
                 }
                 else
                 {
@@ -133,6 +142,7 @@ export class ContatoPage implements OnInit {
 
                   await alert.present();
                 }
+                this.nav.navigateForward('/tabs/perfil-user');
             })
               .catch(async(response)=>{
                 const alert = await this.alertController.create({
@@ -172,13 +182,28 @@ export class ContatoPage implements OnInit {
 
   ativa()
   {
-    if(this.contato1.valid && this.contato2.valid)
+    if(this.nome2 != "")
     {
-      this.desativado = false;
+      if(this.contato1.valid && this.contato2.valid)
+      {
+        this.desativado = false;
+      }
+      else
+      {
+        this.desativado = true;
+      }
     }
     else
     {
-      this.desativado = true;
+      if(this.contato1.valid)
+      {
+        this.desativado = false;
+      }
+      else
+      {
+        this.desativado = true;
+      }
     }
+   
   }
 }

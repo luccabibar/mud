@@ -126,7 +126,7 @@ export class AnimacaoPage implements OnInit, OnDestroy {
 
   async mandaAlerta()   //envia um alerta perguntando se a pessoa está se sentindo melhor de 9 minutos
   {
-    await new Promise(resolve => setTimeout(resolve, 540000)); 
+    await new Promise(resolve => setTimeout(resolve, 12000)); //540000
     if(this.conta == 0)
     {
       const alert = await this.AlertController.create({

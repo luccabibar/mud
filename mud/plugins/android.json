@@ -38,6 +38,9 @@
     },
     "cordova-plugin-document-viewer": {
       "PACKAGE_NAME": "com.mud.notifications"
+    },
+    "mx.ferreyra.callnumber": {
+      "PACKAGE_NAME": "com.mud.notifications"
     }
   },
   "dependent_plugins": {
