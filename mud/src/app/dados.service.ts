@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { BancoService } from './banco.service';
 import {AlertController} from  '@ionic/angular';
+import { forEach } from '@angular/router/src/utils/collection';
 @Injectable({
   providedIn: 'root'
 })
@@ -205,8 +206,7 @@ export class DadosService {
         {
           this.localNotifications.schedule({
             id: 1,
-            text: 'Você tem' +response.valueOf.length +'novos murais '+ this.getNome(),
-            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+            text: 'Você tem um novo mural '+ this.getNome(),
             data: { mydata: "novo mural" }
           });
           this.BancoService.alterarNotifica(this.getId()).then(async(response)=>{
