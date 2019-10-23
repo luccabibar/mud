@@ -67,6 +67,9 @@ export class GraficoSemanalPage implements OnInit
    */
   changeGraf()
   {
+    document.getElementById("grafBox").style.visibility = "visible";
+    document.getElementById("grafBox").style.position = "static";
+    
     //grafico principal
     let dataset = [];
     let opts;
@@ -311,7 +314,6 @@ export class GraficoSemanalPage implements OnInit
     }
     //else limpa o obj grafico e add o novo dataset
     else{
-      console.log("yare yare");
       this.grafObj.data.datasets = dataset;
       this.grafObj.options = opts;
       this.grafObj.update();
@@ -321,6 +323,8 @@ export class GraficoSemanalPage implements OnInit
       //eu poderia usar ngsyle pra alterar dinamicamente? sim
       //eu vou? nao 
       document.getElementById("grafSecBox").style.visibility = "visible";
+      document.getElementById("grafSecBox").style.position = "static";
+      
 
       let secGrafStuff = {
         type: 'bar',
@@ -337,7 +341,6 @@ export class GraficoSemanalPage implements OnInit
       }
       //else limpa o obj grafico e add o novo dataset
       else{
-        console.log("daze");
         this.grafSecObj.data.datasets = datasec;
         this.grafSecObj.options = secopts;
         this.grafSecObj.update();
@@ -345,6 +348,7 @@ export class GraficoSemanalPage implements OnInit
     }
     else{
       document.getElementById("grafSecBox").style.visibility = "hidden";
+      document.getElementById("grafSecBox").style.position = "absolute";
     }
   }
 
@@ -419,8 +423,10 @@ export class GraficoSemanalPage implements OnInit
   {    
     this.grafObj = null;
     this.grafSecObj = null;
+    
     this.paciente = this.data.getDados("user_sessao");
     this.pegaDados(this.paciente.id_usuario);
+
     this.semKey = 0;
     this.obs = false;
     this.obsData = [];
@@ -428,6 +434,9 @@ export class GraficoSemanalPage implements OnInit
 
   ngOnInit() { }
 
-  ionViewDidEnter() { }
+  ionViewDidEnter()
+  {
+  }
 
+  aa = false;
 }
