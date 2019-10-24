@@ -32,8 +32,11 @@ export class GraficoSemanalPage implements OnInit
   grafSecObj;
   @ViewChild("grafsec") secElem;
   //observações
-  obs
-  obsData
+  obs;
+  obsData;
+  //tooltip
+  tooltip;
+  tooltipData;
 
   /**
    * gera uma cor aleatoria
@@ -81,9 +84,23 @@ export class GraficoSemanalPage implements OnInit
     switch(this.grafSel) {
       //case alimentacao
       case "alim":{
+        //cores custom
+        let colors = ['ffa500', 'ff3333', '5cbdbb','9ad318'];
+
         let first = true; 
         this.obs = false;
         this.havegrafsec = false;
+
+        this.tooltip = true;
+        this.tooltipData = {
+          titulo: "Consumo:",
+          //texto em array para multilinha
+          texto: [
+            "1- baixo (um a dois dias na semana)",
+            "2- moderado (tres a cinco dias na semana)",
+            "3- alto (seis a sete dias na semana)",
+          ]
+        };
 
         //itera sobre cada semana
         this.alimentacao.forEach((sem) => 
@@ -99,7 +116,9 @@ export class GraficoSemanalPage implements OnInit
                 dataset.push({
                   label: key,
                   data: [value],
-                  borderColor: this.randColor(),
+                  //cores custom
+                  borderColor: "#" + colors[i] + "ff",
+                  backgroundColor: "#" + colors[i] + "99",
                   fill: false,
                   borderWidth: 1
                 });
@@ -121,7 +140,11 @@ export class GraficoSemanalPage implements OnInit
               stacked: false
             }],
             yAxes: [{
-              stacked: false
+              stacked: false,
+              ticks : {
+                  suggestedMax : 5,    
+                  min : 0
+              }              
             }]
           }
         };
@@ -130,10 +153,24 @@ export class GraficoSemanalPage implements OnInit
       }
       //case lazer
       case "lazr":{
+        //cores
+        let colors = ['ffd700'];
+
         this.obs = true;
         this.havegrafsec = false;
         let i = 0;
         
+        this.tooltip = true;
+        this.tooltipData = {
+          titulo: "Vezes realizadas:",
+          //texto em array para multilinha
+          texto: [
+            "1- baixo (um a dois dias na semana)",
+            "2- moderado (tres a cinco dias na semana)",
+            "3- alto (seis a sete dias na semana)",
+          ]
+        };
+
         //itera sobre cada semana 
         this.lazer.forEach((sem) => 
         { 
@@ -149,7 +186,9 @@ export class GraficoSemanalPage implements OnInit
             dataset.push({
               label: "frequencia",
               data: [sem.vezes],
-              borderColor: this.randColor(),
+              //cores custom
+              borderColor: "#" + colors[0] + "ff",
+              backgroundColor: "#" + colors[0] + "99",
               fill: false,
               borderWidth: 1
             });
@@ -169,7 +208,11 @@ export class GraficoSemanalPage implements OnInit
               stacked: false
             }],
             yAxes: [{
-              stacked: false
+              stacked: false,
+              ticks : {
+                  suggestedMax : 5,    
+                  min : 0
+              }
             }]
           }
         };
@@ -178,10 +221,23 @@ export class GraficoSemanalPage implements OnInit
       }
       //case hidratacao
       case "hidr":{
+        //cores
+        let colors = ['1f06f0'];
+
         this.obs = false;
         this.havegrafsec = false;
         let i = 0;
-        console.log(this.hidratacao);
+
+        this.tooltip = true;
+        this.tooltipData = {
+          titulo: "Consumo:",
+          //texto em array para multilinha
+          texto: [
+            "1- baixo (um a dois dias na semana)",
+            "2- moderado (tres a cinco dias na semana)",
+            "3- alto (seis a sete dias na semana)",
+          ]
+        };
         
         //itera sobre cada semana
         this.hidratacao.forEach((sem) => 
@@ -191,7 +247,8 @@ export class GraficoSemanalPage implements OnInit
             dataset.push({
               label: "frequencia",
               data: [sem.hidratacao],
-              borderColor: this.randColor(),
+							borderColor: "#" + colors[0] + "ff",
+							backgroundColor: "#" + colors[0] + "99",
               fill: false,
               borderWidth: 1
             });
@@ -211,7 +268,11 @@ export class GraficoSemanalPage implements OnInit
               stacked: false
             }],
             yAxes: [{
-              stacked: false
+              stacked: false,
+              ticks : {
+                  suggestedMax : 5,    
+                  min : 0
+              }
             }]
           }
         };
@@ -223,6 +284,9 @@ export class GraficoSemanalPage implements OnInit
         this.havegrafsec = true;
         this.obs = false;
         
+        this.tooltip = false;
+        this.tooltipData = {};
+
         //ok desse aqui eu gosto
         //cores custom
         let colors = ['3399ff', 'ff3333'];
@@ -279,7 +343,11 @@ export class GraficoSemanalPage implements OnInit
               stacked: true
             }],
             yAxes: [{
-              stacked: true
+              stacked: true,
+              ticks : {
+                  suggestedMax : 24,    
+                  min : 0
+              }
             }]
           }
         };
@@ -290,7 +358,11 @@ export class GraficoSemanalPage implements OnInit
               stacked: false
             }],
             yAxes: [{
-              stacked: false
+              stacked: false,
+              ticks : {
+                  suggestedMax : 12,    
+                  min : 0
+              }
             }]
           }
         };
@@ -430,6 +502,8 @@ export class GraficoSemanalPage implements OnInit
     this.semKey = 0;
     this.obs = false;
     this.obsData = [];
+    this.tooltip = false;
+    this.tooltipData = {};
   }
 
   ngOnInit() { }

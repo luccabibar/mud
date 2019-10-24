@@ -37,6 +37,22 @@
         </canvas>
       </div>
     </div>
+    
+    <!--tooltip-->
+    <ion-card *ngIf="tooltip">
+      <ion-card-header>
+        <ion-card-title>
+            {{tooltipData.titulo}}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item *ngFor="let linha of tooltipData.texto">
+          {{linha}} <br>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
     <!--observacoes-->
     <ion-card *ngIf="obs">
       <ion-card-header>
@@ -50,7 +66,6 @@
           {{semana.semana}} {{semana.value}}
         </ion-item>
       </ion-card-content>
-
     </ion-card>
   </div>
 
