@@ -80,6 +80,13 @@ export class GraficoSemanalPage implements OnInit
     let datasec = [];
     let secopts;
     
+    //label
+    let labels = [];
+    this.semana.forEach(sem => 
+    {
+      labels.push(sem.created_at);  
+    });
+    
     //preenche o dataset condicionalmente
     switch(this.grafSel) {
       //case alimentacao
@@ -142,7 +149,7 @@ export class GraficoSemanalPage implements OnInit
             yAxes: [{
               stacked: false,
               ticks : {
-                  suggestedMax : 5,    
+                  suggestedMax : 4,    
                   min : 0
               }              
             }]
@@ -210,7 +217,7 @@ export class GraficoSemanalPage implements OnInit
             yAxes: [{
               stacked: false,
               ticks : {
-                  suggestedMax : 5,    
+                  suggestedMax : 4,    
                   min : 0
               }
             }]
@@ -270,7 +277,7 @@ export class GraficoSemanalPage implements OnInit
             yAxes: [{
               stacked: false,
               ticks : {
-                  suggestedMax : 5,    
+                  suggestedMax : 4,    
                   min : 0
               }
             }]
@@ -374,7 +381,7 @@ export class GraficoSemanalPage implements OnInit
     let grafStuff = {
       type: 'bar',
       data: {
-        //labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
+        labels: labels,
         datasets: dataset
       },
       options: opts
@@ -401,7 +408,7 @@ export class GraficoSemanalPage implements OnInit
       let secGrafStuff = {
         type: 'bar',
         data: {
-          //labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
+          labels: labels,
           datasets: datasec
         },
         options: secopts
@@ -456,7 +463,7 @@ export class GraficoSemanalPage implements OnInit
 
       resp.forEach(row => 
       {
-        let dataIni = (row.created_at).split('-');
+        let dataIni = row.created_at.split(' ')[0].split('-');
         dataIni = dataIni[2] + "/" + dataIni[1] + "/" + dataIni[0];
 
         //5 pacotes de dados brutos
