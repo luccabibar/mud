@@ -63,12 +63,17 @@
 
       <ion-card-content>
         <ion-item *ngFor="let semana of obsData">
-          {{semana.semana}} {{semana.value}}
+          <span><b>semana do dia {{semana.semana}}:</b><br>
+          {{semana.value}}</span>
         </ion-item>
       </ion-card-content>
     </ion-card>
   </div>
 
   <!-- kek -->
-  <p>Para melhor visualização dos gráficos, recomendamos a plataforma mudAnálise web</p>
+  <ion-card>
+    <ion-card-content>
+      Para melhor visualização dos gráficos, recomendamos a plataforma mudAnálise web.
+    </ion-card-content>
+  </ion-card>
 </ion-content>

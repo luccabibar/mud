@@ -15,6 +15,8 @@ export class GraficoSemanalPage implements OnInit
 {
   //dados do paciente (service)
   paciente;
+  //configuracoes do datasource
+  maxLinhas = 8; //maximo de reginstros que puxa do banco
   //dados do paciente (banco)
   semana;
   alimentacao;
@@ -39,17 +41,22 @@ export class GraficoSemanalPage implements OnInit
   tooltipData;
 
   /**
-   * gera uma cor aleatoria
+   * altera o estado de visibilidade de um elemento para visivel ou invisivel
    * 
-   * @returns string comm a cor em hexdec
+   * @param elem id do elemento
+   * @param visivel estado de visibilidade
    */
-  randColor(){
-    let vals = "0123456789ABCDEF"
-    let cor = "#";
-    for (let i = 0; i < 6; i++) {
-      cor += vals[Math.floor(Math.random() * 16)];
+  setVisbilidElem(elemId, visivel)
+  {
+    let elem = document.getElementById(elemId);
+    if(visivel){
+      elem.style.visibility = "visible";
+      elem.style.position = "static";
     }
-    return cor;
+    else{
+      elem.style.visibility = "hidden";
+      elem.style.position = "absolute";
+    }
   }
 
   /**
@@ -70,8 +77,7 @@ export class GraficoSemanalPage implements OnInit
    */
   changeGraf()
   {
-    document.getElementById("grafBox").style.visibility = "visible";
-    document.getElementById("grafBox").style.position = "static";
+    this.setVisbilidElem("grafBox", true);
     
     //grafico principal
     let dataset = [];
@@ -93,6 +99,8 @@ export class GraficoSemanalPage implements OnInit
       case "alim":{
         //cores custom
         let colors = ['ffa500', 'ff3333', '5cbdbb','9ad318'];
+        //legendas custom
+        let legendas = ['carboidratos', 'proteínas', 'laticínios', 'verduras e frutas']
 
         let first = true; 
         this.obs = false;
@@ -100,7 +108,7 @@ export class GraficoSemanalPage implements OnInit
 
         this.tooltip = true;
         this.tooltipData = {
-          titulo: "Consumo:",
+          titulo: "Consumo (vezes por semana):",
           //texto em array para multilinha
           texto: [
             "1- baixo (um a dois dias na semana)",
@@ -121,7 +129,7 @@ export class GraficoSemanalPage implements OnInit
               //if for a primeira vez, cria objeto de dataset
               if(first){     
                 dataset.push({
-                  label: key,
+                  label: legendas[i],
                   data: [value],
                   //cores custom
                   borderColor: "#" + colors[i] + "ff",
@@ -182,10 +190,12 @@ export class GraficoSemanalPage implements OnInit
         this.lazer.forEach((sem) => 
         { 
           //datset secundario pra observaoces
-          this.obsData.push({
-            "semana": this.semana[i].created_at,
-            "value": sem.comentario
-          });
+          if(sem.comentario && sem.comentario.toLowerCase() != "null"){
+            this.obsData.push({
+              "semana": this.semana[i].created_at,
+              "value": sem.comentario
+            });
+          }
 
           //dataset principal pro grafico
           //if for a primeira vez, cria objeto de dataset
@@ -237,12 +247,12 @@ export class GraficoSemanalPage implements OnInit
 
         this.tooltip = true;
         this.tooltipData = {
-          titulo: "Consumo:",
+          titulo: "Consumo (média semanal):",
           //texto em array para multilinha
           texto: [
-            "1- baixo (um a dois dias na semana)",
-            "2- moderado (tres a cinco dias na semana)",
-            "3- alto (seis a sete dias na semana)",
+            "1- baixo (menos de cinco copos por dia)",
+            "2- moderado (menos de seis a onze copos por dia)",
+            "3- alto (doze copos ou mais por dia)",
           ]
         };
         
@@ -262,7 +272,7 @@ export class GraficoSemanalPage implements OnInit
           }
           //else apenas pusha valor
           else{
-            dataset[0].data.push(sem.vezes);
+            dataset[0].data.push(sem.hidratacao);
           }
 
           i++;
@@ -352,7 +362,8 @@ export class GraficoSemanalPage implements OnInit
             yAxes: [{
               stacked: true,
               ticks : {
-                  suggestedMax : 24,    
+                  suggestedMax : 12,
+                  max: 24,    
                   min : 0
               }
             }]
@@ -378,6 +389,13 @@ export class GraficoSemanalPage implements OnInit
       }
     }
 
+    //ajustes nas opts universais
+    opts.legend = {
+      display: true,
+      position: 'bottom',
+      align: "start"
+    };
+
     let grafStuff = {
       type: 'bar',
       data: {
@@ -399,11 +417,13 @@ export class GraficoSemanalPage implements OnInit
     }
 
     if(this.havegrafsec){
-      //eu poderia usar ngsyle pra alterar dinamicamente? sim
-      //eu vou? nao 
-      document.getElementById("grafSecBox").style.visibility = "visible";
-      document.getElementById("grafSecBox").style.position = "static";
+      this.setVisbilidElem("grafSecBox", true);
       
+      secopts.legend = {
+        display: true,
+        position: 'bottom',
+        align: "start"
+      }
 
       let secGrafStuff = {
         type: 'bar',
@@ -426,18 +446,19 @@ export class GraficoSemanalPage implements OnInit
       }
     }
     else{
-      document.getElementById("grafSecBox").style.visibility = "hidden";
-      document.getElementById("grafSecBox").style.position = "absolute";
+      this.setVisbilidElem("grafSecBox", false);
     }
   }
 
   /**
    * a partir de um id de um usuario, pega todas as semanas, e para cada semana,
    * pega todos os dados relacionados a aquela semana semana
+   * 30
    * 
    * @param id o id do usuario
+   * @param limite o limite de registros que pega do banco
    */
-  pegaDados(id)
+  pegaDados(id, limite)
   {
     let sql = "SELECT * FROM (" +  
 		  "SELECT sem.created_at, sem.observacao, " +
@@ -448,9 +469,11 @@ export class GraficoSemanalPage implements OnInit
       "JOIN alimentacao AS ali ON sem.id_semana = ali.semana_id " +
       "JOIN bem_estar AS bem ON sem.id_semana = bem.semana_id " +
       "JOIN sono AS son ON sem.id_semana = son.semana_id " +
-      "WHERE sem.usuario_id = " + id +" " +
-      "ORDER BY sem.created_at LIMIT 12" +
+      "WHERE sem.usuario_id = " + id + " " +
+      "ORDER BY sem.created_at LIMIT " + limite +
       ") AS semana ORDER BY created_at asc;"
+
+    console.log(sql);    
 
     this.db.selectGenerico(sql)
     .then((resp: any) => 
@@ -491,6 +514,8 @@ export class GraficoSemanalPage implements OnInit
           "acordNat": row.acordou_naturalmente
         });
       });
+
+      console.log(this.semana, this.alimentacao, this.hidratacao, this.lazer, this.sono);
     })
     .catch(ex => 
     {
@@ -504,7 +529,7 @@ export class GraficoSemanalPage implements OnInit
     this.grafSecObj = null;
     
     this.paciente = this.data.getDados("user_sessao");
-    this.pegaDados(this.paciente.id_usuario);
+    this.pegaDados(this.paciente.id_usuario, this.maxLinhas);
 
     this.semKey = 0;
     this.obs = false;
@@ -515,9 +540,7 @@ export class GraficoSemanalPage implements OnInit
 
   ngOnInit() { }
 
-  ionViewDidEnter()
-  {
-  }
+  ionViewDidEnter() { }
 
   aa = false;
 }
