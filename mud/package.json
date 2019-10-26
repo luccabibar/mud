@@ -45,7 +45,7 @@
     "cordova-plugin-document-viewer": "^0.9.13",
     "cordova-plugin-local-notification": "^0.9.0-beta.2",
     "cordova-plugin-screen-orientation": "^3.0.2",
-    "core-js": "^2.6.9",
+    "core-js": "^2.6.10",
     "es6-promise-plugin": "^4.2.2",
     "firebase": "^6.6.2",
     "firesql": "^2.0.2",
@@ -71,7 +71,7 @@
     "@ionic/lab": "1.0.24",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "^2.0.8",
-    "@types/node": "^10.14.20",
+    "@types/node": "^10.17.0",
     "angular": "1.7.8",
     "codelyzer": "~4.5.0",
     "cordova-plugin-device": "^2.0.3",
@@ -103,7 +103,9 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "phonegap-plugin-barcodescanner": {},
+      "phonegap-plugin-barcodescanner": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
       "cordova-plugin-screen-orientation": {},
       "cordova-plugin-local-notification": {},
       "cordova-plugin-document-viewer": {},
