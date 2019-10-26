@@ -7,7 +7,13 @@
     "files": {}
   },
   "installed_plugins": {
+    "call-number": {
+      "PACKAGE_NAME": "com.mud.notifications"
+    },
     "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.mud.notifications"
+    },
+    "cordova-plugin-document-viewer": {
       "PACKAGE_NAME": "com.mud.notifications"
     },
     "cordova-plugin-ionic-keyboard": {
@@ -35,12 +41,6 @@
     "phonegap-plugin-barcodescanner": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.mud.notifications"
-    },
-    "cordova-plugin-document-viewer": {
-      "PACKAGE_NAME": "com.mud.notifications"
-    },
-    "mx.ferreyra.callnumber": {
-      "PACKAGE_NAME": "com.mud.notifications"
     }
   },
   "dependent_plugins": {
@@ -48,6 +48,9 @@
       "PACKAGE_NAME": "com.mud.notifications"
     },
     "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.mud.notifications"
+    },
+    "onesignal-cordova-plugin": {
       "PACKAGE_NAME": "com.mud.notifications"
     }
   }
