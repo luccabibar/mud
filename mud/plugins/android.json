@@ -16,6 +16,13 @@
     "cordova-plugin-document-viewer": {
       "PACKAGE_NAME": "com.mud.notifications"
     },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.mud.notifications"
+    },
+    "cordova-plugin-file-opener2": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.mud.notifications"
+    },
     "cordova-plugin-ionic-keyboard": {
       "PACKAGE_NAME": "com.mud.notifications"
     },
@@ -48,9 +55,6 @@
       "PACKAGE_NAME": "com.mud.notifications"
     },
     "es6-promise-plugin": {
-      "PACKAGE_NAME": "com.mud.notifications"
-    },
-    "onesignal-cordova-plugin": {
       "PACKAGE_NAME": "com.mud.notifications"
     }
   }

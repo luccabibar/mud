@@ -152,13 +152,21 @@ export class GraficoSemanalPage implements OnInit
         opts = {
           scales: {
             xAxes: [{
-              stacked: false
+              stacked: false,
+              scaleLabel: {
+                display: true,
+                labelString: 'tempo'
+              }
             }],
             yAxes: [{
               stacked: false,
               ticks : {
                   suggestedMax : 4,    
                   min : 0
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'alimento consumido'
               }              
             }]
           }
@@ -222,13 +230,21 @@ export class GraficoSemanalPage implements OnInit
         opts = {
           scales: {
             xAxes: [{
-              stacked: false
+              stacked: false,
+              scaleLabel: {
+                display: true,
+                labelString: 'tempo'
+              }
             }],
             yAxes: [{
               stacked: false,
               ticks : {
                   suggestedMax : 4,    
                   min : 0
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'atividades de lazer realizadas'
               }
             }]
           }
@@ -282,13 +298,21 @@ export class GraficoSemanalPage implements OnInit
         opts = {
           scales: {
             xAxes: [{
-              stacked: false
+              stacked: false,
+              scaleLabel: {
+                display: true,
+                labelString: 'tempo'
+              }
             }],
             yAxes: [{
               stacked: false,
               ticks : {
                   suggestedMax : 4,    
                   min : 0
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'água consumida'
               }
             }]
           }
@@ -357,7 +381,11 @@ export class GraficoSemanalPage implements OnInit
         opts = {
           scales: {
             xAxes: [{
-              stacked: true
+              stacked: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'tempo'
+              }
             }],
             yAxes: [{
               stacked: true,
@@ -365,6 +393,10 @@ export class GraficoSemanalPage implements OnInit
                   suggestedMax : 12,
                   max: 24,    
                   min : 0
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'horas dormidas por noite'
               }
             }]
           }
@@ -373,13 +405,21 @@ export class GraficoSemanalPage implements OnInit
         secopts = {
           scales: {
             xAxes: [{
-              stacked: false
+              stacked: false,
+              scaleLabel: {
+                display: true,
+                labelString: 'tempo'
+              }
             }],
             yAxes: [{
               stacked: false,
               ticks : {
                   suggestedMax : 12,    
                   min : 0
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'vezes acordadas durante a noite'
               }
             }]
           }

@@ -187,7 +187,7 @@ export class RelatorioCrisePage implements OnInit {
     local_crise = (<HTMLInputElement>document.getElementById("4")).value;
     
     
-    let data_crise = (<HTMLInputElement>document.getElementById("5")).value;
+    //let data_crise = (<HTMLInputElement>document.getElementById("5")).value;
 
     let duracao_crise = (<HTMLInputElement>document.getElementById("tempo")).value;
     this.dadosService.setDuracao_crise(duracao_crise);

@@ -14,7 +14,7 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { DadosService } from './servicos/dados.service';
 
-import { Firebase } from '@ionic-native/firebase';
+
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from 'angularfire2';
