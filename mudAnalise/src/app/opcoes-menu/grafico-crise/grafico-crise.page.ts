@@ -4,106 +4,186 @@ import { DadosService } from 'src/app/servicos/dados.service';
 import { BancoService } from 'src/app/servicos/banco.service';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
+import { resolve } from 'url';
 
 @Component({
   selector: 'app-grafico-crise',
   templateUrl: './grafico-crise.page.html',
   styleUrls: ['./grafico-crise.page.scss'],
 })
-export class GraficoCrisePage implements OnInit {
-  @ViewChild('lineCanvas') lineCanvas;
-  lineChart: any;
-  teste:string;
-  totalCrises;
-  totalCrisesMes;
-  totalCrisesDias;
-  public user_sessao;
-  h = [];
-  primeiro;
-  constructor(private BancoService: BancoService, private ds: DadosService, private router: Router) {
-    this.user_sessao = this.ds.getDados("user_sessao");
+export class GraficoCrisePage implements OnInit 
+{
+  //dados do usuario
+  dadosUser;
+  //controle da pagina
+  dias = 30; //ate qunatos dias ele pega no banco
+  //grafico
+  @ViewChild('grafico') grafElem;
+  grafObj;
+  //view
+  error;
+
+  /**
+   * carrega o grafico 
+   */
+  async loadGraf()
+  {
+    //pega os dados brutos do banco
+    let response: any = await this.getData(this.dadosUser.id_usuario); 
+    if(!response.sucesso){
+      console.log(response.dados);
+      this.error = true;
+    }
+    let data = response.dados
+                                                             
+    //processa os dados do banco
+    let grafStuff = this.prepareGrafStuff(data);
+    //inicializa grfico com dados processado
+    this.grafObj = new Chart(this.grafElem.nativeElement, grafStuff);
+
+    // loadObservacoes(grafData);
   }
 
-   ngOnInit() {
-     this.lineChartMethod(null);
-    
-  }
-  async RetornarListaAnos(){
-    let ReturnAnos = await this.BancoService.selectGenerico("SELECT EXTRACT('YEAR' FROM hora_inicio) AS ANO FROM crise WHERE usuario_id = " +this.user_sessao.id_usuario+" GROUP BY ANO ORDER BY ANO DESC;");
-    let anos=[];
-    for(let i in ReturnAnos)
-      anos[i]=ReturnAnos[i].ano;
-    return anos;
-  }
-  //lista os anos que apresentam crise
-  async lineChartMethod($event = null) {
+  /**
+   * pega os dados que sao relevantes pro grafico
+   * 
+   * @param id id do usuario
+   * @returns promessa que resolve nos dados e rejeita numa excessao 
+   */
+  async getData(id)
+  {
+    //async boizzz
+    return new Promise((resolve, reject) => 
+    {
+      let dataset = null;
+      //query sql
+      //seleciona as crises que pertencam a um usuario E seja dos ultimos 30 dias, agrupando por intensidade E dia que ocorreu
+      let sql = "SELECT COUNT(created_at) AS quantidade, created_at AS data, intensidade " +
+        "FROM public.crise WHERE usuario_id = " + id + " AND " +
+        "DATE_PART('day', now() - created_at) < " + this.dias + " " +
+        "GROUP BY (created_at, intensidade) " +
+        "ORDER BY data;";
+      this.db.selectGenerico(sql)
+      //sucesso
+      .then((response: Array<Object>) => 
+      {
+        resolve({sucesso: true, dados: response});
+      })
+      //fail
+      .catch((exception: Object) => 
+      {
+        reject({sucesso: false, dados: exception});
+      });
 
-    this.h = await this.RetornarListaAnos();
-    this.primeiro = this.h[0];
-
-    let crises;
-
-    if($event!=null){//o $event é ele que identifica se foi selecionado
-       crises = await this.BancoService.selectGenerico("SELECT COUNT(id_crise) AS CRISE,EXTRACT('MONTH' FROM hora_inicio) AS MESES FROM crise WHERE EXTRACT('YEAR' FROM hora_inicio)="+$event.target.value+" AND usuario_id =" + this.user_sessao.id_usuario + " GROUP BY MESES ORDER BY MESES");
-    }
-    //select do número de crises do banco
-    else{
-       crises = await this.BancoService.selectGenerico("SELECT COUNT(id_crise) AS CRISE,EXTRACT('MONTH' FROM hora_inicio) AS MESES FROM crise WHERE EXTRACT('YEAR' FROM hora_inicio)="+this.h[0]+ "AND usuario_id =" + this.user_sessao.id_usuario + " GROUP BY MESES ORDER BY MESES");
-    }
-    let valor = [0,0,0,0,0,0,0,0,0,0,0,0];
-    let totalCrises= 0;
-    for(let i in crises){
-      valor[crises[i].meses]=crises[i].crise;
-      totalCrises += crises[i].crise;
-    }
-    this.totalCrises = totalCrises * 1;
-    this.totalCrisesMes = (totalCrises/12).toFixed(2);
-    this.totalCrisesDias = (totalCrises/365).toFixed(2);
-    //realiza as estatísticas do gráfico
-    
-    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-      type: 'line',
-      data: {
-        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro','outubro', 'Novembro', 'Dezembro'],
-        datasets: [
-          {
-            label: 'Ocorrência de crises',
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: 'rgba(75,192,192,0.4)',
-            borderColor: 'rgba(75,192,192,1)',
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: 'rgba(75,192,192,1)',
-            pointBackgroundColor: '#fff',
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-            pointHoverBorderColor: 'rgba(220,220,220,1)',
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: valor,
-            spanGaps: false,
-          }
-        ]
-      }
     });
   }
-  //cria a base de dados do gráfico 
-  
-  ionViewDidEnter() {
-    this.user_sessao = this.ds.getDados("user_sessao");
-    if (!this.user_sessao) {
-      this.ds.removeDados(true, '');
-      this.router.navigateByUrl("/login");
-    }
-  }
-  clickOk($e){
-    alert($e.target.value);
-  }
-  view;
 
+  /**
+   * prepara todas as informacoes que um grafico precisa com base em dados brutos do banci
+   * 
+   * @param data dados brutos do banco
+   */
+  prepareGrafStuff(data)
+  {
+    let dataset = this.prepareDataset(data);
+    // let labels = [];// this.prepareLabels(data);
+
+    let opts = {
+
+    };
+
+    return {
+      type: 'bubble',
+      data: {
+        // labels: labels,
+        datasets: dataset
+      },
+      options: opts
+    };
+  }
+
+  /**
+   * processa dados brutos do banco em um dataset para o grafico
+   * 
+   * @param data dados brutos dos bancos
+   */
+  prepareDataset(data)
+  {
+    let colors = ['d62a61'];
+    let ultimosNDias = this.getUltimosNDias(this.dias);
+    let dataset = {
+      data: [],
+      borderColor: "#" + colors[0] + "ff",
+      backgroundColor: "#" + colors[0] + "99",
+    };
+
+    //itera sobre os N ultimos dias
+    for(let i = 0; i < ultimosNDias.length; i++){
+      let found = false;
+      //procura crises que tenham ocorrido nesta data 
+      data.forEach((crise) => 
+      {
+        //se achar uma crise que tenha ocorrido nesse dia, add ao dataset        
+        if(crise.data == this.formatData(ultimosNDias[i])){
+          found = true;
+          console.log("foundk", i);
+          
+          dataset.data.push({
+            x: i + 1,
+            y: Number(crise.intensidade),
+            r: crise.quantidade * 5
+          });
+        }
+      });
+
+      //se nao achar nenhuma crise, add dado vazio para ocupar espaco
+      if(!found){
+        dataset.data.push({
+          x: i + 1,
+          y: 0,
+          r: 0
+        });
+      }
+    }
+    console.log(dataset);
+    return dataset;
+  }
+
+  getUltimosNDias(qtd)
+  {
+    let lastN = [];
+    let hj = new Date();
+
+    for(let i = 0; i < qtd; i++){
+      //milisegundos desde time 0 ate a data de i dias atras
+      let NDiasAtras = new Date().setDate(hj.getDate() - i);
+      lastN.push(new Date(NDiasAtras));
+    }
+
+    return lastN.reverse();
+  }
+
+  /**
+   * formata um objeto data para que fique igual ao padrao do postgresql
+   * 
+   * @param data objeto data
+   * @returns string semenlhande ao padrao do postgresql
+   */
+  formatData(data)
+  {
+    return data.getFullYear() + "-" + (data.getMonth() + 1) + "-" + data.getDate();
+  }
+
+  constructor(private db: BancoService, private ds: DadosService, private router: Router) 
+  {
+    this.error = false;
+    this.grafObj = null;
+    this.dadosUser = this.ds.getDados("user_sessao");
+    this.loadGraf();
+  }
+
+  ngOnInit() 
+  {
+    
+  }
 }

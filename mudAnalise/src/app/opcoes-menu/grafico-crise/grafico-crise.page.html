@@ -10,47 +10,14 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-card>
-    <ion-card-header>
-      Gráfico de Crise I
-    </ion-card-header>
-    <img src="assets/imagensGraficos/g1.PNG" alt="">
-  </ion-card>
-  <ion-card>
-      <ion-card-header>
-          Gráfico de Crise II
-        </ion-card-header>
-    <img src="assets/imagensGraficos/g2.PNG" alt="">
 
-  </ion-card> -->
-
-  <ion-card>
-    <ion-item>
-      Crises do paciente:
-      <strong>{{user_sessao.nome}}</strong>
-    </ion-item>
-    <ion-item>
-        <ion-label>Ano</ion-label>
-        <ion-select (ionChange)="lineChartMethod($event)"  [ngModel]="primeiro">
-          <!-- for dessa desgraça que busca do banco os anos -->
-              <ion-select-option  *ngFor="let ano of h" [value]="ano" >{{ano}}</ion-select-option>
-         
-         
-        </ion-select>
-      </ion-item>
-  </ion-card>
-  <div class="canvas-charts">
-  <ion-card >
-      <canvas #lineCanvas></canvas>
- 
-  </ion-card>
-  <ion-card class="cardin">
-      Total de crises anual: {{totalCrises}}<br>
-      Média de crises mensal: {{totalCrisesMes}}<br>
-      Média de crises diária: {{totalCrisesDias}}
-
-    
-  </ion-card>
-</div>
+  <div *ngIf="error; else noError">
+    deu ruim kk se fode
+  </div>
+  <ng-template #noError>
+    <canvas #grafico>
+      
+    </canvas>
+  </ng-template>
 
 </ion-content>
