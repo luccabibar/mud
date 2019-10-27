@@ -7,47 +7,54 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.mud.notifications"
-    },
-    "cordova-plugin-statusbar": {
+    "call-number": {
       "PACKAGE_NAME": "com.mud.notifications"
     },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.mud.notifications"
     },
-    "cordova-plugin-splashscreen": {
+    "cordova-plugin-document-viewer": {
+      "PACKAGE_NAME": "com.mud.notifications"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.mud.notifications"
+    },
+    "cordova-plugin-file-opener2": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.mud.notifications"
+    },
+    "cordova-plugin-ionic-keyboard": {
       "PACKAGE_NAME": "com.mud.notifications"
     },
     "cordova-plugin-ionic-webview": {
       "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
       "PACKAGE_NAME": "com.mud.notifications"
     },
-    "cordova-plugin-ionic-keyboard": {
-      "PACKAGE_NAME": "com.mud.notifications"
-    },
-    "phonegap-plugin-barcodescanner": {
-      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+    "cordova-plugin-local-notification": {
       "PACKAGE_NAME": "com.mud.notifications"
     },
     "cordova-plugin-screen-orientation": {
       "PACKAGE_NAME": "com.mud.notifications"
     },
-    "cordova-plugin-local-notification": {
+    "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "com.mud.notifications"
     },
-    "cordova-plugin-document-viewer": {
+    "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.mud.notifications"
     },
-    "call-number": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.mud.notifications"
+    },
+    "phonegap-plugin-barcodescanner": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.mud.notifications"
     }
   },
   "dependent_plugins": {
-    "es6-promise-plugin": {
+    "cordova-plugin-badge": {
       "PACKAGE_NAME": "com.mud.notifications"
     },
-    "cordova-plugin-badge": {
+    "es6-promise-plugin": {
       "PACKAGE_NAME": "com.mud.notifications"
     }
   }
