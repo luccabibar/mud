@@ -25,7 +25,7 @@ export class Tab2Page {
   {
 
 // Create an Observable that will publish a value on an interval
-const secondsCounter = interval(2000);
+const secondsCounter = interval(5000);
 // Subscribe to begin publishing values
 secondsCounter.subscribe(n =>{  this.dadosService.Notificacao();});
   }
