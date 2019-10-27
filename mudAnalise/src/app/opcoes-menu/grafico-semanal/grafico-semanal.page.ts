@@ -339,7 +339,7 @@ export class GraficoSemanalPage implements OnInit
           //if for a primeira vez, cria dois objetos datasets, um pras semanas em que acorodu naturalmente e outro pro caso contrario (e tambem o objeto datasec)
           if(i == 0){     
             dataset.push({
-              label: "horas dormidas (acorodu natralmente)",
+              label: "horas dormidas (acordou naturalmente)",
               //adiciona valor caso tenha acordado naturalmente, caso contrario adciona 0
               data: [(qualDset) ? sem.duracao : 0],
               borderColor: '#' + colors[0] + 'ff',
@@ -348,7 +348,7 @@ export class GraficoSemanalPage implements OnInit
               borderWidth: 1
             });
             dataset.push({
-              label: "horas dormidas (nao acorodu natralmente)",
+              label: "horas dormidas (nao acordou naturalmente)",
               //adiciona valor caso nao tenha acordado naturalmente, caso contrario adciona 0
               data: [(!qualDset) ? sem.duracao : 0],
               borderColor: '#' + colors[1] + 'ff',
