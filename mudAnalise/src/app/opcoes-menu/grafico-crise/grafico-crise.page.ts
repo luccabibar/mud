@@ -95,15 +95,9 @@ export class GraficoCrisePage implements OnInit
    * @param data dados brutos base
    * @returns objeto de dados processados
    */
-  prepareEstatisticas(data)
+  prepareEstatisticas(data: Array<object>)
   {
-    let total = 0;
-
-    //conta total de crises;
-    data.forEach(element => 
-    {
-      total++;
-    });
+    let total = data.length;
 
     let mediaMensal = (total / 12).toFixed(2);
     let mediaDiaria = (total / 365).toFixed(2);
