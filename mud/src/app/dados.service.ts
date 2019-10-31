@@ -6,7 +6,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 @Injectable({
   providedIn: 'root'
 })
-export class DadosService {
+export class DadosService {//Gets e Sets
 
   constructor(private localNotifications: LocalNotifications, private BancoService: BancoService, private AlertController: AlertController) { }
 

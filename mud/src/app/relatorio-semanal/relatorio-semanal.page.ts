@@ -330,18 +330,6 @@ export class RelatorioSemanalPage implements OnInit {
     }
 
 
-    // const alert = await this.AlertController.create({
-    //   header: 'Erro',
-    //   message: carboidratos+"<br>"+proteinas+"<br>"+lacticinios+"<br>"+verdfrut+"<br>"+agua+"<br>"+
-    //   fez_atv+"<br>"+duracao_atv+"<br>"+intensidade_atv+
-    //   "<br>"+fez_lazer+"<br>"+vezes_Lazer+"<br>"+acomp_lazer+"<br>"+
-    //   horario_dorm+"<br>"+despertou+"<br>"+vezes_sono+"<br>"+acordou_precoce+
-    //   "<br>"+coment_lazer+"<br>"+coment_final,
-    //   buttons: ['OK']
-    // });
-    
-    //await alert.present();
-    
     this.BD.enviarRelatorioSemanal(this.dadosService.getId().toString(),coment_final,this.dadosService.getData_relatorioS_I(),this.dadosService.getData_relatorioS_F(),carboidratos,proteinas,lacticinios,verdfrut,agua,fez_atv.toString(),duracao_atv,intensidade_atv.toString(),fez_lazer.toString(),coment_lazer,vezes_Lazer,acomp_lazer.toString(),parseInt(horario_dorm,10),despertou.toString(),vezes_sono,acordou_precoce.toString())
     .then(async(response)=>{
         const alert = await this.AlertController.create({
@@ -399,11 +387,11 @@ export class RelatorioSemanalPage implements OnInit {
   
   ScrollToPoint(X,Y){
     this.content.scrollToPoint(X,Y,1500);
-  }
+  }// iniciar próximo slide no topo da tela
 
   volta()
   {
     this.router.navigateByUrl('/tabs/tabs2');
-  }
+  }//sai do relatório 
 
 }

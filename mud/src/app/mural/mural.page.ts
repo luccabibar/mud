@@ -33,7 +33,7 @@ export class MuralPage implements OnInit {
   ngOnInit() {
     this.addMural();
   }
-
+  //Recarregar os dados
   doRefresh(event) {
     this.addMural();
 
@@ -42,12 +42,12 @@ export class MuralPage implements OnInit {
       event.target.complete();
     }, 2000);
   }
-
+  //Direciona para a página mais informações
   Info()
   {
     this.navCtrl.navigateForward('tab3');
   }
-//botao sobre da página
+  //Direciona para a página sobre
   sobre()
   {
     this.navCtrl.navigateForward('sobre');
@@ -57,12 +57,8 @@ export class MuralPage implements OnInit {
     var dato ="";
     let id=this.dadosService.getId();
     this.BancoService.selecionarMural(id).then(async(response)=>{
-        //const alert = await this.AlertController.create({
-        //  header: 'Abrindo mural',
-        //  subHeader: 'Aguarde o carregamento...'
-        //});
+
         let loading = await this.loadingCtrl.create({
-          //message: 'Processando...'
         });
         let a=0;
         let n=0;
@@ -92,16 +88,16 @@ export class MuralPage implements OnInit {
         do{  
             switch(j){
             case 0:
-              corzita = "rgba(95, 211, 188, 1)";//"#FFCCBC"; 'rgba(255, 255, 255,'+opacidade+')'
+              corzita = "rgba(95, 211, 188, 1)";
               break;
             case 1:
-              corzita = "rgba(41, 148, 127, 1)";//"#DCEDC8";
+              corzita = "rgba(41, 148, 127, 1)";
             break;
             case 2:
-                corzita = "rgba(48, 176, 151, 1)";//"#DCEDC8";
+                corzita = "rgba(48, 176, 151, 1)";
               break;
             case 3:
-                corzita = "rgba(183, 235, 225, 1)"//"#B3E5FC"; 
+                corzita = "rgba(183, 235, 225, 1)";
               j = -1;
               break;
             }
@@ -118,7 +114,7 @@ export class MuralPage implements OnInit {
 
     const alert = await this.AlertController.create({
       header: 'Mural Vazio',
-      //subHeader: 'aaaaaa' + dato,
+     
       message: "Você ainda não está conectado a um profissional.",
       buttons: ['OK']
     });

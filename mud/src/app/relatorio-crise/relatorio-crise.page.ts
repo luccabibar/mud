@@ -29,7 +29,7 @@ export class RelatorioCrisePage implements OnInit {
 
    }
 
-  async ngOnInit() {
+  async ngOnInit() { 
     this.IonSlides.lockSwipes(true);
     await this.sitBanco(null);
     document.getElementById("lblTempo").innerHTML = '- de 10 mins';
@@ -218,91 +218,10 @@ export class RelatorioCrisePage implements OnInit {
     }
 
 
-    /*let selecionados = 1;
-    let sintomas: any[];
-    if((<HTMLInputElement>document.getElementById("12")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("13")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("14")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("15")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("16")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("17")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("18")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("19")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("20")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("21")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("22")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("23")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }
-    if((<HTMLInputElement>document.getElementById("24")).checked)
-    {
-      sintomas[selecionados-1] = selecionados;
-      selecionados++; 
-    }*/
-
     let sintomas_crise = (<HTMLInputElement>document.getElementById("12")).value;
 
-
-    /*let sint_rit_card_acelerado = (<HTMLInputElement>document.getElementById("14")).value;
-    let sint_sens_asfixia = (<HTMLInputElement>document.getElementById("15")).value;
-    let sint_sudorese = (<HTMLInputElement>document.getElementById("16")).value;
-    let sint_trem_abalos = (<HTMLInputElement>document.getElementById("17")).value;
-    let sint_nausea_ind = (<HTMLInputElement>document.getElementById("18")).value;
-    let sint_dor = (<HTMLInputElement>document.getElementById("19")).value;
-    let sint_ond_calor = (<HTMLInputElement>document.getElementById("20")).value;
-    let sint_anestesia = (<HTMLInputElement>document.getElementById("21")).value;
-    let sint_sens_irrealidade = (<HTMLInputElement>document.getElementById("22")).value;
-    let sint_instabilidade = (<HTMLInputElement>document.getElementById("23")).value;
-    let sint_medo_morrer = (<HTMLInputElement>document.getElementById("24")).value;
-    let sint_medo_perder_controle = (<HTMLInputElement>document.getElementById("25")).value;*/
     let situacoes;
-    if(this.adicionou_sit)
+    if(this.adicionou_sit)//Adiciona uma nova situação na qual aconteceu a crise
     {
       situacoes = (<HTMLInputElement>document.getElementById("26")).value;
 
@@ -328,32 +247,9 @@ export class RelatorioCrisePage implements OnInit {
       situacoes = (<HTMLInputElement>document.getElementById("25")).value;
     }
     
-    /*if((<HTMLInputElement>document.getElementById("25")).value!="")
-    {
-      situacoes+=(<HTMLInputElement>document.getElementById("25")).value;
-    }
-    if((<HTMLInputElement>document.getElementById("26")).value!="")
-    {
-      situacoes+=", "+(<HTMLInputElement>document.getElementById("26")).value;
-    }
-    if((<HTMLInputElement>document.getElementById("27")).value!="")
-    {
-      situacoes+=", "+(<HTMLInputElement>document.getElementById("27")).value;
-    }*/
-    /*let situacao2 = (<HTMLInputElement>document.getElementById("27")).value;
-    let situacao3 = (<HTMLInputElement>document.getElementById("28")).value;*/
     let intensidade = (<HTMLInputElement>document.getElementById("preocupa")).value;
 
-    /*let horas="";
-    let dia = new Date().getDay();
-    let mes = new Date().getMonth();
-    let ano = new Date().getFullYear();
-    let hora = new Date().getHours();
-    let minuto = new Date().getMinutes();
-    let segundo = new Date().getSeconds();
-    horas=ano+"-"+mes+"-"+dia+" "+hora+":"+minuto+":"+segundo;
-    this.dadosService.setCrise_hr_fim(horas);*/
-
+ 
     this.bancoService.relatorio_crise(this.dadosService.getId().toString(),local_crise,sintomas_crise, this.dadosService.getDuracao_crise(),intensidade,situacoes,pessoa_acompanhamento)
     .then(async(response)=>{
         const alert = await this.alertController.create({
@@ -366,7 +262,6 @@ export class RelatorioCrisePage implements OnInit {
               role: "ok",
               handler: data => {
                 this.navCtrl.navigateForward('/tabs/tab2');
-                // this.router.navigateByUrl('/tabs/tabs2');
               }
             },
         ]
@@ -388,7 +283,7 @@ export class RelatorioCrisePage implements OnInit {
 
   }
 
-  voltar()
+  voltar()//Retorna para a página home
   {
     this.navCtrl.navigateBack('tabs/tab2');
   }

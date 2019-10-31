@@ -6,7 +6,7 @@ import { CelularValidator } from './validators/celular';
 @Injectable({
   providedIn: 'root'
 })
-export class BancoService {
+export class BancoService {//métodos do banco, acesso ao banco de dados via API
   private API_URL = 'http://200.145.153.172/mud/API/index.php/'
   constructor(private http: HttpClient) { 
 
