@@ -5,7 +5,7 @@ import {AlertController} from  '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
-export class DadosService {
+export class DadosService {//Gets e Sets
 
   constructor(private localNotifications: LocalNotifications, private BancoService: BancoService, private AlertController: AlertController) { }
 

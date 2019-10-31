@@ -38,25 +38,6 @@ export class EsqueciPage implements OnInit {
 
   ngOnInit() {
   }
-
-  // public async validaEmail(evento) {
-  //   let email = evento.target.value
-
-  //   if (this.formEsqueci.get('email').valid) {
-  //     this.bd.selectGenerico("SELECT * FROM usuario WHERE email='" + email + "';").then(async (resposta) => {
-  //     }).catch(async (resposta) => {
-  //       this.existente = true;
-  //       const alert = await this.alertController.create({
-  //         header: 'Erro ao recuperar senha',
-  //         subHeader: 'E-mail inválido',
-  //         message: 'Certifique se o e-mail preenchido corresponde a uma conta do MudProfissional',
-  //         buttons: ['OK']
-  //       });
-  //       await alert.present();
-  //     })
-  //   }
-  // }
-
   public async sendEmail() { //envia o email
 
     let email = this.formEsqueci.value.email;

@@ -36,29 +36,29 @@ export class PerfilUserPage {
       celular : [this.celular, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(15)])],
       cpf: [this.cpf, Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf])]
     });
-  }
+  }//validação
 
   aa()
   {
     setTimeout(() => {
       this.ino.setFocus();
   }, 400);
-  }
+  }//foca no campo
 
   relatsem()
   {
       this.nav.navigateForward('relatorio-semanal');
-  }
+  }//Entra no relatório
 
   pagsessao()
   {
       this.nav.navigateForward('sessoes');
-  }
+  }//direciona para a página de sessões
 
   editarContatos()
   {
     this.nav.navigateForward('contato');
-  }
+  }//botão para editar contatos
 
   async salvarPerfil() //salva alterações
   {
@@ -178,7 +178,7 @@ export class PerfilUserPage {
     await alert.present();
   }
 
-  async alterarSenha()
+  async alterarSenha()//altera a senha
   {
     const alert = await this.alertController.create({
       header: "Alterar Senha",
@@ -302,7 +302,7 @@ export class PerfilUserPage {
         text: 'Sair',
         handler: data => {
           this.dadosService.limpaDados();
-          //this.nav.navigateForward('login-page');
+          
           window.location.replace("/login-page");
         }
       }
@@ -312,7 +312,7 @@ export class PerfilUserPage {
     await alert.present();
   }
 
-  ativa() 
+  ativa() //habilita a alteração de dados
   {
     if(this.perfil.valid)
     {

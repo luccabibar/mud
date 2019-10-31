@@ -85,17 +85,6 @@ export class CadastroUserPage implements OnInit {
     }
     return rv;
   }
-  
- /* public slideOneForm:FormGroup = new FormGroup({
-    'nome' : new FormControl(null, [Validators.required, Validators.minLength(1), Validators.pattern('[ A-Za-zÀ-ú ]*')]),
-    'email' : new FormControl(null, [Validators.required, Validators.email]),
-    'datanasc' : new FormControl(null, [Validators.required]),
-    'celular' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CelularValidator.checkCelular]),
-    'cpf' : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('[0-9]+'), CpfValidator.checkCpf]),
-    'senha' : new FormControl(null, [Validators.required, Validators.minLength(2)]),
-    'confirmasenha' : new FormControl(null, [Validators.required, Validators.minLength(2), ConfirmaSenha.checkSenha])}, 
-    {validator: this.matchingPasswords('senha', 'confirmasenha')}
-  })*/
 
     proxSlide() //envia pro proximo slide
     {
@@ -334,17 +323,6 @@ export class CadastroUserPage implements OnInit {
     let cont2_tell = (<HTMLInputElement>document.getElementById("9")).value;
 
     this.BD.cadUsu2(this.dadosService.getId().toString(),cont1_nome,cont1_tell,cont2_nome,cont2_tell)
-    /*.then(async(response)=>{
-        const alert = await this.AlertController.create({
-          header: 'Confirmação',
-          subHeader: 'Sucesso!',
-          message: JSON.stringify(response),
-          buttons: ['OK']
-        });
-        
-        await alert.present();
-      }
-    )*/
     .catch(async(response)=>{
 
       const alert = await this.AlertController.create({
@@ -371,12 +349,10 @@ export class CadastroUserPage implements OnInit {
         const alert = await this.AlertController.create({
           header: 'Confirmação',
           subHeader: 'Cadastro efetivado com sucesso!',
-          //message: JSON.stringify(response),
           buttons: [
             {
               text: 'Ok',
               handler: data => {
-                //this.navCtrl.navigateForward('login-page');
                 window.location.replace("/login-page");
               }
             }
@@ -391,7 +367,6 @@ export class CadastroUserPage implements OnInit {
       const alert = await this.AlertController.create({
         header: 'Erro!',
         subHeader: 'Por favor, tente novamente',
-        //message: JSON.stringify(response),
         buttons: ['OK']
       });
   
@@ -401,26 +376,6 @@ export class CadastroUserPage implements OnInit {
     
 async ngOnInit() { //trava os slides
   this.IonSlides.lockSwipes(true);
-  //await this.sitBanco(null);
 }
-
-
-/*async RetornarListaAnos(){
-  //DEVERÁ TER UMA NOVA CONDIÇÃO NO WHERE NO SQL, NO CASO "usuario_id". Para que concatenar com o resto
-  let ReturnAnos = await this.BD.selectGenerico("SELECT * FROM situacao WHERE usuario_id ="+this.dadosService.getId()+" ORDER BY id ASC;");
-  let anos=[];
-  for(let i in ReturnAnos)
-    anos[i]=ReturnAnos[i].ano;
-  return anos;
-}
-
-h = [];
-primeiro: any;
-
-async sitBanco($event = null) {
-  this.h = await this.RetornarListaAnos();
-  this.primeiro = this.h[0];
-  console.log(this.h);
-}*/
 
 }
