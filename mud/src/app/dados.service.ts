@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { BancoService } from './banco.service';
 import {AlertController} from  '@ionic/angular';
+import { forEach } from '@angular/router/src/utils/collection';
 @Injectable({
   providedIn: 'root'
 })
@@ -193,32 +194,35 @@ export class DadosService {//Gets e Sets
     this.setCont2_num("");
   }
 
-
+//aqui temos a função que verifica a existencia de novos murais no banco de dados, ao percebelos ele gera uma notificação no app do usuario
   Notificacao()
   {
     this.BancoService.selecionarMuralNotifica(this.getId()).then(async(response)=>{
+        if(response=="0")
+        {
+          return null;
+        }
+        else if(response[0].novo=="1")
+        {
+          this.localNotifications.schedule({
+            id: 1,
+            text: 'Você tem um novo mural '+ this.getNome(),
+            data: { mydata: "novo mural" }
+          });
+          this.BancoService.alterarNotifica(this.getId()).then(async(response)=>{
+            return null;
+          }).catch(async(response)=>{
+            if(response==null)
+            {
+              return null;
+            }
+          });
+        }
+      }).catch(async(response)=>{
         if(response==null)
         {
           return null;
         }
-        else if(response[0]=="1")
-        {
-          this.localNotifications.schedule({
-            id: 1,
-            text: 'Você tem um novo mural',
-            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
-            data: { mydata: "novo mural" }
-          });
-        }
-      }).catch(async(response)=>{
-
-        const alert = await this.AlertController.create({
-          header: 'erro as buscar o mural',
-          message: "erro de http",
-          buttons: ['OK']
-        });
-    
-        await alert.present()
       });
   }
 }

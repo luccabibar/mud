@@ -3,7 +3,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { Firebase } from '@ionic-native/Firebase';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -15,8 +14,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import {LocalNotifications} from "@ionic-native/local-notifications/ngx";
-
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { File } from '@ionic-native/file/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 const config = {
   apiKey: "AIzaSyDns6l1bdVQVtTNmPpeFVk8LBauDCKKiuk",
@@ -40,6 +41,9 @@ const config = {
     FCM,
     StatusBar,
     SplashScreen,
+    CallNumber,
+    FileOpener,
+    File,
     BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ScreenOrientation,

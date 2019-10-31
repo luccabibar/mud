@@ -1,26 +1,12 @@
 
 /**
- * gera uma cor aleatoria
- * 
- * @returns string comm a cor em hexdec
- */
-function randColor()
-{
-	let vals = "0123456789ABCDEF"
-	let cor = "#";
-	for (let i = 0; i < 6; i++) {
-		cor += vals[Math.floor(Math.random() * 16)];
-	}
-	return cor;
-}
-
-/**
  * pega todos os dados da API e joga em variaveis "estaticas"
  */
 function loadData()
 {
 	//query
-	let sql = "SELECT sem.data_inicial, sem.observacao, " +
+	let sql = "SELECT * FROM (" +  
+		"SELECT sem.created_at, sem.observacao, " +
 		"ali.carboidratos, ali.proteinas, ali.laticinios, ali.verd_frut, ali.hidratacao, " +
 		"bem.b_realizou, bem.vezes, bem.comentario, " +
 		"son.duracao_sono, son.vezes_acordou, son.acordou_naturalmente " +
@@ -29,7 +15,8 @@ function loadData()
 		"JOIN bem_estar AS bem ON sem.id_semana = bem.semana_id " +
 		"JOIN sono AS son ON sem.id_semana = son.semana_id " +
 		"WHERE sem.usuario_id = " + 6 + " " +
-		"ORDER BY sem.data_inicial; ";
+		"ORDER BY sem.created_at " +
+		") AS semana ORDER BY created_at asc;";
 	let data = {
 		'sql': sql
 	};
@@ -45,12 +32,12 @@ function loadData()
 		let dados = resp.dados;
 		dados.forEach((row) => 
 		{			
-			let dataIni = (row.data_inicial).split('-');
+			let dataIni = (row.created_at).split('-');
 			dataIni = dataIni[2] + "/" + dataIni[1] + "/" + dataIni[0];
 
 			//5 pacotes de dados brutos
 			semana.push({
-			"data_inicial": dataIni,
+			"created_at": dataIni,
 			"observacao": row.observacao
 			});
 			alimentacao.push({
@@ -85,10 +72,16 @@ function loadData()
 function loadDataset(opt)
 {
 	let dataset = [];
+	let datasec = [];
+	let opts;
+	let secopts;
 	//carrega um dataset diferente com base no indice selecionado
 	switch(opt){
 		//case Alimentação
 		case 0:{
+			//cores custom
+			let colors = ['ffa500', 'ff3333', '5cbdbb','9ad318'];
+
 			let first = true;
 			//itera sobre cada semana
 			alimentacao.forEach((sem) => 
@@ -104,7 +97,9 @@ function loadDataset(opt)
 						dataset.push({
 							label: key,
 							data: [value],
-							borderColor: randColor(),
+							//cores custom
+							borderColor: "#" + colors[i] + "ff",
+							backgroundColor: "#" + colors[i] + "99",
 							fill: false,
 							borderWidth: 1
 						});
@@ -119,6 +114,17 @@ function loadDataset(opt)
 				first = false;
 			});
 
+			opts = {
+				scales: {
+					xAxes: [{
+						stacked: false
+					}],
+					yAxes: [{
+						stacked: false
+					}]
+				}
+			}	;
+
 			break;
 		}
 		//case Consumno de água
@@ -132,7 +138,8 @@ function loadDataset(opt)
 					dataset.push({
 						label: "frequencia",
 						data: [sem.hidratacao],
-						borderColor: randColor(),
+						borderColor: '#' + '1f06f0' + 'ff',
+						backgroundColor: '#' + '1f06f0' + '99',
 						fill: false,
 						borderWidth: 1
 					});
@@ -144,6 +151,18 @@ function loadDataset(opt)
 
 				i++;
 			});
+
+			opts = {
+				scales: {
+					xAxes: [{
+						stacked: false
+					}],
+					yAxes: [{
+						stacked: false
+					}]
+				}
+			};
+
 			break;
 		}
 		//case Lazer
@@ -151,14 +170,14 @@ function loadDataset(opt)
 			let i = 0;
 			//itera sobre cada semana 
 			lazer.forEach((sem) => 
-			{ 
-			
+			{ 		
 				//if for a primeira vez, cria objeto de dataset
 				if(i == 0){     
 					dataset.push({
 						label: "frequencia",
 						data: [sem.vezes],
-						borderColor: randColor(),
+						borderColor: '#' + 'ffd700' + 'ff',
+						backgroundColor: '#' + 'ffd700' + '99',
 						fill: false,
 						borderWidth: 1
 					});
@@ -170,15 +189,99 @@ function loadDataset(opt)
 
 				i++;
 			});
+
+			opts = {
+				scales: {
+					xAxes: [{
+						stacked: false
+					}],
+					yAxes: [{
+						stacked: false
+					}]
+				}
+			};
+
 			break;
 		}
 		//case Sono
 		case 3:{
+			//ok desse aqui eu gosto
+			//cores custom
+			let colors = ['3399ff', 'ff3333'];
+			let i = 0;
+			sono.forEach((sem) => 
+			{
+				let qualDset = (sem.acordNat == 't') ? true : false;
+				
+				//if for a primeira vez, cria dois objetos datasets, um pras semanas em que acorodu naturalmente e outro pro caso contrario (e tambem o objeto datasec)
+				if(i == 0){     
+					dataset.push({
+						label: "horas dormidas (acorodu natralmente)",
+						//adiciona valor caso tenha acordado naturalmente, caso contrario adciona 0
+						data: [(qualDset) ? sem.duracao : 0],
+						borderColor: '#' + colors[0] + 'ff',
+						backgroundColor: '#' + colors[0] + '99',
+						fill: false,
+						borderWidth: 1
+					});
+					dataset.push({
+						label: "horas dormidas (nao acorodu natralmente)",
+						//adiciona valor caso nao tenha acordado naturalmente, caso contrario adciona 0
+						data: [(!qualDset) ? sem.duracao : 0],
+						borderColor: '#' + colors[1] + 'ff',
+						backgroundColor: '#' + colors[1] + '99',
+						fill: false,
+						borderWidth: 1
+					});
+
+					datasec.push({
+						label: "vezes acordadas durante a noite (média semanal)",
+						//adiciona valor caso nao tenha acordado naturalmente, caso contrario adciona 0
+						data: [sem.acordVezes],
+						borderColor: '#' + '66ff66' + 'ff',
+						backgroundColor: '#' + '66ff66' + '99',
+						fill: false,
+						borderWidth: 1
+					});
+				}
+				//else so add o valor no dataset correspondente
+				else{
+					dataset[0].data.push((qualDset) ? sem.duracao : 0);					
+					dataset[1].data.push((!qualDset) ? sem.duracao : 0);	
+					
+					datasec[0].data.push(sem.acordVezes);
+				}
+
+				i++;
+			});
+
+			opts = {
+				scales: {
+					xAxes: [{
+						stacked: true
+					}],
+					yAxes: [{
+						stacked: true
+					}]
+				}
+			};
+
+			secopts = {
+				scales: {
+					xAxes: [{
+						stacked: false
+					}],
+					yAxes: [{
+						stacked: false
+					}]
+				}
+			};
 
 			break;
 		}	
 	}
-	return dataset;	
+
+	return {'data': dataset, 'datasec': datasec, 'options': opts, 'secOptions': secopts};	
 }
 
 /**
@@ -192,17 +295,9 @@ function updateGraf(dataset)
 		type: 'bar',
 		data: {
 			//labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
-			datasets: dataset
+			datasets: dataset.data
 		},
-		options: {
-			scales: {
-			yAxes: [{
-				ticks: {
-				beginAtZero: true
-				}
-			}]
-			}
-		}
+		options: dataset.options
 	};
 
 	//cria um objeto grafico caso nao existe
@@ -211,9 +306,26 @@ function updateGraf(dataset)
 	}
 	//else limpa o obj grafico e add o novo dataset
 	else{
-		console.log("yare yare");
-		grafObj.data.datasets = dataset;
+		grafObj.data.datasets = dataset.data;
+		grafObj.options = dataset.options;
 		grafObj.update();
+	}
+
+	//faz o mesmo mas pro outro graf
+	if(dataset.datasec.length != 0){
+		//cria um objeto grafico caso nao existe
+		if(grafSec == null){
+			//say sike rn
+			grafStuff.data.datasets = dataset.datasec;
+			grafStuff.options = dataset.secOptions;
+			grafSec = new Chart($("#graf-sec")[0], grafStuff);
+		}
+		//else limpa o obj grafico e add o novo dataset
+		else{
+			grafSec.data.datasets = dataset.datasec;
+			grafObj.options = dataset.secOptions;
+			grafSec.update();
+		}
 	}
 }
 
@@ -222,6 +334,13 @@ function changeGraf()
 	let index = $("#tipo-graf")[0].selectedIndex;
 	let dataset = loadDataset(index); 
 	updateGraf(dataset);
+	//graf secundario
+	if(dataset.datasec.length != 0){
+		$("#graf-sec").css('visibility', 'visible');
+	}
+	else{
+		$("#graf-sec").css('visibility', 'hidden');
+	}
 }
 
 //5 arrays principais de dados brutos
@@ -233,11 +352,12 @@ let sono = [];
 
 //objeto do grafico em si
 let grafObj = null;
+let grafSec = null;
 
 window.onload = () => 
 {
 	loadData();
 
 	$("#tipo-graf").change(changeGraf);
+	$("#refresh").click(changeGraf);
 };
-

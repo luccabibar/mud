@@ -1,12 +1,15 @@
 <ion-header>
   <ion-toolbar color="verdemud4">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+        <ion-button type="button" (click)="voltar()"> 
+            <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
   <ion-item lines="none">
     <div slot="start">
       <ion-avatar slot="start" class="botao">
@@ -14,7 +17,8 @@
       </ion-avatar>
     </div>
     <div >
-      <ion-label><strong><!--{{user_sessao.nome}}--></strong></ion-label>
+      <ion-label><strong>{{nome1}}</strong></ion-label>
+      <ion-label><small>Num: </small>{{num1}}</ion-label>
     </div>
     <div class="divao">
       <ion-buttons slot="end">
@@ -24,4 +28,27 @@
       </ion-buttons>
     </div>
   </ion-item>
+</ion-card>
+<div id="cont2">
+    <ion-card>
+        <ion-item lines="none">
+          <div slot="start">
+            <ion-avatar slot="start" class="botao">
+              <img src="assets/perfil_generico.png">
+            </ion-avatar>
+          </div>
+          <div >
+            <ion-label><strong>{{nome2}}</strong></ion-label>
+            <ion-label><small>Num: </small>{{num2}}</ion-label>
+          </div>
+          <div class="divao">
+            <ion-buttons slot="end">
+              <ion-button (click)="callNow()" class="botao">
+                <ion-icon slot="icon-only" name="call"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </div>
+        </ion-item>
+      </ion-card>
+</div>
 </ion-content>

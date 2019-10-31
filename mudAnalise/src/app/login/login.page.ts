@@ -80,7 +80,7 @@ export class LoginPage implements OnInit {
         const alert = await this.alertController.create({
           header: 'ERRO!!',
           subHeader: 'Dados inválidos!',
-          message: 'Verifique se usuário/senha estão corretos ou se há conexão com wi-fi',
+          message: 'Verifique se usuário/senha estão corretos ou se há conexão com wi-fi'+resposta,
           buttons: ['OK']
         });
         await alert.present();

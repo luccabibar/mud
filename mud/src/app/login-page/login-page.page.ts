@@ -6,7 +6,8 @@ import { NavController, AlertController, IonInput} from '@ionic/angular';
 import { BancoService } from './../banco.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { DadosService } from '../dados.service';
-
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { File } from '@ionic-native/file/ngx';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.page.html',
@@ -23,7 +24,7 @@ export class LoginPagePage {
 
   public submitAttempt: boolean = false;
 
-  constructor(private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router, private ScreenOrientation: ScreenOrientation, private fcm:FCM) { 
+  constructor(private file: File,private fileOpener: FileOpener,private dadosService: DadosService,private nav: NavController,public formBuilder: FormBuilder, private BancoService: BancoService, public alertController: AlertController, private router: Router, private ScreenOrientation: ScreenOrientation, private fcm:FCM) { 
     
   }
 
@@ -94,8 +95,8 @@ export class LoginPagePage {
         this.BancoService.selectGenerico("SELECT * FROM contato WHERE id_usuario='"+this.dadosService.getId()+"';")
         .then(async(response)=>{
           this.dadosService.setCont1_nome(String(response[0].nome));
-          this.dadosService.setCont2_nome(String(response[1].nome));
           this.dadosService.setCont1_num(String(response[0].telefone));
+          this.dadosService.setCont2_nome(String(response[1].nome));
           this.dadosService.setCont2_num(String(response[1].telefone));
         })
 
@@ -153,7 +154,11 @@ export class LoginPagePage {
   //Abre o guia do usuário
   guia()
   {
-    this.nav.navigateForward('guia');
+    let path = this.file.applicationDirectory + 'www/assets';
+
+    this.file.copyFile(path, 'guia.pdf', this.file.dataDirectory, 'guia_usu.pdf').then(result => {
+      this.fileOpener.open(result.nativeURL, 'application/pdf');
+    });
   }
 
 }

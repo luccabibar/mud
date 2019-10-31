@@ -45,7 +45,8 @@ export class FichaPacientePage implements OnInit {
       let sintomas:Array<String> = [];  
       response.forEach(row => {
         let sint: String = row.array_agg;
-        sint = sint.slice(2, sint.length - 2); //tira uns chars indesejados da string
+        //tira uns chars indesejados da string
+        sint = (sint[1] == '"') ? sint.slice(2, sint.length - 2) : sint.slice(1, sint.length - 1);
         sintomas.push(sint);
       });
       
@@ -75,9 +76,6 @@ export class FichaPacientePage implements OnInit {
     this.paciente.dt_nasc = aniver[2] + "/" + aniver[1] + "/" + aniver[0];
 
     this.getDadoInicial(this.paciente.id_usuario);
-    //let idade = ;
-    //this.paciente.idade = ;
-    console.log(this.paciente);
   }
 
   ngOnInit() {

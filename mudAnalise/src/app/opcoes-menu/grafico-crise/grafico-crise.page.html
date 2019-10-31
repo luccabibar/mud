@@ -10,47 +10,50 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-card>
-    <ion-card-header>
-      Gráfico de Crise I
-    </ion-card-header>
-    <img src="assets/imagensGraficos/g1.PNG" alt="">
-  </ion-card>
-  <ion-card>
+
+  <div *ngIf="error; else noError">
+    erro
+  </div>
+  <ng-template #noError>
+    <!-- grafico card -->
+    <ion-card>
       <ion-card-header>
-          Gráfico de Crise II
-        </ion-card-header>
-    <img src="assets/imagensGraficos/g2.PNG" alt="">
+        <ion-card-title>
+          Gráfico de crises:
+        </ion-card-title>
+      </ion-card-header>
 
-  </ion-card> -->
+      <ion-card-content>
+        <!-- grafico em si -->
+        <canvas #grafico>
+          
+        </canvas>
+      </ion-card-content>
+    </ion-card>
 
+    <!-- dados card -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          Dados:
+        </ion-card-title>
+      </ion-card-header>
+
+      <!-- dados em si -->
+      <ion-card-content *ngIf="estatisticas != null">
+        <ion-item> Total de crises nos ultimos 12 meses: {{estatisticas.total}} </ion-item>
+        <ion-item> Média de crises por mês: {{estatisticas.mediaMensal}} </ion-item>
+        <ion-item> Média de crises por dia: {{estatisticas.mediaDiaria}} </ion-item>
+        <ion-item *ngIf="estatisticas.mediaInterv != false"> Uma crise ocorre a cada {{estatisticas.mediaInterv}} dia(s), em média. </ion-item>
+      </ion-card-content>
+    </ion-card>  
+  </ng-template>
+
+  <!-- kek -->
   <ion-card>
-    <ion-item>
-      Crises do paciente:
-      <strong>{{user_sessao.nome}}</strong>
-    </ion-item>
-    <ion-item>
-        <ion-label>Ano</ion-label>
-        <ion-select (ionChange)="lineChartMethod($event)"  [ngModel]="primeiro">
-          <!-- for dessa desgraça que busca do banco os anos -->
-              <ion-select-option  *ngFor="let ano of h" [value]="ano" >{{ano}}</ion-select-option>
-         
-         
-        </ion-select>
-      </ion-item>
+    <ion-card-content>
+      Para melhor visualização dos gráficos, recomendamos a plataforma mudAnálise web.
+    </ion-card-content>
   </ion-card>
-  <div class="canvas-charts">
-  <ion-card >
-      <canvas #lineCanvas></canvas>
- 
-  </ion-card>
-  <ion-card class="cardin">
-      Total de crises anual: {{totalCrises}}<br>
-      Média de crises mensal: {{totalCrisesMes}}<br>
-      Média de crises diária: {{totalCrisesDias}}
-
-    
-  </ion-card>
-</div>
 
 </ion-content>

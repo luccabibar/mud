@@ -68,7 +68,7 @@ export class Tab3Page {
       this.router.navigateByUrl("/login");
     }
   }
-
+//função que deleta o muralo tanto visuamente como fisicamente do banco
   public deleteMural(mural)
   {
     
@@ -97,7 +97,7 @@ export class Tab3Page {
       await alert.present();
     })
   }
-
+//função que adiciona o mural visualmente a tela do usuario
   public addMural()
   {
     
@@ -193,7 +193,7 @@ export class Tab3Page {
   }
   return null;
 }
-
+//alerta de deleção do mural
 public async alertaDeletar(mural){
   const alert = await this.AlertController.create({
     header: 'Apagar nota',
@@ -220,7 +220,7 @@ public async alertaDeletar(mural){
 }
 
 
-
+//função para inserir o mural fisicamente no banco de dados
   async inserirMural() {
 
     let titulo = (<HTMLInputElement>document.getElementById("1")).value;
@@ -260,6 +260,7 @@ public async alertaDeletar(mural){
     this.IonSlides.lockSwipes(true);
   }
 /**/ 
+//elemento visual do murais 
   async novanota()
   {
     this.IonSlides.lockSwipes(false);

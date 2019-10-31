@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DadosService } from '../dados.service';
 import { BancoService } from '../banco.service';
 import { alertController } from '@ionic/core';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-relatorio-crise',
@@ -13,12 +14,20 @@ import { alertController } from '@ionic/core';
 export class RelatorioCrisePage implements OnInit {
 
   @ViewChild(IonSlides) IonSlides: IonSlides;
+  public slide1form: FormGroup;
+
 
   public conta = 0;
   public contar = 0;
   public conta3 = 0;
 
-  constructor(public alertController: AlertController,public bancoService: BancoService,public dadosService: DadosService,public navCtrl: NavController) { }
+  constructor(public alertController: AlertController,public bancoService: BancoService,public dadosService: DadosService,public navCtrl: NavController, public formBuilder: FormBuilder) 
+  {
+    this.slide1form = formBuilder.group({
+      lugar: ['' ,  Validators.compose([Validators.required])]
+    });
+
+   }
 
   async ngOnInit() { 
     this.IonSlides.lockSwipes(true);
@@ -59,14 +68,27 @@ export class RelatorioCrisePage implements OnInit {
     }
   }
 
-  troca() //troca os botoes
+  async troca() //troca os botoes
   {
+    if(this.slide1form.valid)
+    {
     this.IonSlides.lockSwipes(false);
     this.IonSlides.slideNext();
     this.IonSlides.lockSwipes(true);
     this.conta3++;
     document.getElementById("btnProximo").style.display='none';
     document.getElementById("botoes").style.display='unset';
+    }
+    else
+    {
+      const alert = await this.alertController.create({
+        header: 'Erro',
+        message: 'Por favor, preencha todos os campos.',
+        buttons: ['OK']
+      });
+      
+      await alert.present();
+    }
   }
 
   mudaLabel() //muda os labels 
@@ -165,7 +187,7 @@ export class RelatorioCrisePage implements OnInit {
     local_crise = (<HTMLInputElement>document.getElementById("4")).value;
     
     
-    let data_crise = (<HTMLInputElement>document.getElementById("5")).value;
+    //let data_crise = (<HTMLInputElement>document.getElementById("5")).value;
 
     let duracao_crise = (<HTMLInputElement>document.getElementById("tempo")).value;
     this.dadosService.setDuracao_crise(duracao_crise);

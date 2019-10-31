@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar color=verdemud3>
-        <ion-title>Sessao</ion-title>
+        <ion-title>Vínculo</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -37,7 +37,7 @@
           <ion-label class="label" position="stacked"><ion-icon name="call"></ion-icon> Celular</ion-label>
           <ion-input readonly value="{{profCelular}}" type="text" name="nome" id="4"></ion-input>
         </ion-item>
-        <ion-button (click)="removeSessao()" color="danger" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;">Encerrar Sessão</ion-button>
+        <ion-button (click)="removeSessao()" color="danger" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;">Encerrar vínculo</ion-button>
         
         <ion-button (click)="goBack()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Voltar</ion-button>
       </ion-list>
@@ -45,7 +45,7 @@
   </ion-card>
   </div>
   <ng-template #newSessao>
-    <ion-button (click)="startSessao()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;">Iniciar nova sessão</ion-button>
+    <ion-button (click)="startSessao()" id="btnSalvar" expand="block" shape="round" style="margin-top: 1rem;">Iniciar novo vínculo</ion-button>
     <ion-button (click)="goBack()" expand="block" shape="round" fill="outline" style="margin-top: 1rem;" color="verdemud2">Voltar</ion-button>
   </ng-template>
 </ion-content>

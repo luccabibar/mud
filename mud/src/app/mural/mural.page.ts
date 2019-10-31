@@ -29,7 +29,7 @@ export class MuralPage implements OnInit {
    { }
 
 
-
+//inicializa o mural
   ngOnInit() {
     this.addMural();
   }
@@ -52,7 +52,7 @@ export class MuralPage implements OnInit {
   {
     this.navCtrl.navigateForward('sobre');
   }
-  public addMural() //adiciona mural
+  public addMural() //adiciona o mural visualmente ao aplicativo com as definições de css
   { 
     var dato ="";
     let id=this.dadosService.getId();
