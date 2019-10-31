@@ -209,6 +209,12 @@ export class AuthPage implements OnInit {
 
   }
 
+  /**
+   * gera um novo codigoQR caso um determinadotempo passe 
+   * 
+   * @param hashAnterior ultimo hash utilizado
+   * @returns hash a ser utilizado
+   */
   public atualizaQR(hashAnterior) {
     this.timeQR += 1;
     if (this.timeQR == 15) {

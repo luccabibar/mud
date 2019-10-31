@@ -242,7 +242,7 @@ export class CadastroPage implements OnInit {
   
   /**
    * Faz verificacao do CPF inserido de modo a evitar falsidade ideologica
-   * @param evento 
+   * @param evento evento que chama este metodo
    */
 
   public async validaCPF(evento) {
