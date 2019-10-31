@@ -194,7 +194,7 @@ export class DadosService {
     this.setCont2_num("");
   }
 
-
+//aqui temos a função que verifica a existencia de novos murais no banco de dados, ao percebelos ele gera uma notificação no app do usuario
   Notificacao()
   {
     this.BancoService.selecionarMuralNotifica(this.getId()).then(async(response)=>{

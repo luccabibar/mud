@@ -23,7 +23,7 @@ export class Tab2Page {
 
   ngOnInit()
   {
-
+//esse secondsCounter serve para a cada 5000 milesgundos chamar a função notifica no app todo
 // Create an Observable that will publish a value on an interval
 const secondsCounter = interval(5000);
 // Subscribe to begin publishing values
