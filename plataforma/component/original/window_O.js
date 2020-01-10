@@ -11,11 +11,7 @@ function window_mud() {
         h = document.createElement("i"),
         a = document.createElement("i"),
         m = document.createElement("i");
-        rr=null,
         divBack = null;//É usado no confirm
-    this.ReturnConfirm=function(){
-        return rr;
-    }
     this.SetAppendChild = function(t, e) {
         t.appendChild(e)
     }, this.Create = function(r) {
@@ -56,7 +52,7 @@ function window_mud() {
             h = document.createElement("i"),
             a = document.createElement("p");
         this.SetElementAttribute(c, "class", "section-a-c"), this.SetElementAttribute(h, "class", i), this.SetText(o, n), this.SetText(a, e), this.SetAppendChild(c, o), this.SetAppendChild(c, h), this.SetAppendChild(c, a), this.Modal(t, c, 2, d, s, l)
-    }, this.Confirm = function(titP,txtP,titS,ico,pD,){
+    }, this.Confirm = function(titP,txtP,titS,ico,pD,funcaoT,funcaoF){
         let by=document.body,
             c = document.createElement("section"),
             o = document.createElement("h3"),
@@ -64,15 +60,15 @@ function window_mud() {
             a = document.createElement("p");
             div = document.createElement('div'),
             bCan=document.createElement('button'),
-            bSub=document.createElement('button'),
+            bSim=document.createElement('button'),
             spCan=document.createElement('span'),
             spSub=document.createElement('span');
         bCan.textContent='Não';
-        bSub.textContent='Sim';
-        this.SetAppendChild(bCan,spCan);this.SetAppendChild(bSub,spSub);
-        this.SetAppendChild(div,bSub);this.SetAppendChild(div,bCan);
+        bSim.textContent='Sim';
+        this.SetAppendChild(bCan,spCan);this.SetAppendChild(bSim,spSub);
+        this.SetAppendChild(div,bSim);this.SetAppendChild(div,bCan);
         this.SetElementAttribute(bCan,'class','button');
-        this.SetElementAttribute(bSub,'class','button');
+        this.SetElementAttribute(bSim,'class','button');
         this.SetElementAttribute(div,'class','div-submit-confirm');
         this.SetElementAttribute(c, "class", "section-a-c"),
         this.SetElementAttribute(h, "class", ico),
@@ -83,7 +79,8 @@ function window_mud() {
         this.SetAppendChild(c,a),
         this.SetAppendChild(c,div);
         this.Modal(titP,c,2,pD,!1,'');
-        bCan.addEventListener('click',function(){rr=!1;by.removeChild(divBack)});
-        bSub.addEventListener('click',function(){rr=!0;by.removeChild(divBack)});        
+        bSim.addEventListener('click',function(){funcaoT();by.removeChild(divBack)});  
+        bCan.addEventListener('click',function(){funcaoF();by.removeChild(divBack)});
+              
     }
 }

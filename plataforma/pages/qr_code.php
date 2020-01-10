@@ -1,14 +1,10 @@
 <?php
 session_start();
+if(isset($_SESSION['id_usuario'])):
 ?>
 <link rel="stylesheet" href="./css/qr_code.css">
 <script>
-var qr = window.qr = new QRious({
-  element: document.querySelector('.qr-c-f-img > img'),
-  size: 450,
-  value: 'QRious'
-});
-
+    this.IniciarSessao();
 </script>
 <section class='window-qr_code'>
     <section class='qr-code-form'>
@@ -21,3 +17,10 @@ var qr = window.qr = new QRious({
         </div>
     </section>
 </section>
+<?php
+else:
+    ?>
+    <script>muda_session('page','home.php')</script>
+    <?php
+endif;
+ ?>
