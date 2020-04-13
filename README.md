@@ -1,14 +1,5 @@
 ## müd
 
-repositorio do codigo do aplicativo müd, sendo desenvovido por um grupo de alunos do 3o ano do CTI Bauru
+Projeto de TCC do curso técnico de Informática da UNESP-Bauru baseado em ionic 4, PHP, javascript, entre outros.
 
-
-
-Papel de Cada Pasta (Projeto Ionic)
-
-Auth --> temporario. é pra desenvolvimento do desenvolvimento de autenticação. Ao finalizar, SERA FUNDIDO TANTO NO MUD QUANTO NO MUD ANALISE!
-
-Mud --> Contera a interface do paciente
-
-
-MudAnalise --> App para analises dos dados gerados pelo Mud
+Mais detalhes sobre o projeto em um vídeo corporativo: https://www.youtube.com/watch?v=fbGaaIRO73Q
