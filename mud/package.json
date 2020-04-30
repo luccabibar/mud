@@ -54,7 +54,7 @@
     "es6-promise-plugin": "^4.2.2",
     "firebase": "^6.6.2",
     "firesql": "^2.0.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mx.ferreyra.callnumber": "0.0.2",
     "node-sass": "^4.13.0",
     "phonegap-plugin-barcodescanner": "8.1.0",
