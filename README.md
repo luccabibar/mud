@@ -53,6 +53,13 @@ Müd is divided in three different integrated apps: a mobile app aimed to the pa
     <br>
 </div>
 
+### App Pairing 
+Here's a demonstration on how the pairing works between the Patient and Pro apps:
+<div align="center">
+    <img alt="Gif" src="img/pairing.gif" />
+
+</div>
+
 ### 3: Desktop Dashboard
 <div align="center">
     <img alt="Homepage"  src="img/dashboard/homepage.png" />
