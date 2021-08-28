@@ -61,7 +61,7 @@ Müd is divided in three different integrated apps: a mobile app aimed to the pa
     <img alt="Complex Graphs" src="img/dashboard/graphs.png" />
     <p>Patient Graphs (more complex than the mobile ones)</p>
     <br>
-      <img alt="Paired Patients"  src="img/dashboard/paired-patient.png" />
+      <img alt="Paired Patients"  src="img/dashboard/paired-patients.png" />
     <p>Paired Patients Page</p>
     <br>
 </div>
