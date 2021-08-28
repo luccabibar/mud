@@ -26,13 +26,13 @@ Müd is divided in three different integrated apps: a mobile app aimed to the pa
 
 ### 1: Patient-oriented App
 <div align="center">
-    <img alt="Patient Homepage" width="200"  src="img/patient/homepage.png" />
+    <img alt="Patient Homepage" width="250"  src="img/patient/homepage.png" />
     <p>Patient Homepage</p>
     <br>
-    <img alt="Breathing menu" width="200"  src="img/patient/breathing.png" />
+    <img alt="Breathing menu" width="250"  src="img/patient/breathing.png" />
     <p>Breathing Technique</p>
     <br>
-      <img alt="Message Board" width="200"  src="img/patient/message-board.png" />
+      <img alt="Message Board" width="250"  src="img/patient/message-board.png" />
     <p>Message Board</p>
     <br>
       <img alt="Pairing From Patient's perspective" width="300"  src="img/patient/pairing.png" />
@@ -42,10 +42,10 @@ Müd is divided in three different integrated apps: a mobile app aimed to the pa
 
 ### 2: Professional-oriented App
 <div align="center">
-    <img alt="Homepage" width="200"  src="img/pro/homepage.png" />
+    <img alt="Homepage" width="250"  src="img/pro/homepage.png" />
     <p>Pro Homepage</p>
     <br>
-    <img alt="Patient Graphs" width="200"  src="img/pro/graphs.png" />
+    <img alt="Patient Graphs" width="250"  src="img/pro/graphs.png" />
     <p>Patient Graphs</p>
     <br>
       <img alt="Pairing From Professional's perspective" width="300"  src="img/pro/pairing2.png" />
