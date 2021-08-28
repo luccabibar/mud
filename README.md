@@ -35,7 +35,7 @@ Müd is divided in three different integrated apps: a mobile app aimed to the pa
       <img alt="Message Board" width="250"  src="img/patient/message-board.png" />
     <p>Message Board</p>
     <br>
-      <img alt="Pairing From Patient's perspective" width="300"  src="img/patient/pairing.png" />
+      <img alt="Pairing From Patient's perspective"   src="img/patient/pairing.png" />
     <p>Pairing Tutorial</p>
     <br>
 </div>
@@ -48,7 +48,7 @@ Müd is divided in three different integrated apps: a mobile app aimed to the pa
     <img alt="Patient Graphs" width="250"  src="img/pro/graphs.png" />
     <p>Patient Graphs</p>
     <br>
-      <img alt="Pairing From Professional's perspective" width="300"  src="img/pro/pairing2.png" />
+      <img alt="Pairing From Professional's perspective"  src="img/pro/pairing2.png" />
     <p>Pairing Tutorial</p>
     <br>
 </div>
