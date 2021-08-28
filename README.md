@@ -1,5 +1,21 @@
-## müd
+# Müd
 
-Projeto de TCC do curso técnico de Informática da UNESP-Bauru baseado em ionic 4, PHP, javascript, entre outros.
+🇺🇸 Müd is a mobile and desktop application to manage Panic Syndrome Patients. This Ionic-4, PHP and Javascript-based project is also the Final paper for the Technical Diploma of Informatics course at CTI-UNESP.
 
-Mais detalhes sobre o projeto em um vídeo corporativo: https://www.youtube.com/watch?v=fbGaaIRO73Q
+🇧🇷 Müd é uma aplicação mobile e desktop com o intuito de gerenciar pacientes de Síndrome do Pânico. Este projeto, baseado em PHP, Ionic-4 e Javascript, é também o TCC do curso técnico em Informática do CTI-UNESP.
+
+## User Interface
+
+### Patient-oriented App
+
+### Professional-oriented App
+
+### Desktop Dashboard
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
