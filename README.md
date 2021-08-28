@@ -27,42 +27,42 @@ Müd is divided in three different integrated apps: a mobile app aimed to the pa
 ### 1: Patient-oriented App
 <div align="center">
     <img alt="Patient Homepage" width="200"  src="img/patient/homepage.png" />
-    <figcaption>Patient Homepage</figcaption>
+    <p>Patient Homepage</p>
     <br>
     <img alt="Breathing menu" width="200"  src="img/patient/breathing.png" />
-    <figcaption>Breathing Technique</figcaption>
+    <p>Breathing Technique</p>
     <br>
       <img alt="Message Board" width="200"  src="img/patient/message-board.png" />
-    <figcaption>Message Board</figcaption>
+    <p>Message Board</p>
     <br>
       <img alt="Pairing From Patient's perspective" width="300"  src="img/patient/pairing.png" />
-    <figcaption>Pairing Tutorial</figcaption>
+    <p>Pairing Tutorial</p>
     <br>
 </div>
 
 ### 2: Professional-oriented App
 <div align="center">
     <img alt="Homepage" width="200"  src="img/pro/homepage.png" />
-    <figcaption>Pro Homepage</figcaption>
+    <p>Pro Homepage</p>
     <br>
     <img alt="Patient Graphs" width="200"  src="img/pro/graphs.png" />
-    <figcaption>Patient Graphs</figcaption>
+    <p>Patient Graphs</p>
     <br>
       <img alt="Pairing From Professional's perspective" width="300"  src="img/pro/pairing2.png" />
-    <figcaption>Pairing Tutorial</figcaption>
+    <p>Pairing Tutorial</p>
     <br>
 </div>
 
 ### 3: Desktop Dashboard
 <div align="center">
     <img alt="Homepage"  src="img/dashboard/homepage.png" />
-    <figcaption>Dashboard Homepage</figcaption>
+    <p>Dashboard Homepage</p>
     <br>
     <img alt="Complex Graphs" src="img/dashboard/graphs.png" />
-    <figcaption>Patient Graphs (more complex than the mobile ones)</figcaption>
+    <p>Patient Graphs (more complex than the mobile ones)</p>
     <br>
-      <img alt="Paired Patients"  src="img/dashboard/paired-patients.png" />
-    <figcaption>Paired Patients Page</figcaption>
+      <img alt="Paired Patients"  src="img/dashboard/paired-patient.png" />
+    <p>Paired Patients Page</p>
     <br>
 </div>
 
