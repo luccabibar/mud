@@ -33,7 +33,7 @@
     "node-pre-gyp": "^0.13.0",
     "qrious": "^4.0.2",
     "rxjs": "~6.3.3",
-    "tar": "^4.4.8",
+    "tar": "^4.4.18",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
