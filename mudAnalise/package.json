@@ -34,7 +34,7 @@
     "@ionic/angular": "^4.9.0",
     "@material/ripple": "^1.1.0",
     "@swimlane/ngx-charts": "^12.0.1",
-    "ajv": "^6.10.2",
+    "ajv": "^6.12.3",
     "angularfire2": "^5.2.1",
     "br-mask": "0.0.7",
     "call-number": "1.0.1",
