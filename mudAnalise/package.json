@@ -46,7 +46,7 @@
     "core-js": "^2.6.9",
     "firebase": "^7.2.0",
     "firesql": "^2.0.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mx.ferreyra.callnumber": "0.0.2",
     "qrious": "^4.0.2",
     "rxfire": "^3.8.5",
